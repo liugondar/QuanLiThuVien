@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "QuanLiThuVien", "QuanLiThuVien\QuanLiThuVien.vbproj", "{6DDEB53C-1E81-4DA4-9B09-507FBEBC39D7}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DAO", "DAO\DAO.vbproj", "{3C5490F3-5480-4374-B223-D9BF1189B80A}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BUS", "BUS\BUS.vbproj", "{4088581B-A340-45D5-B854-7712B9A51459}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Utility", "Utility\Utility.vbproj", "{70100AD9-80F0-4668-A7E8-6FE7CE878D1C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,8 +35,15 @@ Global
 		{4088581B-A340-45D5-B854-7712B9A51459}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4088581B-A340-45D5-B854-7712B9A51459}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4088581B-A340-45D5-B854-7712B9A51459}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70100AD9-80F0-4668-A7E8-6FE7CE878D1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70100AD9-80F0-4668-A7E8-6FE7CE878D1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70100AD9-80F0-4668-A7E8-6FE7CE878D1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70100AD9-80F0-4668-A7E8-6FE7CE878D1C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FDEFAD71-7443-4739-8792-90476092166B}
 	EndGlobalSection
 EndGlobal
