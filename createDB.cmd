@@ -1,0 +1,1 @@
+SQLCMD -S .\SQLEXPRESS -E -i db.sql
