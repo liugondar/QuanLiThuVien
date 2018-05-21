@@ -67,7 +67,75 @@ CREATE TABLE dbo.QuiDinh
 (
     TuoiToiDa int not null,
     TuoiToiThieu int not null,
-    ThoiHanToiDaTheDocGia int not null--month
+    ThoiHanToiDaTheDocGia int not null,--month
+    ThoiHanNhanSach int not null
+    ,
+    --year
+);
+GO
+
+-- Create a new table called 'TacGia' in schema 'dbo'
+-- Drop the table if it already exists
+IF OBJECT_ID('dbo.TacGia', 'U') IS NOT NULL
+DROP TABLE dbo.TacGia
+GO
+-- Create the table in the specified schema
+CREATE TABLE dbo.TacGia
+(
+    TacGiaId INT IDENTITY PRIMARY KEY,
+    -- primary key column
+    TenTacGia NVARCHAR(50) not null,
+);
+GO
+
+-- Create a new table called 'TheLoai' in schema 'SchemaName'
+-- Drop the table if it already exists
+IF OBJECT_ID('dbo.TheLoaiSach', 'U') IS NOT NULL
+DROP TABLE dbo.TheLoaiSach
+GO
+-- Create the table in the specified schema
+CREATE TABLE dbo.TheLoaiSach
+(
+    TheLoaiSachId INT IDENTITY PRIMARY KEY,
+    -- primary key column
+    TenTheLoaiSach NVARCHAR(50) not null,
+);
+GO
+
+-- Create a new table called 'NhaXuatBan' in schema 'SchemaName'
+-- Drop the table if it already exists
+IF OBJECT_ID('dbo.NhaXuatBan', 'U') IS NOT NULL
+DROP TABLE dbo.NhaXuatBan
+GO
+-- Create the table in the specified schema
+CREATE TABLE dbo.NhaXuatBan
+(
+    NhaXuatBanId INT NOT NULL PRIMARY KEY,
+    -- primary key column
+    TenNhaXuatBan NVARCHAR(50) not null,
+);
+GO
+
+-- Create a new tabcalled 'Sach' in schema 'dbo'
+-- Drop the table if it already exists
+IF OBJECT_ID('dbo.Sach', 'U') IS NOT NULL
+DROP TABLE dbo.Sach
+GO
+-- Create the table in the specified schema
+CREATE TABLE dbo.Sach
+(
+    SachId INT IDENTITY PRIMARY KEY,
+    -- primary key column
+    TheLoaiSachId Int not null,
+    TacGiaId Int not null,
+    NhaXuatBanId int not null,
+    TenSach NVARCHAR(50),
+    NamXuatBan date not null DEFAULT getdate(),
+    NgayNhap date not null DEFAULT getdate(),
+    TriGia INT not null,
+    CONSTRAINT FK_Sach_TacGia FOREIGN KEY(TacGiaId) REFERENCES TacGia(TacGiaId),
+    CONSTRAINT FK_Sach_TheLoaiSach FOREIGN KEY(TheLoaiSachId) REFERENCES TheLoaiSach(TheLoaiSachId),
+    CONSTRAINT FK_Sach_Nxb FOREIGN KEY(NhaXuatBanId) REFERENCES NhaXuatBan(NhaXuatBanId)
 );
 GO
 
@@ -92,9 +160,11 @@ BEGIN
 END
 go
 
+
+-- Init qui dinh
 INSERT INTO dbo.QuiDinh
-    (TuoiToiDa,TuoiToiThieu,ThoiHanToiDaTheDocGia)
-VALUES(55, 18, 6)
+    (TuoiToiDa,TuoiToiThieu,ThoiHanToiDaTheDocGia,ThoiHanNhanSach)
+VALUES(55, 18, 6, 8)
 
 INSERT into LoaiDocGia
     (TenLoaiDocGia)
