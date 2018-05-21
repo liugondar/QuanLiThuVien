@@ -17,7 +17,8 @@ Public Class DocGiaDAO
         query &= "@DiaChi =N'" & docGia.DiaChi & "',"
         query &= "@LoaiDocGiaId=" & docGia.LoaiDocGiaId & ","
         query &= "@NgaySinh='" & docGia.NgaySinh & "',"
-        query &= "@NgayTao='" & docGia.NgayTao & "'"
+        query &= "@NgayTao='" & docGia.NgayTao & "',"
+        query &= "@NgayHetHan='"& docGia.NgayHetHan &"'"
 
         Dim result = _dataProvider.ExcuteNonquery(query)
         Return result

@@ -37,12 +37,12 @@ GO
 -- Create a new table called 'DocGia' in schema 'dbo'
 -- Drop the table if it already exists
 IF OBJECT_ID('dbo.DocGia', 'U') IS NOT NULL
-DROP TABLE dbo.DocGia
+DROP TABLE dbo.TheDocGia
 GO
 -- Create the table in the specified schema
-CREATE TABLE dbo.DocGia
+CREATE TABLE dbo.TheDocGia
 (
-    DocGiaId INT IDENTITY ,
+    TheDocGiaId INT IDENTITY ,
     -- primary key column
     TenDocGia NVARCHAR( 50 ) not null,
     TenNguoiTao NVARCHAR(50) DEFAULT N'User',
@@ -51,7 +51,8 @@ CREATE TABLE dbo.DocGia
     LoaiDocGiaId INT not null,
     NgaySinh date not null DEFAULT GETDATE(),
     NgayTao date not null DEFAULT GETDATE(),
-    CONSTRAINT PK_Reader PRIMARY KEY (DocGiaId,TenDocGia),
+    NgayHetHan date not null
+        CONSTRAINT PK_Reader PRIMARY KEY (DocGiaId,TenDocGia),
     CONSTRAINT FK_Reader_ReaderType FOREIGN KEY(LoaiDocGiaId) REFERENCES LoaiDocGia(LoaiDocGiaId)
 );
 GO
@@ -66,32 +67,33 @@ CREATE TABLE dbo.QuiDinh
 (
     TuoiToiDa int not null,
     TuoiToiThieu int not null,
-    ReaderCardDuration int not null--month
+    ThoiHanToiDaTheDocGia int not null--month
 );
 GO
 
 --create producer insert Reader
-CREATE PROC USP_ThemDocGia
+CREATE PROC USP_ThemTheDocGia
     @TenDocGia NVARCHAR(50),
     @TenNguoiTao NVARCHAR(50),
     @Email NVARCHAR(50),
     @DiaChi NVARCHAR(50),
     @LoaiDocGiaId INT ,
     @NgaySinh date ,
-    @NgayTao date
+    @NgayTao date,
+    @NgayHetHan date
 AS
 BEGIN
     insert into dbo.DocGia
         (TenDocGia,TenNguoiTao,Email,DiaChi,LoaiDocGiaId,
-        NgaySinh,NgayTao)
+        NgaySinh,NgayTao,NgayHetHan)
     VALUES
         (@TenDocGia, @TenNguoiTao, @Email, @DiaChi, @LoaiDocGiaId,
-            @NgaySinh, @NgayTao)
+            @NgaySinh, @NgayTao, @NgayHetHan)
 END
 go
 
 INSERT INTO dbo.QuiDinh
-    (TuoiToiDa,TuoiToiThieu,ReaderCardDuration)
+    (TuoiToiDa,TuoiToiThieu,ThoiHanToiDaTheDocGia)
 VALUES(55, 18, 6)
 
 INSERT into LoaiDocGia

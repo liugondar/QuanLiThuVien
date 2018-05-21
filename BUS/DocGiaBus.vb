@@ -34,6 +34,7 @@ Public Class DocGiaBus
         If ValidateAll(docGia).FlagResult = False Then
             Return ValidateAll(docGia)
         End If
+        docGia.NgayHetHan = docGia.NgayTao.AddMonths(_duration)
         Return _readerDAO.InsertOne(docGia)
     End Function
 
