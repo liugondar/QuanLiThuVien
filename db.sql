@@ -42,7 +42,7 @@ GO
 -- Create the table in the specified schema
 CREATE TABLE dbo.TheDocGia
 (
-    MaTheDocGia INT IDENTITY NOT NULL,
+    MaTheDocGia INT IDENTITY Primary Key NOT NULL,
     -- primary key column
     TenDocGia NVARCHAR( 50 ) not null,
     Email NVARCHAR(50) not null,
@@ -51,7 +51,6 @@ CREATE TABLE dbo.TheDocGia
     NgaySinh date not null DEFAULT GETDATE(),
     NgayTao date not null DEFAULT GETDATE(),
     NgayHetHan date not null,
-    CONSTRAINT PK_Reader PRIMARY KEY (MaTheDocGia,TenDocGia),
     CONSTRAINT FK_Reader_ReaderType FOREIGN KEY(MaLoaiDocGia) REFERENCES LoaiDocGia(MaLoaiDocGia)
 );
 GO
@@ -123,7 +122,7 @@ GO
 -- Create the table in the specified schema
 CREATE TABLE dbo.Sach
 (
-    MaLoaiSach INT IDENTITY PRIMARY KEY,
+    MaSach INT IDENTITY PRIMARY KEY,
     -- primary key column
     MaTheLoaiSach Int not null,
     MaTacGia Int not null,
@@ -147,10 +146,13 @@ GO
 CREATE TABLE dbo.PhieuMuonSach
 (
     MaPhieuMuonSach INT NOT NULL PRIMARY KEY, -- primary key column
-    MaDocGia[INT] NOT NULL,
+    MaTheDocGia[INT] NOT NULL,
     NgayMuon[date] NOT NULL default GETDATE(),
     HanTra[date] NOT NULL,
-    TongSoSachMuon int NOT NULL
+    TongSoSachMuon int NOT NULL,
+    CONSTRAINT FK_PhieuMuonSach_TheDocGia FOREIGN KEY(MaTheDocGia)
+    REFERENCES TheDocGia(MaTheDocGia)
+
 );
 GO
 
@@ -167,7 +169,10 @@ CREATE TABLE dbo.ChiTietPhieuMuonSach
     MaSach int not null,
     TinhTrang int not null, -- 0 la da tra, 1 la chua tra
     CONSTRAINT FK_ChiTietPhieuMuonSach_PhieuMuonSach FOREIGN KEY(MaPhieuMuonSach)
-    REFERENCES PhieuMuonSach(MaPhieuMuonSach)
+    REFERENCES PhieuMuonSach(MaPhieuMuonSach),
+    CONSTRAINT FK_ChiTietPhieuMuonSach_MaSach FOREIGN KEY(MaSach)
+    REFERENCES Sach(MaSach),
+
 );
 GO
 
@@ -260,14 +265,14 @@ go
 
 -- create producer insert phieumuonsach
 create PROC USP_ThemPhieuMuonSach
-    @MaDocGia int,
+    @MaTheDocGia int,
     @NgayMuon date,
     @HanTra date,
     @TongSoSachMuon int 
 as 
 BEGIN
-    insert into dbo.PhieuMuonSach(MaDocGia,NgayMuon,HanTra,TongSoSachMuon)
-    Values (@MaDocGia,@NgayMuon,@HanTra,@TongSoSachMuon)
+    insert into dbo.PhieuMuonSach(MaTheDocGia,NgayMuon,HanTra,TongSoSachMuon)
+    Values (@MaTheDocGia,@NgayMuon,@HanTra,@TongSoSachMuon)
 END
 go
 
