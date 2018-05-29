@@ -195,10 +195,13 @@ CREATE TABLE dbo.ChiTietBaoCaoTinhHinhMuonSach
 (
     MaChiTietBaoCaoTinhHinhMuonSach INT IDENTITY NOT NULL PRIMARY KEY, -- primary key column
     MaBaoCaoTinhHinhMuonSach int not null,
+    MaChiTietPhieuMuonSach int not null,
     SoLuongMuon int not null,
     TiLe FLOAT not null,
     CONSTRAINT FK_ChiTietBaoCaoTinhHinhMuonSach_BaoCaoTinhHinhMuonSach FOREIGN KEY(MaBaoCaoTinhHinhMuonSach)
-    REFERENCES BaoCaoTinhHinhMuonSach(MaBaoCaoTinhHinhMuonSach)
+    REFERENCES BaoCaoTinhHinhMuonSach(MaBaoCaoTinhHinhMuonSach),
+    CONSTRAINT FK_ChiTietBaoCaoTinhHinhMuonSach_ChiTietPhieuMuonSach FOREIGN KEY(MaChiTietPhieuMuonSach)
+    REFERENCES ChiTietPhieuMuonSach(MaChiTietPhieuMuonSach),
 );
 GO
 
