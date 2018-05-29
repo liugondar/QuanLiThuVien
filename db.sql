@@ -28,7 +28,7 @@ GO
 -- Create the table in the specified schema
 CREATE TABLE dbo.LoaiDocGia
 (
-    LoaiDocGiaId INT IDENTITY PRIMARY KEY,
+    MaLoaiDocGia INT IDENTITY PRIMARY KEY,
     -- primary key column
     TenLoaiDocGia NVARCHAR(10)
 );
@@ -42,18 +42,17 @@ GO
 -- Create the table in the specified schema
 CREATE TABLE dbo.TheDocGia
 (
-    TheDocGiaId INT IDENTITY ,
+    MaTheDocGia INT IDENTITY NOT NULL,
     -- primary key column
     TenDocGia NVARCHAR( 50 ) not null,
-    TenNguoiTao NVARCHAR(50) DEFAULT N'User',
     Email NVARCHAR(50) not null,
     DiaChi NVARCHAR(50),
-    LoaiDocGiaId INT not null,
+    MaLoaiDocGia INT not null,
     NgaySinh date not null DEFAULT GETDATE(),
     NgayTao date not null DEFAULT GETDATE(),
-    NgayHetHan date not null
-        CONSTRAINT PK_Reader PRIMARY KEY (DocGiaId,TenDocGia),
-    CONSTRAINT FK_Reader_ReaderType FOREIGN KEY(LoaiDocGiaId) REFERENCES LoaiDocGia(LoaiDocGiaId)
+    NgayHetHan date not null,
+    CONSTRAINT PK_Reader PRIMARY KEY (MaTheDocGia,TenDocGia),
+    CONSTRAINT FK_Reader_ReaderType FOREIGN KEY(MaLoaiDocGia) REFERENCES LoaiDocGia(MaLoaiDocGia)
 );
 GO
 
@@ -68,8 +67,8 @@ CREATE TABLE dbo.QuiDinh
     TuoiToiDa int not null,
     TuoiToiThieu int not null,
     ThoiHanToiDaTheDocGia int not null,--month
-    ThoiHanNhanSach int not null
-    ,
+    ThoiHanNhanSach int not null,
+
     --year
 );
 GO
@@ -82,7 +81,7 @@ GO
 -- Create the table in the specified schema
 CREATE TABLE dbo.TacGia
 (
-    TacGiaId INT IDENTITY PRIMARY KEY,
+    MaTacGia INT IDENTITY PRIMARY KEY,
     -- primary key column
     TenTacGia NVARCHAR(50) not null,
 );
@@ -96,7 +95,7 @@ GO
 -- Create the table in the specified schema
 CREATE TABLE dbo.TheLoaiSach
 (
-    TheLoaiSachId INT IDENTITY PRIMARY KEY,
+    MaTheLoaiSach INT IDENTITY PRIMARY KEY,
     -- primary key column
     TenTheLoaiSach NVARCHAR(50) not null,
 );
@@ -110,7 +109,7 @@ GO
 -- Create the table in the specified schema
 CREATE TABLE dbo.NhaXuatBan
 (
-    NhaXuatBanId INT NOT NULL PRIMARY KEY,
+    MaNhaXuatBan INT NOT NULL PRIMARY KEY,
     -- primary key column
     TenNhaXuatBan NVARCHAR(50) not null,
 );
@@ -124,38 +123,38 @@ GO
 -- Create the table in the specified schema
 CREATE TABLE dbo.Sach
 (
-    SachId INT IDENTITY PRIMARY KEY,
+    MaLoaiSach INT IDENTITY PRIMARY KEY,
     -- primary key column
-    TheLoaiSachId Int not null,
-    TacGiaId Int not null,
-    NhaXuatBanId int not null,
+    MaTheLoaiSach Int not null,
+    MaTacGia Int not null,
+    MaNhaXuatBan int not null,
     TenSach NVARCHAR(50),
     NamXuatBan date not null DEFAULT getdate(),
     NgayNhap date not null DEFAULT getdate(),
     TriGia INT not null,
-    CONSTRAINT FK_Sach_TacGia FOREIGN KEY(TacGiaId) REFERENCES TacGia(TacGiaId),
-    CONSTRAINT FK_Sach_TheLoaiSach FOREIGN KEY(TheLoaiSachId) REFERENCES TheLoaiSach(TheLoaiSachId),
-    CONSTRAINT FK_Sach_Nxb FOREIGN KEY(NhaXuatBanId) REFERENCES NhaXuatBan(NhaXuatBanId)
+    TinhTrang INT not null, -- 0 la con, 1 la het 
+    CONSTRAINT FK_Sach_TacGia FOREIGN KEY(MaTacGia) REFERENCES TacGia(MaTacGia),
+    CONSTRAINT FK_Sach_TheLoaiSach FOREIGN KEY(MaTheLoaiSach) REFERENCES TheLoaiSach(MaTheLoaiSach),
+    CONSTRAINT FK_Sach_Nxb FOREIGN KEY(MaNhaXuatBan) REFERENCES NhaXuatBan(MaNhaXuatBan)
 );
 GO
 
 --create producer insert Reader
 CREATE PROC USP_ThemTheDocGia
     @TenDocGia NVARCHAR(50),
-    @TenNguoiTao NVARCHAR(50),
     @Email NVARCHAR(50),
     @DiaChi NVARCHAR(50),
-    @LoaiDocGiaId INT ,
+    @MaLoaiDocGia INT ,
     @NgaySinh date ,
     @NgayTao date,
     @NgayHetHan date
 AS
 BEGIN
-    insert into dbo.DocGia
-        (TenDocGia,TenNguoiTao,Email,DiaChi,LoaiDocGiaId,
+    insert into dbo.TheDocGia
+        (TenDocGia,Email,DiaChi,MaLoaiDocGia,
         NgaySinh,NgayTao,NgayHetHan)
     VALUES
-        (@TenDocGia, @TenNguoiTao, @Email, @DiaChi, @LoaiDocGiaId,
+        (@TenDocGia,  @Email, @DiaChi, @MaLoaiDocGia,
             @NgaySinh, @NgayTao, @NgayHetHan)
 END
 go

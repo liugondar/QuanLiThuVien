@@ -8,10 +8,9 @@ Public Class frmTaoTheDocGia
     Function InsertConfirm() As Boolean
         Dim docGia = New DocGia()
         docGia.TenDocGia = UserNameTextBox.Text
-        docGia.TenNguoiTao = CreatorTextBox.Text
         docGia.Email = EmailTextBox.Text
         docGia.DiaChi = AddressTextBox.Text
-        docGia.LoaiDocGiaId = ReaderTypeComboBox.SelectedItem.LoaiDocGiaId
+        docGia.MaLoaiDocGia = ReaderTypeComboBox.SelectedItem.LoaiDocGiaId
         docGia.NgaySinh = DateOfBirthDateTimePicker.Value
         docGia.NgayTao = DateCreateDateTimePicker.Value
 

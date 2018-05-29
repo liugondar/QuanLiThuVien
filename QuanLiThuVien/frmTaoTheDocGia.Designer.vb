@@ -28,14 +28,12 @@ Partial Class frmTaoTheDocGia
         Me.DateCreateDateTimePicker = New System.Windows.Forms.DateTimePicker()
         Me.DateOfBirthDateTimePicker = New System.Windows.Forms.DateTimePicker()
         Me.AddressTextBox = New System.Windows.Forms.TextBox()
-        Me.CreatorTextBox = New System.Windows.Forms.TextBox()
         Me.EmailTextBox = New System.Windows.Forms.TextBox()
         Me.UserNameTextBox = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -43,7 +41,7 @@ Partial Class frmTaoTheDocGia
         '
         'CreateAndCloseButton
         '
-        Me.CreateAndCloseButton.Location = New System.Drawing.Point(362, 253)
+        Me.CreateAndCloseButton.Location = New System.Drawing.Point(368, 217)
         Me.CreateAndCloseButton.Name = "CreateAndCloseButton"
         Me.CreateAndCloseButton.Size = New System.Drawing.Size(101, 23)
         Me.CreateAndCloseButton.TabIndex = 33
@@ -52,7 +50,7 @@ Partial Class frmTaoTheDocGia
         '
         'CreateButton
         '
-        Me.CreateButton.Location = New System.Drawing.Point(240, 253)
+        Me.CreateButton.Location = New System.Drawing.Point(244, 217)
         Me.CreateButton.Name = "CreateButton"
         Me.CreateButton.Size = New System.Drawing.Size(103, 23)
         Me.CreateButton.TabIndex = 32
@@ -83,17 +81,10 @@ Partial Class frmTaoTheDocGia
         '
         'AddressTextBox
         '
-        Me.AddressTextBox.Location = New System.Drawing.Point(130, 207)
+        Me.AddressTextBox.Location = New System.Drawing.Point(130, 167)
         Me.AddressTextBox.Name = "AddressTextBox"
         Me.AddressTextBox.Size = New System.Drawing.Size(204, 20)
         Me.AddressTextBox.TabIndex = 28
-        '
-        'CreatorTextBox
-        '
-        Me.CreatorTextBox.Location = New System.Drawing.Point(130, 162)
-        Me.CreatorTextBox.Name = "CreatorTextBox"
-        Me.CreatorTextBox.Size = New System.Drawing.Size(204, 20)
-        Me.CreatorTextBox.TabIndex = 27
         '
         'EmailTextBox
         '
@@ -149,21 +140,11 @@ Partial Class frmTaoTheDocGia
         Me.Label5.TabIndex = 21
         Me.Label5.Text = "Loại độc giả:"
         '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(28, 157)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(96, 24)
-        Me.Label4.TabIndex = 20
-        Me.Label4.Text = "Người lập:"
-        '
         'Label3
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(29, 203)
+        Me.Label3.Location = New System.Drawing.Point(29, 162)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(77, 24)
         Me.Label3.TabIndex = 19
@@ -193,21 +174,19 @@ Partial Class frmTaoTheDocGia
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(741, 285)
+        Me.ClientSize = New System.Drawing.Size(744, 258)
         Me.Controls.Add(Me.CreateAndCloseButton)
         Me.Controls.Add(Me.CreateButton)
         Me.Controls.Add(Me.ReaderTypeComboBox)
         Me.Controls.Add(Me.DateCreateDateTimePicker)
         Me.Controls.Add(Me.DateOfBirthDateTimePicker)
         Me.Controls.Add(Me.AddressTextBox)
-        Me.Controls.Add(Me.CreatorTextBox)
         Me.Controls.Add(Me.EmailTextBox)
         Me.Controls.Add(Me.UserNameTextBox)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
@@ -225,14 +204,12 @@ Partial Class frmTaoTheDocGia
     Friend WithEvents DateCreateDateTimePicker As DateTimePicker
     Friend WithEvents DateOfBirthDateTimePicker As DateTimePicker
     Friend WithEvents AddressTextBox As TextBox
-    Friend WithEvents CreatorTextBox As TextBox
     Friend WithEvents EmailTextBox As TextBox
     Friend WithEvents UserNameTextBox As TextBox
     Friend WithEvents Label8 As Label
     Friend WithEvents Label7 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents Label5 As Label
-    Friend WithEvents Label4 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label

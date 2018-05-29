@@ -43,10 +43,6 @@ Public Class DocGiaBus
             Return New Result(False, "user name không hợp lệ", "")
         End If
 
-        If ValidateCreator(docGia.TenNguoiTao) = False Then
-            Return New Result(False, "tên người tạo không hợp lệ", "")
-        End If
-
         If ValidateEmail(docGia.Email) = False Then
             Return New Result(False, "Email không hợp lệ", "")
         End If
@@ -55,8 +51,8 @@ Public Class DocGiaBus
             Return ValidateYearsold(docGia.NgaySinh)
         End If
 
-        If ValidateReaderType(docGia.LoaiDocGiaId).FlagResult = False Then
-            Return ValidateReaderType(docGia.LoaiDocGiaId)
+        If ValidateReaderType(docGia.MaLoaiDocGia).FlagResult = False Then
+            Return ValidateReaderType(docGia.MaLoaiDocGia)
         End If
 
         Return New Result(True)
