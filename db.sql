@@ -67,9 +67,9 @@ CREATE TABLE dbo.QuiDinh
     TuoiToiDa int not null,
     TuoiToiThieu int not null,
     ThoiHanToiDaTheDocGia int not null,--month
-    ThoiHanNhanSach int not null,
-
-    --year
+    ThoiHanNhanSach int not null, --year
+    SoNgayMuonToiDa int not null,
+    SoSachMuonToiDa int not null
 );
 GO
 
@@ -138,6 +138,102 @@ CREATE TABLE dbo.Sach
     CONSTRAINT FK_Sach_Nxb FOREIGN KEY(MaNhaXuatBan) REFERENCES NhaXuatBan(MaNhaXuatBan)
 );
 GO
+-- Create a new table called 'PhieuMuonSach' in schema 'SchemaName'
+-- Drop the table if it already exists
+IF OBJECT_ID('dbo.PhieuMuonSach', 'U') IS NOT NULL
+DROP TABLE dbo.PhieuMuonSach
+GO
+-- Create the table in the specified schema
+CREATE TABLE dbo.PhieuMuonSach
+(
+    MaPhieuMuonSach INT NOT NULL PRIMARY KEY, -- primary key column
+    MaDocGia[INT] NOT NULL,
+    NgayMuon[date] NOT NULL default GETDATE(),
+    HanTra[date] NOT NULL,
+    TongSoSachMuon int NOT NULL
+);
+GO
+
+-- Create a new table called 'ChiTietPhieuMuonSach' in schema 'SchemaName'
+-- Drop the table if it already exists
+IF OBJECT_ID('dbo.ChiTietPhieuMuonSach', 'U') IS NOT NULL
+DROP TABLE dbo.ChiTietPhieuMuonSach
+GO
+-- Create the table in the specified schema
+CREATE TABLE dbo.ChiTietPhieuMuonSach
+(
+    MaChiTietPhieuMuonSach INT IDENTITY NOT NULL PRIMARY KEY, -- primary key column
+    MaPhieuMuonSach INT NOT NULL,
+    MaSach int not null,
+    TinhTrang int not null, -- 0 la da tra, 1 la chua tra
+    CONSTRAINT FK_ChiTietPhieuMuonSach_PhieuMuonSach FOREIGN KEY(MaPhieuMuonSach)
+    REFERENCES PhieuMuonSach(MaPhieuMuonSach)
+);
+GO
+
+-- Create a new table called 'BaoCaoTinhHinhMuonSach' in schema 'SchemaName'
+-- Drop the table if it already exists
+IF OBJECT_ID('dbo.BaoCaoTinhHinhMuonSach', 'U') IS NOT NULL
+DROP TABLE dbo.BaoCaoTinhHinhMuonSach
+GO
+-- Create the table in the specified schema
+CREATE TABLE dbo.BaoCaoTinhHinhMuonSach
+(
+    MaBaoCaoTinhHinhMuonSach INT IDENTITY NOT NULL PRIMARY KEY, -- primary key column
+    ThoiGian date not null default getdate(),
+    TongSoLuotMuon int not null
+);
+GO
+
+-- Create a new table called 'ChiTietBaoCaoTinhHinhMuonSach' in schema 'SchemaName'
+-- Drop the table if it already exists
+IF OBJECT_ID('dbo.ChiTietBaoCaoTinhHinhMuonSach', 'U') IS NOT NULL
+DROP TABLE dbo.ChiTietBaoCaoTinhHinhMuonSach
+GO
+-- Create the table in the specified schema
+CREATE TABLE dbo.ChiTietBaoCaoTinhHinhMuonSach
+(
+    MaChiTietBaoCaoTinhHinhMuonSach INT IDENTITY NOT NULL PRIMARY KEY, -- primary key column
+    MaBaoCaoTinhHinhMuonSach int not null,
+    SoLuongMuon int not null,
+    TiLe FLOAT not null,
+    CONSTRAINT FK_ChiTietBaoCaoTinhHinhMuonSach_BaoCaoTinhHinhMuonSach FOREIGN KEY(MaBaoCaoTinhHinhMuonSach)
+    REFERENCES BaoCaoTinhHinhMuonSach(MaBaoCaoTinhHinhMuonSach)
+);
+GO
+
+-- Create a new table called 'BaoCaoSachTre' in schema 'dbo'
+-- Drop the table if it already exists
+IF OBJECT_ID('dbo.BaoCaoSachTre', 'U') IS NOT NULL
+DROP TABLE dbo.BaoCaoSachTre
+GO
+-- Create the table in the specified schema
+CREATE TABLE dbo.BaoCaoSachTre
+(
+    MaBaoCaoSachTre INT IDENTITY NOT NULL PRIMARY KEY, -- primary key column
+    ThoiGian date not null DEFAULT getdate()
+);
+GO
+
+-- Create a new table called 'ChiTietBaoCaoSachTre' in schema 'SchemaName'
+-- Drop the table if it already exists
+IF OBJECT_ID('dbo.ChiTietBaoCaoSachTre', 'U') IS NOT NULL
+DROP TABLE dbo.ChiTietBaoCaoSachTre
+GO
+-- Create the table in the specified schema
+CREATE TABLE dbo.ChiTietBaoCaoSachTre
+(
+    MaChiTietBaoCaoSachTre INT NOT NULL PRIMARY KEY, -- primary key column
+    MaBaoCaoSachTre int not null,
+    MaPhieuMuonSach int not null,
+    SoNgayTre int not null,
+    CONSTRAINT FK_ChiTietBaoCaoSachTre_BaoCaoSachTren FOREIGN KEY(MaBaoCaoSachTre)
+    REFERENCES BaoCaoSachTre(MaBaoCaoSachTre),
+    CONSTRAINT FK_ChiTietBaoCaoSachTre_PhieuMuonSach FOREIGN KEY(MaPhieuMuonSach)
+    REFERENCES PhieuMuonSach(MaPhieuMuonSach)
+);
+GO
+
 
 --create producer insert Reader
 CREATE PROC USP_ThemTheDocGia
@@ -159,11 +255,25 @@ BEGIN
 END
 go
 
+-- create producer insert phieumuonsach
+create PROC USP_ThemPhieuMuonSach
+    @MaDocGia int,
+    @NgayMuon date,
+    @HanTra date,
+    @TongSoSachMuon int 
+as 
+BEGIN
+    insert into dbo.PhieuMuonSach(MaDocGia,NgayMuon,HanTra,TongSoSachMuon)
+    Values (@MaDocGia,@NgayMuon,@HanTra,@TongSoSachMuon)
+END
+go
+
 
 -- Init qui dinh
 INSERT INTO dbo.QuiDinh
-    (TuoiToiDa,TuoiToiThieu,ThoiHanToiDaTheDocGia,ThoiHanNhanSach)
-VALUES(55, 18, 6, 8)
+    (TuoiToiDa,TuoiToiThieu,ThoiHanToiDaTheDocGia,ThoiHanNhanSach
+    ,SoNgayMuonToiDa,SoSachMuonToiDa)
+VALUES(55, 18, 6, 8,4,5)
 
 INSERT into LoaiDocGia(TenLoaiDocGia) VALUES('X')
 INSERT into LoaiDocGia(TenLoaiDocGia) VALUES('Y')
