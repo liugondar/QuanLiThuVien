@@ -1,86 +1,89 @@
-﻿Imports DAO
+﻿Imports System.Text.RegularExpressions
+Imports DAO
 Imports DTO
 Imports Utility
 
 Public Class DocGiaBus
-    Private _readerDAO As DocGiaDAO
-    Private _tuoiToiDa As Integer
-    Private _tuoiToiThieu As Integer
-    Private _duration As Integer
-    Private _listReaderType As List(Of LoaiDocGia)
+    Private _docGiaDAO As DocGiaDAO
+    Private _quiDinh As QuiDinh
+    Private _listLoaiDocGia As List(Of LoaiDocGia)
+    Private _ketQuaViecLayQuiDinh As Result
+    Private _ketQuaViecLayLoaiDocGia As Result
 
     Public Sub New()
-        _readerDAO = New DocGiaDAO()
-        GetQuiDinh()
-        GetLoaiDocGia()
+        _docGiaDAO = New DocGiaDAO()
+        _quiDinh = New QuiDinh
+        _listLoaiDocGia = New List(Of LoaiDocGia)
+        _ketQuaViecLayQuiDinh = GetQuiDinh()
+        _ketQuaViecLayLoaiDocGia = GetLoaiDocGia()
     End Sub
 
-    Private Sub GetLoaiDocGia()
+    Public Function GetLoaiDocGia() As Result
         Dim loaiDocGiaBus = New LoaiDocGiaBus()
-        _listReaderType = loaiDocGiaBus.SelectAll()
-    End Sub
+        Dim result = loaiDocGiaBus.SelectAll(_listLoaiDocGia)
+        If _listLoaiDocGia.Count < 1 Then
+            Return New Result(False, "Không thể lấy danh sách loại đôc giả", "")
+        End If
+        Return result
+    End Function
 
-    Private Sub GetQuiDinh()
+    Public Function GetQuiDinh() As Result
         Dim quiDinhBus As QuiDinhBus = New QuiDinhBus()
-        Dim data As DataTable = quiDinhBus.SelectAll()
-        For Each row As DataRow In data.Rows
-            _tuoiToiDa = Integer.Parse(row.ItemArray(0))
-            _tuoiToiThieu = Integer.Parse(row.ItemArray(1))
-            _duration = Integer.Parse(row.ItemArray(2))
-        Next
-    End Sub
+        Dim listQuiDinh = New List(Of QuiDinh)
+        Dim result = quiDinhBus.SelectAll(listQuiDinh)
+        If listQuiDinh.Count < 1 Then
+            Return New Result(False, "Không thể lấy qui định phục vụ việc kiểm tra thông tin nhập thẻ độc giả", "")
+        End If
+        _quiDinh = listQuiDinh(0)
+        Return result
+    End Function
 
-    Function Insert1(docGia As DocGia) As Result
+    Public Function InsertOne(docGia As DocGia) As Result
         If ValidateAll(docGia).FlagResult = False Then
             Return ValidateAll(docGia)
         End If
-        docGia.NgayHetHan = docGia.NgayTao.AddMonths(_duration)
-        Return _readerDAO.InsertOne(docGia)
+        docGia.NgayHetHan = docGia.NgayTao.AddMonths(_quiDinh.ThoiHanToiDaTheDocGia)
+        Return _docGiaDAO.InsertOne(docGia)
+    End Function
+
+    Public Function SelectAllByType(maLoai As String) As Result
+        If String.IsNullOrWhiteSpace(maLoai) Then
+            Return New Result(False, "Mã loại độc giả không đúng!", "")
+        End If
+        'TODO: select all by type doc gia bus
+        Return New Result()
     End Function
 
     Private Function ValidateAll(docGia As DocGia) As Result
-        If ValidateUserName(docGia.TenDocGia) = False Then
-            Return New Result(False, "user name không hợp lệ", "")
-        End If
+        Dim validateUserNameResult = ValidateUserName(docGia.TenDocGia)
+        Dim validateEmailResult = ValidateEmail(docGia.Email)
+        Dim validateYearsoldResult = ValidateYearsold(docGia.NgaySinh)
+        Dim validateReaderTypeResult = ValidateReaderType(docGia.MaLoaiDocGia)
 
-        If ValidateEmail(docGia.Email) = False Then
-            Return New Result(False, "Email không hợp lệ", "")
-        End If
-
-        If ValidateYearsold(docGia.NgaySinh).FlagResult = False Then
-            Return ValidateYearsold(docGia.NgaySinh)
-        End If
-
-        If ValidateReaderType(docGia.MaLoaiDocGia).FlagResult = False Then
-            Return ValidateReaderType(docGia.MaLoaiDocGia)
-        End If
+        If validateUserNameResult.FlagResult = False Then Return validateUserNameResult
+        If validateEmailResult.FlagResult = False Then Return validateEmailResult
+        If validateYearsoldResult.FlagResult = False Then Return validateYearsoldResult
+        If validateReaderTypeResult.FlagResult = False Then Return validateReaderTypeResult
 
         Return New Result(True)
     End Function
 
-    Private Function ValidateEmail(Email As String) As Boolean
-        If String.IsNullOrWhiteSpace(Email) Then
-            Return False
-        End If
-        Return True
+    Private Function ValidateEmail(Email As String) As Result
+        If String.IsNullOrWhiteSpace(Email) Then Return New Result(False, "Email không đúng định dạng,ví dụ: 123@gmail.com", "")
+        If (Regex.IsMatch(Email, "^([0-9a-zA-Z]([-\.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$") = False) Then Return New Result(False, "Email không đúng định dạng,ví dụ: 123@gmail.com", "")
+        Return New Result()
     End Function
 
-    Private Function ValidateCreator(tenNguoiTao As String) As Boolean
-        If String.IsNullOrWhiteSpace(tenNguoiTao) Then
-            Return False
-        End If
-        Return True
-    End Function
 
-    Private Function ValidateUserName(tenDocGia As String) As Boolean
+    Private Function ValidateUserName(tenDocGia As String) As Result
         If String.IsNullOrWhiteSpace(tenDocGia) Then
-            Return False
+            Return New Result(False, "Tên độc giả không đúng định dạng", "")
         End If
-        Return True
+        Return New Result()
     End Function
 
-    Private Function ValidateReaderType(loaiDocGiaId As Integer) As Object
-        Dim matchingValues = _listReaderType.Find(Function(x) x.LoaiDocGiaId = loaiDocGiaId)
+    Private Function ValidateReaderType(loaiDocGiaId As Integer) As Result
+        Dim matchingValues = _listLoaiDocGia.Find(Function(x) x.MaLoaiDocGia = loaiDocGiaId)
 
         If matchingValues Is Nothing Then
             Return New Result(False, "Lỗi nhập vào kiểu người dùng", "")
@@ -92,10 +95,10 @@ Public Class DocGiaBus
     Private Function ValidateYearsold(ngaySinh As Date) As Object
         Dim dateNow As Date = Date.Now()
         Dim yearsold = (dateNow - ngaySinh).TotalDays \ 365
-        If yearsold < _tuoiToiThieu Then
+        If yearsold < _quiDinh.TuoiToiThieu Then
             Return New Result(False, "Tuổi chưa đủ để lập thẻ", "")
         End If
-        If yearsold > _tuoiToiDa Then
+        If yearsold > _quiDinh.TuoiToiDa Then
             Return New Result(False, "Tuổi quá lớn để lập thẻ", "")
         End If
         Return New Result(True)

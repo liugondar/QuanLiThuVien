@@ -7,19 +7,18 @@ Public Class LoaiDocGiaDAO
     Public Sub New()
         _dataProvider = New DataProvider()
     End Sub
-    Function SelectAll() As List(Of LoaiDocGia)
+    Function SelectAll(listLoaiDocGia As List(Of LoaiDocGia)) As Result
         Dim data = New DataTable()
         Dim query = String.Empty
         query &= "Select * from LoaiDocGia"
-        data = _dataProvider.ExcuteQuery(query)
+        Dim result = _dataProvider.ExcuteQuery(query, data)
 
-        Dim listReaderType = New List(Of LoaiDocGia)
         For Each row In data.Rows
             Dim readertypeTemp = New LoaiDocGia()
-            readertypeTemp.LoaiDocGiaId = Integer.Parse(row.ItemArray(0))
-            readertypeTemp.TenLoaiDocGia = (row.ItemArray(1)).ToString()
-            listReaderType.Add(readertypeTemp)
+            readertypeTemp.MaLoaiDocGia = Integer.Parse(row("MaLoaiDocGia"))
+            readertypeTemp.TenLoaiDocGia = (row("TenLoaiDocGia")).ToString()
+            listLoaiDocGia.Add(readertypeTemp)
         Next
-        Return listReaderType
+        Return New Result()
     End Function
 End Class

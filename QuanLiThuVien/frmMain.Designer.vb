@@ -25,6 +25,7 @@ Partial Class frmMain
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ThẻĐộcGiảToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LậpThẻĐộcGiảToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.QuảnLíĐộcGiảToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -39,7 +40,7 @@ Partial Class frmMain
         '
         'ThẻĐộcGiảToolStripMenuItem
         '
-        Me.ThẻĐộcGiảToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LậpThẻĐộcGiảToolStripMenuItem})
+        Me.ThẻĐộcGiảToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LậpThẻĐộcGiảToolStripMenuItem, Me.QuảnLíĐộcGiảToolStripMenuItem})
         Me.ThẻĐộcGiảToolStripMenuItem.Name = "ThẻĐộcGiảToolStripMenuItem"
         Me.ThẻĐộcGiảToolStripMenuItem.Size = New System.Drawing.Size(81, 20)
         Me.ThẻĐộcGiảToolStripMenuItem.Text = "Thẻ độc giả"
@@ -49,6 +50,12 @@ Partial Class frmMain
         Me.LậpThẻĐộcGiảToolStripMenuItem.Name = "LậpThẻĐộcGiảToolStripMenuItem"
         Me.LậpThẻĐộcGiảToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.LậpThẻĐộcGiảToolStripMenuItem.Text = "Lập thẻ độc giả"
+        '
+        'QuảnLíĐộcGiảToolStripMenuItem
+        '
+        Me.QuảnLíĐộcGiảToolStripMenuItem.Name = "QuảnLíĐộcGiảToolStripMenuItem"
+        Me.QuảnLíĐộcGiảToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.QuảnLíĐộcGiảToolStripMenuItem.Text = "Quản Lí độc giả"
         '
         'frmMain
         '
@@ -69,4 +76,5 @@ Partial Class frmMain
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents ThẻĐộcGiảToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents LậpThẻĐộcGiảToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents QuảnLíĐộcGiảToolStripMenuItem As ToolStripMenuItem
 End Class

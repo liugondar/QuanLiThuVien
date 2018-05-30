@@ -393,3 +393,7 @@ INSERT INTO dbo.TacGia(TenTacGia) VALUES(N'Terry Copeland')
 INSERT INTO dbo.TacGia(TenTacGia) VALUES(N'Lelia Fletcher')
 INSERT INTO dbo.TacGia(TenTacGia) VALUES(N'Bruce Clark')
 INSERT INTO dbo.TacGia(TenTacGia) VALUES(N'Mattie Jefferson')
+
+select * from TheDocGia WHERE MaLoaiDocGia=1
+Select * from LoaiDocGia
+

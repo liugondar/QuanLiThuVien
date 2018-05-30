@@ -1,11 +1,18 @@
 ﻿Imports BUS
 Imports DAO
 Imports DTO
+Imports Utility
+
 Public Class frmTaoTheDocGia
+    Private didReaderTypeComboboxLoad As Boolean
     Private Sub CreateButton_Click_1(sender As Object, e As EventArgs) Handles CreateButton.Click
         InsertConfirm()
     End Sub
     Function InsertConfirm() As Boolean
+        If didReaderTypeComboboxLoad = False Then
+            MessageBox.Show("Dữ liệu nhập không thành công do lỗi không load được loại độc giả ")
+            Return False
+        End If
         Dim docGia = New DocGia()
         docGia.TenDocGia = UserNameTextBox.Text
         docGia.Email = EmailTextBox.Text
@@ -15,7 +22,7 @@ Public Class frmTaoTheDocGia
         docGia.NgayTao = DateCreateDateTimePicker.Value
 
         Dim readerBus = New DocGiaBus()
-        Dim result = readerBus.Insert1(docGia)
+        Dim result = readerBus.InsertOne(docGia)
         If result.FlagResult = False Then
             MessageBox.Show(result.ApplicationMessage)
             Return False
@@ -26,27 +33,26 @@ Public Class frmTaoTheDocGia
     End Function
 
     Private Sub CreateAndCloseButton_Click(sender As Object, e As EventArgs) Handles CreateAndCloseButton.Click
-
         If InsertConfirm() Then
             Close()
         End If
     End Sub
 
     Private Sub FormCreateReader_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        InitReaderTypeComboboxData()
+        didReaderTypeComboboxLoad = LoadReaderTypeComboboxData().FlagResult
     End Sub
 
-    Private Sub InitReaderTypeComboboxData()
-        Dim readerTypeBus = New LoaiDocGiaBus()
-        Dim _listReaderType = readerTypeBus.SelectAll()
+    Private Function LoadReaderTypeComboboxData() As Result
+        Dim loaiDocGiaBus = New LoaiDocGiaBus()
+        Dim listLoaiDocGia = New List(Of LoaiDocGia)
+        Dim result = loaiDocGiaBus.SelectAll(listLoaiDocGia)
 
-        For Each readerType In _listReaderType
-            ReaderTypeComboBox.Items.Add(readerType)
-        Next
-
+        ReaderTypeComboBox.DataSource = New BindingSource(listLoaiDocGia, String.Empty)
         ReaderTypeComboBox.SelectedIndex = 0
         ReaderTypeComboBox.DisplayMember = "TenLoaiDocGia"
-        ReaderTypeComboBox.ValueMember = "LoaiDocGiaId"
-    End Sub
+        ReaderTypeComboBox.ValueMember = "MaLoaiDocGia"
+
+        Return result
+    End Function
 
 End Class

@@ -8,4 +8,10 @@
         frm.MdiParent = Me
         frm.Show()
     End Sub
+
+    Private Sub QuảnLíĐộcGiảToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles QuảnLíĐộcGiảToolStripMenuItem.Click
+        Dim frm = New frmQuanLiTheDocGia()
+        frm.MdiParent = Me
+        frm.Show()
+    End Sub
 End Class

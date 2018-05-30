@@ -1,4 +1,6 @@
 ﻿Imports DAO
+Imports DTO
+Imports Utility
 
 Public Class QuiDinhBus
     Private _quiDinhDAO As QuiDinhDAO
@@ -7,10 +9,8 @@ Public Class QuiDinhBus
         _quiDinhDAO = New QuiDinhDAO()
     End Sub
 
-    Public Function SelectAll() As DataTable
-
-        Dim data = New DataTable()
-        data = _quiDinhDAO.SelectAll()
-        Return data
+    Public Function SelectAll(ByRef listQuiDinh As List(Of QuiDinh)) As Result
+        Dim result = _quiDinhDAO.SelectAll(listQuiDinh)
+        Return result
     End Function
 End Class
