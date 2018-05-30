@@ -16,9 +16,7 @@ Public Class QuiDinhDAO
             Dim quiDinh = New QuiDinh(row)
             listQuiDinh.Add(quiDinh)
         Next
-        If listQuiDinh.Count < 1 Then
-            Return New Result(False, "Không thể lấy danh sách qui định", "")
-        End If
+
         Return Result
     End Function
 End Class

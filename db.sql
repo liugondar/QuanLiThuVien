@@ -263,6 +263,20 @@ BEGIN
 END
 go
 
+CREATE PROC USP_SuaTheDocGia
+    @MaTheDocGia INT,
+     @TenDocGia NVARCHAR(50),
+    @Email NVARCHAR(50),
+    @DiaChi NVARCHAR(50),
+    @MaLoaiDocGia INT ,
+    @NgaySinh date 
+AS
+BEGIN
+   Update TheDocGia
+   Set TenDocGia=@TenDocGia,Email=@Email,DiaChi=@DiaChi,MaLoaiDocGia=@MaLoaiDocGia,NgaySinh=@NgaySinh
+   Where MaTheDocGia=@MaTheDocGia
+END
+go
 -- create producer insert phieumuonsach
 create PROC USP_ThemPhieuMuonSach
     @MaTheDocGia int,
@@ -393,7 +407,4 @@ INSERT INTO dbo.TacGia(TenTacGia) VALUES(N'Terry Copeland')
 INSERT INTO dbo.TacGia(TenTacGia) VALUES(N'Lelia Fletcher')
 INSERT INTO dbo.TacGia(TenTacGia) VALUES(N'Bruce Clark')
 INSERT INTO dbo.TacGia(TenTacGia) VALUES(N'Mattie Jefferson')
-
-select * from TheDocGia WHERE MaLoaiDocGia=1
-Select * from LoaiDocGia
 

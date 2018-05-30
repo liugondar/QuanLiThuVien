@@ -6,6 +6,7 @@ Imports Utility
 
 <TestClass()> Public Class DocGiaBusTest
 
+#Region "Insert one test"
     <TestMethod()> Public Sub ValidGetLoaiDocGia()
         'arr
         Dim expected = New Result()
@@ -24,7 +25,18 @@ Imports Utility
         'assert
         Assert.AreEqual(expected.FlagResult, act.FlagResult)
     End Sub
-#Region "Insert one test"
+    <TestMethod()> Public Sub GivenValidDocGia_WhenInsertOne_ThenGiveTrueResult()
+        'arr
+        Dim expected = New Result()
+        Dim docGia = New DocGia(1, "ahiinh", "123@gmail.com", "122c",
+                      New DateTime(1998, 1, 1), DateTime.Now, DateTime.Now.AddMonths(6), 1)
+        Dim docGiaBus = New DocGiaBus()
+        'act
+        Dim act = docGiaBus.InsertOne(docGia)
+        'assert
+        Assert.AreEqual(expected.FlagResult, act.FlagResult)
+        Assert.AreEqual(expected.ApplicationMessage, act.ApplicationMessage)
+    End Sub
     <TestMethod()> Public Sub GivenLowYearsold_WhenInsertOne_ThenGiveFalseResult()
         'arr
         Dim expected = New Result("False", "Tuổi chưa đủ để lập thẻ", "")
@@ -70,6 +82,126 @@ Imports Utility
         Dim docGiaBus = New DocGiaBus()
         'act
         Dim act = docGiaBus.InsertOne(docGia)
+        'assert
+        Assert.AreEqual(expected.FlagResult, act.FlagResult)
+        Assert.AreEqual(expected.ApplicationMessage, act.ApplicationMessage)
+    End Sub
+#End Region
+
+#Region "Select all by type test"
+    <TestMethod()> Public Sub ValidSelectAllByTypeTest()
+        'arr
+        Dim expected = New Result()
+        Dim docGiaBus = New DocGiaBus()
+        'act
+        Dim act = docGiaBus.SelectAllByType(1, New List(Of DocGia))
+        'assert
+        Assert.AreEqual(expected.FlagResult, act.FlagResult)
+    End Sub
+#End Region
+
+#Region "Sửa thẻ độc giả test"
+    <TestMethod()> Public Sub ValidSuaTheDocGiaByTypeTest()
+        'arr
+        Dim expected = New Result()
+        Dim docGiaBus = New DocGiaBus()
+        Dim docGia = New DocGia(1, "ahiinh", "123@gmail.com", "122c",
+                      New DateTime(1998, 1, 1), DateTime.Now, DateTime.Now.AddMonths(6), 1)
+
+        'act
+        Dim act = docGiaBus.SuaTheDocGiaBangDocGia(docGia)
+        'assert
+        Assert.AreEqual(expected.FlagResult, act.FlagResult)
+    End Sub
+    <TestMethod()> Public Sub GivenInvalidDocGia_WhenEditDocGia_ThenFalseResultReturned()
+        'arr
+        Dim expected = New Result("False", "Email không đúng định dạng,ví dụ: 123@gmail.com", "")
+        Dim docGiaBus = New DocGiaBus()
+        Dim docGia = New DocGia(1, "", "123mail.com", "122c",
+                      New DateTime(198, 1, 1), DateTime.Now, DateTime.Now.AddMonths(6), 1)
+
+        'act
+        Dim act = docGiaBus.SuaTheDocGiaBangDocGia(docGia)
+        'assert
+        Assert.AreEqual(expected.FlagResult, act.FlagResult)
+    End Sub
+    <TestMethod()> Public Sub GivenInvalidEmailFormat_WhenEditDocGia_ThenFalseResultReturned()
+        'arr
+        Dim expected = New Result("False", "Email không đúng định dạng,ví dụ: 123@gmail.com", "")
+        Dim docGiaBus = New DocGiaBus()
+        Dim docGia = New DocGia(1, "ahiinh", "123mail.com", "122c",
+                      New DateTime(1998, 1, 1), DateTime.Now, DateTime.Now.AddMonths(6), 1)
+
+        'act
+        Dim act = docGiaBus.SuaTheDocGiaBangDocGia(docGia)
+        'assert
+        Assert.AreEqual(expected.FlagResult, act.FlagResult)
+        Assert.AreEqual(expected.ApplicationMessage, act.ApplicationMessage)
+    End Sub
+    <TestMethod()> Public Sub GivenEmptyEmail_WhenEditDocGia_ThenFalseResultReturned()
+        'arr
+        Dim expected = New Result("False", "Email không đúng định dạng,ví dụ: 123@gmail.com", "")
+        Dim docGiaBus = New DocGiaBus()
+        Dim docGia = New DocGia(1, "ahiinh", "", "122c",
+                      New DateTime(1998, 1, 1), DateTime.Now, DateTime.Now.AddMonths(6), 1)
+
+        'act
+        Dim act = docGiaBus.SuaTheDocGiaBangDocGia(docGia)
+        'assert
+        Assert.AreEqual(expected.FlagResult, act.FlagResult)
+        Assert.AreEqual(expected.ApplicationMessage, act.ApplicationMessage)
+    End Sub
+
+    <TestMethod()> Public Sub GivenEmptyUserName_WhenEditDocGia_ThenFalseResultReturned()
+        'arr
+        Dim expected = New Result("False", "Tên độc giả không đúng định dạng", "")
+        Dim docGiaBus = New DocGiaBus()
+        Dim docGia = New DocGia(1, "", "123@mail.com", "122c",
+                      New DateTime(1998, 1, 1), DateTime.Now, DateTime.Now.AddMonths(6), 1)
+
+        'act
+        Dim act = docGiaBus.SuaTheDocGiaBangDocGia(docGia)
+        'assert
+        Assert.AreEqual(expected.FlagResult, act.FlagResult)
+        Assert.AreEqual(expected.ApplicationMessage, act.ApplicationMessage)
+    End Sub
+
+    <TestMethod()> Public Sub GivenHightYearsold_WhenEditDocGia_ThenFalseResultReturned()
+        'arr
+        Dim expected = New Result("False", "Tuổi quá lớn để lập thẻ", "")
+        Dim docGiaBus = New DocGiaBus()
+        Dim docGia = New DocGia(1, "idfasfd", "123@mail.com", "122c",
+                      New DateTime(199, 1, 1), DateTime.Now, DateTime.Now.AddMonths(6), 1)
+
+        'act
+        Dim act = docGiaBus.SuaTheDocGiaBangDocGia(docGia)
+        'assert
+        Assert.AreEqual(expected.FlagResult, act.FlagResult)
+        Assert.AreEqual(expected.ApplicationMessage, act.ApplicationMessage)
+    End Sub
+    <TestMethod()> Public Sub GivenLow_WhenEditDocGia_ThenFalseResultReturned()
+        'arr
+        Dim expected = New Result("False", "Tuổi chưa đủ để lập thẻ", "")
+        Dim docGiaBus = New DocGiaBus()
+        Dim docGia = New DocGia(1, "fasdf", "123@mail.com", "122c",
+                      New DateTime(2010, 1, 1), DateTime.Now, DateTime.Now.AddMonths(6), 1)
+
+        'act
+        Dim act = docGiaBus.SuaTheDocGiaBangDocGia(docGia)
+        'assert
+        Assert.AreEqual(expected.FlagResult, act.FlagResult)
+        Assert.AreEqual(expected.ApplicationMessage, act.ApplicationMessage)
+    End Sub
+
+    <TestMethod()> Public Sub GivenInvalidLoaiDocGia_WhenEditDocGia_ThenFalseResultReturned()
+        'arr
+        Dim expected = New Result("False", "Tuổi chưa đủ để lập thẻ", "")
+        Dim docGiaBus = New DocGiaBus()
+        Dim docGia = New DocGia(1, "fasdf", "123@mail.com", "122c",
+                      New DateTime(2010, 1, 1), DateTime.Now, DateTime.Now.AddMonths(6), 5)
+
+        'act
+        Dim act = docGiaBus.SuaTheDocGiaBangDocGia(docGia)
         'assert
         Assert.AreEqual(expected.FlagResult, act.FlagResult)
         Assert.AreEqual(expected.ApplicationMessage, act.ApplicationMessage)

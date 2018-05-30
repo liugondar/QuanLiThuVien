@@ -1,6 +1,8 @@
 ﻿Imports System.Text
+Imports DAO
 Imports DTO
 Imports Microsoft.VisualStudio.TestTools.UnitTesting
+Imports Utility
 
 <TestClass()> Public Class DocGiaTest
 
@@ -64,4 +66,50 @@ Imports Microsoft.VisualStudio.TestTools.UnitTesting
 
     End Sub
 
+    <TestMethod()> Public Sub GivenValidDocGia_WhenValidating_ThenTrueResultReturned()
+        'arrange
+        Dim expected = New Result()
+        Dim docGia = New DocGia(1, "ahiinh", "123@gmail.com", "122c",
+                      New DateTime(1998, 1, 1), DateTime.Now, DateTime.Now.AddMonths(6), 1)
+        'act
+        Dim act = docGia.Validate()
+        'assert
+        Assert.AreEqual(expected.FlagResult, act.FlagResult)
+    End Sub
+
+    <TestMethod()> Public Sub GivenEmptyTenDocGia_WhenValidating_ThenTrueResultReturned()
+        'arrange
+        Dim expected = New Result(False, "Tên độc giả không đúng định dạng", "")
+        Dim docGia = New DocGia(1, "", "123@gmail.com", "122c",
+                      New DateTime(1998, 1, 1), DateTime.Now, DateTime.Now.AddMonths(6), 1)
+        'act
+        Dim act = docGia.Validate()
+        'assert
+        Assert.AreEqual(expected.FlagResult, act.FlagResult)
+        Assert.AreEqual(expected.ApplicationMessage, act.ApplicationMessage)
+    End Sub
+
+    <TestMethod()> Public Sub GivenInvidEmail_WhenValidating_ThenTrueResultReturned()
+        'arrange
+        Dim expected = New Result(False, "Email không đúng định dạng,ví dụ: 123@gmail.com", "")
+        Dim docGia = New DocGia(1, "ahiinh", "123ail.com", "122c",
+                      New DateTime(1998, 1, 1), DateTime.Now, DateTime.Now.AddMonths(6), 1)
+        'act
+        Dim act = docGia.Validate()
+        'assert
+        Assert.AreEqual(expected.FlagResult, act.FlagResult)
+        Assert.AreEqual(expected.ApplicationMessage, act.ApplicationMessage)
+    End Sub
+
+    <TestMethod()> Public Sub GivenEmptyEmail_WhenValidating_ThenTrueResultReturned()
+        'arrange
+        Dim expected = New Result(False, "Email không đúng định dạng,ví dụ: 123@gmail.com", "")
+        Dim docGia = New DocGia(1, "ahiinh", "", "122c",
+                      New DateTime(1998, 1, 1), DateTime.Now, DateTime.Now.AddMonths(6), 1)
+        'act
+        Dim act = docGia.Validate()
+        'assert
+        Assert.AreEqual(expected.FlagResult, act.FlagResult)
+        Assert.AreEqual(expected.ApplicationMessage, act.ApplicationMessage)
+    End Sub
 End Class

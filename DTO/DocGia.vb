@@ -1,4 +1,7 @@
-﻿Public Class DocGia
+﻿Imports System.Text.RegularExpressions
+Imports Utility
+
+Public Class DocGia
     Public Property MaTheDocGia As Integer
     Public Property TenDocGia As String
     Public Property Email As String
@@ -50,4 +53,26 @@
         Me.MaLoaiDocGia = LoaiDocGiaId
         Me.NgayHetHan = NgayHetHan
     End Sub
+
+    public Function Validate() As Result
+        Dim validateUserNameResult = ValidateUserName(TenDocGia)
+        Dim validateEmailResult = ValidateEmail(Email)
+        If validateUserNameResult.FlagResult = False Then Return validateUserNameResult
+        If validateEmailResult.FlagResult = False Then Return validateEmailResult
+
+        Return New Result(True)
+    End Function
+
+    Private Function ValidateEmail(Email As String) As Result
+        If String.IsNullOrWhiteSpace(Email) Then Return New Result(False, "Email không đúng định dạng,ví dụ: 123@gmail.com", "")
+        If (Regex.IsMatch(Email, "^([0-9a-zA-Z]([-\.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$") = False) Then Return New Result(False, "Email không đúng định dạng,ví dụ: 123@gmail.com", "")
+        Return New Result()
+    End Function
+
+    Private Function ValidateUserName(tenDocGia As String) As Result
+        If String.IsNullOrWhiteSpace(tenDocGia) Then
+            Return New Result(False, "Tên độc giả không đúng định dạng", "")
+        End If
+        Return New Result()
+    End Function
 End Class

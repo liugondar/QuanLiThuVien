@@ -46,40 +46,16 @@ Public Class DocGiaBus
         Return _docGiaDAO.InsertOne(docGia)
     End Function
 
-    Public Function SelectAllByType(maLoai As String) As Result
-        If String.IsNullOrWhiteSpace(maLoai) Then
-            Return New Result(False, "Mã loại độc giả không đúng!", "")
-        End If
-        'TODO: select all by type doc gia bus
-        Return New Result()
-    End Function
-
     Private Function ValidateAll(docGia As DocGia) As Result
-        Dim validateUserNameResult = ValidateUserName(docGia.TenDocGia)
-        Dim validateEmailResult = ValidateEmail(docGia.Email)
+        Dim validateUserNameAndEmailResult = docGia.Validate()
         Dim validateYearsoldResult = ValidateYearsold(docGia.NgaySinh)
         Dim validateReaderTypeResult = ValidateReaderType(docGia.MaLoaiDocGia)
 
-        If validateUserNameResult.FlagResult = False Then Return validateUserNameResult
-        If validateEmailResult.FlagResult = False Then Return validateEmailResult
+        If validateUserNameAndEmailResult.FlagResult = False Then Return validateUserNameAndEmailResult
         If validateYearsoldResult.FlagResult = False Then Return validateYearsoldResult
         If validateReaderTypeResult.FlagResult = False Then Return validateReaderTypeResult
 
         Return New Result(True)
-    End Function
-
-    Private Function ValidateEmail(Email As String) As Result
-        If String.IsNullOrWhiteSpace(Email) Then Return New Result(False, "Email không đúng định dạng,ví dụ: 123@gmail.com", "")
-        If (Regex.IsMatch(Email, "^([0-9a-zA-Z]([-\.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$") = False) Then Return New Result(False, "Email không đúng định dạng,ví dụ: 123@gmail.com", "")
-        Return New Result()
-    End Function
-
-
-    Private Function ValidateUserName(tenDocGia As String) As Result
-        If String.IsNullOrWhiteSpace(tenDocGia) Then
-            Return New Result(False, "Tên độc giả không đúng định dạng", "")
-        End If
-        Return New Result()
     End Function
 
     Private Function ValidateReaderType(loaiDocGiaId As Integer) As Result
@@ -91,7 +67,6 @@ Public Class DocGiaBus
         Return New Result(True)
     End Function
 
-
     Private Function ValidateYearsold(ngaySinh As Date) As Object
         Dim dateNow As Date = Date.Now()
         Dim yearsold = (dateNow - ngaySinh).TotalDays \ 365
@@ -102,5 +77,29 @@ Public Class DocGiaBus
             Return New Result(False, "Tuổi quá lớn để lập thẻ", "")
         End If
         Return New Result(True)
+    End Function
+
+    Public Function SelectAllByType(maLoai As String, ByRef listDocGia As List(Of DocGia)) As Result
+        If String.IsNullOrWhiteSpace(maLoai) Then
+            Return New Result(False, "Mã loại độc giả không đúng!", "")
+        End If
+        Dim result = _docGiaDAO.SelectAllByType(maLoai, listDocGia)
+        If listDocGia.Count < 1 Then
+            Return New Result(False, "Danh sách các độc giả thuộc loại đang chọn hiện chưa có thành viên", "")
+        End If
+        Return result
+    End Function
+
+    Public Function SuaTheDocGiaBangDocGia(docGia As DocGia) As Result
+        Dim validateResult = docGia.Validate()
+        Dim validateYearsoldResult = ValidateYearsold(docGia.NgaySinh)
+        Dim validateReaderTypeResult = ValidateReaderType(docGia.MaLoaiDocGia)
+
+        If validateResult.FlagResult = False Then Return validateResult
+        If validateYearsoldResult.FlagResult = False Then Return validateYearsoldResult
+        If validateReaderTypeResult.FlagResult = False Then Return validateReaderTypeResult
+
+        Dim result = _docGiaDAO.SuaTheDocGiaMaTheDocGia(docGia)
+        Return result
     End Function
 End Class

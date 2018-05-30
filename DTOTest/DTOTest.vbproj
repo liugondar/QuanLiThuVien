@@ -117,6 +117,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DAO\DAO.vbproj">
+      <Project>{3C5490F3-5480-4374-B223-D9BF1189B80A}</Project>
+      <Name>DAO</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DTO\DTO.vbproj">
       <Project>{61a0eb1a-b950-49d3-98d7-1e9953f25dff}</Project>
       <Name>DTO</Name>

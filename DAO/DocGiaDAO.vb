@@ -32,9 +32,19 @@ Public Class DocGiaDAO
             Dim docGia = New DocGia(row)
             listDocGia.Add(docGia)
         Next
-        If listDocGia.Count < 1 Then
-            Return New Result(False, "Không thể lấy danh sách độc giả theo loại", "")
-        End If
+        Return result
+    End Function
+
+    Public Function SuaTheDocGiaMaTheDocGia(DocGia As DocGia) As Result
+        Dim query As String = String.Empty
+        query &= "EXECUTE USP_SuaTheDocGia "
+        query &= "@MaTheDocGia=N'" & DocGia.MaTheDocGia & "', "
+        query &= "@TenDocGia=N'" & DocGia.TenDocGia & "', "
+        query &= "@Email=N'" & DocGia.Email & "', "
+        query &= "@DiaChi =N'" & DocGia.DiaChi & "', "
+        query &= "@MaLoaiDocGia=" & DocGia.MaLoaiDocGia & ", "
+        query &= "@NgaySinh='" & DocGia.NgaySinh & "'"
+        Dim result = _dataProvider.ExcuteNonquery(query)
         Return result
     End Function
 

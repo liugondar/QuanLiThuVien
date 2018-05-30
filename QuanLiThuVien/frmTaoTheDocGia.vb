@@ -17,7 +17,7 @@ Public Class frmTaoTheDocGia
         docGia.TenDocGia = UserNameTextBox.Text
         docGia.Email = EmailTextBox.Text
         docGia.DiaChi = AddressTextBox.Text
-        docGia.MaLoaiDocGia = ReaderTypeComboBox.SelectedItem.LoaiDocGiaId
+        docGia.MaLoaiDocGia = ReaderTypeComboBox.SelectedItem.MaLoaiDocGia
         docGia.NgaySinh = DateOfBirthDateTimePicker.Value
         docGia.NgayTao = DateCreateDateTimePicker.Value
 
