@@ -36,7 +36,16 @@ Imports Utility
                       New DateTime(1998, 1, 1), DateTime.Now, DateTime.Now.AddMonths(6), 1)
 
         'act
-        Dim actual = DocGiaDAO.SuaTheDocGiaMaTheDocGia(docGia)
+        Dim actual = DocGiaDAO.SuaTheDocGiaBangDocGia(docGia)
+        'assert
+        Assert.AreEqual(expected.FlagResult, actual.FlagResult)
+    End Sub
+    <TestMethod()> Public Sub ValidXoaTheDocGia()
+        'arr
+        Dim expected = New Result()
+        Dim DocGiaDAO = New DocGiaDAO()
+        'act
+        Dim actual = DocGiaDAO.XoaTheDocGiaBangMaTheDocGia(1)
         'assert
         Assert.AreEqual(expected.FlagResult, actual.FlagResult)
     End Sub

@@ -35,7 +35,7 @@ Public Class DocGiaDAO
         Return result
     End Function
 
-    Public Function SuaTheDocGiaMaTheDocGia(DocGia As DocGia) As Result
+    Public Function SuaTheDocGiaBangDocGia(DocGia As DocGia) As Result
         Dim query As String = String.Empty
         query &= "EXECUTE USP_SuaTheDocGia "
         query &= "@MaTheDocGia=N'" & DocGia.MaTheDocGia & "', "
@@ -44,6 +44,14 @@ Public Class DocGiaDAO
         query &= "@DiaChi =N'" & DocGia.DiaChi & "', "
         query &= "@MaLoaiDocGia=" & DocGia.MaLoaiDocGia & ", "
         query &= "@NgaySinh='" & DocGia.NgaySinh & "'"
+        Dim result = _dataProvider.ExcuteNonquery(query)
+        Return result
+    End Function
+
+    Public Function XoaTheDocGiaBangMaTheDocGia(maThe As String) As Result
+        Dim query As String = String.Empty
+        query &= "EXECUTE USP_XoaTheDocGia "
+        query &= "@MaTheDocGia=" & maThe
         Dim result = _dataProvider.ExcuteNonquery(query)
         Return result
     End Function

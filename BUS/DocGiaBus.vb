@@ -99,7 +99,13 @@ Public Class DocGiaBus
         If validateYearsoldResult.FlagResult = False Then Return validateYearsoldResult
         If validateReaderTypeResult.FlagResult = False Then Return validateReaderTypeResult
 
-        Dim result = _docGiaDAO.SuaTheDocGiaMaTheDocGia(docGia)
+        Dim result = _docGiaDAO.SuaTheDocGiaBangDocGia(docGia)
+        Return result
+    End Function
+
+    Public Function XoaTheDocGiaBangMaThe(maThe As String) As Result
+        If String.IsNullOrWhiteSpace(maThe) Then Return New Result(False, "Mã thẻ độc giả không được để trống", "")
+        Dim result = _docGiaDAO.XoaTheDocGiaBangMaTheDocGia(maThe)
         Return result
     End Function
 End Class

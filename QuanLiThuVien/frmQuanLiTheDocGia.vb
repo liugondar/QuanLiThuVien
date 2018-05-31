@@ -174,6 +174,19 @@ Public Class frmQuanLiTheDocGia
     End Sub
 
     Private Sub RemoveButton_Click(sender As Object, e As EventArgs) Handles RemoveButton.Click
+        Dim docGia = New DocGia()
+        Dim getDataResult = GetSelectedDocGiaData(docGia)
+        If getDataResult.FlagResult = False Then
+            MessageBox.Show("Không thể nhận dạng độc giả cần xóa")
+            Return
+        End If
 
+        Dim result = _docGiaBus.XoaTheDocGiaBangMaThe(docGia.MaTheDocGia)
+        If result.FlagResult = False Then
+            MessageBox.Show(result.ApplicationMessage)
+        Else
+            MessageBox.Show("Xóa thành công")
+            LoadListDocGia(docGia.MaLoaiDocGia)
+        End If
     End Sub
 End Class

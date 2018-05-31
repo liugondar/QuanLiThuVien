@@ -207,4 +207,29 @@ Imports Utility
         Assert.AreEqual(expected.ApplicationMessage, act.ApplicationMessage)
     End Sub
 #End Region
+
+#Region "Xoá thẻ độc giả test"
+    <TestMethod()> Public Sub GivenValidMathe_WhenXoaTheDocGiaBangMaThe_ThenTrueResultReturned()
+        'arr
+        Dim expected = New Result()
+        Dim docGiaBus = New DocGiaBus()
+        Dim listDocGia = New List(Of DocGia)
+        Dim result = docGiaBus.SelectAllByType(1, listDocGia)
+        'act
+        Dim act = docGiaBus.XoaTheDocGiaBangMaThe(listDocGia(0).MaTheDocGia)
+        'assert
+        Assert.AreEqual(expected.FlagResult, act.FlagResult)
+    End Sub
+
+    <TestMethod()> Public Sub GivenEmptyMathe_WhenXoaTheDocGiaBangMaThe_ThenTrueResultReturned()
+        'arr
+        Dim expected = New Result(False, "Mã thẻ độc giả không được để trống", "")
+        Dim docGiaBus = New DocGiaBus()
+        'act
+        Dim act = docGiaBus.XoaTheDocGiaBangMaThe("")
+        'assert
+        Assert.AreEqual(expected.FlagResult, act.FlagResult)
+        Assert.AreEqual(expected.ApplicationMessage, act.ApplicationMessage)
+    End Sub
+#End Region
 End Class

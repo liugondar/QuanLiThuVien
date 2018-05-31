@@ -263,6 +263,16 @@ BEGIN
 END
 go
 
+-- create producer delete reader card
+CREATE PROC USP_XoaTheDocGia
+    @MaTheDocGia INT
+AS
+BEGIN
+    Delete from TheDocGia
+    where MaTheDocGia=@MaTheDocGia
+END
+go
+
 CREATE PROC USP_SuaTheDocGia
     @MaTheDocGia INT,
      @TenDocGia NVARCHAR(50),
