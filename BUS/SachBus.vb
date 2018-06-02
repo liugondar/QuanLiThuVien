@@ -1,0 +1,79 @@
+﻿Imports DAO
+Imports DTO
+Imports Utility
+
+Public Class SachBus
+    Private _sachDAO As SachDAO
+    Private _quiDinh As QuiDinh
+    Private _danhSachTacGia As List(Of TacGia)
+    Private _danhSachTheLoaiSach As List(Of TheLoaiSach)
+    Private _ketQuaLayQuiDinh As Result
+
+    Public Sub New()
+        _sachDAO = New SachDAO()
+        _danhSachTacGia = New List(Of TacGia)
+        _danhSachTheLoaiSach = New List(Of TheLoaiSach)
+        _ketQuaLayQuiDinh = GetQuiDinh()
+        GetDanhSachTacGia()
+        GetDanhSachTheLoaiSach()
+    End Sub
+
+    Private Function GetQuiDinh() As Result
+        Dim quiDinhBus = New QuiDinhBus()
+        Dim result = quiDinhBus.SelectAll(_quiDinh)
+        Return result
+    End Function
+    Private Function GetDanhSachTacGia() As Result
+        Dim tacGiaBus = New TacGiaBUS()
+        Dim result = tacGiaBus.SelectAll(_danhSachTacGia)
+        Return result
+    End Function
+    Private Function GetDanhSachTheLoaiSach() As Result
+        Dim theLoaiSachBus = New TheLoaiSachBUS()
+        Dim result = theLoaiSachBus.SelectAll(_danhSachTheLoaiSach)
+        Return result
+    End Function
+
+    Public Function InsertOne(sach As Sach) As Result
+        Dim validateResult = Validate(sach)
+        If validateResult.FlagResult = False Then Return validateResult
+        Return _sachDAO.InsertOne(sach)
+    End Function
+
+    Private Function Validate(sach As Sach) As Result
+        If _ketQuaLayQuiDinh.FlagResult = False Then Return New Result(False, "Không thể lấy qui định trong cơ sở dữ liệu để xác nhập thông tin sách!", "")
+        Dim validateTenSachVaTenNhaXuatBanResult = sach.Validate()
+        Dim validateNgayXuatBanResult = ValidateNgayXuatBan(sach.NgayXuatBan, sach.NgayNhap)
+        Dim validateTheLoaiSachResult = ValidateTheLoaiSach(sach.MaTheLoaiSach)
+        Dim validateTacGiaResult = ValidateTacGia(sach.MaTacGia)
+
+        If validateTenSachVaTenNhaXuatBanResult.FlagResult = False Then Return validateTenSachVaTenNhaXuatBanResult
+        If validateNgayXuatBanResult.FlagResult = False Then Return validateNgayXuatBanResult
+        If validateTheLoaiSachResult.FlagResult = False Then Return validateTheLoaiSachResult
+        If validateTacGiaResult.FlagResult = False Then Return validateTacGiaResult
+
+        Return New Result()
+    End Function
+
+
+
+    Private Function ValidateNgayXuatBan(ngayXuatBan As DateTime, ngayNhap As DateTime) As Result
+
+        Dim timeSpan = ngayNhap.Subtract(ngayXuatBan)
+        Dim khoangCachNhanSach = timeSpan.TotalDays / 365
+
+        If khoangCachNhanSach > _quiDinh.ThoiHanNhanSach Then Return New Result(False, "Không nhận sách có ngày xuấ bản quá " & _quiDinh.ThoiHanNhanSach, "")
+        Return New Result()
+    End Function
+    Private Function ValidateTheLoaiSach(maTheLoaiSach As Integer) As Result
+        Dim isMatchingValues = _danhSachTheLoaiSach.Find(Function(x) x.MaTheLoaiSach = maTheLoaiSach)
+        If isMatchingValues Is Nothing Then Return New Result(False, "Lỗi chọn sai thể loại sách", "")
+        Return New Result()
+    End Function
+
+    Private Function ValidateTacGia(maTacGia As Integer) As Result
+        Dim isMatchingValues = _danhSachTacGia.Find(Function(x) x.MaTacGia = maTacGia)
+        If isMatchingValues Is Nothing Then Return New Result(False, "Lỗi chọn sai tác giả", "")
+        Return New Result()
+    End Function
+End Class

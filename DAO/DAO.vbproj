@@ -82,6 +82,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="QuiDinhDAO.vb" />
+    <Compile Include="SachDAO.vb" />
+    <Compile Include="TacGiaDAO.vb" />
+    <Compile Include="TheLoaiSachDAO.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

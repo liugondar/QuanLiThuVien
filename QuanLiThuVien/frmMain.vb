@@ -14,4 +14,10 @@
         frm.MdiParent = Me
         frm.Show()
     End Sub
+
+    Private Sub NhậpSáchToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NhậpSáchToolStripMenuItem.Click
+        Dim frm = New frmNhapSach()
+        frm.MdiParent = Me
+        frm.Show()
+    End Sub
 End Class

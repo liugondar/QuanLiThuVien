@@ -3,8 +3,6 @@ Imports Utility
 
 Public Class DocGiaDAO
     Private _dataProvider As DataProvider
-    Private _reader As DocGia
-
     Public Sub New()
         _dataProvider = New DataProvider()
     End Sub

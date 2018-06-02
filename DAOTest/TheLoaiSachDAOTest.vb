@@ -1,19 +1,17 @@
 ﻿Imports System.Text
 Imports DAO
-Imports DTO
 Imports Microsoft.VisualStudio.TestTools.UnitTesting
 Imports Utility
 
-<TestClass()> Public Class QuiDinhDAOTest
+<TestClass()> Public Class TheLoaiSachDAOTest
 
     <TestMethod()> Public Sub ValidSelectAll()
-        'arrange
+        'arr
         Dim expected = New Result()
-        Dim quiDinhDao = New QuiDinhDAO()
+        Dim theLoaiSachDao = New TheLoaiSachDAO()
         'act
-        Dim actual = quiDinhDao.SelectAll(New QuiDinh())
+        Dim actual = theLoaiSachDao.SelectAll(New List(Of DTO.TheLoaiSach))
         'assert
-
         Assert.AreEqual(expected.FlagResult, actual.FlagResult)
     End Sub
 

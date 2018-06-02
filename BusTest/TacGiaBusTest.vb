@@ -1,19 +1,17 @@
 ﻿Imports System.Text
-Imports DAO
-Imports DTO
+Imports BUS
 Imports Microsoft.VisualStudio.TestTools.UnitTesting
 Imports Utility
 
-<TestClass()> Public Class QuiDinhDAOTest
+<TestClass()> Public Class TacGiaBusTest
 
     <TestMethod()> Public Sub ValidSelectAll()
-        'arrange
+        'arr
         Dim expected = New Result()
-        Dim quiDinhDao = New QuiDinhDAO()
+        Dim tacGiaBus = New TacGiaBUS()
         'act
-        Dim actual = quiDinhDao.SelectAll(New QuiDinh())
+        Dim actual = tacGiaBus.SelectAll(New List(Of DTO.TacGia))
         'assert
-
         Assert.AreEqual(expected.FlagResult, actual.FlagResult)
     End Sub
 

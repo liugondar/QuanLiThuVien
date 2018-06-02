@@ -29,12 +29,7 @@ Public Class DocGiaBus
 
     Public Function GetQuiDinh() As Result
         Dim quiDinhBus As QuiDinhBus = New QuiDinhBus()
-        Dim listQuiDinh = New List(Of QuiDinh)
-        Dim result = quiDinhBus.SelectAll(listQuiDinh)
-        If listQuiDinh.Count < 1 Then
-            Return New Result(False, "Không thể lấy qui định phục vụ việc kiểm tra thông tin nhập thẻ độc giả", "")
-        End If
-        _quiDinh = listQuiDinh(0)
+        Dim result = quiDinhBus.SelectAll(_quiDinh)
         Return result
     End Function
 
@@ -59,10 +54,10 @@ Public Class DocGiaBus
     End Function
 
     Private Function ValidateReaderType(loaiDocGiaId As Integer) As Result
-        Dim matchingValues = _listLoaiDocGia.Find(Function(x) x.MaLoaiDocGia = loaiDocGiaId)
+        Dim isMatchingValue = _listLoaiDocGia.Find(Function(x) x.MaLoaiDocGia = loaiDocGiaId)
 
-        If matchingValues Is Nothing Then
-            Return New Result(False, "Lỗi nhập vào kiểu người dùng", "")
+        If isMatchingValue Is Nothing Then
+            Return New Result(False, "Lỗi chọn sai kiểu độc giả", "")
         End If
         Return New Result(True)
     End Function

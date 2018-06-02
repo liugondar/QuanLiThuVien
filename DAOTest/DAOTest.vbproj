@@ -95,6 +95,9 @@
     </Compile>
     <Compile Include="LoaiDocGiaDAOTest.vb" />
     <Compile Include="DocGiaDAOTest.vb" />
+    <Compile Include="SachDAOTest.vb" />
+    <Compile Include="TacGiaDAOTESt.vb" />
+    <Compile Include="TheLoaiSachDAOTest.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

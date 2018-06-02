@@ -9,11 +9,8 @@ Public Class QuiDinhBus
         _quiDinhDAO = New QuiDinhDAO()
     End Sub
 
-    Public Function SelectAll(ByRef listQuiDinh As List(Of QuiDinh)) As Result
-        Dim result = _quiDinhDAO.SelectAll(listQuiDinh)
-        If listQuiDinh.Count < 1 Then
-            Return New Result(False, "Danh sách các qui định hiện đang trống", "")
-        End If
+    Public Function SelectAll(ByRef quiDinh As QuiDinh) As Result
+        Dim result = _quiDinhDAO.SelectAll(quiDinh)
         Return result
     End Function
 End Class
