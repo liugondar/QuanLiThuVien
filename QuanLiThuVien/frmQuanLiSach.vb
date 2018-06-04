@@ -152,27 +152,6 @@ Public Class frmQuanLiSach
         If AuthorComboBox.SelectedValue <> -1 Then listThoaMan.Intersect(listSachTheoTacGia, sachComparer).ToList()
         If CategoryComboBox.SelectedValue <> -1 Then listThoaMan = listThoaMan.Intersect(listSachTheoTheLoai, sachComparer).ToList()
 
-
-        For index = 0 To listThoaMan.Count - 1
-            Dim maTheLoaiSachTemp = listThoaMan(index).MaTheLoaiSach
-
-            Dim ListTheLoaiSachThoaMan = From tls In _listTheLoaiSach
-                                         Where tls.MaTheLoaiSach = maTheLoaiSachTemp
-                                         Select tls
-
-            For Each theLoaiSach In ListTheLoaiSachThoaMan
-                listThoaMan(index).TenTheLoaiSach = theLoaiSach.TenTheLoaiSach
-            Next
-
-            Dim maTacGiaTemp = listThoaMan(index).MaTacGia
-            Dim listTacGiaThoaMan = From tg In _listTacGia
-                                    Where tg.MaTacGia = maTheLoaiSachTemp
-                                    Select tg
-            For Each tacGia In listTacGiaThoaMan
-                listThoaMan(index).TenTacGia = tacGia.TenTacGia
-            Next
-        Next
-
         LoadListSach(listThoaMan)
     End Sub
 
@@ -181,8 +160,6 @@ Public Class frmQuanLiSach
         DataGridViewQuanLiSach.DataSource = Nothing
         DataGridViewQuanLiSach.AutoGenerateColumns = False
         DataGridViewQuanLiSach.AllowUserToAddRows = False
-
-        DataGridViewQuanLiSach.DataSource = listSach
 
         Dim columnMaSach = New DataGridViewTextBoxColumn()
         columnMaSach.Name = "MaSach"
@@ -219,7 +196,7 @@ Public Class frmQuanLiSach
 
         Dim columnNayXuatBan = New DataGridViewTextBoxColumn()
         columnNayXuatBan.Name = "NgayXuatBan"
-        columnNayXuatBan.HeaderText = "Ngày xuất bản"
+        columnNayXuatBan.HeaderText = "Năm xuất bản"
         columnNayXuatBan.DataPropertyName = "NgayXuatBAn"
         DataGridViewQuanLiSach.Columns.Add(columnNayXuatBan)
 
@@ -234,5 +211,54 @@ Public Class frmQuanLiSach
         columnTriGia.HeaderText = "Trị giá"
         columnTriGia.DataPropertyName = "TriGia"
         DataGridViewQuanLiSach.Columns.Add(columnTriGia)
+
+        For index = 0 To listSach.Count - 1
+            Dim maTheLoaiSachTemp = listSach(index).MaTheLoaiSach
+            Dim tenTheLoaiSachTemp As String
+            Dim ListTheLoaiSachThoaMan = From tls In _listTheLoaiSach
+                                         Where tls.MaTheLoaiSach = maTheLoaiSachTemp
+                                         Select tls
+
+            For Each theLoaiSach In ListTheLoaiSachThoaMan
+                tenTheLoaiSachTemp = theLoaiSach.TenTheLoaiSach
+            Next
+
+            Dim maTacGiaTemp = listSach(index).MaTacGia
+            Dim tenTacGiaTemp As String
+            Dim listTacGiaThoaMan = From tg In _listTacGia
+                                    Where tg.MaTacGia = maTheLoaiSachTemp
+                                    Select tg
+            For Each tacGia In listTacGiaThoaMan
+                tenTacGiaTemp = tacGia.TenTacGia
+            Next
+
+            DataGridViewQuanLiSach.Rows.Add(listSach(index).MaSach,
+            listSach(index).TenSach, tenTheLoaiSachTemp, tenTacGiaTemp, listSach(index).TenNhaXuatBan,
+            listSach(index).NgayXuatBan.ToString("yyyy"), listSach(index).NgayNhap.ToString("dd/MM/yyyy"), listSach(index).TriGia)
+        Next
+    End Function
+
+    Private Sub DataGridViewQuanLiSach_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridViewQuanLiSach.SelectionChanged
+        Dim sach = New Sach()
+        Dim result = GetSelectedSachData(sach)
+        Console.WriteLine(sach.MaSach)
+    End Sub
+
+    Private Function GetSelectedSachData(ByRef sach As Sach) As Result
+        Dim currentRowIndex As Integer = DataGridViewQuanLiSach.CurrentCellAddress.Y
+        'Verify that indexing OK
+        If (-1 < currentRowIndex And currentRowIndex < DataGridViewQuanLiSach.RowCount) Then
+            Try
+                sach = New Sach()
+                sach.MaSach = Convert.ToInt32(DataGridViewQuanLiSach.Rows(currentRowIndex).Cells("MaSach").Value.ToString())
+            Catch ex As Exception
+                Console.WriteLine(ex.StackTrace)
+                Return New Result(False, "Không lấy được thông tin độc giả đã chọn", "")
+            End Try
+        Else
+            Return New Result(False, "Không lấy được thông tin độc giả đã chọn", "")
+        End If
+
+        Return New Result()
     End Function
 End Class

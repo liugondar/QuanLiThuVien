@@ -1,4 +1,5 @@
-﻿Imports Utility
+﻿Imports System.Windows.Forms
+Imports Utility
 
 Public Class Sach
     Public Sub New()
@@ -45,9 +46,6 @@ Public Class Sach
     Public Property NgayXuatBan() As DateTime
     Public Property NgayNhap() As DateTime
     Public Property TriGia() As Integer
-    Public Property TenTheLoaiSach() As String
-    Public Property TenTacGia() As String
-
 
     Public Function Validate() As Result
         If String.IsNullOrWhiteSpace(TenSach).ToString() Then Return New Result(False, "Tên sách không đúng định dạng!", "")
