@@ -33,13 +33,12 @@ Public Class SachBus
         Dim result = theLoaiSachBus.SelectAll(_danhSachTheLoaiSach)
         Return result
     End Function
-
+#Region "insert one"
     Public Function InsertOne(sach As Sach) As Result
         Dim validateResult = Validate(sach)
         If validateResult.FlagResult = False Then Return validateResult
         Return _sachDAO.InsertOne(sach)
     End Function
-
     Private Function Validate(sach As Sach) As Result
         If _ketQuaLayQuiDinh.FlagResult = False Then Return New Result(False, "Không thể lấy qui định trong cơ sở dữ liệu để xác nhập thông tin sách!", "")
         Dim validateTenSachVaTenNhaXuatBanResult = sach.Validate()
@@ -54,9 +53,6 @@ Public Class SachBus
 
         Return New Result()
     End Function
-
-
-
     Private Function ValidateNgayXuatBan(ngayXuatBan As DateTime, ngayNhap As DateTime) As Result
 
         Dim timeSpan = ngayNhap.Subtract(ngayXuatBan)
@@ -65,15 +61,59 @@ Public Class SachBus
         If khoangCachNhanSach > _quiDinh.ThoiHanNhanSach Then Return New Result(False, "Không nhận sách có ngày xuấ bản quá " & _quiDinh.ThoiHanNhanSach, "")
         Return New Result()
     End Function
+
+
+
     Private Function ValidateTheLoaiSach(maTheLoaiSach As Integer) As Result
         Dim isMatchingValues = _danhSachTheLoaiSach.Find(Function(x) x.MaTheLoaiSach = maTheLoaiSach)
         If isMatchingValues Is Nothing Then Return New Result(False, "Lỗi chọn sai thể loại sách", "")
         Return New Result()
     End Function
-
     Private Function ValidateTacGia(maTacGia As Integer) As Result
         Dim isMatchingValues = _danhSachTacGia.Find(Function(x) x.MaTacGia = maTacGia)
         If isMatchingValues Is Nothing Then Return New Result(False, "Lỗi chọn sai tác giả", "")
         Return New Result()
     End Function
+#End Region
+
+#Region "Select sach"
+    Public Function SelectAll(ByRef listSach As List(Of Sach)) As Result
+        Dim result = _sachDAO.SelectAll(listSach)
+        Return result
+    End Function
+
+    Public Function SelectAllByMaSach(listSach As List(Of Sach), maSach As String) As Result
+        Dim result = _sachDAO.SelectAllByMaSach(listSach, maSach)
+        Return result
+    End Function
+
+    Public Function SelectAllByMaTheLoaiSach(listSach As List(Of Sach), maTheLoaiSach As String) As Result
+        Dim result = _sachDAO.SelectAllByMaTheLoaiSach(listSach, maTheLoaiSach)
+        Return result
+    End Function
+    Public Function SelectAllByMaTacGia(listSach As List(Of Sach), maTacGia As String) As Result
+        Dim result = _sachDAO.SelectAllByMaTacGia(listSach, maTacGia)
+        Return result
+    End Function
+
+    Public Function SelectAllByTenNhaXuatBan(listSach As List(Of Sach), tenNhaXuatBan As String) As Result
+        Dim result = _sachDAO.SelectAllByTenNhaXuatBan(listSach, tenNhaXuatBan)
+        Return result
+    End Function
+
+    Public Function SelectAllByNgayXuatBan(listSach As List(Of Sach), ngayMin As DateTime, ngayMax As DateTime) As Result
+        Dim result = _sachDAO.SelectAllByNgayXuatBan(listSach, ngayMin, ngayMax)
+        Return result
+    End Function
+
+    Public Function SelectAllByNgayNhap(listSach As List(Of Sach), ngayMin As DateTime, ngayMax As DateTime) As Result
+        Dim result = _sachDAO.SelectAllByNgayNhap(listSach, ngayMin, ngayMax)
+        Return result
+    End Function
+
+    Public Function SelectAllByTriGia(listSach As List(Of Sach), triGiaMin As String, triGiaMax As String) As Result
+        Dim result = _sachDAO.SelectAllByTriGia(listSach, triGiaMin, triGiaMax)
+        Return result
+    End Function
+#End Region
 End Class

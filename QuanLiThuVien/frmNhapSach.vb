@@ -19,10 +19,12 @@ Public Class frmNhapSach
         PublishYearDateTimePicker.Format = DateTimePickerFormat.Custom
         PublishYearDateTimePicker.CustomFormat = "yyyy"
         PublishYearDateTimePicker.ShowUpDown = True
+        PublishYearDateTimePicker.MaxDate = Now
 
         DateInputDateTimePicker.Format = DateTimePickerFormat.Custom
         DateInputDateTimePicker.CustomFormat = "yyyy"
         DateInputDateTimePicker.ShowUpDown = True
+        DateInputDateTimePicker.MaxDate = Now
     End Sub
 
     Private Sub LoadAuthorComboBoxData()

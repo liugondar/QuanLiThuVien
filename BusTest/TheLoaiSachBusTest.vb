@@ -14,5 +14,14 @@ Imports Utility
         'assert
         Assert.AreEqual(expected.FlagResult, actual.FlagResult)
     End Sub
+    <TestMethod()> Public Sub ValidSelectAllByMaTheLoaiSach()
+        'arr
+        Dim expected = New Result()
+        Dim theLoaiSachBus = New TheLoaiSachBUS()
+        'act
+        Dim actual = theLoaiSachBus.SelectAllByMaTheLoaiSach(New DTO.TheLoaiSach(), 1)
+        'assert
+        Assert.AreEqual(expected.FlagResult, actual.FlagResult)
+    End Sub
 
 End Class

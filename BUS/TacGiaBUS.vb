@@ -15,4 +15,9 @@ Public Class TacGiaBUS
         End If
         Return result
     End Function
+
+    Public Function SelectTacGiaByMaTacGia(ByRef tacGia As TacGia, maTacGia As String) As Result
+        Dim result = _tacGiaDAO.SelectTacGiaByMaTacGia(tacGia, maTacGia)
+        Return result
+    End Function
 End Class

@@ -18,4 +18,15 @@ Public Class TheLoaiSachDAO
         Next
         Return result
     End Function
+
+    Public Function SelectAllByMaTheLoaiSach(ByRef theLoaiSach As TheLoaiSach, maTheLoaiSach As String) As Result
+        Dim query = String.Empty
+        query &= "Select * from dbo.TheLoaiSach where MaTheLoaiSach=" & maTheLoaiSach
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        For Each row As DataRow In dataTable.Rows
+            theLoaiSach = New TheLoaiSach(row)
+        Next
+        Return result
+    End Function
 End Class
