@@ -21,9 +21,6 @@ Public Class frmNhapSach
         PublishYearDateTimePicker.ShowUpDown = True
         PublishYearDateTimePicker.MaxDate = Now
 
-        DateInputDateTimePicker.Format = DateTimePickerFormat.Custom
-        DateInputDateTimePicker.CustomFormat = "yyyy"
-        DateInputDateTimePicker.ShowUpDown = True
         DateInputDateTimePicker.MaxDate = Now
     End Sub
 
