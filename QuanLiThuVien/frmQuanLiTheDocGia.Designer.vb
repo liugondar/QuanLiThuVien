@@ -47,7 +47,7 @@ Partial Class frmQuanLiTheDocGia
         Me.RemoveButton.Location = New System.Drawing.Point(375, 517)
         Me.RemoveButton.Name = "RemoveButton"
         Me.RemoveButton.Size = New System.Drawing.Size(101, 23)
-        Me.RemoveButton.TabIndex = 48
+        Me.RemoveButton.TabIndex = 8
         Me.RemoveButton.Text = "Xóa"
         Me.RemoveButton.UseVisualStyleBackColor = True
         '
@@ -56,7 +56,7 @@ Partial Class frmQuanLiTheDocGia
         Me.EditButton.Location = New System.Drawing.Point(250, 517)
         Me.EditButton.Name = "EditButton"
         Me.EditButton.Size = New System.Drawing.Size(103, 23)
-        Me.EditButton.TabIndex = 47
+        Me.EditButton.TabIndex = 7
         Me.EditButton.Text = "Cập nhật"
         Me.EditButton.UseVisualStyleBackColor = True
         '
@@ -65,28 +65,29 @@ Partial Class frmQuanLiTheDocGia
         Me.BirthDateTimePicker.Location = New System.Drawing.Point(343, 443)
         Me.BirthDateTimePicker.Name = "BirthDateTimePicker"
         Me.BirthDateTimePicker.Size = New System.Drawing.Size(204, 20)
-        Me.BirthDateTimePicker.TabIndex = 44
+        Me.BirthDateTimePicker.TabIndex = 5
         '
         'AddressTextBox
         '
         Me.AddressTextBox.Location = New System.Drawing.Point(343, 400)
         Me.AddressTextBox.Name = "AddressTextBox"
         Me.AddressTextBox.Size = New System.Drawing.Size(204, 20)
-        Me.AddressTextBox.TabIndex = 43
+        Me.AddressTextBox.TabIndex = 4
+        Me.AddressTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'EmailTextBox
         '
         Me.EmailTextBox.Location = New System.Drawing.Point(343, 353)
         Me.EmailTextBox.Name = "EmailTextBox"
         Me.EmailTextBox.Size = New System.Drawing.Size(204, 20)
-        Me.EmailTextBox.TabIndex = 42
+        Me.EmailTextBox.TabIndex = 3
         '
         'UserNameTextBox
         '
         Me.UserNameTextBox.Location = New System.Drawing.Point(343, 310)
         Me.UserNameTextBox.Name = "UserNameTextBox"
         Me.UserNameTextBox.Size = New System.Drawing.Size(204, 20)
-        Me.UserNameTextBox.TabIndex = 41
+        Me.UserNameTextBox.TabIndex = 2
         '
         'Label7
         '
@@ -144,7 +145,7 @@ Partial Class frmQuanLiTheDocGia
         Me.ReaderTypeComboBox.Location = New System.Drawing.Point(323, 11)
         Me.ReaderTypeComboBox.Name = "ReaderTypeComboBox"
         Me.ReaderTypeComboBox.Size = New System.Drawing.Size(142, 21)
-        Me.ReaderTypeComboBox.TabIndex = 50
+        Me.ReaderTypeComboBox.TabIndex = 1
         '
         'DataGridViewQuanLiTheDocGia
         '
@@ -178,7 +179,7 @@ Partial Class frmQuanLiTheDocGia
         Me.LoaiDocGiaEditComboBox.Location = New System.Drawing.Point(343, 479)
         Me.LoaiDocGiaEditComboBox.Name = "LoaiDocGiaEditComboBox"
         Me.LoaiDocGiaEditComboBox.Size = New System.Drawing.Size(204, 21)
-        Me.LoaiDocGiaEditComboBox.TabIndex = 55
+        Me.LoaiDocGiaEditComboBox.TabIndex = 6
         '
         'Label5
         '
@@ -192,6 +193,7 @@ Partial Class frmQuanLiTheDocGia
         '
         'frmQuanLiTheDocGia
         '
+        Me.AcceptButton = Me.EditButton
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(822, 584)

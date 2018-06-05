@@ -142,7 +142,7 @@ Partial Class frmTaoTheDocGia
         Me.DateCreateDateTimePicker.Location = New System.Drawing.Point(494, 162)
         Me.DateCreateDateTimePicker.Name = "DateCreateDateTimePicker"
         Me.DateCreateDateTimePicker.Size = New System.Drawing.Size(200, 20)
-        Me.DateCreateDateTimePicker.TabIndex = 30
+        Me.DateCreateDateTimePicker.TabIndex = 31
         '
         'ReaderTypeComboBox
         '
@@ -150,7 +150,7 @@ Partial Class frmTaoTheDocGia
         Me.ReaderTypeComboBox.Location = New System.Drawing.Point(494, 121)
         Me.ReaderTypeComboBox.Name = "ReaderTypeComboBox"
         Me.ReaderTypeComboBox.Size = New System.Drawing.Size(81, 21)
-        Me.ReaderTypeComboBox.TabIndex = 31
+        Me.ReaderTypeComboBox.TabIndex = 30
         '
         'CreateButton
         '
@@ -172,6 +172,7 @@ Partial Class frmTaoTheDocGia
         '
         'frmTaoTheDocGia
         '
+        Me.AcceptButton = Me.CreateButton
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(744, 258)

@@ -47,7 +47,7 @@ Partial Class frmNhapSach
         Me.CreateAndCloseButton.Location = New System.Drawing.Point(258, 344)
         Me.CreateAndCloseButton.Name = "CreateAndCloseButton"
         Me.CreateAndCloseButton.Size = New System.Drawing.Size(101, 23)
-        Me.CreateAndCloseButton.TabIndex = 48
+        Me.CreateAndCloseButton.TabIndex = 9
         Me.CreateAndCloseButton.Text = "Nhập và đóng"
         Me.CreateAndCloseButton.UseVisualStyleBackColor = True
         '
@@ -56,7 +56,7 @@ Partial Class frmNhapSach
         Me.CreateButton.Location = New System.Drawing.Point(107, 344)
         Me.CreateButton.Name = "CreateButton"
         Me.CreateButton.Size = New System.Drawing.Size(103, 23)
-        Me.CreateButton.TabIndex = 47
+        Me.CreateButton.TabIndex = 8
         Me.CreateButton.Text = "Nhập"
         Me.CreateButton.UseVisualStyleBackColor = True
         '
@@ -65,7 +65,7 @@ Partial Class frmNhapSach
         Me.BookTitleTextBox.Location = New System.Drawing.Point(217, 77)
         Me.BookTitleTextBox.Name = "BookTitleTextBox"
         Me.BookTitleTextBox.Size = New System.Drawing.Size(204, 20)
-        Me.BookTitleTextBox.TabIndex = 41
+        Me.BookTitleTextBox.TabIndex = 1
         '
         'Label8
         '
@@ -160,7 +160,7 @@ Partial Class frmNhapSach
         Me.PulisherTextBox.Location = New System.Drawing.Point(217, 187)
         Me.PulisherTextBox.Name = "PulisherTextBox"
         Me.PulisherTextBox.Size = New System.Drawing.Size(204, 20)
-        Me.PulisherTextBox.TabIndex = 50
+        Me.PulisherTextBox.TabIndex = 4
         '
         'CategoryComboBox
         '
@@ -170,7 +170,7 @@ Partial Class frmNhapSach
         Me.CategoryComboBox.Location = New System.Drawing.Point(217, 112)
         Me.CategoryComboBox.Name = "CategoryComboBox"
         Me.CategoryComboBox.Size = New System.Drawing.Size(204, 21)
-        Me.CategoryComboBox.TabIndex = 54
+        Me.CategoryComboBox.TabIndex = 2
         '
         'AuthorComboBox
         '
@@ -180,21 +180,22 @@ Partial Class frmNhapSach
         Me.AuthorComboBox.Location = New System.Drawing.Point(217, 150)
         Me.AuthorComboBox.Name = "AuthorComboBox"
         Me.AuthorComboBox.Size = New System.Drawing.Size(204, 21)
-        Me.AuthorComboBox.TabIndex = 55
+        Me.AuthorComboBox.Sorted = True
+        Me.AuthorComboBox.TabIndex = 3
         '
         'PublishYearDateTimePicker
         '
         Me.PublishYearDateTimePicker.Location = New System.Drawing.Point(217, 220)
         Me.PublishYearDateTimePicker.Name = "PublishYearDateTimePicker"
         Me.PublishYearDateTimePicker.Size = New System.Drawing.Size(200, 20)
-        Me.PublishYearDateTimePicker.TabIndex = 56
+        Me.PublishYearDateTimePicker.TabIndex = 5
         '
         'DateInputDateTimePicker
         '
         Me.DateInputDateTimePicker.Location = New System.Drawing.Point(217, 257)
         Me.DateInputDateTimePicker.Name = "DateInputDateTimePicker"
         Me.DateInputDateTimePicker.Size = New System.Drawing.Size(200, 20)
-        Me.DateInputDateTimePicker.TabIndex = 57
+        Me.DateInputDateTimePicker.TabIndex = 6
         '
         'PriceNumericUpDown
         '
@@ -203,12 +204,13 @@ Partial Class frmNhapSach
         Me.PriceNumericUpDown.Maximum = New Decimal(New Integer() {1215752192, 23, 0, 0})
         Me.PriceNumericUpDown.Name = "PriceNumericUpDown"
         Me.PriceNumericUpDown.Size = New System.Drawing.Size(204, 20)
-        Me.PriceNumericUpDown.TabIndex = 58
+        Me.PriceNumericUpDown.TabIndex = 7
         Me.PriceNumericUpDown.ThousandsSeparator = True
         Me.PriceNumericUpDown.Value = New Decimal(New Integer() {10000, 0, 0, 0})
         '
         'frmNhapSach
         '
+        Me.AcceptButton = Me.CreateButton
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(478, 404)
