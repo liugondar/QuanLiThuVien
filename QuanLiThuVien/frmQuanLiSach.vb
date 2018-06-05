@@ -40,7 +40,11 @@ Public Class frmQuanLiSach
         BookTitleComboBox.DisplayMember = "TenSach"
         BookTitleComboBox.ValueMember = "MaSach"
 
-        PublisherComboBox.DataSource = New BindingSource(_listSach, String.Empty)
+        Dim listNhaXuatBan = New List(Of Sach)
+        Dim nhaXuatBanComparer = New TenNhaXuatBanComparer()
+
+        listNhaXuatBan = _listSach.Distinct(nhaXuatBanComparer).ToList()
+        PublisherComboBox.DataSource = New BindingSource(listNhaXuatBan, String.Empty)
         PublisherComboBox.DisplayMember = "TenNhaXuatBan"
         PublisherComboBox.ValueMember = "TenNhaXuatBan"
     End Sub

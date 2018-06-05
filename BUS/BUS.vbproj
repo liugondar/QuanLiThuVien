@@ -85,6 +85,7 @@
     <Compile Include="SachBus.vb" />
     <Compile Include="SachComparer.vb" />
     <Compile Include="TacGiaBUS.vb" />
+    <Compile Include="TenNhaXuatBanComparer.vb" />
     <Compile Include="TheLoaiSachBUS.vb" />
   </ItemGroup>
   <ItemGroup>
