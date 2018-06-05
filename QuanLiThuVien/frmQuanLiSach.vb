@@ -164,59 +164,44 @@ Public Class frmQuanLiSach
         DataGridViewQuanLiSach.DataSource = Nothing
         DataGridViewQuanLiSach.AutoGenerateColumns = False
         DataGridViewQuanLiSach.AllowUserToAddRows = False
-
+        DataGridViewQuanLiSach.Width = 60 + 200 + 150 + 200 + 120 + 60
         Dim columnMaSach = New DataGridViewTextBoxColumn()
         columnMaSach.Name = "MaSach"
         columnMaSach.HeaderText = "Mã Sách"
         columnMaSach.DataPropertyName = "MaSach"
+        columnMaSach.Width = 60
         DataGridViewQuanLiSach.Columns.Add(columnMaSach)
-
 
         Dim columnTenSach = New DataGridViewTextBoxColumn()
         columnTenSach.Name = "TenSach"
         columnTenSach.HeaderText = "Tên Sách"
         columnTenSach.DataPropertyName = "TenSach"
+        columnTenSach.Width = 200
         DataGridViewQuanLiSach.Columns.Add(columnTenSach)
-
 
         Dim columnTenTheLoaiSach = New DataGridViewTextBoxColumn()
         columnTenTheLoaiSach.Name = "TenTheLoaiSach"
         columnTenTheLoaiSach.HeaderText = "Thể loại sách"
         columnTenTheLoaiSach.DataPropertyName = "TenTheLoaiSach"
+        columnTenTheLoaiSach.Width = 150
         DataGridViewQuanLiSach.Columns.Add(columnTenTheLoaiSach)
 
         Dim columnTenTacGia = New DataGridViewTextBoxColumn()
         columnTenTacGia.Name = "TenTacGia"
         columnTenTacGia.HeaderText = "Tên tác giả"
         columnTenTacGia.DataPropertyName = "TenTacGia"
+        columnTenTacGia.Width = 200
         DataGridViewQuanLiSach.Columns.Add(columnTenTacGia)
 
-
-        Dim columnTenNhaXuatBan = New DataGridViewTextBoxColumn()
-        columnTenNhaXuatBan.Name = "TenNhaXuatBan"
-        columnTenNhaXuatBan.HeaderText = "Tên nhà xuất bản"
-        columnTenNhaXuatBan.DataPropertyName = "TenNhaXuatBan"
-        DataGridViewQuanLiSach.Columns.Add(columnTenNhaXuatBan)
-
-        Dim columnNayXuatBan = New DataGridViewTextBoxColumn()
-        columnNayXuatBan.Name = "NgayXuatBan"
-        columnNayXuatBan.HeaderText = "Năm xuất bản"
-        columnNayXuatBan.DataPropertyName = "NgayXuatBAn"
-        DataGridViewQuanLiSach.Columns.Add(columnNayXuatBan)
-
-        Dim columnNgayNhap = New DataGridViewTextBoxColumn()
-        columnNgayNhap.Name = "NgayNhap"
-        columnNgayNhap.HeaderText = "Ngày nhập"
-        columnNgayNhap.DataPropertyName = "NgayNhap"
-        DataGridViewQuanLiSach.Columns.Add(columnNgayNhap)
-
         Dim columnTriGia = New DataGridViewTextBoxColumn()
-        columnTriGia.Name = "TriGia"
-        columnTriGia.HeaderText = "Trị giá"
-        columnTriGia.DataPropertyName = "TriGia"
+        columnTriGia.Name = "TinhTrang"
+        columnTriGia.HeaderText = "Tình trạng"
+        columnTriGia.DataPropertyName = "TinhTrang"
+        columnTriGia.Width = 120
         DataGridViewQuanLiSach.Columns.Add(columnTriGia)
 
         For index = 0 To listSach.Count - 1
+            'load ten the loai sach
             Dim maTheLoaiSachTemp = listSach(index).MaTheLoaiSach
             Dim tenTheLoaiSachTemp As String
             Dim ListTheLoaiSachThoaMan = From tls In _listTheLoaiSach
@@ -226,7 +211,7 @@ Public Class frmQuanLiSach
             For Each theLoaiSach In ListTheLoaiSachThoaMan
                 tenTheLoaiSachTemp = theLoaiSach.TenTheLoaiSach
             Next
-
+            'load ten tac gia
             Dim maTacGiaTemp = listSach(index).MaTacGia
             Dim tenTacGiaTemp As String
             Dim listTacGiaThoaMan = From tg In _listTacGia
@@ -236,9 +221,12 @@ Public Class frmQuanLiSach
                 tenTacGiaTemp = tacGia.TenTacGia
             Next
 
+            'load ten tinh trang
+            Dim tinhTrangTemp = If(listSach(index).TinhTrang = 0, "Còn", "Hết")
+
             DataGridViewQuanLiSach.Rows.Add(listSach(index).MaSach,
-            listSach(index).TenSach, tenTheLoaiSachTemp, tenTacGiaTemp, listSach(index).TenNhaXuatBan,
-            listSach(index).NgayXuatBan.ToString("yyyy"), listSach(index).NgayNhap.ToString("dd/MM/yyyy"), listSach(index).TriGia)
+            listSach(index).TenSach, tenTheLoaiSachTemp, tenTacGiaTemp,
+             tinhTrangTemp)
         Next
     End Function
 

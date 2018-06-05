@@ -13,7 +13,8 @@ Public Class Sach
             row.Table.Columns.Contains("TenNhaXuatBan") And
             row.Table.Columns.Contains("NgayNhap") And
             row.Table.Columns.Contains("NgayXuatBan") And
-            row.Table.Columns.Contains("TriGia")
+            row.Table.Columns.Contains("TriGia") And
+            row.Table.Columns.Contains("TinhTrang")
         If doesRowContainsCorrectFields = False Then
             Return
         End If
@@ -25,6 +26,7 @@ Public Class Sach
         DateTime.TryParse(row("NgayXuatBan").ToString(), NgayXuatBan)
         DateTime.TryParse(row("NgayNhap").ToString(), NgayNhap)
         Integer.TryParse(row("TriGia").ToString(), TriGia)
+        Integer.TryParse(row("TinhTrang").ToString(), TinhTrang)
     End Sub
 
     Public Sub New(maSach As Integer, tenSach As String, maLoaiSach As Integer, maTacGia As Integer, tenNhaXuatBan As String, namXuatBan As Date, ngayNhap As Date, triGia As Integer)
@@ -46,6 +48,8 @@ Public Class Sach
     Public Property NgayXuatBan() As DateTime
     Public Property NgayNhap() As DateTime
     Public Property TriGia() As Integer
+    Public Property TinhTrang() As Integer
+
 
     Public Function Validate() As Result
         If String.IsNullOrWhiteSpace(TenSach).ToString() Then Return New Result(False, "Tên sách không đúng định dạng!", "")

@@ -55,9 +55,9 @@ Partial Class frmQuanLiSach
         'DataGridViewQuanLiSach
         '
         Me.DataGridViewQuanLiSach.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewQuanLiSach.Location = New System.Drawing.Point(30, 171)
+        Me.DataGridViewQuanLiSach.Location = New System.Drawing.Point(110, 171)
         Me.DataGridViewQuanLiSach.Name = "DataGridViewQuanLiSach"
-        Me.DataGridViewQuanLiSach.Size = New System.Drawing.Size(916, 152)
+        Me.DataGridViewQuanLiSach.Size = New System.Drawing.Size(735, 152)
         Me.DataGridViewQuanLiSach.TabIndex = 68
         '
         'MinPriceNumericUpDown
@@ -183,7 +183,7 @@ Partial Class frmQuanLiSach
         '
         'SearchButton
         '
-        Me.SearchButton.Location = New System.Drawing.Point(457, 132)
+        Me.SearchButton.Location = New System.Drawing.Point(416, 127)
         Me.SearchButton.Name = "SearchButton"
         Me.SearchButton.Size = New System.Drawing.Size(103, 23)
         Me.SearchButton.TabIndex = 83
