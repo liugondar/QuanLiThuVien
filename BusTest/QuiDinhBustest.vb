@@ -5,7 +5,7 @@ Imports Microsoft.VisualStudio.TestTools.UnitTesting
 Imports Utility
 
 <TestClass()> Public Class QuiDinhBustest
-#Region "Select all test"
+#Region "Select test"
     <TestMethod()> Public Sub ValidSelectallTest()
         'arr
         Dim quiDinhBus = New QuiDinhBus()
@@ -16,5 +16,7 @@ Imports Utility
         'assert
         Assert.AreEqual(expected.FlagResult, actual.FlagResult)
     End Sub
+
 #End Region
+
 End Class

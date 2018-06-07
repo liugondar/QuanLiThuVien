@@ -136,11 +136,13 @@ CREATE TABLE dbo.PhieuMuonSach
     -- primary key column
     MaTheDocGia[INT] NOT NULL,
     NgayMuon[date] NOT NULL default GETDATE(),
-    HanTra[date] NOT NULL,
-    TongSoSachMuon int NOT NULL,
+    NgayTra[date] NOT NULL default GETDATE(),
+    HanTra[date] NOT NULL DEFAULT getdate(),
+    TongSoSachMuon int NOT NULL DEFAULT 1,
+    TinhTrang int not null DEFAULT 0,
+    -- 0 is not check out, 1 is check out 
     CONSTRAINT FK_PhieuMuonSach_TheDocGia FOREIGN KEY(MaTheDocGia)
     REFERENCES TheDocGia(MaTheDocGia)
-
 );
 GO
 
@@ -156,7 +158,6 @@ CREATE TABLE dbo.ChiTietPhieuMuonSach
     -- primary key column
     MaPhieuMuonSach INT NOT NULL,
     MaSach int not null,
-    TinhTrang int not null,
     -- 0 la da tra, 1 la chua tra
     CONSTRAINT FK_ChiTietPhieuMuonSach_PhieuMuonSach FOREIGN KEY(MaPhieuMuonSach)
     REFERENCES PhieuMuonSach(MaPhieuMuonSach),
@@ -224,7 +225,7 @@ GO
 -- Create the table in the specified schema
 CREATE TABLE dbo.ChiTietBaoCaoSachTre
 (
-    MaChiTietBaoCaoSachTre INT NOT NULL PRIMARY KEY,
+    MaChiTietBaoCaoSachTre INT NOT NULL IDENTITY PRIMARY KEY,
     -- primary key column
     MaBaoCaoSachTre int not null,
     MaPhieuMuonSach int not null,
@@ -281,8 +282,10 @@ BEGIN
    Where MaTheDocGia=@MaTheDocGia
 END
 go
+
 -- create producer insert phieumuonsach
 create PROC USP_ThemPhieuMuonSach
+    @MaPhieuMuonSach int,
     @MaTheDocGia int,
     @NgayMuon date,
     @HanTra date,
@@ -290,9 +293,23 @@ create PROC USP_ThemPhieuMuonSach
 as
 BEGIN
     insert into dbo.PhieuMuonSach
-        (MaTheDocGia,NgayMuon,HanTra,TongSoSachMuon)
+        (MaPhieuMuonSach,MaTheDocGia,NgayMuon,HanTra,TongSoSachMuon)
     Values
-        (@MaTheDocGia, @NgayMuon, @HanTra, @TongSoSachMuon)
+        (@MaPhieuMuonSach, @MaTheDocGia, @NgayMuon, @HanTra, @TongSoSachMuon)
+END
+go
+
+--create procduer insert chitietphieumuonsach
+create PROC USP_ThemChiTietPhieuMuonSach
+    @MaPhieuMuonSach INT,
+    @MaSach Int,
+    @TinhTrang INT
+as
+BEGIN
+    insert into dbo.ChiTietPhieuMuonSach
+        (MaPhieuMuonSach,MaSach,TinhTrang)
+    Values
+        (@MaPhieuMuonSach, @MaSach, @TinhTrang)
 END
 go
 
@@ -312,7 +329,6 @@ BEGIN
     VALUES(@TenSach, @MaTheLoaiSach, @MaTacGia, @TenNhaXuatBan, @NgayXuatBan, @NgayNhap, @TriGia)
 END
     GO
-
 
 -- Init qui dinh
 INSERT INTO dbo.QuiDinh
@@ -641,4 +657,16 @@ INSERT INTO dbo.TacGia
 VALUES(N'Bruce Clark')
 INSERT INTO dbo.TacGia
     (TenTacGia)
-VALUES(N'Mattie Jefferson')
+VALUES(N'Matie Jefferson')
+
+EXECUTE USP_ThemPhieuMuonSach 
+@MaPhieuMuonSach=2,
+@MaTheDocGia=3, 
+@NgayMuon= '01/01/2000' ,
+@HanTra=  '01/01/2000' ,
+@TongSoSachMuon= 1
+
+select top 1
+    *
+from PhieuMuonSach
+order by [MaPhieuMuonSach] DESC

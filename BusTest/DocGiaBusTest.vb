@@ -63,7 +63,7 @@ Imports Utility
     End Sub
     <TestMethod()> Public Sub GivenInvalidLoaiDocGia_WhenInsertOne_ThenGiveFalseResult()
         'arr
-        Dim expected = New Result("False", "Lỗi nhập vào kiểu người dùng", "")
+        Dim expected = New Result("False", "Lỗi chọn sai kiểu độc giả", "")
         Dim docGia = New DocGia(1, "ahiinh", "123@gmail.com", "122c",
                       New DateTime(1998, 1, 1), DateTime.Now, DateTime.Now.AddMonths(6), 100)
         Dim docGiaBus = New DocGiaBus()

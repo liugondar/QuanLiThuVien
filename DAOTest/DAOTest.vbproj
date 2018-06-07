@@ -98,6 +98,8 @@
     <Compile Include="SachDAOTest.vb" />
     <Compile Include="TacGiaDAOTESt.vb" />
     <Compile Include="TheLoaiSachDAOTest.vb" />
+    <Compile Include="PhieuMuonSachDAOTest.vb" />
+    <Compile Include="ChiTietPhieuMuonSachDAOTest.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

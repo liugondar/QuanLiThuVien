@@ -13,9 +13,11 @@ Imports Microsoft.VisualStudio.TestTools.UnitTesting
         table.Columns.Add("TuoiToiThieu", GetType(Integer))
         table.Columns.Add("ThoiHanToiDaTheDocGia", GetType(Integer))
         table.Columns.Add("ThoiHanNhanSach", GetType(Integer))
-        table.Rows.Add(5, 5, 6, 8)
+        table.Columns.Add("SoNgayMuonToiDa", GetType(Integer))
+        table.Columns.Add("SoSachMuonToiDa", GetType(Integer))
+        table.Rows.Add(5, 5, 6, 8, 1, 5)
 
-        Dim expected = New QuiDinh(5, 5, 6, 8)
+        Dim expected = New QuiDinh(5, 5, 6, 8, 1, 5)
         'act
         Dim act = New QuiDinh(table.Rows(0))
         'assert
@@ -52,7 +54,6 @@ Imports Microsoft.VisualStudio.TestTools.UnitTesting
         table.Columns.Add("TuoiToi", GetType(Integer))
         table.Columns.Add("ThoiHanToiDaTheDocGia", GetType(Integer))
         table.Columns.Add("ThoiHanNhanSach", GetType(Integer))
-
         table.Rows.Add(5, 5, 6, 8)
 
         Dim expected = New QuiDinh(0, 0, 0, 0)
@@ -74,7 +75,6 @@ Imports Microsoft.VisualStudio.TestTools.UnitTesting
         table.Columns.Add("TuoiToiThieu", GetType(Integer))
         table.Columns.Add("Thoi", GetType(Integer))
         table.Columns.Add("ThoiHanNhanSach", GetType(Integer))
-
         table.Rows.Add(5, 5, 6, 8)
 
         Dim expected = New QuiDinh(0, 0, 0, 0)
@@ -95,7 +95,6 @@ Imports Microsoft.VisualStudio.TestTools.UnitTesting
         table.Columns.Add("TuoiToiThieu", GetType(Integer))
         table.Columns.Add("ThoiHanToiDaTheDocGia", GetType(Integer))
         table.Columns.Add("ThoiHaanSach", GetType(Integer))
-
         table.Rows.Add(5, 5, 6, 8)
 
         Dim expected = New QuiDinh(0, 0, 0, 0)

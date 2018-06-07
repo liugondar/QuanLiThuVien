@@ -12,7 +12,7 @@ Public Class DocGiaBus
 
     Public Sub New()
         _docGiaDAO = New DocGiaDAO()
-        _quiDinh = New QuiDinh
+        _quiDinh = New QuiDinh()
         _listLoaiDocGia = New List(Of LoaiDocGia)
         _ketQuaViecLayQuiDinh = GetQuiDinh()
         _ketQuaViecLayLoaiDocGia = GetLoaiDocGia()
@@ -29,8 +29,11 @@ Public Class DocGiaBus
 
     Public Function GetQuiDinh() As Result
         Dim quiDinhBus As QuiDinhBus = New QuiDinhBus()
-        Dim result = quiDinhBus.SelectAll(_quiDinh)
-        Return result
+        Dim layTuoiToiDaResult = quiDinhBus.LayTuoiToiDaVaToiThieu(_quiDinh)
+        Dim layThoiHanResult = quiDinhBus.LayThoiHanToiDaTheDocGia(_quiDinh)
+        If layThoiHanResult.FlagResult = False Then Return layThoiHanResult
+        If layTuoiToiDaResult.FlagResult = False Then Return layTuoiToiDaResult
+        Return New Result()
     End Function
 
     Public Function InsertOne(docGia As DocGia) As Result
@@ -53,26 +56,6 @@ Public Class DocGiaBus
         Return New Result(True)
     End Function
 
-    Private Function ValidateReaderType(loaiDocGiaId As Integer) As Result
-        Dim isMatchingValue = _listLoaiDocGia.Find(Function(x) x.MaLoaiDocGia = loaiDocGiaId)
-
-        If isMatchingValue Is Nothing Then
-            Return New Result(False, "Lỗi chọn sai kiểu độc giả", "")
-        End If
-        Return New Result(True)
-    End Function
-
-    Private Function ValidateYearsold(ngaySinh As Date) As Object
-        Dim dateNow As Date = Date.Now()
-        Dim yearsold = (dateNow - ngaySinh).TotalDays \ 365
-        If yearsold < _quiDinh.TuoiToiThieu Then
-            Return New Result(False, "Tuổi chưa đủ để lập thẻ", "")
-        End If
-        If yearsold > _quiDinh.TuoiToiDa Then
-            Return New Result(False, "Tuổi quá lớn để lập thẻ", "")
-        End If
-        Return New Result(True)
-    End Function
 
     Public Function SelectAllByType(maLoai As String, ByRef listDocGia As List(Of DocGia)) As Result
         If String.IsNullOrWhiteSpace(maLoai) Then
@@ -96,6 +79,26 @@ Public Class DocGiaBus
 
         Dim result = _docGiaDAO.SuaTheDocGiaBangDocGia(docGia)
         Return result
+    End Function
+    Private Function ValidateReaderType(loaiDocGiaId As Integer) As Result
+        Dim isMatchingValue = _listLoaiDocGia.Find(Function(x) x.MaLoaiDocGia = loaiDocGiaId)
+
+        If isMatchingValue Is Nothing Then
+            Return New Result(False, "Lỗi chọn sai kiểu độc giả", "")
+        End If
+        Return New Result(True)
+    End Function
+
+    Private Function ValidateYearsold(ngaySinh As Date) As Object
+        Dim dateNow As Date = Date.Now()
+        Dim yearsold = (dateNow - ngaySinh).TotalDays \ 365
+        If yearsold < _quiDinh.TuoiToiThieu Then
+            Return New Result(False, "Tuổi chưa đủ để lập thẻ", "")
+        End If
+        If yearsold > _quiDinh.TuoiToiDa Then
+            Return New Result(False, "Tuổi quá lớn để lập thẻ", "")
+        End If
+        Return New Result(True)
     End Function
 
     Public Function XoaTheDocGiaBangMaThe(maThe As String) As Result

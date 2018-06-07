@@ -19,11 +19,12 @@ Imports Utility
         table.Columns.Add("NgayNhap", GetType(DateTime))
         table.Columns.Add("NgayXuatBan", GetType(DateTime))
         table.Columns.Add("TriGia", GetType(String))
+        table.Columns.Add("TinhTrang", GetType(String))
         table.Rows.Add("1", "1", "1", "Di ve dau", "Kim dong",
-                      New DateTime(1998, 1, 1), New DateTime(1998, 1, 1), "10000")
+                      New DateTime(1998, 1, 1), New DateTime(1998, 1, 1), "10000", 0)
 
         Dim expected = New Sach(1, "Di ve dau", 1, 1, "Kim dong",
-New DateTime(1998, 1, 1), New DateTime(1998, 1, 1), 10000)
+New DateTime(1998, 1, 1), New DateTime(1998, 1, 1), 10000, 0)
 
         'act
         Dim act = New Sach(table.Rows(0))
@@ -86,7 +87,7 @@ New DateTime(1998, 1, 1), New DateTime(1998, 1, 1), 10000)
 
     <TestMethod()> Public Sub GivenInvalidTenSach_WhenValidating_ThenFalseResultReturned()
         'arrange
-        Dim expected = New Result(False, "Lỗi xác nhập tên sách", "")
+        Dim expected = New Result(False, "Tên sách không đúng định dạng!", "")
         'act
         Dim sach = New Sach(0, "", 1, 1, "Kim dong",
 New DateTime(1998, 1, 1), New DateTime(1998, 1, 1), 10000)
@@ -99,7 +100,7 @@ New DateTime(1998, 1, 1), New DateTime(1998, 1, 1), 10000)
 
     <TestMethod()> Public Sub GivenInvalidTenNhaXuatBan_WhenValidating_ThenFalseResultReturned()
         'arrange
-        Dim expected = New Result(False, "Lỗi xác nhập tên nhà xuất bản", "")
+        Dim expected = New Result(False, "Tên nhà xuất bản không đúng định dạng!", "")
         'act
         Dim sach = New Sach(0, "12334", 1, 1, "",
 New DateTime(1998, 1, 1), New DateTime(1998, 1, 1), 10000)
