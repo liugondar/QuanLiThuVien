@@ -40,8 +40,20 @@ Public Class DocGiaBus
         If ValidateAll(docGia).FlagResult = False Then
             Return ValidateAll(docGia)
         End If
+        Dim maTheDocGia As Integer
+        Dim ketQuaLayMaTheDocGia = LayMaTheDocGiaTiepTheo(maTheDocGia)
+        docGia.MaTheDocGia = maTheDocGia
         docGia.NgayHetHan = docGia.NgayTao.AddMonths(_quiDinh.ThoiHanToiDaTheDocGia)
         Return _docGiaDAO.InsertOne(docGia)
+    End Function
+    Public Function LayMaTheDocGiaTiepTheo(ByRef maTheDocGia As String) As Result
+        Dim result = _docGiaDAO.LayMaTheDocGiaCuoiCung(maTheDocGia)
+        If result.FlagResult = True Then
+            maTheDocGia = maTheDocGia + 1
+        Else
+            maTheDocGia = 1
+        End If
+        Return result
     End Function
 
     Private Function ValidateAll(docGia As DocGia) As Result

@@ -42,7 +42,7 @@ GO
 -- Create the table in the specified schema
 CREATE TABLE dbo.TheDocGia
 (
-    MaTheDocGia INT IDENTITY Primary Key NOT NULL,
+    MaTheDocGia INT Primary Key NOT NULL,
     -- primary key column
     TenDocGia NVARCHAR( 50 ) not null,
     Email NVARCHAR(50) not null,
@@ -50,8 +50,8 @@ CREATE TABLE dbo.TheDocGia
     MaLoaiDocGia INT not null,
     NgaySinh date not null DEFAULT GETDATE(),
     NgayTao date not null DEFAULT GETDATE(),
-    NgayHetHan date not null,
-    CONSTRAINT FK_Reader_ReaderType FOREIGN KEY(MaLoaiDocGia) REFERENCES LoaiDocGia(MaLoaiDocGia)
+    NgayHetHan date not null
+        CONSTRAINT FK_Reader_ReaderType FOREIGN KEY(MaLoaiDocGia) REFERENCES LoaiDocGia(MaLoaiDocGia)
 );
 GO
 
@@ -240,6 +240,7 @@ GO
 
 --create producer insert Reader
 CREATE PROC USP_ThemTheDocGia
+    @MaTheDocGia INT,
     @TenDocGia NVARCHAR(50),
     @Email NVARCHAR(50),
     @DiaChi NVARCHAR(50),
@@ -250,10 +251,10 @@ CREATE PROC USP_ThemTheDocGia
 AS
 BEGIN
     insert into dbo.TheDocGia
-        (TenDocGia,Email,DiaChi,MaLoaiDocGia,
+        (MaTheDocGia,TenDocGia,Email,DiaChi,MaLoaiDocGia,
         NgaySinh,NgayTao,NgayHetHan)
     VALUES
-        (@TenDocGia, @Email, @DiaChi, @MaLoaiDocGia,
+        (@MaTheDocGia, @TenDocGia, @Email, @DiaChi, @MaLoaiDocGia,
             @NgaySinh, @NgayTao, @NgayHetHan)
 END
 go
@@ -665,8 +666,3 @@ EXECUTE USP_ThemPhieuMuonSach
 @NgayMuon= '01/01/2000' ,
 @HanTra=  '01/01/2000' ,
 @TongSoSachMuon= 1
-
-select top 1
-    *
-from PhieuMuonSach
-order by [MaPhieuMuonSach] DESC

@@ -49,4 +49,15 @@ Imports Utility
         'assert
         Assert.AreEqual(expected.FlagResult, actual.FlagResult)
     End Sub
+
+    <TestMethod()> Public Sub ValidLayMaTheDocGiaCuoiCung()
+        'arr
+        Dim expected = New Result()
+        Dim DocGiaDAO = New DocGiaDAO()
+        Dim maThe As String
+        'act
+        Dim actual = DocGiaDAO.LayMaTheDocGiaCuoiCung(maThe)
+        'assert
+        Assert.AreEqual(expected.FlagResult, actual.FlagResult)
+    End Sub
 End Class
