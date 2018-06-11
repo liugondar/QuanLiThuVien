@@ -37,7 +37,7 @@ Partial Class frmTaoTheDocGia
         Me.ReaderTypeComboBox = New System.Windows.Forms.ComboBox()
         Me.CreateButton = New System.Windows.Forms.Button()
         Me.CreateAndCloseButton = New System.Windows.Forms.Button()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.ReaderIdTextBox = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
@@ -172,13 +172,13 @@ Partial Class frmTaoTheDocGia
         Me.CreateAndCloseButton.Text = "Nhập và đóng"
         Me.CreateAndCloseButton.UseVisualStyleBackColor = True
         '
-        'TextBox1
+        'ReaderIdTextBox
         '
-        Me.TextBox1.Enabled = False
-        Me.TextBox1.Location = New System.Drawing.Point(131, 84)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(204, 20)
-        Me.TextBox1.TabIndex = 35
+        Me.ReaderIdTextBox.Enabled = False
+        Me.ReaderIdTextBox.Location = New System.Drawing.Point(131, 84)
+        Me.ReaderIdTextBox.Name = "ReaderIdTextBox"
+        Me.ReaderIdTextBox.Size = New System.Drawing.Size(204, 20)
+        Me.ReaderIdTextBox.TabIndex = 35
         '
         'Label4
         '
@@ -196,7 +196,7 @@ Partial Class frmTaoTheDocGia
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(744, 291)
-        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.ReaderIdTextBox)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.CreateAndCloseButton)
         Me.Controls.Add(Me.CreateButton)
@@ -236,6 +236,6 @@ Partial Class frmTaoTheDocGia
     Friend WithEvents ReaderTypeComboBox As ComboBox
     Friend WithEvents CreateButton As Button
     Friend WithEvents CreateAndCloseButton As Button
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents ReaderIdTextBox As TextBox
     Friend WithEvents Label4 As Label
 End Class

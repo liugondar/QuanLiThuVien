@@ -51,13 +51,13 @@ Partial Class frmMain
         'LậpThẻĐộcGiảToolStripMenuItem
         '
         Me.LậpThẻĐộcGiảToolStripMenuItem.Name = "LậpThẻĐộcGiảToolStripMenuItem"
-        Me.LậpThẻĐộcGiảToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
+        Me.LậpThẻĐộcGiảToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.LậpThẻĐộcGiảToolStripMenuItem.Text = "Lập thẻ độc giả"
         '
         'QuảnLíĐộcGiảToolStripMenuItem
         '
         Me.QuảnLíĐộcGiảToolStripMenuItem.Name = "QuảnLíĐộcGiảToolStripMenuItem"
-        Me.QuảnLíĐộcGiảToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
+        Me.QuảnLíĐộcGiảToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.QuảnLíĐộcGiảToolStripMenuItem.Text = "Quản Lí độc giả"
         '
         'SáchToolStripMenuItem
@@ -87,7 +87,7 @@ Partial Class frmMain
         Me.Controls.Add(Me.MenuStrip1)
         Me.IsMdiContainer = True
         Me.Name = "frmMain"
-        Me.Text = "Form1"
+        Me.Text = "Quản lí thư viện"
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
