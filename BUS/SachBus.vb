@@ -58,12 +58,9 @@ Public Class SachBus
         Dim timeSpan = ngayNhap.Subtract(ngayXuatBan)
         Dim khoangCachNhanSach = timeSpan.TotalDays / 365
 
-        If khoangCachNhanSach > _quiDinh.ThoiHanNhanSach Then Return New Result(False, "Không nhận sách có ngày xuấ bản quá " & _quiDinh.ThoiHanNhanSach, "")
+        If khoangCachNhanSach > _quiDinh.ThoiHanNhanSach Then Return New Result(False, "Không nhận sách có ngày xuất bản quá " & _quiDinh.ThoiHanNhanSach, "")
         Return New Result()
     End Function
-
-
-
     Private Function ValidateTheLoaiSach(maTheLoaiSach As Integer) As Result
         Dim isMatchingValues = _danhSachTheLoaiSach.Find(Function(x) x.MaTheLoaiSach = maTheLoaiSach)
         If isMatchingValues Is Nothing Then Return New Result(False, "Lỗi chọn sai thể loại sách", "")
