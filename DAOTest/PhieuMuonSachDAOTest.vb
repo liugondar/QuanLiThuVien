@@ -31,4 +31,14 @@ Imports Utility
         'assert
         Assert.AreEqual(expected.FlagResult, act.FlagResult)
     End Sub
+    <TestMethod()> Public Sub ValidSelectAllByMaTheDocGia()
+        'arr
+        Dim expected = New Result()
+        Dim phieuMuonSachDAO = New PhieuMuonSachDAO()
+        'act
+        Dim act = phieuMuonSachDAO.SelectAllByMaTheDocGia(New List(Of PhieuMuonSach), 1)
+        'assert
+        Assert.AreEqual(expected.FlagResult, act.FlagResult)
+    End Sub
+
 End Class

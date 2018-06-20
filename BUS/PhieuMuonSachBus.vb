@@ -57,4 +57,8 @@ Public Class PhieuMuonSachBus
         If layThoiHanMuonSachResult.FlagResult = False Then Return layThoiHanMuonSachResult
         Return New Result()
     End Function
+
+    Public Function SelectAllByMaTheDocGia(ByRef listPhieuMuonSach As List(Of PhieuMuonSach), maTheDocGia As String) As Result
+        Return _phieuMuonSachDAO.SelectAllByMaTheDocGia(listPhieuMuonSach, maTheDocGia)
+    End Function
 End Class

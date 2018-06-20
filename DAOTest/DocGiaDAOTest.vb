@@ -60,4 +60,16 @@ Imports Utility
         'assert
         Assert.AreEqual(expected.FlagResult, actual.FlagResult)
     End Sub
+
+    <TestMethod()> Public Sub ValidLayTenDocGiaBangMaThe()
+        'arr
+        Dim expected = New Result()
+        Dim DocGiaDAO = New DocGiaDAO()
+        Dim maThe As String = 1
+        Dim docgia = String.Empty
+        'act
+        Dim actual = DocGiaDAO.LayTenDocGiaBangMaThe(docgia, maThe)
+        'assert
+        Assert.AreEqual(expected.FlagResult, actual.FlagResult)
+    End Sub
 End Class

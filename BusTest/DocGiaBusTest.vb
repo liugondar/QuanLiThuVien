@@ -88,13 +88,24 @@ Imports Utility
     End Sub
 #End Region
 
-#Region "Select all by type test"
+#Region "Select test"
     <TestMethod()> Public Sub ValidSelectAllByTypeTest()
         'arr
         Dim expected = New Result()
         Dim docGiaBus = New DocGiaBus()
         'act
         Dim act = docGiaBus.SelectAllByType(1, New List(Of DocGia))
+        'assert
+        Assert.AreEqual(expected.FlagResult, act.FlagResult)
+    End Sub
+
+    <TestMethod()> Public Sub ValidSelectNameByIDTest()
+        'arr
+        Dim expected = New Result()
+        Dim docGiaBus = New DocGiaBus()
+        Dim tendocGia = String.Empty
+        'act
+        Dim act = docGiaBus.LayTenDocGiaBangMaThe(tendocGia, 2)
         'assert
         Assert.AreEqual(expected.FlagResult, act.FlagResult)
     End Sub

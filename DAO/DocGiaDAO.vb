@@ -47,6 +47,19 @@ Public Class DocGiaDAO
         Return result
     End Function
 
+    Public Function LayTenDocGiaBangMaThe(ByRef tenDocGia As String, maThe As String) As Result
+        Dim query As String = String.Empty
+        query &= "select TenDocGia "
+        query &= "from TheDocGia "
+        query &= "where MaTheDocGia=" & maThe
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        For Each row In dataTable.Rows
+            tenDocGia = row("TenDocGia")
+        Next
+        Return result
+    End Function
+
     Public Function XoaTheDocGiaBangMaTheDocGia(maThe As String) As Result
         Dim query As String = String.Empty
         query &= "EXECUTE USP_XoaTheDocGia "

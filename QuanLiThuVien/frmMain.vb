@@ -26,4 +26,10 @@
         frm.MdiParent = Me
         frm.Show()
     End Sub
+
+    Private Sub ChoMượnSáchToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ChoMượnSáchToolStripMenuItem.Click
+        Dim frm = New frmChoMuonSach()
+        frm.MdiParent = Me
+        frm.Show()
+    End Sub
 End Class

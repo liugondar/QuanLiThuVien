@@ -29,6 +29,7 @@ Partial Class frmMain
         Me.SáchToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NhậpSáchToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.QuảnLíSáchToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ChoMượnSáchToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -62,7 +63,7 @@ Partial Class frmMain
         '
         'SáchToolStripMenuItem
         '
-        Me.SáchToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NhậpSáchToolStripMenuItem, Me.QuảnLíSáchToolStripMenuItem})
+        Me.SáchToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NhậpSáchToolStripMenuItem, Me.QuảnLíSáchToolStripMenuItem, Me.ChoMượnSáchToolStripMenuItem})
         Me.SáchToolStripMenuItem.Name = "SáchToolStripMenuItem"
         Me.SáchToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
         Me.SáchToolStripMenuItem.Text = "Sách"
@@ -78,6 +79,12 @@ Partial Class frmMain
         Me.QuảnLíSáchToolStripMenuItem.Name = "QuảnLíSáchToolStripMenuItem"
         Me.QuảnLíSáchToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.QuảnLíSáchToolStripMenuItem.Text = "Quản lí sách"
+        '
+        'ChoMượnSáchToolStripMenuItem
+        '
+        Me.ChoMượnSáchToolStripMenuItem.Name = "ChoMượnSáchToolStripMenuItem"
+        Me.ChoMượnSáchToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ChoMượnSáchToolStripMenuItem.Text = "Cho mượn sách"
         '
         'frmMain
         '
@@ -102,4 +109,5 @@ Partial Class frmMain
     Friend WithEvents SáchToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents NhậpSáchToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents QuảnLíSáchToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ChoMượnSáchToolStripMenuItem As ToolStripMenuItem
 End Class
