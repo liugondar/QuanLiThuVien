@@ -10,6 +10,9 @@ Public Class BookInfoControl
     Public Event UC_Button_Click(sender As Object, e As EventArgs)
     Public isButtonClick As Boolean
 
+    Public Function GetBookIdTextBox()
+        Return BookIdTextBox
+    End Function
     Public Function GetSTTTextBox()
         Return STTTextBox
     End Function

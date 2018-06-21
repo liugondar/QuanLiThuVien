@@ -22,20 +22,13 @@ Partial Class BookInfoControl
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.BookIdTextBox = New System.Windows.Forms.TextBox()
         Me.BookTitleComboBox = New System.Windows.Forms.ComboBox()
         Me.TypeOfBookComboBox = New System.Windows.Forms.ComboBox()
         Me.AuthorComboBox = New System.Windows.Forms.ComboBox()
         Me.STTTextBox = New System.Windows.Forms.TextBox()
         Me.Button = New System.Windows.Forms.Button()
+        Me.BookIdTextBox = New Utility.PlaceHolderTextBox()
         Me.SuspendLayout()
-        '
-        'BookIdTextBox
-        '
-        Me.BookIdTextBox.Location = New System.Drawing.Point(75, 12)
-        Me.BookIdTextBox.Name = "BookIdTextBox"
-        Me.BookIdTextBox.Size = New System.Drawing.Size(115, 20)
-        Me.BookIdTextBox.TabIndex = 0
         '
         'BookTitleComboBox
         '
@@ -89,27 +82,35 @@ Partial Class BookInfoControl
         Me.Button.Text = "Xóa"
         Me.Button.UseVisualStyleBackColor = False
         '
+        'BookIdTextBox
+        '
+        Me.BookIdTextBox.IsPlaceHolder = True
+        Me.BookIdTextBox.Location = New System.Drawing.Point(75, 12)
+        Me.BookIdTextBox.Name = "BookIdTextBox"
+        Me.BookIdTextBox.PlaceHolderText = "hello"
+        Me.BookIdTextBox.Size = New System.Drawing.Size(115, 20)
+        Me.BookIdTextBox.TabIndex = 9
+        '
         'BookInfoControl
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.BookIdTextBox)
         Me.Controls.Add(Me.Button)
         Me.Controls.Add(Me.STTTextBox)
         Me.Controls.Add(Me.AuthorComboBox)
         Me.Controls.Add(Me.TypeOfBookComboBox)
         Me.Controls.Add(Me.BookTitleComboBox)
-        Me.Controls.Add(Me.BookIdTextBox)
         Me.Name = "BookInfoControl"
         Me.Size = New System.Drawing.Size(793, 37)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents BookIdTextBox As Windows.Forms.TextBox
     Friend WithEvents BookTitleComboBox As Windows.Forms.ComboBox
     Friend WithEvents TypeOfBookComboBox As Windows.Forms.ComboBox
     Friend WithEvents AuthorComboBox As Windows.Forms.ComboBox
     Friend WithEvents STTTextBox As Windows.Forms.TextBox
     Friend WithEvents Button As Windows.Forms.Button
+    Friend WithEvents BookIdTextBox As PlaceHolderTextBox
 End Class

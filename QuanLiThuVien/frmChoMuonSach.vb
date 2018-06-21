@@ -252,9 +252,11 @@ Public Class frmChoMuonSach
         AddHandler bookInfoControl.UC_Button_Click, AddressOf SachInfoControl_UC_ButtonClicked
 
         Dim titleComboBox As ComboBox = bookInfoControl.GetTitleComboBox
+        Dim bookIdTextBox As PlaceHolderTextBox = bookInfoControl.GetBookIdTextBox
         Dim typeOfBookComboBox As ComboBox = bookInfoControl.GetTypeOfBookComboBox
         Dim authorOfBookComboBox As ComboBox = bookInfoControl.GetAuthorComboBox
 
+        bookIdTextBox.PlaceHolderText = "Nhập mã sách"
         titleComboBox.DataSource = _listSach
         titleComboBox.DisplayMember = "TenSach"
         titleComboBox.ValueMember = "MaSach"
