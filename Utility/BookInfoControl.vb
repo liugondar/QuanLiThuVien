@@ -34,8 +34,8 @@ Public Class BookInfoControl
         InitializeComponent()
         isButtonClick = False
         ' Add any initialization after the InitializeComponent() call.
-        Button.BackColor = ColorTranslator.FromHtml("#28A745")
-        Button.Text = "+"
+        Button.BackColor = ColorTranslator.FromHtml("#DC3545")
+        Button.Text = "Xóa"
     End Sub
 
 #Region "-  Events -"
@@ -59,20 +59,8 @@ Public Class BookInfoControl
         RaiseEvent UC_SttTextBox_TextChanged(sender, e)
     End Sub
 
-    'Xử lí khi sự kiện click vào button
-    'Đổi màu và text phụ thuộc vào biến isButtonClick
-    ' 
     Private Sub Button_Click(sender As Object, e As EventArgs) Handles Button.Click
         RaiseEvent UC_Button_Click(Me, e)
-        If isButtonClick = False Then
-            isButtonClick = True
-            Button.BackColor = ColorTranslator.FromHtml("#DC3545")
-            Button.Text = "—"
-        Else
-            isButtonClick = False
-            Button.BackColor = ColorTranslator.FromHtml("#28A745")
-            Button.Text = "+"
-        End If
     End Sub
 #End Region
 

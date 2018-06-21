@@ -31,12 +31,12 @@ Partial Class frmChoMuonSach
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.ListSachMuonDataGridView = New System.Windows.Forms.DataGridView()
+        Me.ListSachDaMuonDataGridView = New System.Windows.Forms.DataGridView()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.ConfirmButton = New System.Windows.Forms.Button()
         Me.SachCanThuePanel = New System.Windows.Forms.Panel()
-        CType(Me.ListSachMuonDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ListSachDaMuonDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ReaderIdTextBox
@@ -119,13 +119,13 @@ Partial Class frmChoMuonSach
         Me.Label1.TabIndex = 50
         Me.Label1.Text = "Phiếu mượn sách"
         '
-        'ListSachMuonDataGridView
+        'ListSachDaMuonDataGridView
         '
-        Me.ListSachMuonDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.ListSachMuonDataGridView.Location = New System.Drawing.Point(43, 181)
-        Me.ListSachMuonDataGridView.Name = "ListSachMuonDataGridView"
-        Me.ListSachMuonDataGridView.Size = New System.Drawing.Size(661, 191)
-        Me.ListSachMuonDataGridView.TabIndex = 51
+        Me.ListSachDaMuonDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.ListSachDaMuonDataGridView.Location = New System.Drawing.Point(26, 181)
+        Me.ListSachDaMuonDataGridView.Name = "ListSachDaMuonDataGridView"
+        Me.ListSachDaMuonDataGridView.Size = New System.Drawing.Size(810, 191)
+        Me.ListSachDaMuonDataGridView.TabIndex = 51
         '
         'Label3
         '
@@ -158,21 +158,21 @@ Partial Class frmChoMuonSach
         '
         'SachCanThuePanel
         '
-        Me.SachCanThuePanel.Location = New System.Drawing.Point(43, 416)
+        Me.SachCanThuePanel.Location = New System.Drawing.Point(26, 416)
         Me.SachCanThuePanel.Name = "SachCanThuePanel"
-        Me.SachCanThuePanel.Size = New System.Drawing.Size(661, 227)
+        Me.SachCanThuePanel.Size = New System.Drawing.Size(810, 227)
         Me.SachCanThuePanel.TabIndex = 55
         '
         'frmChoMuonSach
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(810, 684)
+        Me.ClientSize = New System.Drawing.Size(891, 684)
         Me.Controls.Add(Me.ConfirmButton)
         Me.Controls.Add(Me.SachCanThuePanel)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.ListSachMuonDataGridView)
+        Me.Controls.Add(Me.ListSachDaMuonDataGridView)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ReaderIdTextBox)
         Me.Controls.Add(Me.Label4)
@@ -185,7 +185,7 @@ Partial Class frmChoMuonSach
         Me.Name = "frmChoMuonSach"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Mượn sách"
-        CType(Me.ListSachMuonDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ListSachDaMuonDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -200,7 +200,7 @@ Partial Class frmChoMuonSach
     Friend WithEvents Label5 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
-    Friend WithEvents ListSachMuonDataGridView As DataGridView
+    Friend WithEvents ListSachDaMuonDataGridView As DataGridView
     Friend WithEvents Label3 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents ConfirmButton As Button

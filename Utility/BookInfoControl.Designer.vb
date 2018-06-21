@@ -54,7 +54,7 @@ Partial Class BookInfoControl
         Me.TypeOfBookComboBox.FormattingEnabled = True
         Me.TypeOfBookComboBox.Location = New System.Drawing.Point(351, 11)
         Me.TypeOfBookComboBox.Name = "TypeOfBookComboBox"
-        Me.TypeOfBookComboBox.Size = New System.Drawing.Size(91, 21)
+        Me.TypeOfBookComboBox.Size = New System.Drawing.Size(155, 21)
         Me.TypeOfBookComboBox.TabIndex = 5
         '
         'AuthorComboBox
@@ -62,9 +62,9 @@ Partial Class BookInfoControl
         Me.AuthorComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.AuthorComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.AuthorComboBox.FormattingEnabled = True
-        Me.AuthorComboBox.Location = New System.Drawing.Point(448, 11)
+        Me.AuthorComboBox.Location = New System.Drawing.Point(512, 10)
         Me.AuthorComboBox.Name = "AuthorComboBox"
-        Me.AuthorComboBox.Size = New System.Drawing.Size(162, 21)
+        Me.AuthorComboBox.Size = New System.Drawing.Size(195, 21)
         Me.AuthorComboBox.TabIndex = 6
         '
         'STTTextBox
@@ -77,16 +77,16 @@ Partial Class BookInfoControl
         '
         'Button
         '
-        Me.Button.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(167, Byte), Integer), CType(CType(69, Byte), Integer))
+        Me.Button.BackColor = System.Drawing.Color.DarkRed
         Me.Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Button.Location = New System.Drawing.Point(613, 4)
+        Me.Button.Location = New System.Drawing.Point(710, 8)
         Me.Button.Margin = New System.Windows.Forms.Padding(0)
         Me.Button.Name = "Button"
-        Me.Button.Size = New System.Drawing.Size(43, 32)
+        Me.Button.Size = New System.Drawing.Size(72, 26)
         Me.Button.TabIndex = 8
-        Me.Button.Text = "+"
+        Me.Button.Text = "Xóa"
         Me.Button.UseVisualStyleBackColor = False
         '
         'BookInfoControl
@@ -100,7 +100,7 @@ Partial Class BookInfoControl
         Me.Controls.Add(Me.BookTitleComboBox)
         Me.Controls.Add(Me.BookIdTextBox)
         Me.Name = "BookInfoControl"
-        Me.Size = New System.Drawing.Size(667, 37)
+        Me.Size = New System.Drawing.Size(793, 37)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

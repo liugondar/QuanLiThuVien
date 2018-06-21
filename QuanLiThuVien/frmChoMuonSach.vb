@@ -6,10 +6,17 @@ Public Class frmChoMuonSach
 #Region "-  Fields  -"
     Private _quiDinhBus As QuiDinhBus
     Private _docGiaBus As DocGiaBus
-    Private _phieuMuonSachBus As PhieuMuonSachBus
+    Private _tacGiaBus As TacGiaBUS
+    Private _theLoaiSachBus As TheLoaiSachBUS
     Private _sachBus As SachBus
+    Private _phieuMuonSachBus As PhieuMuonSachBus
+
     Private _listSach As List(Of Sach)
+    Private _listTacGia As List(Of TacGia)
+    Private _listTheLoaiSach As List(Of TheLoaiSach)
+
     Private _listControlBookInfoControl As List(Of BookInfoControl)
+    Private AddNewRowButton As Button
 #End Region
 
 #Region "-  Constructor  -"
@@ -18,26 +25,84 @@ Public Class frmChoMuonSach
         _quiDinhBus = New QuiDinhBus()
         _docGiaBus = New DocGiaBus()
         _phieuMuonSachBus = New PhieuMuonSachBus()
-        _listControlBookInfoControl = New List(Of BookInfoControl)
         _sachBus = New SachBus()
+        _tacGiaBus = New TacGiaBUS()
+        _theLoaiSachBus = New TheLoaiSachBUS()
+
+        _listSach = New List(Of Sach)
+        _listTacGia = New List(Of TacGia)
+        _listTheLoaiSach = New List(Of TheLoaiSach)
+
+        _listControlBookInfoControl = New List(Of BookInfoControl)
+
+        AddNewRowButton = New Button()
 
         '"-  Load data for controls  -"
-        MapBorrowDateToExpirationDate()
-        LoadListSachMuonDataGridView(New List(Of PhieuMuonSach))
-
+        If MapBorrowDateToExpirationDate().FlagResult = False Then Return
+        LoadListSachDaMuonDataGridView(New List(Of PhieuMuonSach))
+        If LoadDataListSachCoTheMuon().FlagResult = False Then Return
+        If LoadDataListTheLoaiSachCoTheMuon().FlagResult = False Then Return
+        If LoadDataListTenGiaSachCoTheMuon().FlagResult = False Then Return
 
         ' design
         SachCanThuePanel.VerticalScroll.Value = VerticalScroll.Minimum
         'TODO: Không hiển thị chỗ nhập sách nếu độc giả đã mượn đủ số sách
-        Dim bookInfoControl = New BookInfoControl()
-        bookInfoControl.Location = New Point(0, 0)
-        AddHandler bookInfoControl.UC_Button_Click, AddressOf SachInfoControl_UC_ButtonClicked
-        Dim sttTextBox As TextBox = bookInfoControl.GetSTTTextBox
-        'TODO: Hiển thị danh sách data cho các combo box
-        sttTextBox.Text = 1
 
-        SachCanThuePanel.Controls.Add(bookInfoControl)
-        _listControlBookInfoControl.Add(bookInfoControl)
+        AddNewRowButton.BackColor = ColorTranslator.FromHtml("#28A745")
+        AddNewRowButton.Text = "Thêm dòng"
+        AddNewRowButton.ForeColor = Color.White
+        AddNewRowButton.Font = New Font("Microsoft Sans Serif", 10)
+        AddNewRowButton.Width = 72
+        AddNewRowButton.Height = 26
+        AddNewRowButton.FlatStyle = FlatStyle.Flat
+        AddNewRowButton.FlatAppearance.BorderSize = 0
+        AddHandler AddNewRowButton.Click, AddressOf addNewRowButton_Click
+
+        AddNewRow()
+
+        Try
+            Dim firstControlBookInfoElement = _listControlBookInfoControl(0)
+            AddNewRowButton.Location = New Point(firstControlBookInfoElement.GetButton().Location.X,
+                                             firstControlBookInfoElement.Height + firstControlBookInfoElement.Location.Y + 10)
+        Catch
+        End Try
+
+        SachCanThuePanel.Controls.Add(AddNewRowButton)
+    End Sub
+
+    Private Function LoadDataListTenGiaSachCoTheMuon() As Result
+        Dim tacGia = New TacGia(-1, "--- Chọn tên tác giả ---")
+        _listTacGia.Add(tacGia)
+        Return _tacGiaBus.SelectAll(_listTacGia)
+    End Function
+
+    Private Function LoadDataListTheLoaiSachCoTheMuon() As Result
+        Dim theLoaiSach = New TheLoaiSach(-1, "--- Chọn thể loại sách ---")
+        _listTheLoaiSach.Add(theLoaiSach)
+        Return _theLoaiSachBus.SelectAll(_listTheLoaiSach)
+    End Function
+
+    Private Function LoadDataListSachCoTheMuon() As Result
+        Dim sach = New Sach()
+        sach.MaSach = -1
+        sach.TenSach = "--- Chọn tên sách ---"
+        _listSach.Add(sach)
+        Return _sachBus.SelectAll(_listSach)
+    End Function
+
+    Private Sub addNewRowButton_Click(sender As Object, e As EventArgs)
+        Try
+            'Guard clause 
+            Dim validateAmountBookCanBorrowResult = IsValidAmountBookCanBorrow()
+            If validateAmountBookCanBorrowResult.FlagResult = False Then
+                MessageBox.Show(validateAmountBookCanBorrowResult.ApplicationMessage)
+                Return
+            End If
+
+            'Add new row 
+            AddNewRow()
+        Catch ex As Exception
+        End Try
     End Sub
 #End Region
 
@@ -74,51 +139,51 @@ Public Class frmChoMuonSach
         Dim ketQuaLayPhieuMuonSach =
             _phieuMuonSachBus.SelectAllByMaTheDocGia(listPhieuMuonSach,
                                                      docGia.MaTheDocGia)
-        LoadListSachMuonDataGridView(listPhieuMuonSach)
+        LoadListSachDaMuonDataGridView(listPhieuMuonSach)
     End Sub
 
-    Private Sub LoadListSachMuonDataGridView(listPhieuMuonSach As List(Of PhieuMuonSach))
-        ListSachMuonDataGridView.Columns.Clear()
-        ListSachMuonDataGridView.DataSource = Nothing
-        ListSachMuonDataGridView.AutoGenerateColumns = False
-        ListSachMuonDataGridView.AllowUserToAddRows = False
+    Private Sub LoadListSachDaMuonDataGridView(listPhieuMuonSachDaMuon As List(Of PhieuMuonSach))
+        ListSachDaMuonDataGridView.Columns.Clear()
+        ListSachDaMuonDataGridView.DataSource = Nothing
+        ListSachDaMuonDataGridView.AutoGenerateColumns = False
+        ListSachDaMuonDataGridView.AllowUserToAddRows = False
 
-        ListSachMuonDataGridView.DataSource = New BindingSource(listPhieuMuonSach, String.Empty)
+        ListSachDaMuonDataGridView.DataSource = New BindingSource(listPhieuMuonSachDaMuon, String.Empty)
 
         Dim maSachColumn = New DataGridViewTextBoxColumn()
         maSachColumn.Name = "MaSach"
         maSachColumn.HeaderText = "Mã sách"
         maSachColumn.DataPropertyName = "MaSach"
         maSachColumn.Width = 50
-        ListSachMuonDataGridView.Columns.Add(maSachColumn)
+        ListSachDaMuonDataGridView.Columns.Add(maSachColumn)
 
         Dim tenSachColumn = New DataGridViewTextBoxColumn()
         tenSachColumn.Name = "TenSach"
         tenSachColumn.HeaderText = "Tên sách"
         tenSachColumn.DataPropertyName = "TenSach"
         tenSachColumn.Width = 200
-        ListSachMuonDataGridView.Columns.Add(tenSachColumn)
+        ListSachDaMuonDataGridView.Columns.Add(tenSachColumn)
 
         Dim tacGiaColumn = New DataGridViewTextBoxColumn()
         tacGiaColumn.Name = "TacGia"
         tacGiaColumn.HeaderText = "Tác giả "
         tacGiaColumn.DataPropertyName = "TacGia"
         tacGiaColumn.Width = 140
-        ListSachMuonDataGridView.Columns.Add(tacGiaColumn)
+        ListSachDaMuonDataGridView.Columns.Add(tacGiaColumn)
 
         Dim tinhTrangColumn = New DataGridViewTextBoxColumn()
         tinhTrangColumn.Name = "TinhTrang"
         tinhTrangColumn.HeaderText = "Tình trạng"
         tinhTrangColumn.DataPropertyName = "TinhTrang"
         tinhTrangColumn.Width = 100
-        ListSachMuonDataGridView.Columns.Add(tinhTrangColumn)
+        ListSachDaMuonDataGridView.Columns.Add(tinhTrangColumn)
 
         Dim ngayHetHanColumn = New DataGridViewTextBoxColumn()
         ngayHetHanColumn.Name = "NgayHetHan"
         ngayHetHanColumn.HeaderText = "Ngày hết hạn"
         ngayHetHanColumn.DataPropertyName = "NgayHetHan"
         ngayHetHanColumn.Width = 120
-        ListSachMuonDataGridView.Columns.Add(ngayHetHanColumn)
+        ListSachDaMuonDataGridView.Columns.Add(ngayHetHanColumn)
     End Sub
 
     Private Function GetReaderDataById(ByRef docGia As DocGia) As Result
@@ -139,29 +204,31 @@ Public Class frmChoMuonSach
     Private Sub SachInfoControl_UC_ButtonClicked(sender As Object, e As EventArgs)
         Dim control As BookInfoControl = sender
 
-        If sender.isButtonClick = False Then
-            XuLiKhiButtonTrongControlChuaClick(control)
-        Else
-            XuLiKhiButtonDaClickDeTaoDongMoi(sender)
-        End If
+        XoaDong(control)
     End Sub
 
     ' Xử lí khi book info control đã được click, click tiếp để bỏ dòng
-    Private Sub XuLiKhiButtonDaClickDeTaoDongMoi(sender As Object)
+    Private Sub XoaDong(bookInfoControl As BookInfoControl)
         Try
-            SachCanThuePanel.Controls.Remove(sender)
-            _listControlBookInfoControl.Remove(sender)
-            If SachCanThuePanel.Controls.Count >= 1 Then
-                SachCanThuePanel.Controls(0).Location = New Point(0, 0)
+            SachCanThuePanel.Controls.Remove(bookInfoControl)
+            _listControlBookInfoControl.Remove(bookInfoControl)
+            If _listControlBookInfoControl.Count >= 1 Then
+                _listControlBookInfoControl(0).Location = New Point(0, 0)
                 Dim bookInfoControlTemp As BookInfoControl = SachCanThuePanel.Controls(0)
                 bookInfoControlTemp.GetSTTTextBox.Text = 1
 
-                For index = 1 To SachCanThuePanel.Controls.Count - 1
-                    Dim yLocation = SachCanThuePanel.Controls(index - 1).Location.Y + SachCanThuePanel.Controls(index - 1).Height
+                For index = 1 To _listControlBookInfoControl.Count - 1
+                    Dim yLocation = _listControlBookInfoControl(index - 1).Location.Y + _listControlBookInfoControl(index - 1).Height
                     bookInfoControlTemp = SachCanThuePanel.Controls(index)
                     bookInfoControlTemp.GetSTTTextBox.Text = index + 1
-                    SachCanThuePanel.Controls(index).Location = New Point(0, yLocation)
+                    _listControlBookInfoControl(index).Location = New Point(0, yLocation)
                 Next
+
+                AddNewRowButton.Location = New Point(AddNewRowButton.Location.X,
+                                                     _listControlBookInfoControl(_listControlBookInfoControl.Count - 1).Location.Y)
+            Else
+                AddNewRowButton.Location = New Point(AddNewRowButton.Location.X,
+                                                 0)
             End If
         Catch
 
@@ -169,36 +236,40 @@ Public Class frmChoMuonSach
     End Sub
 
     'Xử lí khi book info control vừa được tạo, click để tạo hàng mới
-    Private Sub XuLiKhiButtonTrongControlChuaClick(control As BookInfoControl)
-        Try
-            'Guard clause 
-            Dim validateAmountBookCanBorrowResult = IsValidAmountBookCanBorrow()
-            If validateAmountBookCanBorrowResult.FlagResult = False Then
-                MessageBox.Show(validateAmountBookCanBorrowResult.ApplicationMessage)
-                control.isButtonClick = True
-                Return
-            End If
-
-            'Add new row 
-            AddNewRow(control)
-        Catch ex As Exception
-        End Try
-    End Sub
-
-    Private Sub AddNewRow(control As BookInfoControl)
+    Private Sub AddNewRow()
         Dim bookInfoControl = New BookInfoControl()
 
-        Dim y = control.Location.Y + control.Height
-        bookInfoControl.Location = New Point(0, y)
-        bookInfoControl.GetSTTTextBox.Text = _listControlBookInfoControl.Count + 1
+        If _listControlBookInfoControl.Count < 1 Then
+            bookInfoControl.Location = New Point(0, 0)
+            bookInfoControl.GetSTTTextBox.Text = 1
+        Else
+            Dim control = _listControlBookInfoControl(_listControlBookInfoControl.Count - 1)
+            Dim y = control.Location.Y + control.Height
+            bookInfoControl.Location = New Point(0, y)
+            bookInfoControl.GetSTTTextBox.Text = _listControlBookInfoControl.Count + 1
+        End If
+
         AddHandler bookInfoControl.UC_Button_Click, AddressOf SachInfoControl_UC_ButtonClicked
 
         Dim titleComboBox As ComboBox = bookInfoControl.GetTitleComboBox
+        Dim typeOfBookComboBox As ComboBox = bookInfoControl.GetTypeOfBookComboBox
+        Dim authorOfBookComboBox As ComboBox = bookInfoControl.GetAuthorComboBox
+
         titleComboBox.DataSource = _listSach
         titleComboBox.DisplayMember = "TenSach"
+        titleComboBox.ValueMember = "MaSach"
+        typeOfBookComboBox.DataSource = _listTheLoaiSach
+        typeOfBookComboBox.DisplayMember = "TenTheLoaiSach"
+        typeOfBookComboBox.ValueMember = "MaTheLoaiSach"
+        authorOfBookComboBox.DataSource = _listTacGia
+        authorOfBookComboBox.DisplayMember = "TenTacGia"
+        authorOfBookComboBox.ValueMember = "MaTacGia"
 
         _listControlBookInfoControl.Add(bookInfoControl)
         SachCanThuePanel.Controls.Add(bookInfoControl)
+        Dim lastBookInfoControl = _listControlBookInfoControl(_listControlBookInfoControl.Count - 1)
+        AddNewRowButton.Location = New Point(AddNewRowButton.Location.X,
+                                             lastBookInfoControl.Location.Y + lastBookInfoControl.Height + 10)
     End Sub
 
     Private Function IsValidAmountBookCanBorrow() As Result
