@@ -38,4 +38,21 @@ Public Class PhieuMuonSachDAO
         maPhieuDocSach = phieuMuonSach.MaPhieuMuonSach
         Return result
     End Function
+
+    Public Function SelectAllByMaTheDocGia(ByRef listPhieuMuonSach As List(Of PhieuMuonSach), maTheDocGia As String) As Result
+        Dim query = String.Empty
+        query &= "select * "
+        query &= "from PhieuMuonSach "
+        query &= "Where MaTheDocGia=" & maTheDocGia
+
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        If result.FlagResult = False Then Return New Result(False, "Không thể lấy danh sach phiếu mượn sách đã có!", "")
+        Dim phieuMuonSach = New PhieuMuonSach()
+        phieuMuonSach.MaPhieuMuonSach = 0
+        For Each row In dataTable.Rows
+            phieuMuonSach = New PhieuMuonSach(row)
+        Next
+        Return result
+    End Function
 End Class

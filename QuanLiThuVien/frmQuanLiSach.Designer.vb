@@ -1,6 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class frmQuanLiSach
-    Inherits System.Windows.Forms.Form
+    Inherits MetroFramework.Forms.MetroForm
 
     'Form overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()> _
@@ -35,7 +35,6 @@ Partial Class frmQuanLiSach
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.SearchButton = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.MaxPublishYearDateTimePicker = New System.Windows.Forms.DateTimePicker()
@@ -47,6 +46,7 @@ Partial Class frmQuanLiSach
         Me.MaxPriceNumericUpDown = New System.Windows.Forms.NumericUpDown()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
+        Me.SearchButton = New MetroFramework.Controls.MetroButton()
         CType(Me.DataGridViewQuanLiSach, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.MinPriceNumericUpDown, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.MaxPriceNumericUpDown, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -55,15 +55,15 @@ Partial Class frmQuanLiSach
         'DataGridViewQuanLiSach
         '
         Me.DataGridViewQuanLiSach.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewQuanLiSach.Location = New System.Drawing.Point(110, 171)
+        Me.DataGridViewQuanLiSach.Location = New System.Drawing.Point(54, 221)
         Me.DataGridViewQuanLiSach.Name = "DataGridViewQuanLiSach"
-        Me.DataGridViewQuanLiSach.Size = New System.Drawing.Size(735, 152)
+        Me.DataGridViewQuanLiSach.Size = New System.Drawing.Size(918, 182)
         Me.DataGridViewQuanLiSach.TabIndex = 68
         '
         'MinPriceNumericUpDown
         '
         Me.MinPriceNumericUpDown.ForeColor = System.Drawing.SystemColors.WindowText
-        Me.MinPriceNumericUpDown.Location = New System.Drawing.Point(724, 91)
+        Me.MinPriceNumericUpDown.Location = New System.Drawing.Point(729, 145)
         Me.MinPriceNumericUpDown.Maximum = New Decimal(New Integer() {1215752192, 23, 0, 0})
         Me.MinPriceNumericUpDown.Name = "MinPriceNumericUpDown"
         Me.MinPriceNumericUpDown.Size = New System.Drawing.Size(102, 20)
@@ -72,14 +72,14 @@ Partial Class frmQuanLiSach
         '
         'MinDateInputDateTimePicker
         '
-        Me.MinDateInputDateTimePicker.Location = New System.Drawing.Point(724, 61)
+        Me.MinDateInputDateTimePicker.Location = New System.Drawing.Point(729, 115)
         Me.MinDateInputDateTimePicker.Name = "MinDateInputDateTimePicker"
         Me.MinDateInputDateTimePicker.Size = New System.Drawing.Size(102, 20)
         Me.MinDateInputDateTimePicker.TabIndex = 81
         '
         'MinPublishYearDateTimePicker
         '
-        Me.MinPublishYearDateTimePicker.Location = New System.Drawing.Point(724, 27)
+        Me.MinPublishYearDateTimePicker.Location = New System.Drawing.Point(729, 81)
         Me.MinPublishYearDateTimePicker.Name = "MinPublishYearDateTimePicker"
         Me.MinPublishYearDateTimePicker.Size = New System.Drawing.Size(102, 20)
         Me.MinPublishYearDateTimePicker.TabIndex = 80
@@ -89,7 +89,7 @@ Partial Class frmQuanLiSach
         Me.AuthorComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.AuthorComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.AuthorComboBox.FormattingEnabled = True
-        Me.AuthorComboBox.Location = New System.Drawing.Point(369, 60)
+        Me.AuthorComboBox.Location = New System.Drawing.Point(374, 114)
         Me.AuthorComboBox.Name = "AuthorComboBox"
         Me.AuthorComboBox.Size = New System.Drawing.Size(140, 21)
         Me.AuthorComboBox.TabIndex = 79
@@ -99,7 +99,7 @@ Partial Class frmQuanLiSach
         Me.CategoryComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.CategoryComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.CategoryComboBox.FormattingEnabled = True
-        Me.CategoryComboBox.Location = New System.Drawing.Point(110, 56)
+        Me.CategoryComboBox.Location = New System.Drawing.Point(115, 110)
         Me.CategoryComboBox.Name = "CategoryComboBox"
         Me.CategoryComboBox.Size = New System.Drawing.Size(140, 21)
         Me.CategoryComboBox.TabIndex = 78
@@ -109,7 +109,7 @@ Partial Class frmQuanLiSach
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label4.Location = New System.Drawing.Point(553, 91)
+        Me.Label4.Location = New System.Drawing.Point(558, 145)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(55, 20)
         Me.Label4.TabIndex = 76
@@ -120,7 +120,7 @@ Partial Class frmQuanLiSach
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label8.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label8.Location = New System.Drawing.Point(553, 57)
+        Me.Label8.Location = New System.Drawing.Point(558, 111)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(91, 20)
         Me.Label8.TabIndex = 74
@@ -131,7 +131,7 @@ Partial Class frmQuanLiSach
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label7.Location = New System.Drawing.Point(256, 24)
+        Me.Label7.Location = New System.Drawing.Point(261, 78)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(107, 20)
         Me.Label7.TabIndex = 73
@@ -142,7 +142,7 @@ Partial Class frmQuanLiSach
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label6.Location = New System.Drawing.Point(26, 58)
+        Me.Label6.Location = New System.Drawing.Point(31, 112)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(68, 20)
         Me.Label6.TabIndex = 72
@@ -153,7 +153,7 @@ Partial Class frmQuanLiSach
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label5.Location = New System.Drawing.Point(553, 27)
+        Me.Label5.Location = New System.Drawing.Point(558, 81)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(111, 20)
         Me.Label5.TabIndex = 71
@@ -164,7 +164,7 @@ Partial Class frmQuanLiSach
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label3.Location = New System.Drawing.Point(256, 57)
+        Me.Label3.Location = New System.Drawing.Point(261, 111)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(64, 20)
         Me.Label3.TabIndex = 70
@@ -175,27 +175,18 @@ Partial Class frmQuanLiSach
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label2.Location = New System.Drawing.Point(26, 22)
+        Me.Label2.Location = New System.Drawing.Point(31, 76)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(78, 20)
         Me.Label2.TabIndex = 69
         Me.Label2.Text = "Tên sách:"
-        '
-        'SearchButton
-        '
-        Me.SearchButton.Location = New System.Drawing.Point(416, 127)
-        Me.SearchButton.Name = "SearchButton"
-        Me.SearchButton.Size = New System.Drawing.Size(103, 23)
-        Me.SearchButton.TabIndex = 83
-        Me.SearchButton.Text = "Tìm kiếm"
-        Me.SearchButton.UseVisualStyleBackColor = True
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label1.Location = New System.Drawing.Point(685, 28)
+        Me.Label1.Location = New System.Drawing.Point(690, 82)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(24, 16)
         Me.Label1.TabIndex = 84
@@ -206,7 +197,7 @@ Partial Class frmQuanLiSach
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label9.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label9.Location = New System.Drawing.Point(843, 29)
+        Me.Label9.Location = New System.Drawing.Point(848, 83)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(32, 16)
         Me.Label9.TabIndex = 85
@@ -214,7 +205,7 @@ Partial Class frmQuanLiSach
         '
         'MaxPublishYearDateTimePicker
         '
-        Me.MaxPublishYearDateTimePicker.Location = New System.Drawing.Point(881, 27)
+        Me.MaxPublishYearDateTimePicker.Location = New System.Drawing.Point(886, 81)
         Me.MaxPublishYearDateTimePicker.Name = "MaxPublishYearDateTimePicker"
         Me.MaxPublishYearDateTimePicker.Size = New System.Drawing.Size(102, 20)
         Me.MaxPublishYearDateTimePicker.TabIndex = 86
@@ -224,7 +215,7 @@ Partial Class frmQuanLiSach
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label10.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label10.Location = New System.Drawing.Point(685, 61)
+        Me.Label10.Location = New System.Drawing.Point(690, 115)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(24, 16)
         Me.Label10.TabIndex = 87
@@ -235,7 +226,7 @@ Partial Class frmQuanLiSach
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label11.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label11.Location = New System.Drawing.Point(843, 64)
+        Me.Label11.Location = New System.Drawing.Point(848, 118)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(32, 16)
         Me.Label11.TabIndex = 88
@@ -243,7 +234,7 @@ Partial Class frmQuanLiSach
         '
         'MaxDateInputDateTimePicker
         '
-        Me.MaxDateInputDateTimePicker.Location = New System.Drawing.Point(881, 60)
+        Me.MaxDateInputDateTimePicker.Location = New System.Drawing.Point(886, 114)
         Me.MaxDateInputDateTimePicker.Name = "MaxDateInputDateTimePicker"
         Me.MaxDateInputDateTimePicker.Size = New System.Drawing.Size(102, 20)
         Me.MaxDateInputDateTimePicker.TabIndex = 89
@@ -253,7 +244,7 @@ Partial Class frmQuanLiSach
         Me.PublisherComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.PublisherComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.PublisherComboBox.FormattingEnabled = True
-        Me.PublisherComboBox.Location = New System.Drawing.Point(369, 23)
+        Me.PublisherComboBox.Location = New System.Drawing.Point(374, 77)
         Me.PublisherComboBox.Name = "PublisherComboBox"
         Me.PublisherComboBox.Size = New System.Drawing.Size(140, 21)
         Me.PublisherComboBox.TabIndex = 90
@@ -263,7 +254,7 @@ Partial Class frmQuanLiSach
         Me.BookTitleComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.BookTitleComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.BookTitleComboBox.FormattingEnabled = True
-        Me.BookTitleComboBox.Location = New System.Drawing.Point(110, 24)
+        Me.BookTitleComboBox.Location = New System.Drawing.Point(115, 78)
         Me.BookTitleComboBox.Name = "BookTitleComboBox"
         Me.BookTitleComboBox.Size = New System.Drawing.Size(140, 21)
         Me.BookTitleComboBox.TabIndex = 91
@@ -271,7 +262,7 @@ Partial Class frmQuanLiSach
         'MaxPriceNumericUpDown
         '
         Me.MaxPriceNumericUpDown.ForeColor = System.Drawing.SystemColors.WindowText
-        Me.MaxPriceNumericUpDown.Location = New System.Drawing.Point(881, 91)
+        Me.MaxPriceNumericUpDown.Location = New System.Drawing.Point(886, 145)
         Me.MaxPriceNumericUpDown.Maximum = New Decimal(New Integer() {1215752192, 23, 0, 0})
         Me.MaxPriceNumericUpDown.Name = "MaxPriceNumericUpDown"
         Me.MaxPriceNumericUpDown.Size = New System.Drawing.Size(102, 20)
@@ -284,7 +275,7 @@ Partial Class frmQuanLiSach
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label12.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label12.Location = New System.Drawing.Point(685, 95)
+        Me.Label12.Location = New System.Drawing.Point(690, 149)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(24, 16)
         Me.Label12.TabIndex = 93
@@ -295,18 +286,26 @@ Partial Class frmQuanLiSach
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label13.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label13.Location = New System.Drawing.Point(843, 93)
+        Me.Label13.Location = New System.Drawing.Point(848, 147)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(32, 16)
         Me.Label13.TabIndex = 94
         Me.Label13.Text = "Đến"
         '
+        'SearchButton
+        '
+        Me.SearchButton.Location = New System.Drawing.Point(434, 180)
+        Me.SearchButton.Name = "SearchButton"
+        Me.SearchButton.Size = New System.Drawing.Size(103, 23)
+        Me.SearchButton.TabIndex = 96
+        Me.SearchButton.Text = "Tìm kiếm"
+        '
         'frmQuanLiSach
         '
-        Me.AcceptButton = Me.SearchButton
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(995, 335)
+        Me.ClientSize = New System.Drawing.Size(995, 454)
+        Me.Controls.Add(Me.SearchButton)
         Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.Label12)
         Me.Controls.Add(Me.MaxPriceNumericUpDown)
@@ -318,7 +317,6 @@ Partial Class frmQuanLiSach
         Me.Controls.Add(Me.MaxPublishYearDateTimePicker)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.SearchButton)
         Me.Controls.Add(Me.MinPriceNumericUpDown)
         Me.Controls.Add(Me.MinDateInputDateTimePicker)
         Me.Controls.Add(Me.MinPublishYearDateTimePicker)
@@ -333,7 +331,6 @@ Partial Class frmQuanLiSach
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.DataGridViewQuanLiSach)
         Me.Name = "frmQuanLiSach"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmQuanLiSach"
         CType(Me.DataGridViewQuanLiSach, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.MinPriceNumericUpDown, System.ComponentModel.ISupportInitialize).EndInit()
@@ -355,7 +352,6 @@ Partial Class frmQuanLiSach
     Friend WithEvents Label5 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents Label2 As Label
-    Friend WithEvents SearchButton As Button
     Friend WithEvents Label1 As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents MaxPublishYearDateTimePicker As DateTimePicker
@@ -367,4 +363,5 @@ Partial Class frmQuanLiSach
     Friend WithEvents MaxPriceNumericUpDown As NumericUpDown
     Friend WithEvents Label12 As Label
     Friend WithEvents Label13 As Label
+    Friend WithEvents SearchButton As MetroFramework.Controls.MetroButton
 End Class

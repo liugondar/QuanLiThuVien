@@ -1,6 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmQuanLiTheDocGia
-    Inherits System.Windows.Forms.Form
+    Inherits MetroFramework.Forms.MetroForm
 
     'Form overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()>
@@ -22,8 +22,6 @@ Partial Class frmQuanLiTheDocGia
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.RemoveButton = New System.Windows.Forms.Button()
-        Me.EditButton = New System.Windows.Forms.Button()
         Me.BirthDateTimePicker = New System.Windows.Forms.DateTimePicker()
         Me.AddressTextBox = New System.Windows.Forms.TextBox()
         Me.EmailTextBox = New System.Windows.Forms.TextBox()
@@ -39,37 +37,21 @@ Partial Class frmQuanLiTheDocGia
         Me.Label4 = New System.Windows.Forms.Label()
         Me.LoaiDocGiaEditComboBox = New System.Windows.Forms.ComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.EditButton = New MetroFramework.Controls.MetroButton()
+        Me.RemoveButton = New MetroFramework.Controls.MetroButton()
         CType(Me.DataGridViewQuanLiTheDocGia, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'RemoveButton
-        '
-        Me.RemoveButton.Location = New System.Drawing.Point(375, 517)
-        Me.RemoveButton.Name = "RemoveButton"
-        Me.RemoveButton.Size = New System.Drawing.Size(101, 23)
-        Me.RemoveButton.TabIndex = 8
-        Me.RemoveButton.Text = "Xóa"
-        Me.RemoveButton.UseVisualStyleBackColor = True
-        '
-        'EditButton
-        '
-        Me.EditButton.Location = New System.Drawing.Point(250, 517)
-        Me.EditButton.Name = "EditButton"
-        Me.EditButton.Size = New System.Drawing.Size(103, 23)
-        Me.EditButton.TabIndex = 7
-        Me.EditButton.Text = "Cập nhật"
-        Me.EditButton.UseVisualStyleBackColor = True
-        '
         'BirthDateTimePicker
         '
-        Me.BirthDateTimePicker.Location = New System.Drawing.Point(343, 443)
+        Me.BirthDateTimePicker.Location = New System.Drawing.Point(347, 520)
         Me.BirthDateTimePicker.Name = "BirthDateTimePicker"
         Me.BirthDateTimePicker.Size = New System.Drawing.Size(204, 20)
         Me.BirthDateTimePicker.TabIndex = 5
         '
         'AddressTextBox
         '
-        Me.AddressTextBox.Location = New System.Drawing.Point(343, 400)
+        Me.AddressTextBox.Location = New System.Drawing.Point(347, 477)
         Me.AddressTextBox.Name = "AddressTextBox"
         Me.AddressTextBox.Size = New System.Drawing.Size(204, 20)
         Me.AddressTextBox.TabIndex = 4
@@ -77,14 +59,14 @@ Partial Class frmQuanLiTheDocGia
         '
         'EmailTextBox
         '
-        Me.EmailTextBox.Location = New System.Drawing.Point(343, 353)
+        Me.EmailTextBox.Location = New System.Drawing.Point(347, 430)
         Me.EmailTextBox.Name = "EmailTextBox"
         Me.EmailTextBox.Size = New System.Drawing.Size(204, 20)
         Me.EmailTextBox.TabIndex = 3
         '
         'UserNameTextBox
         '
-        Me.UserNameTextBox.Location = New System.Drawing.Point(343, 310)
+        Me.UserNameTextBox.Location = New System.Drawing.Point(347, 387)
         Me.UserNameTextBox.Name = "UserNameTextBox"
         Me.UserNameTextBox.Size = New System.Drawing.Size(204, 20)
         Me.UserNameTextBox.TabIndex = 2
@@ -93,7 +75,7 @@ Partial Class frmQuanLiTheDocGia
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(213, 439)
+        Me.Label7.Location = New System.Drawing.Point(217, 516)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(82, 20)
         Me.Label7.TabIndex = 39
@@ -103,7 +85,7 @@ Partial Class frmQuanLiTheDocGia
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(213, 349)
+        Me.Label6.Location = New System.Drawing.Point(217, 426)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(52, 20)
         Me.Label6.TabIndex = 38
@@ -113,7 +95,7 @@ Partial Class frmQuanLiTheDocGia
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(213, 395)
+        Me.Label3.Location = New System.Drawing.Point(217, 472)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(65, 20)
         Me.Label3.TabIndex = 36
@@ -123,7 +105,7 @@ Partial Class frmQuanLiTheDocGia
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(213, 310)
+        Me.Label2.Location = New System.Drawing.Point(217, 387)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(81, 20)
         Me.Label2.TabIndex = 35
@@ -133,7 +115,7 @@ Partial Class frmQuanLiTheDocGia
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(213, 9)
+        Me.Label1.Location = New System.Drawing.Point(228, 75)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(94, 20)
         Me.Label1.TabIndex = 49
@@ -142,7 +124,7 @@ Partial Class frmQuanLiTheDocGia
         'ReaderTypeComboBox
         '
         Me.ReaderTypeComboBox.FormattingEnabled = True
-        Me.ReaderTypeComboBox.Location = New System.Drawing.Point(323, 11)
+        Me.ReaderTypeComboBox.Location = New System.Drawing.Point(338, 77)
         Me.ReaderTypeComboBox.Name = "ReaderTypeComboBox"
         Me.ReaderTypeComboBox.Size = New System.Drawing.Size(142, 21)
         Me.ReaderTypeComboBox.TabIndex = 1
@@ -150,14 +132,14 @@ Partial Class frmQuanLiTheDocGia
         'DataGridViewQuanLiTheDocGia
         '
         Me.DataGridViewQuanLiTheDocGia.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewQuanLiTheDocGia.Location = New System.Drawing.Point(48, 47)
+        Me.DataGridViewQuanLiTheDocGia.Location = New System.Drawing.Point(52, 124)
         Me.DataGridViewQuanLiTheDocGia.Name = "DataGridViewQuanLiTheDocGia"
         Me.DataGridViewQuanLiTheDocGia.Size = New System.Drawing.Size(703, 206)
         Me.DataGridViewQuanLiTheDocGia.TabIndex = 51
         '
         'MaTheDocGiaTextBox
         '
-        Me.MaTheDocGiaTextBox.Location = New System.Drawing.Point(343, 270)
+        Me.MaTheDocGiaTextBox.Location = New System.Drawing.Point(347, 347)
         Me.MaTheDocGiaTextBox.Name = "MaTheDocGiaTextBox"
         Me.MaTheDocGiaTextBox.ReadOnly = True
         Me.MaTheDocGiaTextBox.Size = New System.Drawing.Size(204, 20)
@@ -167,7 +149,7 @@ Partial Class frmQuanLiTheDocGia
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(213, 270)
+        Me.Label4.Location = New System.Drawing.Point(217, 347)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(113, 20)
         Me.Label4.TabIndex = 52
@@ -176,7 +158,7 @@ Partial Class frmQuanLiTheDocGia
         'LoaiDocGiaEditComboBox
         '
         Me.LoaiDocGiaEditComboBox.FormattingEnabled = True
-        Me.LoaiDocGiaEditComboBox.Location = New System.Drawing.Point(343, 479)
+        Me.LoaiDocGiaEditComboBox.Location = New System.Drawing.Point(347, 556)
         Me.LoaiDocGiaEditComboBox.Name = "LoaiDocGiaEditComboBox"
         Me.LoaiDocGiaEditComboBox.Size = New System.Drawing.Size(204, 21)
         Me.LoaiDocGiaEditComboBox.TabIndex = 6
@@ -185,18 +167,36 @@ Partial Class frmQuanLiTheDocGia
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(213, 480)
+        Me.Label5.Location = New System.Drawing.Point(217, 557)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(94, 20)
         Me.Label5.TabIndex = 54
         Me.Label5.Text = "Loại độc giả"
+        '
+        'EditButton
+        '
+        Me.EditButton.Location = New System.Drawing.Point(271, 594)
+        Me.EditButton.Name = "EditButton"
+        Me.EditButton.Size = New System.Drawing.Size(86, 23)
+        Me.EditButton.TabIndex = 55
+        Me.EditButton.Text = "Cập nhật"
+        '
+        'RemoveButton
+        '
+        Me.RemoveButton.Location = New System.Drawing.Point(380, 594)
+        Me.RemoveButton.Name = "RemoveButton"
+        Me.RemoveButton.Size = New System.Drawing.Size(86, 23)
+        Me.RemoveButton.TabIndex = 56
+        Me.RemoveButton.Text = "Xoá thẻ"
         '
         'frmQuanLiTheDocGia
         '
         Me.AcceptButton = Me.EditButton
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(822, 584)
+        Me.ClientSize = New System.Drawing.Size(822, 664)
+        Me.Controls.Add(Me.RemoveButton)
+        Me.Controls.Add(Me.EditButton)
         Me.Controls.Add(Me.LoaiDocGiaEditComboBox)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.MaTheDocGiaTextBox)
@@ -204,8 +204,6 @@ Partial Class frmQuanLiTheDocGia
         Me.Controls.Add(Me.DataGridViewQuanLiTheDocGia)
         Me.Controls.Add(Me.ReaderTypeComboBox)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.RemoveButton)
-        Me.Controls.Add(Me.EditButton)
         Me.Controls.Add(Me.BirthDateTimePicker)
         Me.Controls.Add(Me.AddressTextBox)
         Me.Controls.Add(Me.EmailTextBox)
@@ -215,16 +213,12 @@ Partial Class frmQuanLiTheDocGia
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Name = "frmQuanLiTheDocGia"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Quản lí thẻ độc giả"
         CType(Me.DataGridViewQuanLiTheDocGia, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents RemoveButton As Button
-    Friend WithEvents EditButton As Button
     Friend WithEvents BirthDateTimePicker As DateTimePicker
     Friend WithEvents AddressTextBox As TextBox
     Friend WithEvents EmailTextBox As TextBox
@@ -240,4 +234,6 @@ Partial Class frmQuanLiTheDocGia
     Friend WithEvents Label4 As Label
     Friend WithEvents LoaiDocGiaEditComboBox As ComboBox
     Friend WithEvents Label5 As Label
+    Friend WithEvents EditButton As MetroFramework.Controls.MetroButton
+    Friend WithEvents RemoveButton As MetroFramework.Controls.MetroButton
 End Class

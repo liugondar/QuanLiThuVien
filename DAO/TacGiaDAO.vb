@@ -29,4 +29,5 @@ Public Class TacGiaDAO
         Next
         Return result
     End Function
+
 End Class

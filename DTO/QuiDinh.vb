@@ -1,10 +1,4 @@
 ﻿Public Class QuiDinh
-    Private v1 As Integer
-    Private v2 As Integer
-    Private v3 As Integer
-    Private v4 As Integer
-    Private v5 As Integer
-    Private v6 As Integer
     Public Property SoSachMuonToiDa() As Integer
     Public Property TuoiToiThieu() As Integer
     Public Property TuoiToiDa() As Integer

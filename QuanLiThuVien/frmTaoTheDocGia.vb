@@ -19,7 +19,7 @@ Public Class frmTaoTheDocGia
             MessageBox.Show("Lỗi không thể lấy mã độc giả để tiến hành tạo thẻ!")
             Return ketQuaLayMa
         End If
-        ReaderIdTextBox.Text = maDocGia
+        ReaderIDTextBox.Text = maDocGia
         Return ketQuaLayMa
     End Function
 

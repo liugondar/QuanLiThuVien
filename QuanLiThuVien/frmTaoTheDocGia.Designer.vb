@@ -1,6 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class frmTaoTheDocGia
-    Inherits System.Windows.Forms.Form
+    Inherits MetroFramework.Forms.MetroForm
 
     'Form overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()> _
@@ -22,7 +22,6 @@ Partial Class frmTaoTheDocGia
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -35,21 +34,11 @@ Partial Class frmTaoTheDocGia
         Me.DateOfBirthDateTimePicker = New System.Windows.Forms.DateTimePicker()
         Me.DateCreateDateTimePicker = New System.Windows.Forms.DateTimePicker()
         Me.ReaderTypeComboBox = New System.Windows.Forms.ComboBox()
-        Me.CreateButton = New System.Windows.Forms.Button()
-        Me.CreateAndCloseButton = New System.Windows.Forms.Button()
-        Me.ReaderIdTextBox = New System.Windows.Forms.TextBox()
+        Me.ReaderIDTextBox = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.CreateButton = New MetroFramework.Controls.MetroButton()
+        Me.CreateAndCloseButton = New MetroFramework.Controls.MetroButton()
         Me.SuspendLayout()
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(270, 25)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(167, 33)
-        Me.Label1.TabIndex = 17
-        Me.Label1.Text = "Thẻ độc giả"
         '
         'Label2
         '
@@ -154,31 +143,13 @@ Partial Class frmTaoTheDocGia
         Me.ReaderTypeComboBox.Size = New System.Drawing.Size(81, 21)
         Me.ReaderTypeComboBox.TabIndex = 30
         '
-        'CreateButton
+        'ReaderIDTextBox
         '
-        Me.CreateButton.Location = New System.Drawing.Point(245, 256)
-        Me.CreateButton.Name = "CreateButton"
-        Me.CreateButton.Size = New System.Drawing.Size(103, 23)
-        Me.CreateButton.TabIndex = 32
-        Me.CreateButton.Text = "Nhập"
-        Me.CreateButton.UseVisualStyleBackColor = True
-        '
-        'CreateAndCloseButton
-        '
-        Me.CreateAndCloseButton.Location = New System.Drawing.Point(369, 256)
-        Me.CreateAndCloseButton.Name = "CreateAndCloseButton"
-        Me.CreateAndCloseButton.Size = New System.Drawing.Size(101, 23)
-        Me.CreateAndCloseButton.TabIndex = 33
-        Me.CreateAndCloseButton.Text = "Nhập và đóng"
-        Me.CreateAndCloseButton.UseVisualStyleBackColor = True
-        '
-        'ReaderIdTextBox
-        '
-        Me.ReaderIdTextBox.Enabled = False
-        Me.ReaderIdTextBox.Location = New System.Drawing.Point(131, 84)
-        Me.ReaderIdTextBox.Name = "ReaderIdTextBox"
-        Me.ReaderIdTextBox.Size = New System.Drawing.Size(204, 20)
-        Me.ReaderIdTextBox.TabIndex = 35
+        Me.ReaderIDTextBox.Enabled = False
+        Me.ReaderIDTextBox.Location = New System.Drawing.Point(131, 81)
+        Me.ReaderIDTextBox.Name = "ReaderIDTextBox"
+        Me.ReaderIDTextBox.Size = New System.Drawing.Size(204, 20)
+        Me.ReaderIDTextBox.TabIndex = 38
         '
         'Label4
         '
@@ -190,16 +161,32 @@ Partial Class frmTaoTheDocGia
         Me.Label4.TabIndex = 34
         Me.Label4.Text = "Mã thẻ:"
         '
+        'CreateButton
+        '
+        Me.CreateButton.Location = New System.Drawing.Point(203, 256)
+        Me.CreateButton.Name = "CreateButton"
+        Me.CreateButton.Size = New System.Drawing.Size(100, 23)
+        Me.CreateButton.TabIndex = 36
+        Me.CreateButton.Text = "Nhập"
+        '
+        'CreateAndCloseButton
+        '
+        Me.CreateAndCloseButton.Location = New System.Drawing.Point(326, 256)
+        Me.CreateAndCloseButton.Name = "CreateAndCloseButton"
+        Me.CreateAndCloseButton.Size = New System.Drawing.Size(100, 23)
+        Me.CreateAndCloseButton.TabIndex = 37
+        Me.CreateAndCloseButton.Text = "Nhập và đóng"
+        '
         'frmTaoTheDocGia
         '
         Me.AcceptButton = Me.CreateButton
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(744, 291)
-        Me.Controls.Add(Me.ReaderIdTextBox)
-        Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.CreateAndCloseButton)
         Me.Controls.Add(Me.CreateButton)
+        Me.Controls.Add(Me.ReaderIDTextBox)
+        Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.ReaderTypeComboBox)
         Me.Controls.Add(Me.DateCreateDateTimePicker)
         Me.Controls.Add(Me.DateOfBirthDateTimePicker)
@@ -212,16 +199,12 @@ Partial Class frmTaoTheDocGia
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.Label1)
         Me.Name = "frmTaoTheDocGia"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Tạo thẻ độc giả"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents Label5 As Label
@@ -234,8 +217,8 @@ Partial Class frmTaoTheDocGia
     Friend WithEvents DateOfBirthDateTimePicker As DateTimePicker
     Friend WithEvents DateCreateDateTimePicker As DateTimePicker
     Friend WithEvents ReaderTypeComboBox As ComboBox
-    Friend WithEvents CreateButton As Button
-    Friend WithEvents CreateAndCloseButton As Button
-    Friend WithEvents ReaderIdTextBox As TextBox
+    Friend WithEvents ReaderIDTextBox As TextBox
     Friend WithEvents Label4 As Label
+    Friend WithEvents CreateButton As MetroFramework.Controls.MetroButton
+    Friend WithEvents CreateAndCloseButton As MetroFramework.Controls.MetroButton
 End Class

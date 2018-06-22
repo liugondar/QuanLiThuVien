@@ -10,6 +10,9 @@ Public Class frmQuanLiTheDocGia
         _docGiaBus = New DocGiaBus()
         Dim loadReaderTypeComboBoxResult = LoadReaderTypeComboBoxData()
         If loadReaderTypeComboBoxResult.FlagResult = False Then MessageBox.Show(loadReaderTypeComboBoxResult.ApplicationMessage)
+
+        RemoveButton.BackColor = ColorTranslator.FromHtml("#DC3545")
+        EditButton.BackColor = ColorTranslator.FromHtml("#28A745")
     End Sub
 
     Private Function LoadReaderTypeComboBoxData() As Result

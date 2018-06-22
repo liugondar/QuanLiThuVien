@@ -105,7 +105,7 @@ Public Class frmQuanLiSach
         MaxPublishYearDateTimePicker.MaxDate = Now
     End Sub
 
-    Private Sub CreateButton_Click(sender As Object, e As EventArgs) Handles SearchButton.Click
+    Private Sub SearchButton_Click(sender As Object, e As EventArgs) Handles SearchButton.Click
 #Region "Lấy thông tin input"
         Dim maSach = BookTitleComboBox.SelectedValue
         Dim maTacGia = AuthorComboBox.SelectedValue

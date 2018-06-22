@@ -36,6 +36,12 @@ Public Class DocGiaBus
         Return New Result()
     End Function
 
+    Public Function LayTenDocGiaBangMaThe(ByRef tenDocGia As String, maThe As String) As Result
+        Dim result = _docGiaDAO.LayTenDocGiaBangMaThe(tenDocGia, maThe)
+        If String.IsNullOrWhiteSpace(tenDocGia) = True Then Return New Result(False, "Lấy dữ liệu độc giả không thành công! Vui lòng kiểm tra lại mã thẻ ", "")
+        Return result
+    End Function
+
     Public Function InsertOne(docGia As DocGia) As Result
         If ValidateAll(docGia).FlagResult = False Then
             Return ValidateAll(docGia)

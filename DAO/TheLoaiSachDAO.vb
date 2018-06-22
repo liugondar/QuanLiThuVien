@@ -19,7 +19,7 @@ Public Class TheLoaiSachDAO
         Return result
     End Function
 
-    Public Function SelectAllByMaTheLoaiSach(ByRef theLoaiSach As TheLoaiSach, maTheLoaiSach As String) As Result
+    Public Function SelectTheLoaiSachByMaTheLoaiSach(ByRef theLoaiSach As TheLoaiSach, maTheLoaiSach As String) As Result
         Dim query = String.Empty
         query &= "Select * from dbo.TheLoaiSach where MaTheLoaiSach=" & maTheLoaiSach
         Dim dataTable = New DataTable()

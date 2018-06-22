@@ -131,8 +131,6 @@ New DateTime(1992, 1, 1), New DateTime(1998, 1, 1), 10000)
         'assert
         Assert.AreEqual(expected.FlagResult, act.FlagResult)
     End Sub
-
-
     <TestMethod()> Public Sub GivenValidTriGia_WhenSelectingByMaSach_ThenTrueResultReturn()
         'arrange
         Dim expected = New Result()
@@ -145,4 +143,29 @@ New DateTime(1992, 1, 1), New DateTime(1998, 1, 1), 10000)
         Assert.AreEqual(expected.FlagResult, act.FlagResult)
     End Sub
 
+    <TestMethod()> Public Sub GivenValidInput_WhenSelectBookIdBookTitleAuthorIdTypeIDBySpecificRequest_ThenTrueResultReturn()
+        'arrange
+        Dim expected = New Result()
+        Dim sachBus = New SachBus()
+        Dim sach = New Sach()
+        sach.MaSach = 1
+        sach.TenSach = 1
+        sach.MaTacGia = 1
+        sach.MaTheLoaiSach = 1
+        'act
+        Dim act = sachBus.SelectByBookIdBookTitleAuthorIdTypeID(New List(Of Sach), sach)
+        'assert
+        Assert.AreEqual(expected.FlagResult, act.FlagResult)
+    End Sub
+
+    <TestMethod()> Public Sub GiveEmptyInput_WhenSelectBookIdBookTitleAuthorIdTypeIDBySpecificRequest_ThenTrueResultReturn()
+        'arrange
+        Dim expected = New Result()
+        Dim sachBus = New SachBus()
+        Dim sach = New Sach()
+        'act
+        Dim act = sachBus.SelectByBookIdBookTitleAuthorIdTypeID(New List(Of Sach), sach)
+        'assert
+        Assert.AreEqual(expected.FlagResult, act.FlagResult)
+    End Sub
 End Class
