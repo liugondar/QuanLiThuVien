@@ -47,17 +47,41 @@ Public Class DocGiaBus
             Return ValidateAll(docGia)
         End If
         Dim maTheDocGia As Integer
-        Dim ketQuaLayMaTheDocGia = LayMaTheDocGiaTiepTheo(maTheDocGia)
+        Dim ketQuaLayMaTheDocGia = BuildMaDocGia(maTheDocGia)
         docGia.MaTheDocGia = maTheDocGia
         docGia.NgayHetHan = docGia.NgayTao.AddMonths(_quiDinh.ThoiHanToiDaTheDocGia)
         Return _docGiaDAO.InsertOne(docGia)
     End Function
-    Public Function LayMaTheDocGiaTiepTheo(ByRef maTheDocGia As String) As Result
-        Dim result = _docGiaDAO.LayMaTheDocGiaCuoiCung(maTheDocGia)
+    Public Function BuildMaDocGia(ByRef maTheDocGia As String) As Result
+
+        maTheDocGia = String.Empty
+        Dim y = DateTime.Now.Year
+        Dim x = y.ToString().Substring(2)
+        maTheDocGia = x + "000000"
+
+        Dim maTheCuoiCung = String.Empty
+        Dim result = _docGiaDAO.LayMaTheDocGiaCuoiCung(maTheCuoiCung)
+
         If result.FlagResult = True Then
-            maTheDocGia = maTheDocGia + 1
+            If (maTheCuoiCung <> Nothing And maTheCuoiCung.Length >= 8) Then
+                Dim currentYear = DateTime.Now.Year.ToString().Substring(2)
+                Dim iCurrentYear = Integer.Parse(currentYear)
+                Dim currentYearOnDB = maTheCuoiCung.Substring(0, 2)
+                Dim icurrentYearOnDB = Integer.Parse(currentYearOnDB)
+                Dim year = iCurrentYear
+                If (year < icurrentYearOnDB) Then
+                    year = icurrentYearOnDB
+                End If
+                maTheDocGia = year.ToString()
+                Dim v = maTheCuoiCung.Substring(2)
+                Dim convertDecimal = Convert.ToDecimal(v)
+                convertDecimal = convertDecimal + 1
+                Dim tmp = convertDecimal.ToString()
+                tmp = tmp.PadLeft(maTheCuoiCung.Length - 2, "0")
+                maTheDocGia = maTheDocGia + tmp
+            End If
         Else
-            maTheDocGia = 1
+            maTheDocGia = maTheDocGia + 1
         End If
         Return result
     End Function

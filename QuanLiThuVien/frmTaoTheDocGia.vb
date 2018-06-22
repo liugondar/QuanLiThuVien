@@ -14,7 +14,7 @@ Public Class frmTaoTheDocGia
     End Sub
     Private Function LoadReaderIdTextBox() As Result
         Dim maDocGia As String
-        Dim ketQuaLayMa = _docGiaBus.LayMaTheDocGiaTiepTheo(maDocGia)
+        Dim ketQuaLayMa = _docGiaBus.BuildMaDocGia(maDocGia)
         If ketQuaLayMa.FlagResult = False Then
             MessageBox.Show("Lỗi không thể lấy mã độc giả để tiến hành tạo thẻ!")
             Return ketQuaLayMa

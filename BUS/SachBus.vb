@@ -3,12 +3,12 @@ Imports DTO
 Imports Utility
 
 Public Class SachBus
+#Region "-   field   -"
     Private _sachDAO As SachDAO
     Private _quiDinh As QuiDinh
     Private _danhSachTacGia As List(Of TacGia)
     Private _danhSachTheLoaiSach As List(Of TheLoaiSach)
     Private _ketQuaLayQuiDinh As Result
-
     Public Sub New()
         _sachDAO = New SachDAO()
         _danhSachTacGia = New List(Of TacGia)
@@ -33,7 +33,9 @@ Public Class SachBus
         Dim result = theLoaiSachBus.SelectAll(_danhSachTheLoaiSach)
         Return result
     End Function
-#Region "insert one"
+#End Region
+
+#Region "-   insert one   -"
     Public Function InsertOne(sach As Sach) As Result
         Dim validateResult = Validate(sach)
         If validateResult.FlagResult = False Then Return validateResult
@@ -73,7 +75,7 @@ Public Class SachBus
     End Function
 #End Region
 
-#Region "Select sach"
+#Region "-   Select sach   -"
     Public Function SelectAll(ByRef listSach As List(Of Sach)) As Result
         Dim result = _sachDAO.SelectAll(listSach)
         Return result
