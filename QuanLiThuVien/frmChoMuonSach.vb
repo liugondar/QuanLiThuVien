@@ -60,13 +60,15 @@ Public Class frmChoMuonSach
         AddNewRowButton.FlatAppearance.BorderSize = 0
         AddHandler AddNewRowButton.Click, AddressOf addNewRowButton_Click
 
+        AddNewRow()
 
-        'Try
-        '    Dim firstControlBookInfoElement = _listControlBookInfoControl(0)
-        '    AddNewRowButton.Location = New Point(firstControlBookInfoElement.GetButton().Location.X,
-        '                                     firstControlBookInfoElement.Height + firstControlBookInfoElement.Location.Y + 10)
-        'Catch
-        'End Try
+        Try
+            Dim firstControlBookInfoElement = _listControlBookInfoControl(0)
+            AddNewRowButton.Location = New Point(firstControlBookInfoElement.GetButton().Location.X,
+                                             firstControlBookInfoElement.Height + firstControlBookInfoElement.Location.Y + 10)
+        Catch
+        End Try
+
 
         SachCanThuePanel.Controls.Add(AddNewRowButton)
     End Sub
@@ -252,28 +254,51 @@ Public Class frmChoMuonSach
     ' Xử lí khi book info control đã được click, click tiếp để bỏ dòng
     Private Sub XoaDong(bookInfoControl As BookInfoControl)
         Try
-            SachCanThuePanel.Controls.Remove(bookInfoControl)
-            _listControlBookInfoControl.Remove(bookInfoControl)
+            RemoveDongCanXoa(bookInfoControl)
+
             If _listControlBookInfoControl.Count >= 1 Then
-                _listControlBookInfoControl(0).Location = New Point(0, 0)
-                Dim bookInfoControlTemp As BookInfoControl = SachCanThuePanel.Controls(0)
-                bookInfoControlTemp.GetSTTTextBox.Text = 1
-
-                For index = 1 To _listControlBookInfoControl.Count - 1
-                    Dim yLocation = _listControlBookInfoControl(index - 1).Location.Y + _listControlBookInfoControl(index - 1).Height
-                    bookInfoControlTemp = SachCanThuePanel.Controls(index)
-                    bookInfoControlTemp.GetSTTTextBox.Text = index + 1
-                    _listControlBookInfoControl(index).Location = New Point(0, yLocation)
-                Next
-
-                AddNewRowButton.Location = New Point(AddNewRowButton.Location.X,
-                                                     _listControlBookInfoControl(_listControlBookInfoControl.Count - 1).Location.Y)
+                MoveTheOtherRowsToNewLocation(bookInfoControl)
             Else
-                AddNewRowButton.Location = New Point(AddNewRowButton.Location.X,
-                                                 0)
+                SetAddNewRowButtonLocationToFirstRow()
             End If
         Catch
         End Try
     End Sub
+
+    Private Sub MoveTheOtherRowsToNewLocation(bookInfoControl As BookInfoControl)
+        Dim firstControl = _listControlBookInfoControl(0)
+        firstControl.Location = New Point(0, 0)
+        firstControl.GetSTTTextBox.Text = 1
+
+        If _listControlBookInfoControl.Count > 1 Then
+            For index = 1 To _listControlBookInfoControl.Count - 1
+                Dim previousControl As BookInfoControl = _listControlBookInfoControl(index - 1)
+                Dim currentControl As BookInfoControl = _listControlBookInfoControl(index)
+
+                Dim yLocation = previousControl.Location.Y +
+                    previousControl.Height
+
+                currentControl.GetSTTTextBox.Text = index + 1
+                currentControl.TabIndex = 5 + index
+                currentControl.Location = New Point(0, yLocation)
+            Next
+        End If
+
+        Dim lastBookInfoControl = _listControlBookInfoControl(_listControlBookInfoControl.Count - 1)
+        AddNewRowButton.Location = New Point(AddNewRowButton.Location.X,
+                                             lastBookInfoControl.Location.Y + bookInfoControl.Height + 10)
+    End Sub
+
+    Private Sub SetAddNewRowButtonLocationToFirstRow()
+        AddNewRowButton.Location = New Point(AddNewRowButton.Location.X,
+                                                     0)
+    End Sub
+
+    Private Sub RemoveDongCanXoa(bookInfoControl As BookInfoControl)
+        SachCanThuePanel.Controls.Remove(bookInfoControl)
+        _listControlBookInfoControl.Remove(bookInfoControl)
+    End Sub
+
+
 #End Region
 End Class
