@@ -294,7 +294,12 @@ Public Class frmChoMuonSach
     Private Function IsValidAmountBookCanBorrow() As Result
         Dim quiDinh = New QuiDinh()
         Dim result = _quiDinhBus.LaySoSachMuonToiDa(quiDinh)
-        If _listControlBookInfoControl.Count + _listPhieuMuonSachDaMuon.Count >= quiDinh.SoSachMuonToiDa Then
+
+        Dim listChiTietPhieuMuonSAchDaMuon = New List(Of ChiTietPhieuMuonSach)
+        For Each phieuMuonSach In _listPhieuMuonSachDaMuon
+            _chiTietPhieuMuonSach.selectAllByMaphieumuonsach(listChiTietPhieuMuonSachDaMuon, phieuMuonSach.MaPhieuMuonSach)
+        Next
+        If _listControlBookInfoControl.Count + listChiTietPhieuMuonSAchDaMuon.Count >= quiDinh.SoSachMuonToiDa Then
             Return New Result(False, "Đã đạt tối đa số lượng sách đã mượn :" + quiDinh.SoSachMuonToiDa.ToString(), "")
         End If
         Return New Result(True, "", "")
