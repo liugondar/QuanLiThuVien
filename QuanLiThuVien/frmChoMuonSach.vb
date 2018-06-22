@@ -12,9 +12,11 @@ Public Class frmChoMuonSach
     Private _sachBus As SachBus
     Private _phieuMuonSachBus As PhieuMuonSachBus
 
+    Private _listPhieuMuonSachDaMuon As List(Of PhieuMuonSach)
     Private _listSach As List(Of Sach)
     Private _listTacGia As List(Of TacGia)
     Private _listTheLoaiSach As List(Of TheLoaiSach)
+
 
     Private _listControlBookInfoControl As List(Of BookInfoControl)
     Private AddNewRowButton As Button
@@ -30,6 +32,7 @@ Public Class frmChoMuonSach
         _tacGiaBus = New TacGiaBUS()
         _theLoaiSachBus = New TheLoaiSachBUS()
 
+        _listPhieuMuonSachDaMuon = New List(Of PhieuMuonSach)
         _listSach = New List(Of Sach)
         _listTacGia = New List(Of TacGia)
         _listTheLoaiSach = New List(Of TheLoaiSach)
@@ -118,11 +121,11 @@ Public Class frmChoMuonSach
 
         UserNameTextBox.Text = docGia.TenDocGia
 
-        Dim listPhieuMuonSach = New List(Of PhieuMuonSach)
+
         Dim ketQuaLayPhieuMuonSach =
-            _phieuMuonSachBus.SelectAllByMaTheDocGia(listPhieuMuonSach,
+            _phieuMuonSachBus.SelectAllByMaTheDocGia(_listPhieuMuonSachDaMuon,
                                                      docGia.MaTheDocGia)
-        LoadListSachDaMuonDataGridView(listPhieuMuonSach)
+        LoadListSachDaMuonDataGridView(_listPhieuMuonSachDaMuon)
     End Sub
 
     Private Sub LoadListSachDaMuonDataGridView(listPhieuMuonSachDaMuon As List(Of PhieuMuonSach))
@@ -247,7 +250,7 @@ Public Class frmChoMuonSach
         'TODO: kiem tra so sach da muon+ voi so sach can muon co vuot qua qui dinh hay khong
         Dim quiDinh = New QuiDinh()
         Dim result = _quiDinhBus.LaySoSachMuonToiDa(quiDinh)
-        If _listControlBookInfoControl.Count >= quiDinh.SoSachMuonToiDa Then
+        If _listControlBookInfoControl.Count + _listPhieuMuonSachDaMuon.Count >= quiDinh.SoSachMuonToiDa Then
             Return New Result(False, "Đã đạt tối đa số lượng sách đã mượn :" + quiDinh.SoSachMuonToiDa.ToString(), "")
         End If
         Return New Result(True, "", "")
