@@ -223,9 +223,12 @@ Public Class frmChoMuonSach
             Dim theLoaiSach = New TheLoaiSach()
             sach.MaSach = maSach
 
+            Console.WriteLine("Ma sach: " & maSach)
             _sachBus.SelectTenSachByMaSach(sach, maSach)
-            _tacGiaBus.SelectTacGiaByMaTacGia(tacGia, maSach)
-            _theLoaiSachBus.SelectTheLoaiSachByMaTheLoaiSach(theLoaiSach, maSach)
+            _tacGiaBus.SelectTacGiaByMaTacGia(tacGia, sach.MaTacGia)
+            _theLoaiSachBus.SelectTheLoaiSachByMaTheLoaiSach(theLoaiSach, sach.MaTheLoaiSach)
+            Console.WriteLine("MaThe loai: " & theLoaiSach.MaTheLoaiSach)
+            Console.WriteLine("Ma tac gia: " & tacGia.MaTacGia)
 
             bookInfoControl.GetAuthorTextBox.text = tacGia.TenTacGia
             bookInfoControl.GetTypeOfBookTextBox.text = theLoaiSach.TenTheLoaiSach
