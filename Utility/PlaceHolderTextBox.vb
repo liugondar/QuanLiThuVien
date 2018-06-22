@@ -32,6 +32,12 @@ Public Class PlaceHolderTextBox
             Me.ForeColor = System.Drawing.SystemColors.WindowText
         End If
     End Sub
+    Protected Overrides Sub OnTextChanged(e As EventArgs)
+        MyBase.OnTextChanged(e)
+        If PlaceHolderText.Equals(Me.Text) Then
+
+        End If
+    End Sub
     Protected Overrides Sub OnGotFocus(e As EventArgs)
         MyBase.OnGotFocus(e)
         If PlaceHolderText.Equals(Me.Text) Then

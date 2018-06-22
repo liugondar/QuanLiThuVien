@@ -112,5 +112,23 @@ Public Class SachBus
         Dim result = _sachDAO.SelectAllByTriGia(listSach, triGiaMin, triGiaMax)
         Return result
     End Function
+
+    Public Function SelectByBookIdBookTitleAuthorIdTypeID(ByRef listSach As List(Of Sach),
+                                                                      SachYeuCau As Sach) As Result
+        'Guard clause
+        If String.IsNullOrWhiteSpace(SachYeuCau.MaSach) Then SachYeuCau.MaSach = -1
+        If String.IsNullOrWhiteSpace(SachYeuCau.TenSach) Then SachYeuCau.TenSach = -1
+        If String.IsNullOrWhiteSpace(SachYeuCau.MaTheLoaiSach) Then SachYeuCau.MaTheLoaiSach = -1
+        If String.IsNullOrWhiteSpace(SachYeuCau.MaTacGia) Then SachYeuCau.MaTacGia = -1
+
+        Return _sachDAO.SelectBookIdBookTitleAuthorIdTypeIDBySpecificRequest(listSach, SachYeuCau)
+    End Function
+
+
+    Public Function SelectTenSachByMaSach(ByRef sach As Sach, maSach As String) As Result
+        'Guard clause
+        If String.IsNullOrWhiteSpace(sach.MaSach) Then Return New Result(False, "Mã sách không tồn tại", "")
+        Return _sachDAO.SelectSachByMaSach(sach, maSach)
+    End Function
 #End Region
 End Class

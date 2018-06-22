@@ -16,15 +16,15 @@ Public Class BookInfoControl
     Public Function GetSTTTextBox()
         Return STTTextBox
     End Function
-    Public Function GetTitleComboBox()
-        Return BookTitleComboBox
+    Public Function GetTitleTextBox()
+        Return BookTitleTextBox
     End Function
 
-    Public Function GetTypeOfBookComboBox()
-        Return TypeOfBookComboBox
+    Public Function GetTypeOfBookTextBox()
+        Return TypeOfBookTextBox
     End Function
-    Public Function GetAuthorComboBox()
-        Return AuthorComboBox
+    Public Function GetAuthorTextBox()
+        Return AuthorTextBox
     End Function
 
     Public Function GetButton()
@@ -43,23 +43,23 @@ Public Class BookInfoControl
 
 #Region "-  Events -"
     Public Sub BookIdTextBox_TextChanged(sender As Object, e As EventArgs) Handles BookIdTextBox.TextChanged
-        RaiseEvent UC_BookIDTextBox_TextChanged(sender, e)
+        RaiseEvent UC_BookIDTextBox_TextChanged(Me, e)
     End Sub
 
-    Public Sub BookTitleComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles BookTitleComboBox.SelectedIndexChanged
-        RaiseEvent UC_BookTitleComboBox_SelectedIndexChanged(sender, e)
+    Public Sub BookTitleTextBox_TextChanged(sender As Object, e As EventArgs) Handles BookTitleTextBox.TextChanged
+        RaiseEvent UC_BookTitleComboBox_SelectedIndexChanged(Me, e)
     End Sub
 
-    Public Sub TypeOfBookComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TypeOfBookComboBox.SelectedIndexChanged
-        RaiseEvent UC_TypeOfBookComboBox_SelectedIndexChanged(sender, e)
+    Public Sub TypeOfBookTExtBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TypeOfBookTextBox.TextChanged
+        RaiseEvent UC_TypeOfBookComboBox_SelectedIndexChanged(Me, e)
     End Sub
 
-    Public Sub AuthorComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles AuthorComboBox.SelectedIndexChanged
-        RaiseEvent UC_AuthorComboBox_SelectedIndexChangeChanged(sender, e)
+    Public Sub AuthorComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles AuthorTextBox.TextChanged
+        RaiseEvent UC_AuthorComboBox_SelectedIndexChangeChanged(Me, e)
     End Sub
 
     Private Sub STTTextBox_TextChanged(sender As Object, e As EventArgs) Handles STTTextBox.TextChanged
-        RaiseEvent UC_SttTextBox_TextChanged(sender, e)
+        RaiseEvent UC_SttTextBox_TextChanged(Me, e)
     End Sub
 
     Private Sub Button_Click(sender As Object, e As EventArgs) Handles Button.Click

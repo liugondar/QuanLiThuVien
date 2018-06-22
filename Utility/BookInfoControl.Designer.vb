@@ -22,43 +22,13 @@ Partial Class BookInfoControl
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.BookTitleComboBox = New System.Windows.Forms.ComboBox()
-        Me.TypeOfBookComboBox = New System.Windows.Forms.ComboBox()
-        Me.AuthorComboBox = New System.Windows.Forms.ComboBox()
         Me.STTTextBox = New System.Windows.Forms.TextBox()
         Me.Button = New System.Windows.Forms.Button()
         Me.BookIdTextBox = New Utility.PlaceHolderTextBox()
+        Me.BookTitleTextBox = New Utility.PlaceHolderTextBox()
+        Me.TypeOfBookTextBox = New Utility.PlaceHolderTextBox()
+        Me.AuthorTextBox = New Utility.PlaceHolderTextBox()
         Me.SuspendLayout()
-        '
-        'BookTitleComboBox
-        '
-        Me.BookTitleComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.BookTitleComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.BookTitleComboBox.FormattingEnabled = True
-        Me.BookTitleComboBox.Location = New System.Drawing.Point(196, 11)
-        Me.BookTitleComboBox.Name = "BookTitleComboBox"
-        Me.BookTitleComboBox.Size = New System.Drawing.Size(149, 21)
-        Me.BookTitleComboBox.TabIndex = 4
-        '
-        'TypeOfBookComboBox
-        '
-        Me.TypeOfBookComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.TypeOfBookComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.TypeOfBookComboBox.FormattingEnabled = True
-        Me.TypeOfBookComboBox.Location = New System.Drawing.Point(351, 11)
-        Me.TypeOfBookComboBox.Name = "TypeOfBookComboBox"
-        Me.TypeOfBookComboBox.Size = New System.Drawing.Size(155, 21)
-        Me.TypeOfBookComboBox.TabIndex = 5
-        '
-        'AuthorComboBox
-        '
-        Me.AuthorComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.AuthorComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.AuthorComboBox.FormattingEnabled = True
-        Me.AuthorComboBox.Location = New System.Drawing.Point(512, 10)
-        Me.AuthorComboBox.Name = "AuthorComboBox"
-        Me.AuthorComboBox.Size = New System.Drawing.Size(195, 21)
-        Me.AuthorComboBox.TabIndex = 6
         '
         'STTTextBox
         '
@@ -84,33 +54,71 @@ Partial Class BookInfoControl
         '
         'BookIdTextBox
         '
+        Me.BookIdTextBox.ForeColor = System.Drawing.Color.Gray
         Me.BookIdTextBox.IsPlaceHolder = True
         Me.BookIdTextBox.Location = New System.Drawing.Point(75, 12)
         Me.BookIdTextBox.Name = "BookIdTextBox"
-        Me.BookIdTextBox.PlaceHolderText = "hello"
+        Me.BookIdTextBox.PlaceHolderText = "Mã sách"
         Me.BookIdTextBox.Size = New System.Drawing.Size(115, 20)
-        Me.BookIdTextBox.TabIndex = 9
+        Me.BookIdTextBox.TabIndex = 12
+        Me.BookIdTextBox.Text = "Mã sách"
+        '
+        'BookTitleTextBox
+        '
+        Me.BookTitleTextBox.Enabled = False
+        Me.BookTitleTextBox.ForeColor = System.Drawing.Color.Gray
+        Me.BookTitleTextBox.IsPlaceHolder = True
+        Me.BookTitleTextBox.Location = New System.Drawing.Point(196, 12)
+        Me.BookTitleTextBox.Name = "BookTitleTextBox"
+        Me.BookTitleTextBox.PlaceHolderText = "Tên sách"
+        Me.BookTitleTextBox.Size = New System.Drawing.Size(149, 20)
+        Me.BookTitleTextBox.TabIndex = 13
+        Me.BookTitleTextBox.Text = "Tên sách"
+        '
+        'TypeOfBookTextBox
+        '
+        Me.TypeOfBookTextBox.Enabled = False
+        Me.TypeOfBookTextBox.ForeColor = System.Drawing.Color.Gray
+        Me.TypeOfBookTextBox.IsPlaceHolder = True
+        Me.TypeOfBookTextBox.Location = New System.Drawing.Point(351, 12)
+        Me.TypeOfBookTextBox.Name = "TypeOfBookTextBox"
+        Me.TypeOfBookTextBox.PlaceHolderText = "Tên sách"
+        Me.TypeOfBookTextBox.Size = New System.Drawing.Size(155, 20)
+        Me.TypeOfBookTextBox.TabIndex = 14
+        Me.TypeOfBookTextBox.Text = "Thể loại"
+        '
+        'AuthorTextBox
+        '
+        Me.AuthorTextBox.Enabled = False
+        Me.AuthorTextBox.ForeColor = System.Drawing.Color.Gray
+        Me.AuthorTextBox.IsPlaceHolder = True
+        Me.AuthorTextBox.Location = New System.Drawing.Point(512, 11)
+        Me.AuthorTextBox.Name = "AuthorTextBox"
+        Me.AuthorTextBox.PlaceHolderText = "Tác giả"
+        Me.AuthorTextBox.Size = New System.Drawing.Size(183, 20)
+        Me.AuthorTextBox.TabIndex = 15
+        Me.AuthorTextBox.Text = "Tác giả"
         '
         'BookInfoControl
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.AuthorTextBox)
+        Me.Controls.Add(Me.TypeOfBookTextBox)
+        Me.Controls.Add(Me.BookTitleTextBox)
         Me.Controls.Add(Me.BookIdTextBox)
         Me.Controls.Add(Me.Button)
         Me.Controls.Add(Me.STTTextBox)
-        Me.Controls.Add(Me.AuthorComboBox)
-        Me.Controls.Add(Me.TypeOfBookComboBox)
-        Me.Controls.Add(Me.BookTitleComboBox)
         Me.Name = "BookInfoControl"
         Me.Size = New System.Drawing.Size(793, 37)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents BookTitleComboBox As Windows.Forms.ComboBox
-    Friend WithEvents TypeOfBookComboBox As Windows.Forms.ComboBox
-    Friend WithEvents AuthorComboBox As Windows.Forms.ComboBox
     Friend WithEvents STTTextBox As Windows.Forms.TextBox
     Friend WithEvents Button As Windows.Forms.Button
     Friend WithEvents BookIdTextBox As PlaceHolderTextBox
+    Friend WithEvents BookTitleTextBox As PlaceHolderTextBox
+    Friend WithEvents TypeOfBookTextBox As PlaceHolderTextBox
+    Friend WithEvents AuthorTextBox As PlaceHolderTextBox
 End Class

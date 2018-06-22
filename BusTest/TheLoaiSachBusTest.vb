@@ -19,7 +19,7 @@ Imports Utility
         Dim expected = New Result()
         Dim theLoaiSachBus = New TheLoaiSachBUS()
         'act
-        Dim actual = theLoaiSachBus.SelectAllByMaTheLoaiSach(New DTO.TheLoaiSach(), 1)
+        Dim actual = theLoaiSachBus.SelectTheLoaiSachByMaTheLoaiSach(New DTO.TheLoaiSach(), 1)
         'assert
         Assert.AreEqual(expected.FlagResult, actual.FlagResult)
     End Sub

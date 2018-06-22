@@ -124,7 +124,7 @@ Partial Class frmChoMuonSach
         Me.ListSachDaMuonDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.ListSachDaMuonDataGridView.Location = New System.Drawing.Point(26, 181)
         Me.ListSachDaMuonDataGridView.Name = "ListSachDaMuonDataGridView"
-        Me.ListSachDaMuonDataGridView.Size = New System.Drawing.Size(810, 191)
+        Me.ListSachDaMuonDataGridView.Size = New System.Drawing.Size(767, 191)
         Me.ListSachDaMuonDataGridView.TabIndex = 51
         '
         'Label3
@@ -160,7 +160,7 @@ Partial Class frmChoMuonSach
         '
         Me.SachCanThuePanel.Location = New System.Drawing.Point(26, 416)
         Me.SachCanThuePanel.Name = "SachCanThuePanel"
-        Me.SachCanThuePanel.Size = New System.Drawing.Size(810, 227)
+        Me.SachCanThuePanel.Size = New System.Drawing.Size(767, 227)
         Me.SachCanThuePanel.TabIndex = 55
         '
         'frmChoMuonSach

@@ -16,8 +16,8 @@ Public Class TheLoaiSachBUS
         Return result
     End Function
 
-    Public Function SelectAllByMaTheLoaiSach(ByRef theLoaiSach As TheLoaiSach, maTheLoaiSach As String) As Result
-        Dim result = _theLoaiSachDAO.SelectAllByMaTheLoaiSach(theLoaiSach, maTheLoaiSach)
+    Public Function SelectTheLoaiSachByMaTheLoaiSach(ByRef theLoaiSach As TheLoaiSach, maTheLoaiSach As String) As Result
+        Dim result = _theLoaiSachDAO.SelectTheLoaiSachByMaTheLoaiSach(theLoaiSach, maTheLoaiSach)
         Return result
     End Function
 End Class

@@ -51,7 +51,7 @@ Public Class Sach
         Me.TinhTrang = tinhTrang
     End Sub
 
-    Public Property MaSach() As Integer
+    Public Property MaSach() As String
     Public Property TenSach() As String
     Public Property MaTheLoaiSach() As Integer
     Public Property MaTacGia() As Integer
