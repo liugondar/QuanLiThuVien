@@ -122,6 +122,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BUS\BUS.vbproj">
+      <Project>{4088581B-A340-45D5-B854-7712B9A51459}</Project>
+      <Name>BUS</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DAO\DAO.vbproj">
       <Project>{3c5490f3-5480-4374-b223-d9bf1189b80a}</Project>
       <Name>DAO</Name>

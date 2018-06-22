@@ -14,7 +14,16 @@ Public Class ChiTietPhieuMuonSachDAO
         Return _dataProvider.ExcuteNonquery(query)
     End Function
 
-    Public Function selectAllByMaphieumuonsach(listChitietphieumuonsach As List(Of ChiTietPhieuMuonSach)) As Result
-        Throw New NotImplementedException()
+    Public Function selectAllByMaphieumuonsach(listChitietphieumuonsach As List(Of ChiTietPhieuMuonSach), maPhieuMuonSach As String) As Result
+        Dim query = String.Empty
+        query = String.Format("select * from chiTietPhieuMuonSach where MaPhieuMuonSach={0}",
+                                maPhieuMuonSach)
+        Dim DataTable = New DataTable()
+        Dim result = _dataProvider.ExcuteQuery(query, DataTable)
+        For Each row In DataTable.Rows
+            Dim chiTietPhieuMuonSach = New ChiTietPhieuMuonSach(row)
+            listChitietphieumuonsach.Add(chiTietPhieuMuonSach)
+        Next
+        Return result
     End Function
 End Class

@@ -11,7 +11,8 @@ Public Class ChiTietPhieuMuonSachBus
         Return _chiTietPhieuMuonSachDAO.InsertOne(chiTietPhieuMuonSach)
     End Function
 
-    Public Function selectAllByMaphieumuonsach(ByRef listChitietphieumuonsach As List(Of ChiTietPhieuMuonSach)) As Result
-        Return _chiTietPhieuMuonSachDAO.selectAllByMaphieumuonsach(listChitietphieumuonsach)
+    Public Function selectAllByMaphieumuonsach(ByRef listChitietphieumuonsach As List(Of ChiTietPhieuMuonSach),
+                                               maPhieuMuonSach As String) As Result
+        Return _chiTietPhieuMuonSachDAO.selectAllByMaphieumuonsach(listChitietphieumuonsach, maPhieuMuonSach)
     End Function
 End Class

@@ -30,4 +30,14 @@ Public Class TacGiaDAO
         Return result
     End Function
 
+    Public Function SelectTenTacGiaByMaTacGia(ByRef tenTacGia As String, maTacGia As String) As Object
+        Dim query = String.Empty
+        query &= "Select * from dbo.TacGia where MaTacGia=" & maTacGia
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        For Each row As DataRow In dataTable.Rows
+            tenTacGia = row("TenTacGia").ToString()
+        Next
+        Return result
+    End Function
 End Class

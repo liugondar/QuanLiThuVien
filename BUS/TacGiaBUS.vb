@@ -20,5 +20,8 @@ Public Class TacGiaBUS
         Dim result = _tacGiaDAO.SelectTacGiaByMaTacGia(tacGia, maTacGia)
         Return result
     End Function
-
+    Public Function SelectTenTacGiaByMaTacGia(ByRef tenTacGia As String, maTacGia As String) As Result
+        Dim result = _tacGiaDAO.SelectTenTacGiaByMaTacGia(tenTacGia, maTacGia)
+        Return result
+    End Function
 End Class

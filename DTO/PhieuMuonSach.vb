@@ -2,8 +2,8 @@
 
 Public Class PhieuMuonSach
 
-    Public Property MaPhieuMuonSach() As Integer
-    Public Property MaTheDocGia() As Integer
+    Public Property MaPhieuMuonSach() As String
+    Public Property MaTheDocGia() As String
     Public Property NgayMuon() As DateTime
     Public Property NgayTra As DateTime
     Public Property HanTra() As DateTime

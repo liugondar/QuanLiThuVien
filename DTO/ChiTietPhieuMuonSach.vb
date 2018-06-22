@@ -9,4 +9,17 @@
     End Sub
     Public Sub New()
     End Sub
+
+    Public Sub New(row As DataRow)
+        Dim doesRowContainsCorrectFields = row.Table.Columns.Contains("MaChiTietPhieuMuonSach") And
+          row.Table.Columns.Contains("MaPhieuMuonSach") And
+        row.Table.Columns.Contains("MaSach")
+        If doesRowContainsCorrectFields = False Then
+            Return
+        End If
+
+        MaPhieuMuonSach = row("MaPhieuMuonSach").ToString()
+        MaChiTietPhieuMuonSach = row("MaChiTietPhieuMuonSach").ToString()
+        MaSach = row("MaSach").ToString()
+    End Sub
 End Class

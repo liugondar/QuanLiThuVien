@@ -66,6 +66,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomBookInfoDisplay.vb" />
     <Compile Include="DataProvider.vb" />
     <Compile Include="BookInfoControl.Designer.vb">
       <DependentUpon>BookInfoControl.vb</DependentUpon>

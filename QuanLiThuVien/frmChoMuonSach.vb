@@ -120,7 +120,7 @@ Public Class frmChoMuonSach
 
         UserNameTextBox.Text = docGia.TenDocGia
 
-
+        _listPhieuMuonSachDaMuon.Clear()
         Dim ketQuaLayPhieuMuonSach =
             _phieuMuonSachBus.SelectAllByMaTheDocGia(_listPhieuMuonSachDaMuon,
                                                      docGia.MaTheDocGia)
@@ -173,10 +173,41 @@ Public Class frmChoMuonSach
     End Sub
 
     Private Sub BindingSourceBookBorrowedDataGridViewData(listPhieuMuonSachDaMuon As List(Of PhieuMuonSach))
-        If listPhieuMuonSachDaMuon.Count < 1 Then Return
-        Dim listChiTietPhieuMuonSach = New List(Of ChiTietPhieuMuonSach)
 
-        ListSachDaMuonDataGridView.DataSource = New BindingSource(listPhieuMuonSachDaMuon, String.Empty)
+        If listPhieuMuonSachDaMuon.Count < 1 Then Return
+        Dim listChiTietPhieuMuonSachDaMuon = New List(Of ChiTietPhieuMuonSach)
+        Dim listSachDaMuon = New List(Of Sach)
+        Dim listCustomBookInfoDisplay = New List(Of CustomBookInfoDisplay)
+
+        For Each phieuMuonSach In listPhieuMuonSachDaMuon
+            _chiTietPhieuMuonSach.selectAllByMaphieumuonsach(listChiTietPhieuMuonSachDaMuon, phieuMuonSach.MaPhieuMuonSach)
+        Next
+
+        For Each chiTietPhieuMuonSach In listChiTietPhieuMuonSachDaMuon
+            _sachBus.SelectAllByMaSach(listSachDaMuon, chiTietPhieuMuonSach.MaSach)
+        Next
+
+        For Each sach In listSachDaMuon
+            Dim maPhieuMuonSach = listChiTietPhieuMuonSachDaMuon.
+                Where(Function(s) s.MaSach = sach.MaSach).
+                Select(Function(s) s.MaPhieuMuonSach).First()
+
+            Dim phieuMuonSach = listPhieuMuonSachDaMuon.Where(Function(s) s.MaPhieuMuonSach = maPhieuMuonSach).First()
+
+            Dim customBook = New CustomBookInfoDisplay()
+            customBook.MaSach = sach.MaSach
+            customBook.TenSach = sach.TenSach
+            _tacGiaBus.SelectTenTacGiaByMaTacGia(customBook.TacGia, sach.MaTacGia)
+            customBook.NgayHetHan = phieuMuonSach.HanTra
+
+            Dim dateNow As Date = Date.Now()
+            Dim isExpirated = If((phieuMuonSach.HanTra - dateNow).TotalSeconds < 0, True, False)
+                customBook.TinhTrang = If(isExpirated, "Quá hạn", "Chưa trả")
+
+            listCustomBookInfoDisplay.Add(customBook)
+        Next
+
+        ListSachDaMuonDataGridView.DataSource = New BindingSource(listCustomBookInfoDisplay, String.Empty)
     End Sub
 
     Private Sub ClearBookBorrowedDataGridViewData()
@@ -195,7 +226,7 @@ Public Class frmChoMuonSach
 
 #End Region
 
-#Region "-  Events for Custom controls  -"
+#Region "-  Events for Custom book info controls  -"
     'Event thêm cho phần custom control hiển thị control để mượn sách
 
 
