@@ -61,4 +61,8 @@ Public Class PhieuMuonSachBus
     Public Function SelectAllByMaTheDocGia(ByRef listPhieuMuonSach As List(Of PhieuMuonSach), maTheDocGia As String) As Result
         Return _phieuMuonSachDAO.SelectAllByMaTheDocGia(listPhieuMuonSach, maTheDocGia)
     End Function
+
+    Public Function SelectIdTheLastOne(ByRef maphieuMuonSach As String) As Result
+        Return _phieuMuonSachDAO.SelectIdTheLastOne(maphieuMuonSach)
+    End Function
 End Class

@@ -41,4 +41,15 @@ Imports Utility
         Assert.AreEqual(expected.FlagResult, act.FlagResult)
     End Sub
 
+    <TestMethod()> Public Sub ValidIDTheLastOne()
+        'arr
+        Dim expected = New Result()
+        Dim phieuMuonSachDAO = New PhieuMuonSachDAO()
+        Dim s = String.Empty
+        'act
+        Dim act = phieuMuonSachDAO.SelectIdTheLastOne(s)
+        'assert
+        Assert.AreEqual(expected.FlagResult, act.FlagResult)
+    End Sub
+
 End Class

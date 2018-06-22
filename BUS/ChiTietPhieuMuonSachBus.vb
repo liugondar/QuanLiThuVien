@@ -8,7 +8,10 @@ Public Class ChiTietPhieuMuonSachBus
         _chiTietPhieuMuonSachDAO = New ChiTietPhieuMuonSachDAO()
     End Sub
     Public Function InsertOne(chiTietPhieuMuonSach As ChiTietPhieuMuonSach) As Result
-
         Return _chiTietPhieuMuonSachDAO.InsertOne(chiTietPhieuMuonSach)
+    End Function
+
+    Public Function selectAllByMaphieumuonsach(ByRef listChitietphieumuonsach As List(Of ChiTietPhieuMuonSach)) As Result
+        Return _chiTietPhieuMuonSachDAO.selectAllByMaphieumuonsach(listChitietphieumuonsach)
     End Function
 End Class

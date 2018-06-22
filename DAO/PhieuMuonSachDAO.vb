@@ -48,10 +48,24 @@ Public Class PhieuMuonSachDAO
         Dim dataTable = New DataTable()
         Dim result = _dataProvider.ExcuteQuery(query, dataTable)
         If result.FlagResult = False Then Return New Result(False, "Không thể lấy danh sach phiếu mượn sách đã có!", "")
-        Dim phieuMuonSach = New PhieuMuonSach()
-        phieuMuonSach.MaPhieuMuonSach = 0
         For Each row In dataTable.Rows
+            Dim phieuMuonSach = New PhieuMuonSach()
+            phieuMuonSach.MaPhieuMuonSach = 0
             phieuMuonSach = New PhieuMuonSach(row)
+            listPhieuMuonSach.Add(phieuMuonSach)
+        Next
+        Return result
+    End Function
+
+    Public Function SelectIdTheLastOne(ByRef maPhieuMuonSach As String) As Result
+        Dim query As String = String.Empty
+        query &= "select top 1 [MaPhieuMuonSach] "
+        query &= "from PhieuMuonSach "
+        query &= "ORDER BY [MaTheDocGia] DESC "
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        For Each row In dataTable.Rows
+            maPhieuMuonSach = row("MaPhieuMuonSach")
         Next
         Return result
     End Function

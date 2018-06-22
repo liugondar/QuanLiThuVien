@@ -13,4 +13,8 @@ Public Class ChiTietPhieuMuonSachDAO
             chiTietPhieuMuonSach.MaPhieuMuonSach, chiTietPhieuMuonSach.MaSach)
         Return _dataProvider.ExcuteNonquery(query)
     End Function
+
+    Public Function selectAllByMaphieumuonsach(listChitietphieumuonsach As List(Of ChiTietPhieuMuonSach)) As Result
+        Throw New NotImplementedException()
+    End Function
 End Class

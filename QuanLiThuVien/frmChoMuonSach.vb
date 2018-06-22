@@ -11,6 +11,7 @@ Public Class frmChoMuonSach
     Private _theLoaiSachBus As TheLoaiSachBUS
     Private _sachBus As SachBus
     Private _phieuMuonSachBus As PhieuMuonSachBus
+    Private _chiTietPhieuMuonSach As ChiTietPhieuMuonSachBus
 
     Private _listPhieuMuonSachDaMuon As List(Of PhieuMuonSach)
     Private _listSach As List(Of Sach)
@@ -31,6 +32,7 @@ Public Class frmChoMuonSach
         _sachBus = New SachBus()
         _tacGiaBus = New TacGiaBUS()
         _theLoaiSachBus = New TheLoaiSachBUS()
+        _chiTietPhieuMuonSach = New ChiTietPhieuMuonSachBus()
 
         _listPhieuMuonSachDaMuon = New List(Of PhieuMuonSach)
         _listSach = New List(Of Sach)
@@ -93,9 +95,6 @@ Public Class frmChoMuonSach
 #End Region
 
 #Region "-  Events  -"
-    Private Sub sachInfoControl_BookIdTextBoxChanged(sender As Object, e As EventArgs)
-    End Sub
-
     'Thay đổi ngày hết hạn mượn sách khi ngày mượn sách thay đổi
     Private Sub BorrowDateTimePicker_ValueChanged(sender As Object, e As EventArgs) Handles BorrowDateTimePicker.ValueChanged
         MapBorrowDateToExpirationDate()
@@ -129,13 +128,14 @@ Public Class frmChoMuonSach
     End Sub
 
     Private Sub LoadListSachDaMuonDataGridView(listPhieuMuonSachDaMuon As List(Of PhieuMuonSach))
-        ListSachDaMuonDataGridView.Columns.Clear()
-        ListSachDaMuonDataGridView.DataSource = Nothing
-        ListSachDaMuonDataGridView.AutoGenerateColumns = False
-        ListSachDaMuonDataGridView.AllowUserToAddRows = False
+        ClearBookBorrowedDataGridViewData()
 
-        ListSachDaMuonDataGridView.DataSource = New BindingSource(listPhieuMuonSachDaMuon, String.Empty)
+        BindingSourceBookBorrowedDataGridViewData(listPhieuMuonSachDaMuon)
 
+        AddColumnTitle()
+    End Sub
+
+    Private Sub AddColumnTitle()
         Dim maSachColumn = New DataGridViewTextBoxColumn()
         maSachColumn.Name = "MaSach"
         maSachColumn.HeaderText = "Mã sách"
@@ -170,6 +170,20 @@ Public Class frmChoMuonSach
         ngayHetHanColumn.DataPropertyName = "NgayHetHan"
         ngayHetHanColumn.Width = 120
         ListSachDaMuonDataGridView.Columns.Add(ngayHetHanColumn)
+    End Sub
+
+    Private Sub BindingSourceBookBorrowedDataGridViewData(listPhieuMuonSachDaMuon As List(Of PhieuMuonSach))
+        If listPhieuMuonSachDaMuon.Count < 1 Then Return
+        Dim listChiTietPhieuMuonSach = New List(Of ChiTietPhieuMuonSach)
+
+        ListSachDaMuonDataGridView.DataSource = New BindingSource(listPhieuMuonSachDaMuon, String.Empty)
+    End Sub
+
+    Private Sub ClearBookBorrowedDataGridViewData()
+        ListSachDaMuonDataGridView.Columns.Clear()
+        ListSachDaMuonDataGridView.DataSource = Nothing
+        ListSachDaMuonDataGridView.AutoGenerateColumns = False
+        ListSachDaMuonDataGridView.AllowUserToAddRows = False
     End Sub
 
     Private Function GetReaderDataById(ByRef docGia As DocGia) As Result
@@ -247,7 +261,6 @@ Public Class frmChoMuonSach
 
 
     Private Function IsValidAmountBookCanBorrow() As Result
-        'TODO: kiem tra so sach da muon+ voi so sach can muon co vuot qua qui dinh hay khong
         Dim quiDinh = New QuiDinh()
         Dim result = _quiDinhBus.LaySoSachMuonToiDa(quiDinh)
         If _listControlBookInfoControl.Count + _listPhieuMuonSachDaMuon.Count >= quiDinh.SoSachMuonToiDa Then
@@ -305,6 +318,41 @@ Public Class frmChoMuonSach
         _listControlBookInfoControl.Remove(bookInfoControl)
     End Sub
 
+    Private Sub ConfirmButton_Click(sender As Object, e As EventArgs) Handles ConfirmButton.Click
+        'remove none info row
+        For index = 0 To _listControlBookInfoControl.Count - 1
+            Dim Control = _listControlBookInfoControl(index)
+            If Control.GetBookIdTextBox.Text = Control.GetBookIdTextBox.PlaceHolderText Then
+                _listControlBookInfoControl.Remove(Control)
+            End If
+        Next
 
+        Dim phieuMuonSAch = New PhieuMuonSach()
+        phieuMuonSAch.MaTheDocGia = ReaderIdTextBox.Text
+        phieuMuonSAch.NgayMuon = BorrowDateTimePicker.Value
+        phieuMuonSAch.HanTra = ExpirationTimePicker.Value
+        phieuMuonSAch.TongSoSachMuon = _listControlBookInfoControl.Count
+        Dim insertPhieumuonsachResult = _phieuMuonSachBus.InsertOne(phieuMuonSAch)
+        If insertPhieumuonsachResult.FlagResult = False Then
+            MessageBox.Show("Thêm phiếu mượn sách không thành công", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        Dim maPhieuMuonSachHienTai = String.Empty
+        _phieuMuonSachBus.SelectIdTheLastOne(maPhieuMuonSachHienTai)
+
+        For Each control As BookInfoControl In _listControlBookInfoControl
+            Dim chiTietPhieuMuonSach = New ChiTietPhieuMuonSach()
+            chiTietPhieuMuonSach.MaPhieuMuonSach = maPhieuMuonSachHienTai
+            chiTietPhieuMuonSach.MaSach = control.GetBookIdTextBox.text
+            Dim insertChitietphieumuonsachResult = _chiTietPhieuMuonSach.InsertOne(chiTietPhieuMuonSach)
+            If insertChitietphieumuonsachResult.FlagResult = False Then
+                MessageBox.Show("Thêm phiếu mượn sách không thành công", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                'TODO: xóa phiếu mượn sách và các chi tiết phiếu mượn sách đã insert phía trước
+                Return
+            End If
+        Next
+        MessageBox.Show("Thêm phiếu mượn sách thành công", "Infomation", MessageBoxButtons.OK, MessageBoxIcon.Information)
+    End Sub
 #End Region
 End Class
