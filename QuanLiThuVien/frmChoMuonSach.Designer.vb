@@ -1,6 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmChoMuonSach
-    Inherits System.Windows.Forms.Form
+    Inherits MetroFramework.Forms.MetroForm
 
     'Form overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()>
@@ -30,12 +30,11 @@ Partial Class frmChoMuonSach
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.ListSachDaMuonDataGridView = New System.Windows.Forms.DataGridView()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.ConfirmButton = New System.Windows.Forms.Button()
         Me.SachCanThuePanel = New System.Windows.Forms.Panel()
+        Me.ConfirmButton = New MetroFramework.Controls.MetroButton()
         CType(Me.ListSachDaMuonDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -109,16 +108,6 @@ Partial Class frmChoMuonSach
         Me.Label2.TabIndex = 36
         Me.Label2.Text = "Họ và tên:"
         '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(289, 20)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(240, 33)
-        Me.Label1.TabIndex = 50
-        Me.Label1.Text = "Phiếu mượn sách"
-        '
         'ListSachDaMuonDataGridView
         '
         Me.ListSachDaMuonDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -147,21 +136,20 @@ Partial Class frmChoMuonSach
         Me.Label6.TabIndex = 54
         Me.Label6.Text = "Thông tin sách cần mượn:"
         '
-        'ConfirmButton
-        '
-        Me.ConfirmButton.Location = New System.Drawing.Point(340, 649)
-        Me.ConfirmButton.Name = "ConfirmButton"
-        Me.ConfirmButton.Size = New System.Drawing.Size(75, 23)
-        Me.ConfirmButton.TabIndex = 0
-        Me.ConfirmButton.Text = "Xác Nhận"
-        Me.ConfirmButton.UseVisualStyleBackColor = True
-        '
         'SachCanThuePanel
         '
         Me.SachCanThuePanel.Location = New System.Drawing.Point(26, 416)
         Me.SachCanThuePanel.Name = "SachCanThuePanel"
         Me.SachCanThuePanel.Size = New System.Drawing.Size(767, 227)
         Me.SachCanThuePanel.TabIndex = 55
+        '
+        'ConfirmButton
+        '
+        Me.ConfirmButton.Location = New System.Drawing.Point(328, 649)
+        Me.ConfirmButton.Name = "ConfirmButton"
+        Me.ConfirmButton.Size = New System.Drawing.Size(103, 23)
+        Me.ConfirmButton.TabIndex = 98
+        Me.ConfirmButton.Text = "Xác nhận"
         '
         'frmChoMuonSach
         '
@@ -173,7 +161,6 @@ Partial Class frmChoMuonSach
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.ListSachDaMuonDataGridView)
-        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ReaderIdTextBox)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.ExpirationTimePicker)
@@ -183,7 +170,6 @@ Partial Class frmChoMuonSach
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label2)
         Me.Name = "frmChoMuonSach"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Mượn sách"
         CType(Me.ListSachDaMuonDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -199,10 +185,9 @@ Partial Class frmChoMuonSach
     Friend WithEvents Label7 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents Label2 As Label
-    Friend WithEvents Label1 As Label
     Friend WithEvents ListSachDaMuonDataGridView As DataGridView
     Friend WithEvents Label3 As Label
     Friend WithEvents Label6 As Label
-    Friend WithEvents ConfirmButton As Button
     Friend WithEvents SachCanThuePanel As Panel
+    Friend WithEvents ConfirmButton As MetroFramework.Controls.MetroButton
 End Class
