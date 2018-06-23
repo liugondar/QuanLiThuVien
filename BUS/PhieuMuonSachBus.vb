@@ -35,7 +35,21 @@ Public Class PhieuMuonSachBus
 
     Private Function ValidateTheDocGia(maTheDocGia As Integer) As Result
         'TODO: validate tinh trang the con han su dung khong
+        Dim validateTinhtrangtheResult = ValidateTinhTrangThe(maTheDocGia)
+        If validateTinhtrangtheResult.FlagResult = False Then Return validateTinhtrangtheResult
         'TODO: validate tinh trang the khong co sach muon qua han
+        Return New Result()
+    End Function
+
+    Private Function ValidateTinhTrangThe(maTheDocGia As Integer) As Result
+        Dim ngayHienTai = DateTime.Now
+        Dim ngayHetHanThe = New DateTime()
+        Dim docGiaBus = New DocGiaBus()
+
+        Dim getNgayHetHanResult = docGiaBus.SelectExpirationDateById(ngayHetHanThe, maTheDocGia)
+        If getNgayHetHanResult.FlagResult = False Then Return getNgayHetHanResult
+
+        If ngayHetHanThe.Subtract(ngayHienTai).TotalSeconds < 0 Then Return New Result(False, "Thẻ độc giả quá hạn sử dụng!", "")
         Return New Result()
     End Function
 

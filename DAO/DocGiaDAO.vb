@@ -47,7 +47,7 @@ Public Class DocGiaDAO
         Return result
     End Function
 
-    Public Function LayTenDocGiaBangMaThe(ByRef tenDocGia As String, maThe As String) As Result
+    Public Function SelectReaderNameByID(ByRef tenDocGia As String, maThe As String) As Result
         Dim query As String = String.Empty
         query &= "select TenDocGia "
         query &= "from TheDocGia "
@@ -81,4 +81,14 @@ Public Class DocGiaDAO
         Return result
     End Function
 
+    Public Function SelectExpirationDateById(ngayHetHan As DateTime, maThe As String) As Result
+        Dim query = String.Empty
+        query = String.Format("Select ngayHetHan from TheDocGia where MaTheDocGia={0}", maThe)
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        For Each row In dataTable.Rows
+            DateTime.TryParse(row("NgayHetHan").ToString(), ngayHetHan)
+        Next
+        Return result
+    End Function
 End Class

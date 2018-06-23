@@ -105,7 +105,7 @@ Imports Utility
         Dim docGiaBus = New DocGiaBus()
         Dim tendocGia = String.Empty
         'act
-        Dim act = docGiaBus.LayTenDocGiaBangMaThe(tendocGia, 2)
+        Dim act = docGiaBus.SelectReaderNameById(tendocGia, 2)
         'assert
         Assert.AreEqual(expected.FlagResult, act.FlagResult)
     End Sub

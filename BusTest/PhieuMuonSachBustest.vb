@@ -32,4 +32,5 @@ Imports Utility
         'assert
         Assert.AreEqual(expected.FlagResult, act.FlagResult)
     End Sub
+
 End Class

@@ -146,7 +146,6 @@ Public Class SachDAO
     End Function
 
     Public Function SelectBookIdBookTitleAuthorIdTypeIDBySpecificRequest(listSach As List(Of Sach), sachYeuCau As Sach) As Result
-        'TODO: select sach boi cac yeu cau
         Dim dieuKienMaSach As String = If(sachYeuCau.MaSach = -1, " 1=1 ", "MaSach = " & sachYeuCau.MaSach)
         Dim dieuKienTenSach As String = If(sachYeuCau.TenSach = -1, " 1=1 ", "TenSach = '" & sachYeuCau.TenSach & "' ")
         Dim dieuKienMaTacGia As String = If(sachYeuCau.MaTacGia = -1, " 1=1 ", "MaTacGia = " & sachYeuCau.MaTacGia)

@@ -1,7 +1,6 @@
 ﻿Imports BUS
 Imports DTO
 Imports Utility
-Imports MetroFramework.Forms
 
 Public Class frmChoMuonSach
 #Region "-  Fields  -"
@@ -221,7 +220,7 @@ Public Class frmChoMuonSach
         If String.IsNullOrWhiteSpace(ReaderIdTextBox.Text) = True Then Return New Result(False, "", "")
         docGia.MaTheDocGia = ReaderIdTextBox.Text
         Return _docGiaBus.
-            LayTenDocGiaBangMaThe(docGia.TenDocGia, docGia.MaTheDocGia)
+            SelectReaderNameById(docGia.TenDocGia, docGia.MaTheDocGia)
     End Function
 
 #End Region
@@ -355,25 +354,24 @@ Public Class frmChoMuonSach
     End Sub
 
     Private Sub ConfirmButton_Click(sender As Object, e As EventArgs) Handles ConfirmButton.Click
-        'remove none info row
-        For index = 0 To _listControlBookInfoControl.Count - 1
-            Dim Control = _listControlBookInfoControl(index)
-            If Control.GetBookIdTextBox.Text = Control.GetBookIdTextBox.PlaceHolderText Then
-                _listControlBookInfoControl.Remove(Control)
-            End If
-        Next
+        RemoveNoneBookInfoRow()
 
-        Dim phieuMuonSAch = New PhieuMuonSach()
-        phieuMuonSAch.MaTheDocGia = ReaderIdTextBox.Text
-        phieuMuonSAch.NgayMuon = BorrowDateTimePicker.Value
-        phieuMuonSAch.HanTra = ExpirationTimePicker.Value
-        phieuMuonSAch.TongSoSachMuon = _listControlBookInfoControl.Count
-        Dim insertPhieumuonsachResult = _phieuMuonSachBus.InsertOne(phieuMuonSAch)
-        If insertPhieumuonsachResult.FlagResult = False Then
-            MessageBox.Show("Thêm phiếu mượn sách không thành công", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Dim insertPhieuMuonSachResult = InsertPhieuMuonSach()
+        If insertPhieuMuonSachResult.FlagResult = False Then
+            MessageBox.Show(insertPhieuMuonSachResult.ApplicationMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
         End If
 
+        Dim insertCacChiTietPhieuMuonSachResult = InsertCacChiTietPhieuMuonSachTuongUng()
+        If insertCacChiTietPhieuMuonSachResult.FlagResult = False Then
+            MessageBox.Show("Cho mượn sách không thành công!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        MessageBox.Show("Thêm phiếu mượn sách thành công", "Infomation", MessageBoxButtons.OK, MessageBoxIcon.Information)
+    End Sub
+
+    Private Function InsertCacChiTietPhieuMuonSachTuongUng() As Result
         Dim maPhieuMuonSachHienTai = String.Empty
         _phieuMuonSachBus.SelectIdTheLastOne(maPhieuMuonSachHienTai)
 
@@ -383,12 +381,32 @@ Public Class frmChoMuonSach
             chiTietPhieuMuonSach.MaSach = control.GetBookIdTextBox.text
             Dim insertChitietphieumuonsachResult = _chiTietPhieuMuonSach.InsertOne(chiTietPhieuMuonSach)
             If insertChitietphieumuonsachResult.FlagResult = False Then
-                MessageBox.Show("Thêm phiếu mượn sách không thành công", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 'TODO: xóa phiếu mượn sách và các chi tiết phiếu mượn sách đã insert phía trước
-                Return
+                Return insertChitietphieumuonsachResult
             End If
         Next
-        MessageBox.Show("Thêm phiếu mượn sách thành công", "Infomation", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Return New Result()
+    End Function
+
+    Private Function InsertPhieuMuonSach() As Result
+        Dim phieuMuonSAch = New PhieuMuonSach()
+        phieuMuonSAch.MaTheDocGia = ReaderIdTextBox.Text
+        phieuMuonSAch.NgayMuon = BorrowDateTimePicker.Value
+        phieuMuonSAch.HanTra = ExpirationTimePicker.Value
+        phieuMuonSAch.TongSoSachMuon = _listControlBookInfoControl.Count
+        Dim insertPhieumuonsachResult = _phieuMuonSachBus.InsertOne(phieuMuonSAch)
+        If insertPhieumuonsachResult.FlagResult = False Then Return insertPhieumuonsachResult
+        Return New Result()
+    End Function
+
+    Private Sub RemoveNoneBookInfoRow()
+        'remove none info row
+        For index = 0 To _listControlBookInfoControl.Count - 1
+            Dim Control = _listControlBookInfoControl(index)
+            If Control.GetBookIdTextBox.Text = Control.GetBookIdTextBox.PlaceHolderText Then
+                _listControlBookInfoControl.Remove(Control)
+            End If
+        Next
     End Sub
 #End Region
 End Class

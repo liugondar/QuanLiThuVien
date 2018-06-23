@@ -4,6 +4,7 @@ Imports DTO
 Imports Utility
 
 Public Class DocGiaBus
+#Region "-   Field   -"
     Private _docGiaDAO As DocGiaDAO
     Private _quiDinh As QuiDinh
     Private _listLoaiDocGia As List(Of LoaiDocGia)
@@ -36,12 +37,9 @@ Public Class DocGiaBus
         Return New Result()
     End Function
 
-    Public Function LayTenDocGiaBangMaThe(ByRef tenDocGia As String, maThe As String) As Result
-        Dim result = _docGiaDAO.LayTenDocGiaBangMaThe(tenDocGia, maThe)
-        If String.IsNullOrWhiteSpace(tenDocGia) = True Then Return New Result(False, "Lấy dữ liệu độc giả không thành công! Vui lòng kiểm tra lại mã thẻ ", "")
-        Return result
-    End Function
+#End Region
 
+#Region "-   Insert   -"
     Public Function InsertOne(docGia As DocGia) As Result
         If ValidateAll(docGia).FlagResult = False Then
             Return ValidateAll(docGia)
@@ -52,6 +50,8 @@ Public Class DocGiaBus
         docGia.NgayHetHan = docGia.NgayTao.AddMonths(_quiDinh.ThoiHanToiDaTheDocGia)
         Return _docGiaDAO.InsertOne(docGia)
     End Function
+
+
     Public Function BuildMaDocGia(ByRef maTheDocGia As String) As Result
 
         maTheDocGia = String.Empty
@@ -98,30 +98,6 @@ Public Class DocGiaBus
         Return New Result(True)
     End Function
 
-
-    Public Function SelectAllByType(maLoai As String, ByRef listDocGia As List(Of DocGia)) As Result
-        If String.IsNullOrWhiteSpace(maLoai) Then
-            Return New Result(False, "Mã loại độc giả không đúng!", "")
-        End If
-        Dim result = _docGiaDAO.SelectAllByType(maLoai, listDocGia)
-        If listDocGia.Count < 1 Then
-            Return New Result(False, "Danh sách các độc giả thuộc loại đang chọn hiện chưa có thành viên", "")
-        End If
-        Return result
-    End Function
-
-    Public Function SuaTheDocGiaBangDocGia(docGia As DocGia) As Result
-        Dim validateResult = docGia.Validate()
-        Dim validateYearsoldResult = ValidateYearsold(docGia.NgaySinh)
-        Dim validateReaderTypeResult = ValidateReaderType(docGia.MaLoaiDocGia)
-
-        If validateResult.FlagResult = False Then Return validateResult
-        If validateYearsoldResult.FlagResult = False Then Return validateYearsoldResult
-        If validateReaderTypeResult.FlagResult = False Then Return validateReaderTypeResult
-
-        Dim result = _docGiaDAO.SuaTheDocGiaBangDocGia(docGia)
-        Return result
-    End Function
     Private Function ValidateReaderType(loaiDocGiaId As Integer) As Result
         Dim isMatchingValue = _listLoaiDocGia.Find(Function(x) x.MaLoaiDocGia = loaiDocGiaId)
 
@@ -142,10 +118,50 @@ Public Class DocGiaBus
         End If
         Return New Result(True)
     End Function
+#End Region
+
+#Region "-  Edit and remove   -"
+    Public Function SuaTheDocGiaBangDocGia(docGia As DocGia) As Result
+        Dim validateResult = docGia.Validate()
+        Dim validateYearsoldResult = ValidateYearsold(docGia.NgaySinh)
+        Dim validateReaderTypeResult = ValidateReaderType(docGia.MaLoaiDocGia)
+
+        If validateResult.FlagResult = False Then Return validateResult
+        If validateYearsoldResult.FlagResult = False Then Return validateYearsoldResult
+        If validateReaderTypeResult.FlagResult = False Then Return validateReaderTypeResult
+
+        Dim result = _docGiaDAO.SuaTheDocGiaBangDocGia(docGia)
+        Return result
+    End Function
 
     Public Function XoaTheDocGiaBangMaThe(maThe As String) As Result
         If String.IsNullOrWhiteSpace(maThe) Then Return New Result(False, "Mã thẻ độc giả không được để trống", "")
         Dim result = _docGiaDAO.XoaTheDocGiaBangMaTheDocGia(maThe)
         Return result
     End Function
+
+#End Region
+
+#Region "-   Select   -"
+    Public Function SelectAllByType(maLoai As String, ByRef listDocGia As List(Of DocGia)) As Result
+        If String.IsNullOrWhiteSpace(maLoai) Then
+            Return New Result(False, "Mã loại độc giả không đúng!", "")
+        End If
+        Dim result = _docGiaDAO.SelectAllByType(maLoai, listDocGia)
+        If listDocGia.Count < 1 Then
+            Return New Result(False, "Danh sách các độc giả thuộc loại đang chọn hiện chưa có thành viên", "")
+        End If
+        Return result
+    End Function
+
+    Public Function SelectReaderNameById(ByRef tenDocGia As String, maThe As String) As Result
+        Dim result = _docGiaDAO.SelectReaderNameByID(tenDocGia, maThe)
+        If String.IsNullOrWhiteSpace(tenDocGia) = True Then Return New Result(False, "Lấy dữ liệu độc giả không thành công! Vui lòng kiểm tra lại mã thẻ ", "")
+        Return result
+    End Function
+
+    Public Function SelectExpirationDateById(ByRef ngayHetHan As DateTime, maThe As String) As Result
+        Return _docGiaDAO.SelectExpirationDateById(ngayHetHan, maThe)
+    End Function
+#End Region
 End Class

@@ -68,7 +68,20 @@ Imports Utility
         Dim maThe As String = 1
         Dim docgia = String.Empty
         'act
-        Dim actual = DocGiaDAO.LayTenDocGiaBangMaThe(docgia, maThe)
+        Dim actual = DocGiaDAO.SelectReaderNameByID(docgia, maThe)
+        'assert
+        Assert.AreEqual(expected.FlagResult, actual.FlagResult)
+    End Sub
+
+    <TestMethod()> Public Sub ValidSelectExpirationDateByID()
+        'arr
+        Dim expected = New Result()
+        Dim DocGiaDAO = New DocGiaDAO()
+        Dim maThe As String = String.Empty
+        maThe = 1
+        Dim ngayHetHan = New DateTime()
+        'act
+        Dim actual = DocGiaDAO.SelectExpirationDateById(ngayHetHan, maThe)
         'assert
         Assert.AreEqual(expected.FlagResult, actual.FlagResult)
     End Sub
