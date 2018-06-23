@@ -3,13 +3,16 @@ Imports DTO
 Imports Utility
 
 Public Class PhieuMuonSachBus
+#Region "-   Field   -"
     Private _phieuMuonSachDAO As PhieuMuonSachDAO
     Private _quiDinh As QuiDinh
     Public Sub New()
         _phieuMuonSachDAO = New PhieuMuonSachDAO()
         _quiDinh = New QuiDinh()
     End Sub
+#End Region
 
+#Region "-   Insert    -"
     Public Function InsertOne(phieuMuonSach As PhieuMuonSach) As Result
 #Region "guard clause"
         'Lay danh sach qui dinh va kiem tra
@@ -58,7 +61,7 @@ Public Class PhieuMuonSachBus
         Return New Result()
     End Function
 
-    Private Function LayMaSoPhieuMuonSachTiepTheo(ByRef maPhieuMuonSach) As Result
+    Public Function LayMaSoPhieuMuonSachTiepTheo(ByRef maPhieuMuonSach As String) As Result
         Dim result = _phieuMuonSachDAO.LayMaSoPhieuMuonSachCuoiCung(maPhieuMuonSach)
         maPhieuMuonSach = maPhieuMuonSach + 1
         Return result
@@ -71,7 +74,9 @@ Public Class PhieuMuonSachBus
         If layThoiHanMuonSachResult.FlagResult = False Then Return layThoiHanMuonSachResult
         Return New Result()
     End Function
+#End Region
 
+#Region "-   Select    -"
     Public Function SelectAllByMaTheDocGia(ByRef listPhieuMuonSach As List(Of PhieuMuonSach), maTheDocGia As String) As Result
         Return _phieuMuonSachDAO.SelectAllByMaTheDocGia(listPhieuMuonSach, maTheDocGia)
     End Function
@@ -79,4 +84,6 @@ Public Class PhieuMuonSachBus
     Public Function SelectIdTheLastOne(ByRef maphieuMuonSach As String) As Result
         Return _phieuMuonSachDAO.SelectIdTheLastOne(maphieuMuonSach)
     End Function
+#End Region
+
 End Class

@@ -43,6 +43,8 @@ Public Class frmChoMuonSach
         AddNewRowButton = New Button()
 
         '"-  Load data for controls  -"
+        LoadMaPhieuMuonSach()
+
         If MapBorrowDateToExpirationDate().FlagResult = False Then Return
         LoadListSachDaMuonDataGridView(New List(Of PhieuMuonSach))
 
@@ -52,6 +54,7 @@ Public Class frmChoMuonSach
 
         ' design
         'TODO: Không hiển thị chỗ nhập sách nếu độc giả đã mượn đủ số sách
+        AddHandler ReaderIdTextBox.LostFocus, AddressOf ReaderIdTextBox_lostFocus
 
         AddNewRowButton.BackColor = ColorTranslator.FromHtml("#28A745")
         AddNewRowButton.Text = "Thêm dòng"
@@ -73,8 +76,46 @@ Public Class frmChoMuonSach
         Catch
         End Try
 
-
         SachCanThuePanel.Controls.Add(AddNewRowButton)
+    End Sub
+#Region "-    Display warning reader id valdiate label depend on reader id"
+    Private Sub ReaderIdTextBox_lostFocus(sender As Object, e As EventArgs)
+        If Not IsReaderCardExist() Then Return
+        If Not IsValidExpirationDateCard() Then Return
+        WarningValidateReaderIdLabel.Visible = False
+
+    End Sub
+
+    Private Function IsReaderCardExist() As Boolean
+        Dim maTheDocGia = ReaderIdTextBox.Text
+
+        Dim isTheDocGiaExist = _docGiaBus.SelectReaderNameById(String.Empty, maTheDocGia)
+        If isTheDocGiaExist.FlagResult = False Then
+            WarningValidateReaderIdLabel.Text = "Mã thẻ độc giả không tồn tại!"
+            WarningValidateReaderIdLabel.Visible = True
+            Return False
+        End If
+        Return True
+    End Function
+    Private Function IsValidExpirationDateCard() As Boolean
+        Dim maTheDocGia = ReaderIdTextBox.Text
+
+        Dim expirationDate = New DateTime()
+        _docGiaBus.SelectExpirationDateById(expirationDate, maTheDocGia)
+
+        If expirationDate.Subtract(DateTime.Now).TotalSeconds < 0 Then
+            WarningValidateReaderIdLabel.Text = "Mã thẻ độc giả hết hạn sử dụng!"
+            WarningValidateReaderIdLabel.Visible = True
+            Return False
+        End If
+        Return True
+    End Function
+
+#End Region
+    Private Sub LoadMaPhieuMuonSach()
+        Dim maPhieuMuonSach = String.Empty
+        Dim result = _phieuMuonSachBus.LayMaSoPhieuMuonSachTiepTheo(maPhieuMuonSach)
+        If result.FlagResult = True Then PhieuMuonSachIdTextBox.Text = maPhieuMuonSach
     End Sub
 
     Private Sub addNewRowButton_Click(sender As Object, e As EventArgs)
@@ -173,7 +214,7 @@ Public Class frmChoMuonSach
 
     Private Sub BindingSourceBookBorrowedDataGridViewData(listPhieuMuonSachDaMuon As List(Of PhieuMuonSach))
 
-        If listPhieuMuonSachDaMuon.Count < 1 Then Return
+        If listPhieuMuonSachDaMuon.Count <1 Then Return
         Dim listChiTietPhieuMuonSachDaMuon = New List(Of ChiTietPhieuMuonSach)
         Dim listSachDaMuon = New List(Of Sach)
         Dim listCustomBookInfoDisplay = New List(Of CustomBookInfoDisplay)
@@ -217,8 +258,12 @@ Public Class frmChoMuonSach
     End Sub
 
     Private Function GetReaderDataById(ByRef docGia As DocGia) As Result
-        If String.IsNullOrWhiteSpace(ReaderIdTextBox.Text) = True Then Return New Result(False, "", "")
-        docGia.MaTheDocGia = ReaderIdTextBox.Text
+        Try
+            If String.IsNullOrWhiteSpace(ReaderIdTextBox.Text) = True Then Return New Result(False, "", "")
+            docGia.MaTheDocGia = ReaderIdTextBox.Text
+        Catch ex As Exception
+            Console.WriteLine(ex)
+        End Try
         Return _docGiaBus.
             SelectReaderNameById(docGia.TenDocGia, docGia.MaTheDocGia)
     End Function
@@ -407,6 +452,18 @@ Public Class frmChoMuonSach
                 _listControlBookInfoControl.Remove(Control)
             End If
         Next
+    End Sub
+
+    Private Sub Label7_Click(sender As Object, e As EventArgs) Handles Label7.Click
+
+    End Sub
+
+    Private Sub Label5_Click(sender As Object, e As EventArgs) Handles Label5.Click
+
+    End Sub
+
+    Private Sub ExpirationTimePicker_ValueChanged(sender As Object, e As EventArgs) Handles ExpirationTimePicker.ValueChanged
+
     End Sub
 #End Region
 End Class

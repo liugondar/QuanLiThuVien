@@ -81,7 +81,7 @@ Public Class DocGiaDAO
         Return result
     End Function
 
-    Public Function SelectExpirationDateById(ngayHetHan As DateTime, maThe As String) As Result
+    Public Function SelectExpirationDateById(ByRef ngayHetHan As DateTime, maThe As String) As Result
         Dim query = String.Empty
         query = String.Format("Select ngayHetHan from TheDocGia where MaTheDocGia={0}", maThe)
         Dim dataTable = New DataTable()

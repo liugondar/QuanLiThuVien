@@ -20,7 +20,7 @@ Public Class PhieuMuonSachDAO
         Return _dataProvider.ExcuteNonquery(query)
     End Function
 
-    Public Function LayMaSoPhieuMuonSachCuoiCung(ByRef maPhieuDocSach As Integer) As Result
+    Public Function LayMaSoPhieuMuonSachCuoiCung(ByRef maPhieuDocSach As String) As Result
         Dim query = String.Empty
         query &= "select top 1 * "
         query &= "from PhieuMuonSach "
