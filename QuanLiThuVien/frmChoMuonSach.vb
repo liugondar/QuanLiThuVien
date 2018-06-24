@@ -3,6 +3,7 @@ Imports DTO
 Imports Utility
 
 Public Class frmChoMuonSach
+
 #Region "-  Fields  -"
     Private _quiDinhBus As QuiDinhBus
     Private _docGiaBus As DocGiaBus
@@ -53,8 +54,12 @@ Public Class frmChoMuonSach
         If _sachBus.SelectAll(_listSach).FlagResult = False Then Return
 
         ' design
-        'TODO: Không hiển thị chỗ nhập sách nếu độc giả đã mượn đủ số sách
         AddHandler ReaderIdTextBox.LostFocus, AddressOf ReaderIdTextBox_lostFocus
+        CreateControlInChoMuonSachPanel()
+    End Sub
+
+    Private Sub CreateControlInChoMuonSachPanel()
+        SachCanMuonPanel.Controls.Clear()
 
         AddNewRowButton.BackColor = ColorTranslator.FromHtml("#28A745")
         AddNewRowButton.Text = "Thêm dòng"
@@ -63,11 +68,19 @@ Public Class frmChoMuonSach
         AddNewRowButton.Width = 72
         AddNewRowButton.Height = 26
         AddNewRowButton.FlatStyle = FlatStyle.Flat
-        AddNewRowButton.Location = New Point(SachCanThuePanel.Width - AddNewRowButton.Width, 0)
+        AddNewRowButton.Location = New Point(SachCanMuonPanel.Width - AddNewRowButton.Width, 0)
         AddNewRowButton.FlatAppearance.BorderSize = 0
+        RemoveHandler AddNewRowButton.Click, AddressOf addNewRowButton_Click
         AddHandler AddNewRowButton.Click, AddressOf addNewRowButton_Click
 
-        AddNewRow()
+        Dim quiDinh = New QuiDinh()
+        _quiDinhBus.LaySoSachMuonToiDa(quiDinh)
+        Dim listPhieuSachDAMuon = New List(Of PhieuMuonSach)
+        _phieuMuonSachBus.SelectAllSachChuaTraByReaderID(listPhieuSachDAMuon, ReaderIdTextBox.Text)
+
+        If _listPhieuMuonSachDaMuon.Count < quiDinh.SoSachMuonToiDa Then
+            AddNewRow()
+        End If
 
         Try
             Dim firstControlBookInfoElement = _listControlBookInfoControl(0)
@@ -76,12 +89,14 @@ Public Class frmChoMuonSach
         Catch
         End Try
 
-        SachCanThuePanel.Controls.Add(AddNewRowButton)
+        SachCanMuonPanel.Controls.Add(AddNewRowButton)
     End Sub
+
 #Region "-    Display warning reader id valdiate label depend on reader id"
     Private Sub ReaderIdTextBox_lostFocus(sender As Object, e As EventArgs)
         If Not IsReaderCardExist() Then Return
         If Not IsValidExpirationDateCard() Then Return
+        If haveExpirationBookBorrowed() Then Return
         WarningValidateReaderIdLabel.Visible = False
 
     End Sub
@@ -110,8 +125,23 @@ Public Class frmChoMuonSach
         End If
         Return True
     End Function
+    Private Function haveExpirationBookBorrowed() As Boolean
+        Dim maTheDocGia = ReaderIdTextBox.Text
+        Dim listPhieuMuonSach = New List(Of PhieuMuonSach)
+        If _phieuMuonSachBus.SelectAllSachChuaTraByReaderID(listPhieuMuonSach, maTheDocGia).FlagResult = False Then Return False
+
+        For Each phieuMuonSAch In listPhieuMuonSach
+            If phieuMuonSAch.HanTra.Subtract(DateTime.Now).TotalSeconds < 0 Then
+                WarningValidateReaderIdLabel.Text = "Mã thẻ độc giả có sách mượn quá hạn!"
+                WarningValidateReaderIdLabel.Visible = True
+                Return True
+            End If
+        Next
+        Return False
+    End Function
 
 #End Region
+
     Private Sub LoadMaPhieuMuonSach()
         Dim maPhieuMuonSach = String.Empty
         Dim result = _phieuMuonSachBus.LayMaSoPhieuMuonSachTiepTheo(maPhieuMuonSach)
@@ -155,6 +185,7 @@ Public Class frmChoMuonSach
         Dim docGia = New DocGia()
         Dim getReaderDataResult = GetReaderDataById(docGia)
         If getReaderDataResult.FlagResult = False Then
+            UserNameTextBox.Text = String.Empty
             Return
         End If
 
@@ -162,7 +193,7 @@ Public Class frmChoMuonSach
 
         _listPhieuMuonSachDaMuon.Clear()
         Dim ketQuaLayPhieuMuonSach =
-            _phieuMuonSachBus.SelectAllByMaTheDocGia(_listPhieuMuonSachDaMuon,
+            _phieuMuonSachBus.SelectAllSachChuaTraByReaderID(_listPhieuMuonSachDaMuon,
                                                      docGia.MaTheDocGia)
         LoadListSachDaMuonDataGridView(_listPhieuMuonSachDaMuon)
     End Sub
@@ -214,7 +245,7 @@ Public Class frmChoMuonSach
 
     Private Sub BindingSourceBookBorrowedDataGridViewData(listPhieuMuonSachDaMuon As List(Of PhieuMuonSach))
 
-        If listPhieuMuonSachDaMuon.Count <1 Then Return
+        If listPhieuMuonSachDaMuon.Count < 1 Then Return
         Dim listChiTietPhieuMuonSachDaMuon = New List(Of ChiTietPhieuMuonSach)
         Dim listSachDaMuon = New List(Of Sach)
         Dim listCustomBookInfoDisplay = New List(Of CustomBookInfoDisplay)
@@ -242,7 +273,7 @@ Public Class frmChoMuonSach
 
             Dim dateNow As Date = Date.Now()
             Dim isExpirated = If((phieuMuonSach.HanTra - dateNow).TotalSeconds < 0, True, False)
-                customBook.TinhTrang = If(isExpirated, "Quá hạn", "Chưa trả")
+            customBook.TinhTrang = If(isExpirated, "Quá hạn", "Chưa trả")
 
             listCustomBookInfoDisplay.Add(customBook)
         Next
@@ -268,6 +299,76 @@ Public Class frmChoMuonSach
             SelectReaderNameById(docGia.TenDocGia, docGia.MaTheDocGia)
     End Function
 
+#Region "-   Insert confirm button click   -"
+    Private Sub ConfirmButton_Click(sender As Object, e As EventArgs) Handles ConfirmButton.Click
+        RemoveNoneBookInfoRow()
+
+        Dim insertPhieuMuonSachResult = InsertPhieuMuonSach()
+        If insertPhieuMuonSachResult.FlagResult = False Then
+            _listControlBookInfoControl.Clear()
+            CreateControlInChoMuonSachPanel()
+            MessageBox.Show(insertPhieuMuonSachResult.ApplicationMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        Dim insertCacChiTietPhieuMuonSachResult = InsertCacChiTietPhieuMuonSachTuongUng()
+        If insertCacChiTietPhieuMuonSachResult.FlagResult = False Then
+            _listControlBookInfoControl.Clear()
+            CreateControlInChoMuonSachPanel()
+            MessageBox.Show("Cho mượn sách không thành công!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        MessageBox.Show("Thêm phiếu mượn sách thành công", "Infomation", MessageBoxButtons.OK, MessageBoxIcon.Information)
+    End Sub
+
+    Private Function InsertCacChiTietPhieuMuonSachTuongUng() As Result
+        Dim maPhieuMuonSachHienTai = String.Empty
+        _phieuMuonSachBus.SelectIdTheLastOne(maPhieuMuonSachHienTai)
+
+        For Each control As BookInfoControl In _listControlBookInfoControl
+            Dim chiTietPhieuMuonSach = New ChiTietPhieuMuonSach()
+            chiTietPhieuMuonSach.MaPhieuMuonSach = maPhieuMuonSachHienTai
+            chiTietPhieuMuonSach.MaSach = control.GetBookIdTextBox.text
+            Dim insertChitietphieumuonsachResult = _chiTietPhieuMuonSach.InsertOne(chiTietPhieuMuonSach)
+            If insertChitietphieumuonsachResult.FlagResult = False Then
+                'TODO: xóa phiếu mượn sách và các chi tiết phiếu mượn sách đã insert phía trước
+                Return insertChitietphieumuonsachResult
+            End If
+        Next
+        Return New Result()
+    End Function
+
+    Private Function InsertPhieuMuonSach() As Result
+        Dim phieuMuonSAch = New PhieuMuonSach()
+        phieuMuonSAch.MaTheDocGia = ReaderIdTextBox.Text
+        phieuMuonSAch.NgayMuon = BorrowDateTimePicker.Value
+        phieuMuonSAch.HanTra = ExpirationTimePicker.Value
+        phieuMuonSAch.TongSoSachMuon = _listControlBookInfoControl.Count
+        Dim insertPhieumuonsachResult = _phieuMuonSachBus.InsertOne(phieuMuonSAch)
+        If insertPhieumuonsachResult.FlagResult = False Then Return insertPhieumuonsachResult
+        Return New Result()
+    End Function
+
+    Private Sub RemoveNoneBookInfoRow()
+        'remove none info row
+        For index = 0 To _listControlBookInfoControl.Count - 1
+            If _listControlBookInfoControl.Count < 1 Then Return
+            If RemoveSpecificRowIfItEmptyBookId(index) Then index = index - 1
+        Next
+    End Sub
+
+    Private Function RemoveSpecificRowIfItEmptyBookId(index As Integer) As Boolean
+        Dim Control = _listControlBookInfoControl(index)
+        Dim isEmptyTextBox = Control.GetBookIdTextBox.Text = Control.GetBookIdTextBox.PlaceHolderText Or String.IsNullOrWhiteSpace(Control.GetBookIdTextBox.Text)
+        If isEmptyTextBox Then
+            _listControlBookInfoControl.Remove(Control)
+            Return True
+        End If
+        Return False
+    End Function
+#End Region
+
 #End Region
 
 #Region "-  Events for Custom book info controls  -"
@@ -292,7 +393,7 @@ Public Class frmChoMuonSach
         AddHandler bookInfoControl.UC_BookIDTextBox_TextChanged, AddressOf SachInfoControl_UC_BookIDTextBoxChanged
 
         _listControlBookInfoControl.Add(bookInfoControl)
-        SachCanThuePanel.Controls.Add(bookInfoControl)
+        SachCanMuonPanel.Controls.Add(bookInfoControl)
 
         Dim lastBookInfoControl = _listControlBookInfoControl(_listControlBookInfoControl.Count - 1)
         AddNewRowButton.Location = New Point(AddNewRowButton.Location.X,
@@ -341,7 +442,7 @@ Public Class frmChoMuonSach
 
         Dim listChiTietPhieuMuonSAchDaMuon = New List(Of ChiTietPhieuMuonSach)
         For Each phieuMuonSach In _listPhieuMuonSachDaMuon
-            _chiTietPhieuMuonSach.selectAllByMaphieumuonsach(listChiTietPhieuMuonSachDaMuon, phieuMuonSach.MaPhieuMuonSach)
+            _chiTietPhieuMuonSach.selectAllByMaphieumuonsach(listChiTietPhieuMuonSAchDaMuon, phieuMuonSach.MaPhieuMuonSach)
         Next
         If _listControlBookInfoControl.Count + listChiTietPhieuMuonSAchDaMuon.Count >= quiDinh.SoSachMuonToiDa Then
             Return New Result(False, "Đã đạt tối đa số lượng sách đã mượn :" + quiDinh.SoSachMuonToiDa.ToString(), "")
@@ -394,76 +495,10 @@ Public Class frmChoMuonSach
     End Sub
 
     Private Sub RemoveDongCanXoa(bookInfoControl As BookInfoControl)
-        SachCanThuePanel.Controls.Remove(bookInfoControl)
+        SachCanMuonPanel.Controls.Remove(bookInfoControl)
         _listControlBookInfoControl.Remove(bookInfoControl)
     End Sub
 
-    Private Sub ConfirmButton_Click(sender As Object, e As EventArgs) Handles ConfirmButton.Click
-        RemoveNoneBookInfoRow()
-
-        Dim insertPhieuMuonSachResult = InsertPhieuMuonSach()
-        If insertPhieuMuonSachResult.FlagResult = False Then
-            MessageBox.Show(insertPhieuMuonSachResult.ApplicationMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Return
-        End If
-
-        Dim insertCacChiTietPhieuMuonSachResult = InsertCacChiTietPhieuMuonSachTuongUng()
-        If insertCacChiTietPhieuMuonSachResult.FlagResult = False Then
-            MessageBox.Show("Cho mượn sách không thành công!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Return
-        End If
-
-        MessageBox.Show("Thêm phiếu mượn sách thành công", "Infomation", MessageBoxButtons.OK, MessageBoxIcon.Information)
-    End Sub
-
-    Private Function InsertCacChiTietPhieuMuonSachTuongUng() As Result
-        Dim maPhieuMuonSachHienTai = String.Empty
-        _phieuMuonSachBus.SelectIdTheLastOne(maPhieuMuonSachHienTai)
-
-        For Each control As BookInfoControl In _listControlBookInfoControl
-            Dim chiTietPhieuMuonSach = New ChiTietPhieuMuonSach()
-            chiTietPhieuMuonSach.MaPhieuMuonSach = maPhieuMuonSachHienTai
-            chiTietPhieuMuonSach.MaSach = control.GetBookIdTextBox.text
-            Dim insertChitietphieumuonsachResult = _chiTietPhieuMuonSach.InsertOne(chiTietPhieuMuonSach)
-            If insertChitietphieumuonsachResult.FlagResult = False Then
-                'TODO: xóa phiếu mượn sách và các chi tiết phiếu mượn sách đã insert phía trước
-                Return insertChitietphieumuonsachResult
-            End If
-        Next
-        Return New Result()
-    End Function
-
-    Private Function InsertPhieuMuonSach() As Result
-        Dim phieuMuonSAch = New PhieuMuonSach()
-        phieuMuonSAch.MaTheDocGia = ReaderIdTextBox.Text
-        phieuMuonSAch.NgayMuon = BorrowDateTimePicker.Value
-        phieuMuonSAch.HanTra = ExpirationTimePicker.Value
-        phieuMuonSAch.TongSoSachMuon = _listControlBookInfoControl.Count
-        Dim insertPhieumuonsachResult = _phieuMuonSachBus.InsertOne(phieuMuonSAch)
-        If insertPhieumuonsachResult.FlagResult = False Then Return insertPhieumuonsachResult
-        Return New Result()
-    End Function
-
-    Private Sub RemoveNoneBookInfoRow()
-        'remove none info row
-        For index = 0 To _listControlBookInfoControl.Count - 1
-            Dim Control = _listControlBookInfoControl(index)
-            If Control.GetBookIdTextBox.Text = Control.GetBookIdTextBox.PlaceHolderText Then
-                _listControlBookInfoControl.Remove(Control)
-            End If
-        Next
-    End Sub
-
-    Private Sub Label7_Click(sender As Object, e As EventArgs) Handles Label7.Click
-
-    End Sub
-
-    Private Sub Label5_Click(sender As Object, e As EventArgs) Handles Label5.Click
-
-    End Sub
-
-    Private Sub ExpirationTimePicker_ValueChanged(sender As Object, e As EventArgs) Handles ExpirationTimePicker.ValueChanged
-
-    End Sub
 #End Region
+
 End Class

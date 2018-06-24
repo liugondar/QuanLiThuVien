@@ -32,10 +32,8 @@ Partial Class frmChoMuonSach
         Me.Label2 = New System.Windows.Forms.Label()
         Me.ListSachDaMuonDataGridView = New System.Windows.Forms.DataGridView()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.SachCanThuePanel = New System.Windows.Forms.Panel()
+        Me.SachCanMuonPanel = New System.Windows.Forms.Panel()
         Me.ConfirmButton = New MetroFramework.Controls.MetroButton()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
@@ -43,6 +41,8 @@ Partial Class frmChoMuonSach
         Me.PhieuMuonSachIdTextBox = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.WarningValidateReaderIdLabel = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
         CType(Me.ListSachDaMuonDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -121,7 +121,7 @@ Partial Class frmChoMuonSach
         Me.ListSachDaMuonDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.ListSachDaMuonDataGridView.Location = New System.Drawing.Point(52, 278)
         Me.ListSachDaMuonDataGridView.Name = "ListSachDaMuonDataGridView"
-        Me.ListSachDaMuonDataGridView.Size = New System.Drawing.Size(788, 191)
+        Me.ListSachDaMuonDataGridView.Size = New System.Drawing.Size(788, 145)
         Me.ListSachDaMuonDataGridView.TabIndex = 51
         '
         'Label3
@@ -134,46 +134,26 @@ Partial Class frmChoMuonSach
         Me.Label3.TabIndex = 53
         Me.Label3.Text = "Danh sách sách đang mượn:"
         '
-        'Label6
+        'SachCanMuonPanel
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(48, 491)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(191, 20)
-        Me.Label6.TabIndex = 54
-        Me.Label6.Text = "Thông tin sách cần mượn:"
-        '
-        'SachCanThuePanel
-        '
-        Me.SachCanThuePanel.Location = New System.Drawing.Point(52, 543)
-        Me.SachCanThuePanel.Name = "SachCanThuePanel"
-        Me.SachCanThuePanel.Size = New System.Drawing.Size(788, 184)
-        Me.SachCanThuePanel.TabIndex = 55
+        Me.SachCanMuonPanel.Location = New System.Drawing.Point(62, 493)
+        Me.SachCanMuonPanel.Name = "SachCanMuonPanel"
+        Me.SachCanMuonPanel.Size = New System.Drawing.Size(788, 184)
+        Me.SachCanMuonPanel.TabIndex = 55
         '
         'ConfirmButton
         '
-        Me.ConfirmButton.Location = New System.Drawing.Point(386, 736)
+        Me.ConfirmButton.Location = New System.Drawing.Point(396, 686)
         Me.ConfirmButton.Name = "ConfirmButton"
         Me.ConfirmButton.Size = New System.Drawing.Size(103, 23)
         Me.ConfirmButton.TabIndex = 98
         Me.ConfirmButton.Text = "Xác nhận"
         '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Georgia", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(75, 521)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(31, 16)
-        Me.Label1.TabIndex = 104
-        Me.Label1.Text = "STT"
-        '
         'Label8
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Georgia", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(145, 521)
+        Me.Label8.Location = New System.Drawing.Point(155, 471)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(58, 16)
         Me.Label8.TabIndex = 105
@@ -183,7 +163,7 @@ Partial Class frmChoMuonSach
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Georgia", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(279, 521)
+        Me.Label9.Location = New System.Drawing.Point(289, 471)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(62, 16)
         Me.Label9.TabIndex = 106
@@ -193,7 +173,7 @@ Partial Class frmChoMuonSach
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Georgia", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(430, 522)
+        Me.Label10.Location = New System.Drawing.Point(440, 472)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(59, 16)
         Me.Label10.TabIndex = 107
@@ -203,7 +183,7 @@ Partial Class frmChoMuonSach
         '
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Georgia", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(581, 521)
+        Me.Label11.Location = New System.Drawing.Point(591, 471)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(52, 16)
         Me.Label11.TabIndex = 108
@@ -232,18 +212,38 @@ Partial Class frmChoMuonSach
         Me.WarningValidateReaderIdLabel.AutoSize = True
         Me.WarningValidateReaderIdLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.WarningValidateReaderIdLabel.ForeColor = System.Drawing.Color.Red
-        Me.WarningValidateReaderIdLabel.Location = New System.Drawing.Point(468, 121)
+        Me.WarningValidateReaderIdLabel.Location = New System.Drawing.Point(468, 119)
         Me.WarningValidateReaderIdLabel.Name = "WarningValidateReaderIdLabel"
         Me.WarningValidateReaderIdLabel.Size = New System.Drawing.Size(179, 20)
         Me.WarningValidateReaderIdLabel.TabIndex = 111
         Me.WarningValidateReaderIdLabel.Text = "Warning validate mã thẻ"
         Me.WarningValidateReaderIdLabel.Visible = False
         '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.Location = New System.Drawing.Point(53, 441)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(191, 20)
+        Me.Label13.TabIndex = 54
+        Me.Label13.Text = "Thông tin sách cần mượn:"
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Font = New System.Drawing.Font("Georgia", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.Location = New System.Drawing.Point(80, 471)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(31, 16)
+        Me.Label14.TabIndex = 104
+        Me.Label14.Text = "STT"
+        '
         'frmChoMuonSach
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(891, 762)
+        Me.ClientSize = New System.Drawing.Size(891, 720)
         Me.Controls.Add(Me.WarningValidateReaderIdLabel)
         Me.Controls.Add(Me.PhieuMuonSachIdTextBox)
         Me.Controls.Add(Me.Label12)
@@ -251,10 +251,10 @@ Partial Class frmChoMuonSach
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.Label14)
         Me.Controls.Add(Me.ConfirmButton)
-        Me.Controls.Add(Me.SachCanThuePanel)
-        Me.Controls.Add(Me.Label6)
+        Me.Controls.Add(Me.SachCanMuonPanel)
+        Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.ListSachDaMuonDataGridView)
         Me.Controls.Add(Me.ReaderIdTextBox)
@@ -283,10 +283,8 @@ Partial Class frmChoMuonSach
     Friend WithEvents Label2 As Label
     Friend WithEvents ListSachDaMuonDataGridView As DataGridView
     Friend WithEvents Label3 As Label
-    Friend WithEvents Label6 As Label
-    Friend WithEvents SachCanThuePanel As Panel
+    Friend WithEvents SachCanMuonPanel As Panel
     Friend WithEvents ConfirmButton As MetroFramework.Controls.MetroButton
-    Friend WithEvents Label1 As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents Label10 As Label
@@ -294,4 +292,6 @@ Partial Class frmChoMuonSach
     Friend WithEvents PhieuMuonSachIdTextBox As TextBox
     Friend WithEvents Label12 As Label
     Friend WithEvents WarningValidateReaderIdLabel As Label
+    Friend WithEvents Label13 As Label
+    Friend WithEvents Label14 As Label
 End Class

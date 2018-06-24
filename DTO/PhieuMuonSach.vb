@@ -1,4 +1,5 @@
 ﻿Imports DTO
+Imports Utility
 
 Public Class PhieuMuonSach
 
@@ -22,7 +23,8 @@ Public Class PhieuMuonSach
          row.Table.Columns.Contains("NgayMuon") And
          row.Table.Columns.Contains("HanTra") And
          row.Table.Columns.Contains("TinhTrang") And
-         row.Table.Columns.Contains("NgayTra")
+         row.Table.Columns.Contains("NgayTra") And
+         row.Table.Columns.Contains("TongSoSachMuon")
 
         If doesRowContainsCorrectFields = False Then
             MaPhieuMuonSach = 0
@@ -40,6 +42,7 @@ Public Class PhieuMuonSach
         DateTime.TryParse(row("NgayTra").ToString(), NgayTra)
         DateTime.TryParse(row("HanTra").ToString(), HanTra)
         Integer.TryParse(row("TinhTrang").ToString(), TinhTrang)
+        Integer.TryParse(row("TongSoSachMuon").ToString(), TongSoSachMuon)
     End Sub
 
     Public Sub New(maPhieuMuonSach As Integer, maTheDocGia As Integer, ngayMuon As Date, ngayTra As Date, hanTra As Date, tongSoSachMuon As Integer, tinhTrang As Integer)
@@ -51,5 +54,11 @@ Public Class PhieuMuonSach
         Me.TongSoSachMuon = tongSoSachMuon
         Me.TinhTrang = tinhTrang
     End Sub
+
+    Public Function validate() As Result
+        If String.IsNullOrWhiteSpace(MaPhieuMuonSach) Then Return New Result(False, "Mã phiếu mượn sách trống!", "")
+        If String.IsNullOrWhiteSpace(MaTheDocGia) Then Return New Result(False, "Mã độc giả trống !", "")
+        Return New Result()
+    End Function
 End Class
 

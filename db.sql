@@ -136,7 +136,7 @@ CREATE TABLE dbo.PhieuMuonSach
     -- primary key column
     MaTheDocGia[INT] NOT NULL,
     NgayMuon[date] NOT NULL default GETDATE(),
-    NgayTra[date] NOT NULL default GETDATE(),
+    NgayTra[date] ,
     HanTra[date] NOT NULL DEFAULT getdate(),
     TongSoSachMuon int NOT NULL DEFAULT 1,
     TinhTrang int not null DEFAULT 0,
@@ -659,10 +659,3 @@ VALUES(N'Bruce Clark')
 INSERT INTO dbo.TacGia
     (TenTacGia)
 VALUES(N'Matie Jefferson')
-
-EXECUTE USP_ThemPhieuMuonSach 
-@MaPhieuMuonSach=2,
-@MaTheDocGia=3, 
-@NgayMuon= '01/01/2000' ,
-@HanTra=  '01/01/2000' ,
-@TongSoSachMuon= 1

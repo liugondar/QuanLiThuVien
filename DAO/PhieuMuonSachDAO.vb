@@ -56,6 +56,21 @@ Public Class PhieuMuonSachDAO
         Next
         Return result
     End Function
+    Public Function SelectAllPhieuMuonSachChuaTraByReaderId(ByRef listPhieuMuonSach As List(Of PhieuMuonSach), maTheDocGia As String) As Result
+        Dim query = String.Empty
+        query = String.Format("Select * from PhieuMuonSach WHERE [MaTheDocGia]={0} AND [TinhTrang]=0", maTheDocGia)
+
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        If result.FlagResult = False Then Return New Result(False, "Không thể lấy danh sach phiếu mượn sách đã có!", "")
+        For Each row In dataTable.Rows
+            Dim phieuMuonSach = New PhieuMuonSach()
+            phieuMuonSach.MaPhieuMuonSach = 0
+            phieuMuonSach = New PhieuMuonSach(row)
+            listPhieuMuonSach.Add(phieuMuonSach)
+        Next
+        Return result
+    End Function
 
     Public Function SelectIdTheLastOne(ByRef maPhieuMuonSach As String) As Result
         Dim query As String = String.Empty
