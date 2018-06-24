@@ -19,7 +19,7 @@ Public Class DocGiaBus
         _ketQuaViecLayLoaiDocGia = GetLoaiDocGia()
     End Sub
 
-    Public Function GetLoaiDocGia() As Result
+    Private Function GetLoaiDocGia() As Result
         Dim loaiDocGiaBus = New LoaiDocGiaBus()
         Dim result = loaiDocGiaBus.SelectAll(_listLoaiDocGia)
         If _listLoaiDocGia.Count < 1 Then

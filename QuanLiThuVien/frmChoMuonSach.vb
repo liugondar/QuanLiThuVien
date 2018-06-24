@@ -41,7 +41,6 @@ Public Class frmChoMuonSach
 
         _listControlBookInfoControl = New List(Of BookInfoControl)
 
-        AddNewRowButton = New Button()
 
         '"-  Load data for controls  -"
         LoadMaPhieuMuonSach()
@@ -61,6 +60,7 @@ Public Class frmChoMuonSach
     Private Sub CreateControlInChoMuonSachPanel()
         SachCanMuonPanel.Controls.Clear()
 
+        AddNewRowButton = New Button()
         AddNewRowButton.BackColor = ColorTranslator.FromHtml("#28A745")
         AddNewRowButton.Text = "Thêm dòng"
         AddNewRowButton.ForeColor = Color.White

@@ -8,15 +8,6 @@ Imports Utility
 <TestClass()> Public Class DocGiaBusTest
 
 #Region "Insert one test"
-    <TestMethod()> Public Sub ValidGetLoaiDocGia()
-        'arr
-        Dim expected = New Result()
-        Dim docGiaBus = New DocGiaBus()
-        'act
-        Dim act = docGiaBus.GetLoaiDocGia()
-        'assert
-        Assert.AreEqual(expected.FlagResult, act.FlagResult)
-    End Sub
     <TestMethod()> Public Sub ValidGetQuidinh()
         'arr
         Dim expected = New Result()
@@ -29,7 +20,11 @@ Imports Utility
     <TestMethod()> Public Sub GivenValidDocGia_WhenInsertOne_ThenGiveTrueResult()
         'arr
         Dim expected = New Result()
-        Dim docGia = New DocGia(1, "ahiinh", "123@gmail.com", "122c",
+        Dim maDocGia = 0
+        Dim docGiaDao = New DocGiaDAO()
+        docGiaDao.LayMaTheDocGiaCuoiCung(maDocGia)
+        maDocGia = maDocGia + 1
+        Dim docGia = New DocGia(maDocGia, "ahiinh", "123@gmail.com", "122c",
                       New DateTime(1998, 1, 1), DateTime.Now, DateTime.Now.AddMonths(6), 1)
         Dim docGiaBus = New DocGiaBus()
         'act
@@ -124,11 +119,16 @@ Imports Utility
         'arr
         Dim expected = New Result()
         Dim docGiaBus = New DocGiaBus()
-        Dim docGia = New DocGia(1, "ahiinh", "123@gmail.com", "122c",
+        Dim docGiaDao = New DocGiaDAO()
+        Dim maDocGia = String.Empty
+        'act
+        Dim act = New Result()
+        If docGiaDao.LayMaTheDocGiaCuoiCung(maDocGia).FlagResult Then
+            Dim docGia = New DocGia(1, "ahiinh", "123@gmail.com", "122c",
                       New DateTime(1998, 1, 1), DateTime.Now, DateTime.Now.AddMonths(6), 1)
 
-        'act
-        Dim act = docGiaBus.SuaTheDocGiaBangDocGia(docGia)
+            act = docGiaBus.SuaTheDocGiaBangDocGia(docGia)
+        End If
         'assert
         Assert.AreEqual(expected.FlagResult, act.FlagResult)
     End Sub
