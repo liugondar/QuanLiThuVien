@@ -18,7 +18,7 @@ Imports Utility
 
         'act
         Dim act = New Result()
-        If docGiaDao.LayMaTheDocGiaCuoiCung(maTheDocGia).FlagResult Then
+        If docGiaDao.GetTheLastTheDocGiaID(maTheDocGia).FlagResult Then
             phieuMuonSach.MaTheDocGia = maTheDocGia
             phieuMuonSach.NgayMuon = DateTime.Now
             phieuMuonSach.TongSoSachMuon = 4

@@ -3,8 +3,14 @@ Imports DTO
 Imports Utility
 
 Public Class frmQuanLiTheDocGia
+
+#Region "-   Fields   -"
     Private _docGiaBus As DocGiaBus
     Private _loaiDocGiaBus As LoaiDocGiaBus
+#End Region
+
+#Region "-   Constructor   -"
+
     Private Sub frmQuanLiTheDocGia_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         _loaiDocGiaBus = New LoaiDocGiaBus()
         _docGiaBus = New DocGiaBus()
@@ -39,6 +45,7 @@ Public Class frmQuanLiTheDocGia
 
         Return result
     End Function
+
     Function LoadListDocGia(maLoai As String) As Result
         DataGridViewQuanLiTheDocGia.Columns.Clear()
         DataGridViewQuanLiTheDocGia.DataSource = Nothing
@@ -108,6 +115,10 @@ Public Class frmQuanLiTheDocGia
         Return result
     End Function
 
+#End Region
+
+#Region "-   Events   -"
+
     Private Sub ReaderTypeComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ReaderTypeComboBox.SelectedIndexChanged
         Try
             Dim maLoai = Convert.ToInt32(ReaderTypeComboBox.SelectedValue)
@@ -116,6 +127,7 @@ Public Class frmQuanLiTheDocGia
         End Try
     End Sub
 
+#Region "-   Load info cho thẻ độc giả được chọn   - "
     Private Sub DataGridViewQuanLiTheDocGia_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridViewQuanLiTheDocGia.SelectionChanged
         LoadInfoSelectedRow()
     End Sub
@@ -140,6 +152,7 @@ Public Class frmQuanLiTheDocGia
         LoaiDocGiaEditComboBox.SelectedIndex = ReaderTypeComboBox.SelectedIndex
         Return result
     End Function
+#End Region
 
     Private Function GetSelectedDocGiaData(ByRef docGia As DocGia) As Result
         Dim currentRowIndex As Integer = DataGridViewQuanLiTheDocGia.CurrentCellAddress.Y
@@ -192,4 +205,7 @@ Public Class frmQuanLiTheDocGia
             LoadListDocGia(docGia.MaLoaiDocGia)
         End If
     End Sub
+
+#End Region
+
 End Class

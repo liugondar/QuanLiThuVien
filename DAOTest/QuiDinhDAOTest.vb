@@ -22,7 +22,7 @@ Imports Utility
         Dim expected = New Result()
         Dim quiDinhDao = New QuiDinhDAO()
         'act
-        Dim actual = quiDinhDao.LayTuoiToiDaVaToiThieu(New QuiDinh())
+        Dim actual = quiDinhDao.GetTuoiToiDaVaToiThieu(New QuiDinh())
         'assert
         Assert.AreEqual(expected.FlagResult, actual.FlagResult)
     End Sub
@@ -32,7 +32,7 @@ Imports Utility
         Dim expected = New Result()
         Dim quiDinhDao = New QuiDinhDAO()
         'act
-        Dim actual = quiDinhDao.LayThoiHanToiDaTheDocGia(New QuiDinh())
+        Dim actual = quiDinhDao.GetThoiHanToiDaTheDocGia(New QuiDinh())
         'assert
         Assert.AreEqual(expected.FlagResult, actual.FlagResult)
     End Sub
@@ -41,7 +41,7 @@ Imports Utility
         Dim expected = New Result()
         Dim quiDinhDao = New QuiDinhDAO()
         'act
-        Dim actual = quiDinhDao.LaySoNgayMuonSachToiDa(New QuiDinh())
+        Dim actual = quiDinhDao.GetSoNgayMuonSachToiDa(New QuiDinh())
         'assert
         Assert.AreEqual(expected.FlagResult, actual.FlagResult)
     End Sub
@@ -50,7 +50,7 @@ Imports Utility
         Dim expected = New Result()
         Dim quiDinhDao = New QuiDinhDAO()
         'act
-        Dim actual = quiDinhDao.LaySoSachMuonToiDa(New QuiDinh())
+        Dim actual = quiDinhDao.GetSoSachMuonToiDa(New QuiDinh())
         'assert
         Assert.AreEqual(expected.FlagResult, actual.FlagResult)
     End Sub

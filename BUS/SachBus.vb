@@ -75,7 +75,7 @@ Public Class SachBus
     End Function
 #End Region
 
-#Region "-   Select sach   -"
+#Region "-   Retrieve data  -"
     Public Function SelectAll(ByRef listSach As List(Of Sach)) As Result
         Dim result = _sachDAO.SelectAll(listSach)
         Return result
@@ -115,7 +115,7 @@ Public Class SachBus
         Return result
     End Function
 
-    Public Function SelectByBookIdBookTitleAuthorIdTypeID(ByRef listSach As List(Of Sach),
+    Public Function SelectAllByBookIdBookTitleAuthorIdTypeID(ByRef listSach As List(Of Sach),
                                                                       SachYeuCau As Sach) As Result
         'Guard clause
         If String.IsNullOrWhiteSpace(SachYeuCau.MaSach) Then SachYeuCau.MaSach = -1
@@ -127,7 +127,7 @@ Public Class SachBus
     End Function
 
 
-    Public Function SelectTenSachByMaSach(ByRef sach As Sach, maSach As String) As Result
+    Public Function SelectSachById(ByRef sach As Sach, maSach As String) As Result
         'Guard clause
         If String.IsNullOrWhiteSpace(sach.MaSach) Then Return New Result(False, "Mã sách không tồn tại", "")
         Return _sachDAO.SelectSachByMaSach(sach, maSach)

@@ -2,11 +2,17 @@
 Imports Utility
 
 Public Class TheLoaiSachDAO
+
+#Region "-  Fields and constructor   -"
     Private _dataProvider As DataProvider
 
     Public Sub New()
         _dataProvider = New DataProvider()
     End Sub
+
+#End Region
+
+#Region "-   Retrieve data    -"
     Public Function SelectAll(ByRef listTheLoaiSach As List(Of TheLoaiSach)) As Result
         Dim query = String.Empty
         query &= "Select * from dbo.TheLoaiSach"
@@ -20,7 +26,7 @@ Public Class TheLoaiSachDAO
         Return result
     End Function
 
-    Public Function SelectTheLoaiSachByMaTheLoaiSach(ByRef theLoaiSach As TheLoaiSach, maTheLoaiSach As String) As Result
+    Public Function SelectTheLoaiSachByID(ByRef theLoaiSach As TheLoaiSach, maTheLoaiSach As String) As Result
         Dim query = String.Empty
         query &= "Select * from dbo.TheLoaiSach where MaTheLoaiSach=" & maTheLoaiSach
         query &= " and DeleteFlag='N'" & " "
@@ -31,4 +37,7 @@ Public Class TheLoaiSachDAO
         Next
         Return result
     End Function
+
+#End Region
+
 End Class

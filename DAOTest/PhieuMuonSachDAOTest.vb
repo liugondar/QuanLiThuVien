@@ -12,7 +12,7 @@ Imports Utility
         Dim phieuMuonSachDAO = New PhieuMuonSachDAO()
         Dim maPhieu As Integer
         'act
-        Dim act = phieuMuonSachDAO.LayMaSoPhieuMuonSachCuoiCung(maPhieu)
+        Dim act = phieuMuonSachDAO.GetTheLastPhieuMuonSachID(maPhieu)
         'assert
         Assert.AreEqual(expected.FlagResult, act.FlagResult)
     End Sub
@@ -28,7 +28,7 @@ Imports Utility
 
         Dim docGiaDao = New DocGiaDAO()
         Dim maTheDocGia = String.Empty
-        Dim resultLayMaThe = docGiaDao.LayMaTheDocGiaCuoiCung(maTheDocGia)
+        Dim resultLayMaThe = docGiaDao.GetTheLastTheDocGiaID(maTheDocGia)
 
         Dim act = New Result
         If resultLayMaThe.FlagResult Then

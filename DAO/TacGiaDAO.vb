@@ -2,11 +2,20 @@
 Imports Utility
 
 Public Class TacGiaDAO
-    Private _dataProvider As DataProvider
 
+#Region "-   Fields   -"
+    Private _dataProvider As DataProvider
+#End Region
+
+#Region "-   Constructor   -"
     Public Sub New()
         _dataProvider = New DataProvider()
     End Sub
+
+#End Region
+
+#Region "-   Retrieve data    -"
+
     Public Function SelectAll(ByRef listTacGia As List(Of TacGia)) As Result
         Dim query = String.Empty
         query &= "Select * from dbo.TacGia"
@@ -33,7 +42,7 @@ Public Class TacGiaDAO
         Return result
     End Function
 
-    Public Function SelectTenTacGiaByMaTacGia(ByRef tenTacGia As String, maTacGia As String) As Object
+    Public Function GetTenTacGiaByMaTacGia(ByRef tenTacGia As String, maTacGia As String) As Object
         Dim query = String.Empty
         query &= "Select * from dbo.TacGia where MaTacGia=" & maTacGia
         query &= " and DeleteFlag='N'" & " "
@@ -44,4 +53,7 @@ Public Class TacGiaDAO
         Next
         Return result
     End Function
+
+#End Region
+
 End Class

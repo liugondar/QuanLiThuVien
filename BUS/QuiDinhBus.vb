@@ -3,29 +3,40 @@ Imports DTO
 Imports Utility
 
 Public Class QuiDinhBus
+#Region "-   Fields   -"
     Private _quiDinhDAO As QuiDinhDAO
+#End Region
+
+#Region "-   Constructor   -"
 
     Public Sub New()
         _quiDinhDAO = New QuiDinhDAO()
     End Sub
+
+#End Region
+
+#Region "-   Retrieve data  -"
 
     Public Function SelectAll(ByRef quiDinh As QuiDinh) As Result
         Dim result = _quiDinhDAO.SelectAll(quiDinh)
         Return result
     End Function
 
-    Public Function LayTuoiToiDaVaToiThieu(ByRef quiDinh As QuiDinh) As Result
-        Return _quiDinhDAO.LayTuoiToiDaVaToiThieu(quiDinh)
+    Public Function GetTuoiToiDaVaToiThieu(ByRef quiDinh As QuiDinh) As Result
+        Return _quiDinhDAO.GetTuoiToiDaVaToiThieu(quiDinh)
     End Function
-    Public Function LayThoiHanToiDaTheDocGia(ByRef quiDinh As QuiDinh) As Result
-        Return _quiDinhDAO.LayThoiHanToiDaTheDocGia(quiDinh)
-    End Function
-
-    Public Function LaySoNgayMuonSachToiDa(ByRef quiDinh As QuiDinh) As Result
-        Return _quiDinhDAO.LaySoNgayMuonSachToiDa(quiDinh)
+    Public Function GetThoiHanToiDaTheDocGia(ByRef quiDinh As QuiDinh) As Result
+        Return _quiDinhDAO.GetThoiHanToiDaTheDocGia(quiDinh)
     End Function
 
-    Public Function LaySoSachMuonToiDa(ByRef quiDinh As QuiDinh) As Result
-        Return _quiDinhDAO.LaySoSachMuonToiDa(quiDinh)
+    Public Function GetSoNgayMuonSachToiDa(ByRef quiDinh As QuiDinh) As Result
+        Return _quiDinhDAO.GetSoNgayMuonSachToiDa(quiDinh)
     End Function
+
+    Public Function GetSoSachMuonToiDa(ByRef quiDinh As QuiDinh) As Result
+        Return _quiDinhDAO.GetSoSachMuonToiDa(quiDinh)
+    End Function
+
+#End Region
+
 End Class

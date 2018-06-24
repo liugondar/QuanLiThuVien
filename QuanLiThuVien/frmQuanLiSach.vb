@@ -3,12 +3,18 @@ Imports DTO
 Imports Utility
 
 Public Class frmQuanLiSach
+
+#Region "-   Fields    -"
     Private _theLoaiSachBus As TheLoaiSachBUS
     Private _tacGiaBus As TacGiaBUS
     Private _sachBus As SachBus
     Private _listTheLoaiSach As List(Of TheLoaiSach)
     Private _listTacGia As List(Of TacGia)
     Private _listSach As List(Of Sach)
+#End Region
+
+#Region "-   Constructor   -"
+
     Private Sub frmQuanLiSach_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         _theLoaiSachBus = New TheLoaiSachBUS()
         _tacGiaBus = New TacGiaBUS()
@@ -104,31 +110,35 @@ Public Class frmQuanLiSach
         MaxPublishYearDateTimePicker.ShowUpDown = True
         MaxPublishYearDateTimePicker.MaxDate = Now
     End Sub
-
-    Private Sub SearchButton_Click(sender As Object, e As EventArgs) Handles SearchButton.Click
-#Region "Lấy thông tin input"
-        Dim maSach = BookTitleComboBox.SelectedValue
-        Dim maTacGia = AuthorComboBox.SelectedValue
-        Dim maTheLoaiSach = CategoryComboBox.SelectedValue
-        Dim tenNhaXuatBan = PublisherComboBox.SelectedValue
-        Dim ngayXuatBanMin = MinPublishYearDateTimePicker.Value
-        Dim ngayXuatBanMax = MaxPublishYearDateTimePicker.Value
-        Dim ngayNhapMin = MinDateInputDateTimePicker.Value
-        Dim ngayNhapMax = MaxDateInputDateTimePicker.Value
-        Dim triGiaMin = MinPriceNumericUpDown.Value
-        Dim triGiaMax = MaxPriceNumericUpDown.Value
-
-        Console.WriteLine(maSach)
-
-        Dim listSachTheoMaSach = New List(Of Sach)
-        Dim listSachTheoTacGia = New List(Of Sach)
-        Dim listSachTheoTheLoai = New List(Of Sach)
-        Dim listSachTheoNhaXuatBan = New List(Of Sach)
-        Dim listSachTheoNgayXuatBan = New List(Of Sach)
-        Dim listSachTheoNgayNhap = New List(Of Sach)
-        Dim listSachTheoTriGia = New List(Of Sach)
 #End Region
-#Region "Guard clause"
+
+#Region "-   Events   -"
+
+#Region "-   search Button click   -"
+    Private Sub SearchButton_Click(sender As Object, e As EventArgs) Handles SearchButton.Click
+
+#Region "-   Lấy thông tin input    -"
+        Dim maSach As Object = Nothing
+        Dim maTacGia As Object = Nothing
+        Dim maTheLoaiSach As Object = Nothing
+        Dim tenNhaXuatBan As Object = Nothing
+        Dim ngayXuatBanMin As Date = Nothing
+        Dim ngayXuatBanMax As Date = Nothing
+        Dim ngayNhapMin As Date = Nothing
+        Dim ngayNhapMax As Date = Nothing
+        Dim triGiaMin As Decimal = Nothing
+        Dim triGiaMax As Decimal = Nothing
+        Dim listSachTheoMaSach As List(Of Sach) = Nothing
+        Dim listSachTheoTacGia As List(Of Sach) = Nothing
+        Dim listSachTheoTheLoai As List(Of Sach) = Nothing
+        Dim listSachTheoNhaXuatBan As List(Of Sach) = Nothing
+        Dim listSachTheoNgayXuatBan As List(Of Sach) = Nothing
+        Dim listSachTheoNgayNhap As List(Of Sach) = Nothing
+        Dim listSachTheoTriGia As List(Of Sach) = Nothing
+        LoadInputData(maSach, maTacGia, maTheLoaiSach, tenNhaXuatBan, ngayXuatBanMin, ngayXuatBanMax, ngayNhapMin, ngayNhapMax, triGiaMin, triGiaMax, listSachTheoMaSach, listSachTheoTacGia, listSachTheoTheLoai, listSachTheoNhaXuatBan, listSachTheoNgayXuatBan, listSachTheoNgayNhap, listSachTheoTriGia)
+#End Region
+
+#Region "-   Guard clause   -"
         Dim resultSelectAllByMaSach = _sachBus.SelectAllByMaSach(listSachTheoMaSach, maSach)
         Dim resultSelectAllByTacGia = _sachBus.SelectAllByMaTacGia(listSachTheoTacGia, maTacGia)
         Dim resultSelectAllByTheLoai = _sachBus.SelectAllByMaTheLoaiSach(listSachTheoTheLoai, maTheLoaiSach)
@@ -146,6 +156,8 @@ Public Class frmQuanLiSach
         resultSelectAllByTriGia.FlagResult
         If layListSachThoaManResult = False Then Return
 #End Region
+
+#Region "-  Load list sách thỏa mãn  -"
         Dim sachComparer = New SachComparer()
 
         Dim listThoaMan = listSachTheoTriGia.Intersect(listSachTheoNgayNhap, sachComparer).ToList()
@@ -157,6 +169,30 @@ Public Class frmQuanLiSach
         If CategoryComboBox.SelectedValue <> -1 Then listThoaMan = listThoaMan.Intersect(listSachTheoTheLoai, sachComparer).ToList()
 
         LoadListSach(listThoaMan)
+#End Region
+
+    End Sub
+
+    Private Sub LoadInputData(ByRef maSach As Object, ByRef maTacGia As Object, ByRef maTheLoaiSach As Object, ByRef tenNhaXuatBan As Object, ByRef ngayXuatBanMin As Date, ByRef ngayXuatBanMax As Date, ByRef ngayNhapMin As Date, ByRef ngayNhapMax As Date, ByRef triGiaMin As Decimal, ByRef triGiaMax As Decimal, ByRef listSachTheoMaSach As List(Of Sach), ByRef listSachTheoTacGia As List(Of Sach), ByRef listSachTheoTheLoai As List(Of Sach), ByRef listSachTheoNhaXuatBan As List(Of Sach), ByRef listSachTheoNgayXuatBan As List(Of Sach), ByRef listSachTheoNgayNhap As List(Of Sach), ByRef listSachTheoTriGia As List(Of Sach))
+        maSach = BookTitleComboBox.SelectedValue
+        maTacGia = AuthorComboBox.SelectedValue
+        maTheLoaiSach = CategoryComboBox.SelectedValue
+        tenNhaXuatBan = PublisherComboBox.SelectedValue
+        ngayXuatBanMin = MinPublishYearDateTimePicker.Value
+        ngayXuatBanMax = MaxPublishYearDateTimePicker.Value
+        ngayNhapMin = MinDateInputDateTimePicker.Value
+        ngayNhapMax = MaxDateInputDateTimePicker.Value
+        triGiaMin = MinPriceNumericUpDown.Value
+        triGiaMax = MaxPriceNumericUpDown.Value
+
+
+        listSachTheoMaSach = New List(Of Sach)
+        listSachTheoTacGia = New List(Of Sach)
+        listSachTheoTheLoai = New List(Of Sach)
+        listSachTheoNhaXuatBan = New List(Of Sach)
+        listSachTheoNgayXuatBan = New List(Of Sach)
+        listSachTheoNgayNhap = New List(Of Sach)
+        listSachTheoTriGia = New List(Of Sach)
     End Sub
 
     Function LoadListSach(listSach As List(Of Sach))
@@ -229,11 +265,11 @@ Public Class frmQuanLiSach
              tinhTrangTemp)
         Next
     End Function
+#End Region
 
     Private Sub DataGridViewQuanLiSach_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridViewQuanLiSach.SelectionChanged
         Dim sach = New Sach()
         Dim result = GetSelectedSachData(sach)
-        Console.WriteLine(sach.MaSach)
     End Sub
 
     Private Function GetSelectedSachData(ByRef sach As Sach) As Result
@@ -253,4 +289,6 @@ Public Class frmQuanLiSach
 
         Return New Result()
     End Function
+#End Region
+
 End Class

@@ -11,7 +11,7 @@ Imports Utility
         Dim expected = New Result()
         Dim DocGiaDAO = New DocGiaDAO()
         Dim maTheDocGia = String.Empty
-        Dim result = DocGiaDAO.LayMaTheDocGiaCuoiCung(maTheDocGia)
+        Dim result = DocGiaDAO.GetTheLastTheDocGiaID(maTheDocGia)
         If result.FlagResult Then
             maTheDocGia = maTheDocGia + 1
         Else
@@ -43,7 +43,7 @@ Imports Utility
                       New DateTime(1998, 1, 1), DateTime.Now, DateTime.Now.AddMonths(6), 1)
 
         'act
-        Dim actual = DocGiaDAO.SuaTheDocGiaBangDocGia(docGia)
+        Dim actual = DocGiaDAO.UpdateByReaderId(docGia)
         'assert
         Assert.AreEqual(expected.FlagResult, actual.FlagResult)
     End Sub
@@ -52,7 +52,7 @@ Imports Utility
         Dim expected = New Result()
         Dim DocGiaDAO = New DocGiaDAO()
         'act
-        Dim actual = DocGiaDAO.XoaTheDocGiaBangMaTheDocGia(1)
+        Dim actual = DocGiaDAO.DeleteByReaderID(1)
         'assert
         Assert.AreEqual(expected.FlagResult, actual.FlagResult)
     End Sub
@@ -63,7 +63,7 @@ Imports Utility
         Dim DocGiaDAO = New DocGiaDAO()
         Dim maThe As String
         'act
-        Dim actual = DocGiaDAO.LayMaTheDocGiaCuoiCung(maThe)
+        Dim actual = DocGiaDAO.GetTheLastTheDocGiaID(maThe)
         'assert
         Assert.AreEqual(expected.FlagResult, actual.FlagResult)
     End Sub
@@ -75,7 +75,7 @@ Imports Utility
         Dim maThe As String = 1
         Dim docgia = String.Empty
         'act
-        Dim actual = DocGiaDAO.SelectReaderNameByID(docgia, maThe)
+        Dim actual = DocGiaDAO.GetReaderNameByID(docgia, maThe)
         'assert
         Assert.AreEqual(expected.FlagResult, actual.FlagResult)
     End Sub
@@ -88,7 +88,7 @@ Imports Utility
         maThe = 1
         Dim ngayHetHan = New DateTime()
         'act
-        Dim actual = DocGiaDAO.SelectExpirationDateById(ngayHetHan, maThe)
+        Dim actual = DocGiaDAO.GetExpirationDateById(ngayHetHan, maThe)
         'assert
         Assert.AreEqual(expected.FlagResult, actual.FlagResult)
     End Sub

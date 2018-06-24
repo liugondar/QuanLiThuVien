@@ -4,7 +4,7 @@ Imports Utility
 
 Public Class frmChoMuonSach
 
-#Region "-  Fields and constructor -"
+#Region "-  Fields   -"
     Private _quiDinhBus As QuiDinhBus
     Private _docGiaBus As DocGiaBus
     Private _tacGiaBus As TacGiaBUS
@@ -22,6 +22,9 @@ Public Class frmChoMuonSach
     Private _listControlBookInfoControl As List(Of BookInfoControl)
     Private AddNewRowButton As Button
 
+#End Region
+
+#Region "-   Constructor    -"
     Private Sub frmChoMuonSach_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' -  Init Fields contant objects  
         _quiDinhBus = New QuiDinhBus()
@@ -78,7 +81,7 @@ Public Class frmChoMuonSach
         AddHandler AddNewRowButton.Click, AddressOf addNewRowButton_Click
 
         Dim quiDinh = New QuiDinh()
-        _quiDinhBus.LaySoSachMuonToiDa(quiDinh)
+        _quiDinhBus.GetSoSachMuonToiDa(quiDinh)
         Dim listPhieuSachDAMuon = New List(Of PhieuMuonSach)
         _phieuMuonSachBus.SelectAllSachChuaTraByReaderID(listPhieuSachDAMuon, ReaderIdTextBox.Text)
 
@@ -125,7 +128,7 @@ Public Class frmChoMuonSach
 
     Private Function MapBorrowDateToExpirationDate() As Result
         Dim quiDinh = New QuiDinh()
-        Dim result = _quiDinhBus.LaySoNgayMuonSachToiDa(quiDinh)
+        Dim result = _quiDinhBus.GetSoNgayMuonSachToiDa(quiDinh)
         If result.FlagResult = False Then Return result
 
         ExpirationTimePicker.Value =
@@ -290,7 +293,7 @@ Public Class frmChoMuonSach
             Dim customBook = New CustomBookInfoDisplay()
             customBook.MaSach = sach.MaSach
             customBook.TenSach = sach.TenSach
-            _tacGiaBus.SelectTenTacGiaByMaTacGia(customBook.TacGia, sach.MaTacGia)
+            _tacGiaBus.GetTenTacGiaByMaTacGia(customBook.TacGia, sach.MaTacGia)
             customBook.NgayHetHan = phieuMuonSach.HanTra
 
             Dim dateNow As Date = Date.Now()
@@ -382,8 +385,6 @@ Public Class frmChoMuonSach
     End Function
 #End Region
 
-#End Region
-
 #Region "-  Events for Custom book info controls  -"
     'Event thêm cho phần custom control hiển thị control để mượn sách
 
@@ -430,9 +431,9 @@ Public Class frmChoMuonSach
             sach.MaSach = maSach
 
             Console.WriteLine("Ma sach: " & maSach)
-            _sachBus.SelectTenSachByMaSach(sach, maSach)
+            _sachBus.SelectSachById(sach, maSach)
             _tacGiaBus.SelectTacGiaByMaTacGia(tacGia, sach.MaTacGia)
-            _theLoaiSachBus.SelectTheLoaiSachByMaTheLoaiSach(theLoaiSach, sach.MaTheLoaiSach)
+            _theLoaiSachBus.SelectTheLoaiSachByID(theLoaiSach, sach.MaTheLoaiSach)
             Console.WriteLine("MaThe loai: " & theLoaiSach.MaTheLoaiSach)
             Console.WriteLine("Ma tac gia: " & tacGia.MaTacGia)
 
@@ -451,7 +452,7 @@ Public Class frmChoMuonSach
 
     Private Function IsValidAmountBookCanBorrow() As Result
         Dim quiDinh = New QuiDinh()
-        Dim result = _quiDinhBus.LaySoSachMuonToiDa(quiDinh)
+        Dim result = _quiDinhBus.GetSoSachMuonToiDa(quiDinh)
 
         Dim listChiTietPhieuMuonSAchDaMuon = New List(Of ChiTietPhieuMuonSach)
         For Each phieuMuonSach In _listPhieuMuonSachDaMuon
@@ -511,6 +512,8 @@ Public Class frmChoMuonSach
         SachCanMuonPanel.Controls.Remove(bookInfoControl)
         _listControlBookInfoControl.Remove(bookInfoControl)
     End Sub
+
+#End Region
 
 #End Region
 

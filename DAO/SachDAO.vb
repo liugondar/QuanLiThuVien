@@ -2,12 +2,18 @@
 Imports Utility
 
 Public Class SachDAO
-    Private _dataProvider As DataProvider
 
+#Region "-   Fields   -"
+    Private _dataProvider As DataProvider
+#End Region
+
+#Region "-   Constructors   -"
     Public Sub New()
         _dataProvider = New DataProvider()
     End Sub
+#End Region
 
+#Region "-   insert   -"
     Public Function InsertOne(sach As Sach) As Result
         Dim query = String.Empty
         query &= "EXECUTE USP_NhapSach "
@@ -22,7 +28,9 @@ Public Class SachDAO
         Dim result = _dataProvider.ExcuteNonquery(query)
         Return result
     End Function
+#End Region
 
+#Region "-   Retrieve data    -"
     Public Function SelectAll(ByRef listSach As List(Of Sach)) As Result
         Dim query = String.Empty
         query &= "Select * from Sach where DeleteFlag='N'"
@@ -208,5 +216,7 @@ Public Class SachDAO
         End If
         Return result
     End Function
+
+#End Region
 
 End Class

@@ -87,21 +87,21 @@ Public Class PhieuMuonSachBus
     End Function
 
     Public Function LayMaSoPhieuMuonSachTiepTheo(ByRef maPhieuMuonSach As String) As Result
-        Dim result = _phieuMuonSachDAO.LayMaSoPhieuMuonSachCuoiCung(maPhieuMuonSach)
+        Dim result = _phieuMuonSachDAO.GetTheLastPhieuMuonSachID(maPhieuMuonSach)
         maPhieuMuonSach = maPhieuMuonSach + 1
         Return result
     End Function
     Public Function GetQuiDinh() As Result
         Dim quiDinhBus = New QuiDinhBus()
-        Dim layThoiHanMuonSachResult = quiDinhBus.LaySoNgayMuonSachToiDa(_quiDinh)
-        Dim laySoSachMuonToiDaResult = quiDinhBus.LaySoSachMuonToiDa(_quiDinh)
+        Dim layThoiHanMuonSachResult = quiDinhBus.GetSoNgayMuonSachToiDa(_quiDinh)
+        Dim laySoSachMuonToiDaResult = quiDinhBus.GetSoSachMuonToiDa(_quiDinh)
         If laySoSachMuonToiDaResult.FlagResult = False Then Return laySoSachMuonToiDaResult
         If layThoiHanMuonSachResult.FlagResult = False Then Return layThoiHanMuonSachResult
         Return New Result()
     End Function
 #End Region
 
-#Region "-   Select    -"
+#Region "-   Retrieve data  -"
     Public Function SelectAllByMaTheDocGia(ByRef listPhieuMuonSach As List(Of PhieuMuonSach), maTheDocGia As String) As Result
         Return _phieuMuonSachDAO.SelectAllByMaTheDocGia(listPhieuMuonSach, maTheDocGia)
     End Function

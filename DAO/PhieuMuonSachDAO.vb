@@ -2,12 +2,21 @@
 Imports Utility
 
 Public Class PhieuMuonSachDAO
+#Region "-   Fields    -"
+
     Private _dataProvider As DataProvider
+
+#End Region
+
+#Region "-   Constructor  -"
 
     Public Sub New()
         _dataProvider = New DataProvider()
     End Sub
 
+#End Region
+
+#Region "-   Insert   -"
 
     Public Function InsertOne(phieuMuonSach As PhieuMuonSach) As Result
         Dim query = String.Empty
@@ -20,7 +29,11 @@ Public Class PhieuMuonSachDAO
         Return _dataProvider.ExcuteNonquery(query)
     End Function
 
-    Public Function LayMaSoPhieuMuonSachCuoiCung(ByRef maPhieuDocSach As String) As Result
+#End Region
+
+#Region "-   Retrieve data    -"
+
+    Public Function GetTheLastPhieuMuonSachID(ByRef maPhieuDocSach As String) As Result
         Dim query = String.Empty
         query = String.Format("select top 1 [MaPhieuMuonSach]
 from PhieuMuonSach
@@ -58,6 +71,7 @@ order by  [MaPhieuMuonSach] desc")
         Next
         Return result
     End Function
+
     Public Function SelectAllPhieuMuonSachChuaTraByReaderId(ByRef listPhieuMuonSach As List(Of PhieuMuonSach), maTheDocGia As String) As Result
         Dim query = String.Empty
         query = String.Format("Select * from PhieuMuonSach
@@ -90,4 +104,6 @@ and DeleteFlag='N'", maTheDocGia)
         Next
         Return result
     End Function
+
+#End Region
 End Class

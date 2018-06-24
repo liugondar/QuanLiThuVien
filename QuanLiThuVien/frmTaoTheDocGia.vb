@@ -5,10 +5,13 @@ Imports Utility
 
 Public Class frmTaoTheDocGia
 
-#Region "-   Fields and constructor   -"
+#Region "-   Fields -"
     Private _didReaderTypeComboboxLoad As Result
     Private _docGiaBus As DocGiaBus
     Private _quiDinhBus As QuiDinhBus
+#End Region
+
+#Region "-   Constructor   -"
 
     Private Sub FormCreateReader_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         _docGiaBus = New DocGiaBus()
@@ -22,7 +25,7 @@ Public Class frmTaoTheDocGia
 
     Private Sub SetDefaultBirthDayTimePicker()
         Dim quiDinh = New QuiDinh()
-        _quiDinhBus.LayTuoiToiDaVaToiThieu(quiDinh)
+        _quiDinhBus.GetTuoiToiDaVaToiThieu(quiDinh)
         DateOfBirthDateTimePicker.Value = DateTime.Now.AddYears(-quiDinh.TuoiToiThieu)
         DateOfBirthDateTimePicker.MaxDate = DateTime.Now.AddYears(-quiDinh.TuoiToiThieu)
     End Sub
@@ -54,29 +57,19 @@ Public Class frmTaoTheDocGia
 #End Region
 
 #Region "-   Events   -"
+
+#Region "-   Insert   -"
     Private Sub CreateButton_Click_1(sender As Object, e As EventArgs) Handles CreateButton.Click
         InsertConfirm()
         LoadReaderIdTextBox()
     End Sub
+
     Private Sub CreateAndCloseButton_Click(sender As Object, e As EventArgs) Handles CreateAndCloseButton.Click
         If InsertConfirm() Then
             Close()
         End If
     End Sub
 
-    Private Sub DateCreateDateTimePicker_ValueChanged(sender As Object, e As EventArgs) Handles DateCreateDateTimePicker.ValueChanged
-        BindingCreateDatetimeToExpirationDate()
-    End Sub
-
-    Private Function BindingCreateDatetimeToExpirationDate()
-        Dim quiDinh = New QuiDinh()
-        _quiDinhBus.LayThoiHanToiDaTheDocGia(quiDinh)
-        Dim ngayHetHan = DateCreateDateTimePicker.Value.AddYears(quiDinh.ThoiHanToiDaTheDocGia)
-        ExpirationDateTimePicker.Value = ngayHetHan
-    End Function
-
-#End Region
-#Region "functions"
     Function InsertConfirm() As Boolean
         If _didReaderTypeComboboxLoad.FlagResult = False Then
             MessageBox.Show(_didReaderTypeComboboxLoad.ApplicationMessage)
@@ -99,7 +92,21 @@ Public Class frmTaoTheDocGia
             Return True
         End If
     End Function
+#End Region
 
+#Region "-  Binding CreateDatetime data To ExpirationDate   -"
+    Private Sub DateCreateDateTimePicker_ValueChanged(sender As Object, e As EventArgs) Handles DateCreateDateTimePicker.ValueChanged
+        BindingCreateDatetimeToExpirationDate()
+    End Sub
+
+    Private Function BindingCreateDatetimeToExpirationDate()
+        Dim quiDinh = New QuiDinh()
+        _quiDinhBus.GetThoiHanToiDaTheDocGia(quiDinh)
+        Dim ngayHetHan = DateCreateDateTimePicker.Value.AddYears(quiDinh.ThoiHanToiDaTheDocGia)
+        ExpirationDateTimePicker.Value = ngayHetHan
+    End Function
+
+#End Region
 
 #End Region
 

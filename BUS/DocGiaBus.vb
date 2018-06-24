@@ -30,8 +30,8 @@ Public Class DocGiaBus
 
     Public Function GetQuiDinh() As Result
         Dim quiDinhBus As QuiDinhBus = New QuiDinhBus()
-        Dim layTuoiToiDaResult = quiDinhBus.LayTuoiToiDaVaToiThieu(_quiDinh)
-        Dim layThoiHanResult = quiDinhBus.LayThoiHanToiDaTheDocGia(_quiDinh)
+        Dim layTuoiToiDaResult = quiDinhBus.GetTuoiToiDaVaToiThieu(_quiDinh)
+        Dim layThoiHanResult = quiDinhBus.GetThoiHanToiDaTheDocGia(_quiDinh)
         If layThoiHanResult.FlagResult = False Then Return layThoiHanResult
         If layTuoiToiDaResult.FlagResult = False Then Return layTuoiToiDaResult
         Return New Result()
@@ -60,7 +60,7 @@ Public Class DocGiaBus
         maTheDocGia = x + "000000"
 
         Dim maTheCuoiCung = String.Empty
-        Dim result = _docGiaDAO.LayMaTheDocGiaCuoiCung(maTheCuoiCung)
+        Dim result = _docGiaDAO.GetTheLastTheDocGiaID(maTheCuoiCung)
 
         If result.FlagResult = True Then
             If (maTheCuoiCung <> Nothing And maTheCuoiCung.Length >= 8) Then
@@ -130,13 +130,13 @@ Public Class DocGiaBus
         If validateYearsoldResult.FlagResult = False Then Return validateYearsoldResult
         If validateReaderTypeResult.FlagResult = False Then Return validateReaderTypeResult
 
-        Dim result = _docGiaDAO.SuaTheDocGiaBangDocGia(docGia)
+        Dim result = _docGiaDAO.UpdateByReaderId(docGia)
         Return result
     End Function
 
     Public Function XoaTheDocGiaBangMaThe(maThe As String) As Result
         If String.IsNullOrWhiteSpace(maThe) Then Return New Result(False, "Mã thẻ độc giả không được để trống", "")
-        Dim result = _docGiaDAO.XoaTheDocGiaBangMaTheDocGia(maThe)
+        Dim result = _docGiaDAO.DeleteByReaderID(maThe)
         Return result
     End Function
 
@@ -155,13 +155,13 @@ Public Class DocGiaBus
     End Function
 
     Public Function SelectReaderNameById(ByRef tenDocGia As String, maThe As String) As Result
-        Dim result = _docGiaDAO.SelectReaderNameByID(tenDocGia, maThe)
+        Dim result = _docGiaDAO.GetReaderNameByID(tenDocGia, maThe)
         If String.IsNullOrWhiteSpace(tenDocGia) = True Then Return New Result(False, "Lấy dữ liệu độc giả không thành công! Vui lòng kiểm tra lại mã thẻ ", "")
         Return result
     End Function
 
     Public Function SelectExpirationDateById(ByRef ngayHetHan As DateTime, maThe As String) As Result
-        Return _docGiaDAO.SelectExpirationDateById(ngayHetHan, maThe)
+        Return _docGiaDAO.GetExpirationDateById(ngayHetHan, maThe)
     End Function
 #End Region
 End Class

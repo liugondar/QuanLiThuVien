@@ -153,7 +153,7 @@ New DateTime(1992, 1, 1), New DateTime(1998, 1, 1), 10000)
         sach.MaTacGia = 1
         sach.MaTheLoaiSach = 1
         'act
-        Dim act = sachBus.SelectByBookIdBookTitleAuthorIdTypeID(New List(Of Sach), sach)
+        Dim act = sachBus.SelectAllByBookIdBookTitleAuthorIdTypeID(New List(Of Sach), sach)
         'assert
         Assert.AreEqual(expected.FlagResult, act.FlagResult)
     End Sub
@@ -164,7 +164,7 @@ New DateTime(1992, 1, 1), New DateTime(1998, 1, 1), 10000)
         Dim sachBus = New SachBus()
         Dim sach = New Sach()
         'act
-        Dim act = sachBus.SelectByBookIdBookTitleAuthorIdTypeID(New List(Of Sach), sach)
+        Dim act = sachBus.SelectAllByBookIdBookTitleAuthorIdTypeID(New List(Of Sach), sach)
         'assert
         Assert.AreEqual(expected.FlagResult, act.FlagResult)
     End Sub

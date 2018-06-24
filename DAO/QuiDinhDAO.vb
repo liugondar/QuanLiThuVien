@@ -3,10 +3,22 @@ Imports Utility
 
 
 Public Class QuiDinhDAO
+
+#Region "-  Fields   -"
+
     Private _dataProvider As DataProvider
+
+#End Region
+
+#Region "-   Constructors   -"
+
     Public Sub New()
         _dataProvider = New DataProvider()
     End Sub
+
+#End Region
+
+#Region "-   Retrieve data    -"
     Public Function SelectAll(ByRef quiDinh As QuiDinh) As Result
         Dim query = String.Empty
         query &= "Select * from QuiDinh"
@@ -18,7 +30,7 @@ Public Class QuiDinhDAO
         Return result
     End Function
 
-    Public Function LayTuoiToiDaVaToiThieu(ByRef quiDinh As QuiDinh) As Result
+    Public Function GetTuoiToiDaVaToiThieu(ByRef quiDinh As QuiDinh) As Result
         Dim query = String.Empty
         query &= "Select [TuoiToiDa],[TuoiToiThieu] from QuiDinh"
         Dim dataTable = New DataTable()
@@ -29,7 +41,8 @@ Public Class QuiDinhDAO
         Next
         Return result
     End Function
-    Public Function LayThoiHanToiDaTheDocGia(ByRef quiDinh As QuiDinh) As Result
+
+    Public Function GetThoiHanToiDaTheDocGia(ByRef quiDinh As QuiDinh) As Result
         Dim query = String.Empty
         Dim dataTable = New DataTable()
         query &= "Select [ThoiHanToiDaTheDocGia] from QuiDinh"
@@ -40,7 +53,7 @@ Public Class QuiDinhDAO
         Return result
     End Function
 
-    Public Function LaySoNgayMuonSachToiDa(ByRef quiDinh As QuiDinh) As Result
+    Public Function GetSoNgayMuonSachToiDa(ByRef quiDinh As QuiDinh) As Result
         Dim query = String.Empty
         Dim dataTable = New DataTable()
         query &= "Select [SoNgayMuonToiDa] from QuiDinh"
@@ -51,7 +64,7 @@ Public Class QuiDinhDAO
         Return result
     End Function
 
-    Public Function LaySoSachMuonToiDa(ByRef quiDinh As QuiDinh) As Result
+    Public Function GetSoSachMuonToiDa(ByRef quiDinh As QuiDinh) As Result
         Dim query = String.Empty
         Dim dataTable = New DataTable()
         query &= "Select [SoSachMuonToiDa] from QuiDinh"
@@ -61,4 +74,6 @@ Public Class QuiDinhDAO
         Next
         Return result
     End Function
+#End Region
+
 End Class

@@ -2,11 +2,19 @@
 Imports DTO
 
 Public Class frmNhapSach
+
+#Region "-  Fields   -"
+
     Private _tacGiaBus As TacGiaBUS
     Private _theLoaiSachBus As TheLoaiSachBUS
     Private _sachBus As SachBus
     Private _listTheLoaiSach As List(Of TheLoaiSach)
     Private _listTacGia As List(Of TacGia)
+
+#End Region
+
+#Region "-  Constructor  -"
+
     Private Sub frmNhapSach_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         _tacGiaBus = New TacGiaBUS()
         _theLoaiSachBus = New TheLoaiSachBUS()
@@ -49,7 +57,11 @@ Public Class frmNhapSach
         CategoryComboBox.ValueMember = "MaTheLoaiSach"
 
     End Sub
+#End Region
 
+#Region "-   Events   -"
+
+#Region "-   Create button clicked  -"
     Private Sub CreateButton_Click(sender As Object, e As EventArgs) Handles CreateButton.Click
         InsertSach()
     End Sub
@@ -71,11 +83,13 @@ Public Class frmNhapSach
             MessageBox.Show("Đã nhập thành công sách mới!")
         End If
     End Sub
+#End Region
 
     Private Sub CreateAndCloseButton_Click(sender As Object, e As EventArgs) Handles CreateAndCloseButton.Click
         InsertSach()
         Close()
     End Sub
 
+#End Region
 
 End Class

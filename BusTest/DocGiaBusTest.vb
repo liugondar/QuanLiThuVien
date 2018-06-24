@@ -22,7 +22,7 @@ Imports Utility
         Dim expected = New Result()
         Dim maDocGia = 0
         Dim docGiaDao = New DocGiaDAO()
-        docGiaDao.LayMaTheDocGiaCuoiCung(maDocGia)
+        docGiaDao.GetTheLastTheDocGiaID(maDocGia)
         maDocGia = maDocGia + 1
         Dim docGia = New DocGia(maDocGia, "ahiinh", "123@gmail.com", "122c",
                       New DateTime(1998, 1, 1), DateTime.Now, DateTime.Now.AddMonths(6), 1)
@@ -106,7 +106,7 @@ Imports Utility
         'act
 
         Dim act = New Result()
-        If docGiaDao.LayMaTheDocGiaCuoiCung(maTheDocGia).FlagResult Then
+        If docGiaDao.GetTheLastTheDocGiaID(maTheDocGia).FlagResult Then
             act = docGiaBus.SelectReaderNameById(tendocGia, maTheDocGia)
         End If
         'assert
@@ -123,7 +123,7 @@ Imports Utility
         Dim maDocGia = String.Empty
         'act
         Dim act = New Result()
-        If docGiaDao.LayMaTheDocGiaCuoiCung(maDocGia).FlagResult Then
+        If docGiaDao.GetTheLastTheDocGiaID(maDocGia).FlagResult Then
             Dim docGia = New DocGia(1, "ahiinh", "123@gmail.com", "122c",
                       New DateTime(1998, 1, 1), DateTime.Now, DateTime.Now.AddMonths(6), 1)
 
