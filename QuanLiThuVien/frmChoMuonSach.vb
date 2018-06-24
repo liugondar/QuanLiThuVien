@@ -4,7 +4,7 @@ Imports Utility
 
 Public Class frmChoMuonSach
 
-#Region "-  Fields  -"
+#Region "-  Fields and constructor -"
     Private _quiDinhBus As QuiDinhBus
     Private _docGiaBus As DocGiaBus
     Private _tacGiaBus As TacGiaBUS
@@ -21,9 +21,7 @@ Public Class frmChoMuonSach
 
     Private _listControlBookInfoControl As List(Of BookInfoControl)
     Private AddNewRowButton As Button
-#End Region
 
-#Region "-  Constructor  -"
     Private Sub frmChoMuonSach_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' -  Init Fields contant objects  
         _quiDinhBus = New QuiDinhBus()
@@ -56,7 +54,13 @@ Public Class frmChoMuonSach
         AddHandler ReaderIdTextBox.LostFocus, AddressOf ReaderIdTextBox_lostFocus
         CreateControlInChoMuonSachPanel()
     End Sub
+    Private Sub LoadMaPhieuMuonSach()
+        Dim maPhieuMuonSach = String.Empty
+        Dim result = _phieuMuonSachBus.LayMaSoPhieuMuonSachTiepTheo(maPhieuMuonSach)
+        If result.FlagResult = True Then PhieuMuonSachIdTextBox.Text = maPhieuMuonSach
+    End Sub
 
+#Region "-   Create panel controls   -"
     Private Sub CreateControlInChoMuonSachPanel()
         SachCanMuonPanel.Controls.Clear()
 
@@ -92,13 +96,86 @@ Public Class frmChoMuonSach
         SachCanMuonPanel.Controls.Add(AddNewRowButton)
     End Sub
 
-#Region "-    Display warning reader id valdiate label depend on reader id"
+    Private Sub addNewRowButton_Click(sender As Object, e As EventArgs)
+        Try
+            'Guard clause 
+            Dim validateAmountBookCanBorrowResult = IsValidAmountBookCanBorrow()
+            If validateAmountBookCanBorrowResult.FlagResult = False Then
+                MessageBox.Show(validateAmountBookCanBorrowResult.ApplicationMessage)
+                Return
+            End If
+
+            'Add new row 
+            AddNewRow()
+        Catch ex As Exception
+        End Try
+    End Sub
+
+#End Region
+
+#End Region
+
+#Region "-  Events  -"
+
+#Region "-   Thay đổi ngày hết hạn mượn sách khi ngày mượn sách thay đổi   -"
+    'Thay đổi ngày hết hạn mượn sách khi ngày mượn sách thay đổi
+    Private Sub BorrowDateTimePicker_ValueChanged(sender As Object, e As EventArgs) Handles BorrowDateTimePicker.ValueChanged
+        MapBorrowDateToExpirationDate()
+    End Sub
+
+    Private Function MapBorrowDateToExpirationDate() As Result
+        Dim quiDinh = New QuiDinh()
+        Dim result = _quiDinhBus.LaySoNgayMuonSachToiDa(quiDinh)
+        If result.FlagResult = False Then Return result
+
+        ExpirationTimePicker.Value =
+            BorrowDateTimePicker.Value.AddDays(quiDinh.SoNgayMuonSachToiDa)
+        Return result
+    End Function
+
+#End Region
+
+#Region "-   Thay doi thong tin the doc gia khi ma doc gia thay doi   -"
+    'Thay đổi thông tin thẻ độc giả khi người dùng nhập vào mã thẻ độc giả
+    Private Sub ReaderIdTextBox_TextChanged(sender As Object, e As EventArgs) Handles ReaderIdTextBox.TextChanged
+        Dim docGia = New DocGia()
+        Dim getReaderDataResult = GetReaderDataById(docGia)
+        If getReaderDataResult.FlagResult = False Then
+            UserNameTextBox.Text = String.Empty
+            Return
+        End If
+
+        UserNameTextBox.Text = docGia.TenDocGia
+
+        _listPhieuMuonSachDaMuon.Clear()
+        Dim ketQuaLayPhieuMuonSach =
+            _phieuMuonSachBus.SelectAllSachChuaTraByReaderID(_listPhieuMuonSachDaMuon,
+                                                     docGia.MaTheDocGia)
+        LoadListSachDaMuonDataGridView(_listPhieuMuonSachDaMuon)
+    End Sub
+    Private Function GetReaderDataById(ByRef docGia As DocGia) As Result
+        Try
+            If String.IsNullOrWhiteSpace(ReaderIdTextBox.Text) = True Then Return New Result(False, "", "")
+            docGia.MaTheDocGia = ReaderIdTextBox.Text
+        Catch ex As Exception
+            Console.WriteLine(ex)
+        End Try
+        Return _docGiaBus.
+            SelectReaderNameById(docGia.TenDocGia, docGia.MaTheDocGia)
+    End Function
+#End Region
+
+#Region "-   Display warning reader id valdiate label depend on reader id   -"
     Private Sub ReaderIdTextBox_lostFocus(sender As Object, e As EventArgs)
+        WarningValidateReaderIdLabel.Visible = False
+        If String.IsNullOrWhiteSpace(ReaderIdTextBox.Text) Then
+            WarningValidateReaderIdLabel.Text = "Vui lòng nhập thẻ độc giả!"
+            WarningValidateReaderIdLabel.Visible = True
+            Return
+        End If
         If Not IsReaderCardExist() Then Return
         If Not IsValidExpirationDateCard() Then Return
         If haveExpirationBookBorrowed() Then Return
-        WarningValidateReaderIdLabel.Visible = False
-
     End Sub
 
     Private Function IsReaderCardExist() As Boolean
@@ -142,62 +219,7 @@ Public Class frmChoMuonSach
 
 #End Region
 
-    Private Sub LoadMaPhieuMuonSach()
-        Dim maPhieuMuonSach = String.Empty
-        Dim result = _phieuMuonSachBus.LayMaSoPhieuMuonSachTiepTheo(maPhieuMuonSach)
-        If result.FlagResult = True Then PhieuMuonSachIdTextBox.Text = maPhieuMuonSach
-    End Sub
-
-    Private Sub addNewRowButton_Click(sender As Object, e As EventArgs)
-        Try
-            'Guard clause 
-            Dim validateAmountBookCanBorrowResult = IsValidAmountBookCanBorrow()
-            If validateAmountBookCanBorrowResult.FlagResult = False Then
-                MessageBox.Show(validateAmountBookCanBorrowResult.ApplicationMessage)
-                Return
-            End If
-
-            'Add new row 
-            AddNewRow()
-        Catch ex As Exception
-        End Try
-    End Sub
-#End Region
-
-#Region "-  Events  -"
-    'Thay đổi ngày hết hạn mượn sách khi ngày mượn sách thay đổi
-    Private Sub BorrowDateTimePicker_ValueChanged(sender As Object, e As EventArgs) Handles BorrowDateTimePicker.ValueChanged
-        MapBorrowDateToExpirationDate()
-    End Sub
-
-    Private Function MapBorrowDateToExpirationDate() As Result
-        Dim quiDinh = New QuiDinh()
-        Dim result = _quiDinhBus.LaySoNgayMuonSachToiDa(quiDinh)
-        If result.FlagResult = False Then Return result
-
-        ExpirationTimePicker.Value =
-            BorrowDateTimePicker.Value.AddDays(quiDinh.SoNgayMuonSachToiDa)
-        Return result
-    End Function
-
-    'Thay đổi thông tin thẻ độc giả khi người dùng nhập vào mã thẻ độc giả
-    Private Sub ReaderIdTextBox_TextChanged(sender As Object, e As EventArgs) Handles ReaderIdTextBox.TextChanged
-        Dim docGia = New DocGia()
-        Dim getReaderDataResult = GetReaderDataById(docGia)
-        If getReaderDataResult.FlagResult = False Then
-            UserNameTextBox.Text = String.Empty
-            Return
-        End If
-
-        UserNameTextBox.Text = docGia.TenDocGia
-
-        _listPhieuMuonSachDaMuon.Clear()
-        Dim ketQuaLayPhieuMuonSach =
-            _phieuMuonSachBus.SelectAllSachChuaTraByReaderID(_listPhieuMuonSachDaMuon,
-                                                     docGia.MaTheDocGia)
-        LoadListSachDaMuonDataGridView(_listPhieuMuonSachDaMuon)
-    End Sub
-
+#Region "-   Load list sach da muon datagridview   -"
     Private Sub LoadListSachDaMuonDataGridView(listPhieuMuonSachDaMuon As List(Of PhieuMuonSach))
         ClearBookBorrowedDataGridViewData()
 
@@ -288,16 +310,7 @@ Public Class frmChoMuonSach
         ListSachDaMuonDataGridView.AllowUserToAddRows = False
     End Sub
 
-    Private Function GetReaderDataById(ByRef docGia As DocGia) As Result
-        Try
-            If String.IsNullOrWhiteSpace(ReaderIdTextBox.Text) = True Then Return New Result(False, "", "")
-            docGia.MaTheDocGia = ReaderIdTextBox.Text
-        Catch ex As Exception
-            Console.WriteLine(ex)
-        End Try
-        Return _docGiaBus.
-            SelectReaderNameById(docGia.TenDocGia, docGia.MaTheDocGia)
-    End Function
+#End Region
 
 #Region "-   Insert confirm button click   -"
     Private Sub ConfirmButton_Click(sender As Object, e As EventArgs) Handles ConfirmButton.Click
