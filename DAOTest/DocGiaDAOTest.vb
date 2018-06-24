@@ -10,7 +10,14 @@ Imports Utility
         'arr
         Dim expected = New Result()
         Dim DocGiaDAO = New DocGiaDAO()
-        Dim docGia = New DocGia(1, "ahiinh", "123@gmail.com", "122c",
+        Dim maTheDocGia = String.Empty
+        Dim result = DocGiaDAO.LayMaTheDocGiaCuoiCung(maTheDocGia)
+        If result.FlagResult Then
+            maTheDocGia = maTheDocGia + 1
+        Else
+            maTheDocGia = 1
+        End If
+        Dim docGia = New DocGia(maTheDocGia, "ahiinh", "123@gmail.com", "122c",
                       New DateTime(1998, 1, 1), DateTime.Now, DateTime.Now.AddMonths(6), 1)
 
         'act

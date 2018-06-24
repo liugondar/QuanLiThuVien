@@ -10,6 +10,8 @@ Public Class TacGiaDAO
     Public Function SelectAll(ByRef listTacGia As List(Of TacGia)) As Result
         Dim query = String.Empty
         query &= "Select * from dbo.TacGia"
+        query &= " Where DeleteFlag='N'" & " "
+
         Dim dataTable = New DataTable()
         Dim result = _dataProvider.ExcuteQuery(query, dataTable)
         For Each row As DataRow In dataTable.Rows
@@ -22,6 +24,7 @@ Public Class TacGiaDAO
     Public Function SelectTacGiaByMaTacGia(ByRef tacGia As TacGia, maTacGia As String) As Result
         Dim query = String.Empty
         query &= "Select * from dbo.TacGia where MaTacGia=" & maTacGia
+        query &= " and DeleteFlag='N'" & " "
         Dim dataTable = New DataTable()
         Dim result = _dataProvider.ExcuteQuery(query, dataTable)
         For Each row As DataRow In dataTable.Rows
@@ -33,6 +36,7 @@ Public Class TacGiaDAO
     Public Function SelectTenTacGiaByMaTacGia(ByRef tenTacGia As String, maTacGia As String) As Object
         Dim query = String.Empty
         query &= "Select * from dbo.TacGia where MaTacGia=" & maTacGia
+        query &= " and DeleteFlag='N'" & " "
         Dim dataTable = New DataTable()
         Dim result = _dataProvider.ExcuteQuery(query, dataTable)
         For Each row As DataRow In dataTable.Rows

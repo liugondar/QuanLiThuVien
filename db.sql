@@ -30,6 +30,7 @@ CREATE TABLE dbo.LoaiDocGia
 (
     MaLoaiDocGia INT IDENTITY PRIMARY KEY,
     -- primary key column
+    DeleteFlag NVARCHAR(1) not null default 'N',
     TenLoaiDocGia NVARCHAR(10)
 );
 GO
@@ -50,8 +51,9 @@ CREATE TABLE dbo.TheDocGia
     MaLoaiDocGia INT not null,
     NgaySinh date not null DEFAULT GETDATE(),
     NgayTao date not null DEFAULT GETDATE(),
-    NgayHetHan date not null
-        CONSTRAINT FK_Reader_ReaderType FOREIGN KEY(MaLoaiDocGia) REFERENCES LoaiDocGia(MaLoaiDocGia)
+    NgayHetHan date not null,
+    DeleteFlag NVARCHAR(1) not null default 'N',
+    CONSTRAINT FK_Reader_ReaderType FOREIGN KEY(MaLoaiDocGia) REFERENCES LoaiDocGia(MaLoaiDocGia)
 );
 GO
 
@@ -84,6 +86,7 @@ CREATE TABLE dbo.TacGia
     MaTacGia INT IDENTITY PRIMARY KEY,
     -- primary key column
     TenTacGia NVARCHAR(50) not null,
+    DeleteFlag NVARCHAR(1) not null default 'N',
 );
 GO
 
@@ -98,6 +101,7 @@ CREATE TABLE dbo.TheLoaiSach
     MaTheLoaiSach INT IDENTITY PRIMARY KEY,
     -- primary key column
     TenTheLoaiSach NVARCHAR(50) not null,
+    DeleteFlag NVARCHAR(1) not null default 'N',
 );
 GO
 
@@ -118,8 +122,8 @@ CREATE TABLE dbo.Sach
     NgayXuatBan date not null DEFAULT getdate(),
     NgayNhap date not null DEFAULT getdate(),
     TriGia INT not null,
-    TinhTrang INT not null DEFAULT 0,
-    -- 0 la con, 1 la het 
+    TinhTrang INT not null DEFAULT 0,-- 0 la con, 1 la het 
+    DeleteFlag NVARCHAR(1) not null default 'N',
     CONSTRAINT FK_Sach_TacGia FOREIGN KEY(MaTacGia) REFERENCES TacGia(MaTacGia),
     CONSTRAINT FK_Sach_TheLoaiSach FOREIGN KEY(MaTheLoaiSach) REFERENCES TheLoaiSach(MaTheLoaiSach),
 );
@@ -139,8 +143,8 @@ CREATE TABLE dbo.PhieuMuonSach
     NgayTra[date] ,
     HanTra[date] NOT NULL DEFAULT getdate(),
     TongSoSachMuon int NOT NULL DEFAULT 1,
-    TinhTrang int not null DEFAULT 0,
-    -- 0 is not check out, 1 is check out 
+    TinhTrang int not null DEFAULT 0,-- 0 is not check out, 1 is check out 
+    DeleteFlag NVARCHAR(1) not null default 'N',
     CONSTRAINT FK_PhieuMuonSach_TheDocGia FOREIGN KEY(MaTheDocGia)
     REFERENCES TheDocGia(MaTheDocGia)
 );
@@ -158,7 +162,7 @@ CREATE TABLE dbo.ChiTietPhieuMuonSach
     -- primary key column
     MaPhieuMuonSach INT NOT NULL,
     MaSach int not null,
-    -- 0 la da tra, 1 la chua tra
+    DeleteFlag NVARCHAR(1) not null default 'N',
     CONSTRAINT FK_ChiTietPhieuMuonSach_PhieuMuonSach FOREIGN KEY(MaPhieuMuonSach)
     REFERENCES PhieuMuonSach(MaPhieuMuonSach),
     CONSTRAINT FK_ChiTietPhieuMuonSach_MaSach FOREIGN KEY(MaSach)
@@ -178,6 +182,7 @@ CREATE TABLE dbo.BaoCaoTinhHinhMuonSach
     MaBaoCaoTinhHinhMuonSach INT IDENTITY NOT NULL PRIMARY KEY,
     -- primary key column
     ThoiGian date not null default getdate(),
+    DeleteFlag NVARCHAR(1) not null default 'N',
     TongSoLuotMuon int not null
 );
 GO
@@ -196,6 +201,7 @@ CREATE TABLE dbo.ChiTietBaoCaoTinhHinhMuonSach
     MaChiTietPhieuMuonSach int not null,
     SoLuongMuon int not null,
     TiLe FLOAT not null,
+    DeleteFlag NVARCHAR(1) not null default 'N',
     CONSTRAINT FK_ChiTietBaoCaoTinhHinhMuonSach_BaoCaoTinhHinhMuonSach FOREIGN KEY(MaBaoCaoTinhHinhMuonSach)
     REFERENCES BaoCaoTinhHinhMuonSach(MaBaoCaoTinhHinhMuonSach),
     CONSTRAINT FK_ChiTietBaoCaoTinhHinhMuonSach_ChiTietPhieuMuonSach FOREIGN KEY(MaChiTietPhieuMuonSach)
@@ -213,7 +219,8 @@ CREATE TABLE dbo.BaoCaoSachTre
 (
     MaBaoCaoSachTre INT IDENTITY NOT NULL PRIMARY KEY,
     -- primary key column
-    ThoiGian date not null DEFAULT getdate()
+    ThoiGian date not null DEFAULT getdate(),
+    DeleteFlag NVARCHAR(1) not null default 'N',
 );
 GO
 
@@ -230,6 +237,7 @@ CREATE TABLE dbo.ChiTietBaoCaoSachTre
     MaBaoCaoSachTre int not null,
     MaPhieuMuonSach int not null,
     SoNgayTre int not null,
+    DeleteFlag NVARCHAR(1) not null default 'N',
     CONSTRAINT FK_ChiTietBaoCaoSachTre_BaoCaoSachTren FOREIGN KEY(MaBaoCaoSachTre)
     REFERENCES BaoCaoSachTre(MaBaoCaoSachTre),
     CONSTRAINT FK_ChiTietBaoCaoSachTre_PhieuMuonSach FOREIGN KEY(MaPhieuMuonSach)
@@ -264,8 +272,9 @@ CREATE PROC USP_XoaTheDocGia
     @MaTheDocGia INT
 AS
 BEGIN
-    Delete from TheDocGia
-    where MaTheDocGia=@MaTheDocGia
+    Update TheDocGia
+   Set DeleteFlag='Y'
+   Where MaTheDocGia=@MaTheDocGia
 END
 go
 
@@ -303,14 +312,13 @@ go
 --create procduer insert chitietphieumuonsach
 create PROC USP_ThemChiTietPhieuMuonSach
     @MaPhieuMuonSach INT,
-    @MaSach Int,
-    @TinhTrang INT
+    @MaSach Int
 as
 BEGIN
     insert into dbo.ChiTietPhieuMuonSach
-        (MaPhieuMuonSach,MaSach,TinhTrang)
+        (MaPhieuMuonSach,MaSach)
     Values
-        (@MaPhieuMuonSach, @MaSach, @TinhTrang)
+        (@MaPhieuMuonSach, @MaSach)
 END
 go
 

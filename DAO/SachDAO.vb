@@ -25,7 +25,7 @@ Public Class SachDAO
 
     Public Function SelectAll(ByRef listSach As List(Of Sach)) As Result
         Dim query = String.Empty
-        query &= "Select * from Sach"
+        query &= "Select * from Sach where DeleteFlag='N'"
         Dim dataTable = New DataTable()
         Dim result = _dataProvider.ExcuteQuery(query, dataTable)
         If result.FlagResult = True Then
@@ -39,7 +39,7 @@ Public Class SachDAO
 
     Public Function SelectAllByMaSach(ByRef listSach As List(Of Sach), maSach As String) As Result
         Dim query = String.Empty
-        query &= "Select * from Sach where MaSach=" & maSach
+        query = String.Format("Select * from Sach where MaSach={0} and DeleteFlag='N'", maSach)
         Dim dataTable = New DataTable()
         Dim result = _dataProvider.ExcuteQuery(query, dataTable)
         If result.FlagResult = True Then
@@ -53,7 +53,7 @@ Public Class SachDAO
 
     Public Function SelectAllByMaTheLoaiSach(ByRef listSach As List(Of Sach), maTheLoaiSach As String) As Result
         Dim query = String.Empty
-        query &= "Select * from Sach where MaTheLoaiSach=" & maTheLoaiSach
+        query = String.Format("Select * from Sach where MaTheLoaiSach={0} and DeleteFlag='N'", maTheLoaiSach)
         Dim dataTable = New DataTable()
         Dim result = _dataProvider.ExcuteQuery(query, dataTable)
         If result.FlagResult = True Then
@@ -67,7 +67,7 @@ Public Class SachDAO
 
     Public Function SelectAllByMaTacGia(ByRef listSach As List(Of Sach), maTacGia As String) As Result
         Dim query = String.Empty
-        query &= "Select * from Sach where MaTacGia=" & maTacGia
+        query = String.Format("Select * from Sach where MaTacGia={0} and DeleteFlag='N'", maTacGia)
         Dim dataTable = New DataTable()
         Dim result = _dataProvider.ExcuteQuery(query, dataTable)
         If result.FlagResult = True Then
@@ -81,7 +81,7 @@ Public Class SachDAO
 
     Public Function SelectAllByTenNhaXuatBan(ByRef listSach As List(Of Sach), TenNhaXuatBan As String) As Result
         Dim query = String.Empty
-        query &= "Select * from Sach where TenNhaXuatBan='" & TenNhaXuatBan & "'"
+        query = String.Format("Select * from Sach where TenNhaXuatBan='{0}' and DeleteFlag='N'", TenNhaXuatBan)
         Dim dataTable = New DataTable()
         Dim result = _dataProvider.ExcuteQuery(query, dataTable)
         If result.FlagResult = True Then
@@ -97,9 +97,7 @@ Public Class SachDAO
         Dim ngayMinConverted = ngayMin.ToString("MMMM dd, yyyy")
         Dim ngayMaxConverted = ngayMax.ToString("MMMM dd, yyyy")
         Dim query = String.Empty
-        query &= "select * from Sach "
-        query &= "where NgayXuatBan between " & "' " & ngayMinConverted & "' "
-        query &= "And '" & ngayMaxConverted & "' "
+        query &= String.Format("select * from Sach where NgayXuatBan between '{0}' And '{1}' and DeleteFlag='N' ", ngayMinConverted, ngayMaxConverted)
         Dim dataTable = New DataTable()
         Dim result = _dataProvider.ExcuteQuery(query, dataTable)
         If result.FlagResult = True Then
@@ -118,6 +116,7 @@ Public Class SachDAO
         query &= "select * from Sach "
         query &= "where NgayNhap between " & "' " & ngayMinConverted & "' "
         query &= "And '" & ngayMaxConverted & "' "
+        query &= "And DeleteFlag='N'"
         Dim dataTable = New DataTable()
         Dim result = _dataProvider.ExcuteQuery(query, dataTable)
         If result.FlagResult = True Then
@@ -134,6 +133,7 @@ Public Class SachDAO
         query &= "select * from Sach "
         query &= "where TriGia between " & " " & triGiaMin & " "
         query &= "And " & triGiaMax & " "
+        query &= "And DeleteFlag='N'"
         Dim dataTable = New DataTable()
         Dim result = _dataProvider.ExcuteQuery(query, dataTable)
         If result.FlagResult = True Then
@@ -157,6 +157,7 @@ Public Class SachDAO
         query &= "And " & dieuKienTenSach & "  "
         query &= "And " & dieuKienMaTacGia & "  "
         query &= "And " & dieuKienMaTheLoaiSach & "  "
+        query &= " And DeleteFlag='N'" & " "
         Dim dataTable = New DataTable()
         Dim result = _dataProvider.ExcuteQuery(query, dataTable)
         If result.FlagResult = True Then
@@ -184,7 +185,9 @@ Public Class SachDAO
         Dim query = String.Empty
         query &= "select [maSach], [tenSach], [maTacGia], [maTheLoaiSach]  "
         query &= "from sach "
-        query &= "where maSach= " & maSach
+        query &= "where maSach= " & maSach & " "
+        query &= " And DeleteFlag='N'" & " "
+
         Dim dataTable = New DataTable()
         Dim result = _dataProvider.ExcuteQuery(query, dataTable)
         If result.FlagResult = True Then

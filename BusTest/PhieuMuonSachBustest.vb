@@ -1,5 +1,6 @@
 ﻿Imports System.Text
 Imports BUS
+Imports DAO
 Imports DTO
 Imports Microsoft.VisualStudio.TestTools.UnitTesting
 Imports Utility
@@ -12,13 +13,19 @@ Imports Utility
         Dim PhieuMuonSachBus = New PhieuMuonSachBus()
         Dim phieuMuonSach = New PhieuMuonSach()
         Dim docGiaBus = New DocGiaBus()
-        Dim listDocGia = New List(Of DocGia)
-        docGiaBus.SelectAllByType(1, listDocGia)
-        phieuMuonSach.MaTheDocGia = listDocGia(0).MaTheDocGia
-        phieuMuonSach.NgayMuon = DateTime.Now
-        phieuMuonSach.TongSoSachMuon = 4
+        Dim docGiaDao = New DocGiaDAO()
+        Dim maTheDocGia = String.Empty
+
         'act
-        Dim act = PhieuMuonSachBus.InsertOne(phieuMuonSach)
+        Dim act = New Result()
+        If docGiaDao.LayMaTheDocGiaCuoiCung(maTheDocGia).FlagResult Then
+            phieuMuonSach.MaTheDocGia = maTheDocGia
+            phieuMuonSach.NgayMuon = DateTime.Now
+            phieuMuonSach.TongSoSachMuon = 4
+            phieuMuonSach.HanTra = DateTime.Now
+            act = PhieuMuonSachBus.InsertOne(phieuMuonSach)
+        End If
+
         'assert
         Assert.AreEqual(expected.FlagResult, act.FlagResult)
     End Sub

@@ -10,7 +10,8 @@ Public Class LoaiDocGiaDAO
     Function SelectAll(listLoaiDocGia As List(Of LoaiDocGia)) As Result
         Dim data = New DataTable()
         Dim query = String.Empty
-        query &= "Select * from LoaiDocGia"
+        query &= "Select * from LoaiDocGia "
+        query &= " Where DeleteFlag='N'" & " "
         Dim result = _dataProvider.ExcuteQuery(query, data)
 
         For Each row In data.Rows

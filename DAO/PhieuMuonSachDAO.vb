@@ -22,9 +22,10 @@ Public Class PhieuMuonSachDAO
 
     Public Function LayMaSoPhieuMuonSachCuoiCung(ByRef maPhieuDocSach As String) As Result
         Dim query = String.Empty
-        query &= "select top 1 * "
-        query &= "from PhieuMuonSach "
-        query &= "ORDER BY [MaPhieuMuonSach] DESC "
+        query = String.Format("select top 1 [MaPhieuMuonSach]
+from PhieuMuonSach
+where DeleteFlag='N'
+order by  [MaPhieuMuonSach] desc")
 
         Dim dataTable = New DataTable()
         Dim result = _dataProvider.ExcuteQuery(query, dataTable)
@@ -32,10 +33,9 @@ Public Class PhieuMuonSachDAO
         Dim phieuMuonSach = New PhieuMuonSach()
         phieuMuonSach.MaPhieuMuonSach = 0
         For Each row In dataTable.Rows
-            phieuMuonSach = New PhieuMuonSach(row)
+            maPhieuDocSach = row("MaPhieuMuonSach").ToString()
         Next
 
-        maPhieuDocSach = phieuMuonSach.MaPhieuMuonSach
         Return result
     End Function
 
@@ -44,6 +44,8 @@ Public Class PhieuMuonSachDAO
         query &= "select * "
         query &= "from PhieuMuonSach "
         query &= "Where MaTheDocGia=" & maTheDocGia
+        query &= " And DeleteFlag='N'" & " "
+
 
         Dim dataTable = New DataTable()
         Dim result = _dataProvider.ExcuteQuery(query, dataTable)
@@ -58,7 +60,9 @@ Public Class PhieuMuonSachDAO
     End Function
     Public Function SelectAllPhieuMuonSachChuaTraByReaderId(ByRef listPhieuMuonSach As List(Of PhieuMuonSach), maTheDocGia As String) As Result
         Dim query = String.Empty
-        query = String.Format("Select * from PhieuMuonSach WHERE [MaTheDocGia]={0} AND [TinhTrang]=0", maTheDocGia)
+        query = String.Format("Select * from PhieuMuonSach
+WHERE [MaTheDocGia]={0} AND [TinhTrang]=0
+and DeleteFlag='N'", maTheDocGia)
 
         Dim dataTable = New DataTable()
         Dim result = _dataProvider.ExcuteQuery(query, dataTable)
@@ -76,7 +80,9 @@ Public Class PhieuMuonSachDAO
         Dim query As String = String.Empty
         query &= "select top 1 [MaPhieuMuonSach] "
         query &= "from PhieuMuonSach "
-        query &= "ORDER BY [MaTheDocGia] DESC "
+        query &= " Where DeleteFlag='N'" & " "
+        query &= "ORDER BY [MaPhieuMuonSach] DESC "
+
         Dim dataTable = New DataTable()
         Dim result = _dataProvider.ExcuteQuery(query, dataTable)
         For Each row In dataTable.Rows

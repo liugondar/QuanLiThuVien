@@ -6,7 +6,7 @@ Imports Utility
 Public Class frmTaoTheDocGia
 
 #Region "-   Fields and constructor   -"
-    Private didReaderTypeComboboxLoad As Boolean
+    Private _didReaderTypeComboboxLoad As Result
     Private _docGiaBus As DocGiaBus
     Private _quiDinhBus As QuiDinhBus
 
@@ -14,9 +14,17 @@ Public Class frmTaoTheDocGia
         _docGiaBus = New DocGiaBus()
         _quiDinhBus = New QuiDinhBus()
 
-        LoadReaderTypeComboboxData()
+        _didReaderTypeComboboxLoad = LoadReaderTypeComboboxData()
+        SetDefaultBirthDayTimePicker()
         LoadReaderIdTextBox()
         BindingCreateDatetimeToExpirationDate()
+    End Sub
+
+    Private Sub SetDefaultBirthDayTimePicker()
+        Dim quiDinh = New QuiDinh()
+        _quiDinhBus.LayTuoiToiDaVaToiThieu(quiDinh)
+        DateOfBirthDateTimePicker.Value = DateTime.Now.AddYears(-quiDinh.TuoiToiThieu)
+        DateOfBirthDateTimePicker.MaxDate = DateTime.Now.AddYears(-quiDinh.TuoiToiThieu)
     End Sub
 
     Private Function LoadReaderIdTextBox() As Result
@@ -70,8 +78,8 @@ Public Class frmTaoTheDocGia
 #End Region
 #Region "functions"
     Function InsertConfirm() As Boolean
-        If didReaderTypeComboboxLoad = False Then
-            MessageBox.Show("Dữ liệu nhập không thành công do lỗi không load được loại độc giả ")
+        If _didReaderTypeComboboxLoad.FlagResult = False Then
+            MessageBox.Show(_didReaderTypeComboboxLoad.ApplicationMessage)
             Return False
         End If
         Dim docGia = New DocGia()

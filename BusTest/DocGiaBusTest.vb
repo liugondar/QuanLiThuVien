@@ -1,5 +1,6 @@
 ﻿Imports System.Text
 Imports BUS
+Imports DAO
 Imports DTO
 Imports Microsoft.VisualStudio.TestTools.UnitTesting
 Imports Utility
@@ -104,8 +105,15 @@ Imports Utility
         Dim expected = New Result()
         Dim docGiaBus = New DocGiaBus()
         Dim tendocGia = String.Empty
+        Dim maTheDocGia = String.Empty
+        Dim docGiaDao = New DocGiaDAO()
+
         'act
-        Dim act = docGiaBus.SelectReaderNameById(tendocGia, 2)
+
+        Dim act = New Result()
+        If docGiaDao.LayMaTheDocGiaCuoiCung(maTheDocGia).FlagResult Then
+            act = docGiaBus.SelectReaderNameById(tendocGia, maTheDocGia)
+        End If
         'assert
         Assert.AreEqual(expected.FlagResult, act.FlagResult)
     End Sub

@@ -107,35 +107,35 @@ Partial Class frmTaoTheDocGia
         Me.UserNameTextBox.Location = New System.Drawing.Point(151, 119)
         Me.UserNameTextBox.Name = "UserNameTextBox"
         Me.UserNameTextBox.Size = New System.Drawing.Size(204, 20)
-        Me.UserNameTextBox.TabIndex = 25
+        Me.UserNameTextBox.TabIndex = 2
         '
         'EmailTextBox
         '
         Me.EmailTextBox.Location = New System.Drawing.Point(151, 157)
         Me.EmailTextBox.Name = "EmailTextBox"
         Me.EmailTextBox.Size = New System.Drawing.Size(204, 20)
-        Me.EmailTextBox.TabIndex = 26
+        Me.EmailTextBox.TabIndex = 3
         '
         'AddressTextBox
         '
         Me.AddressTextBox.Location = New System.Drawing.Point(151, 269)
         Me.AddressTextBox.Name = "AddressTextBox"
         Me.AddressTextBox.Size = New System.Drawing.Size(204, 20)
-        Me.AddressTextBox.TabIndex = 28
+        Me.AddressTextBox.TabIndex = 6
         '
         'DateOfBirthDateTimePicker
         '
         Me.DateOfBirthDateTimePicker.Location = New System.Drawing.Point(151, 233)
         Me.DateOfBirthDateTimePicker.Name = "DateOfBirthDateTimePicker"
         Me.DateOfBirthDateTimePicker.Size = New System.Drawing.Size(204, 20)
-        Me.DateOfBirthDateTimePicker.TabIndex = 29
+        Me.DateOfBirthDateTimePicker.TabIndex = 5
         '
         'DateCreateDateTimePicker
         '
         Me.DateCreateDateTimePicker.Location = New System.Drawing.Point(151, 303)
         Me.DateCreateDateTimePicker.Name = "DateCreateDateTimePicker"
         Me.DateCreateDateTimePicker.Size = New System.Drawing.Size(204, 20)
-        Me.DateCreateDateTimePicker.TabIndex = 31
+        Me.DateCreateDateTimePicker.TabIndex = 7
         '
         'ReaderTypeComboBox
         '
@@ -143,7 +143,7 @@ Partial Class frmTaoTheDocGia
         Me.ReaderTypeComboBox.Location = New System.Drawing.Point(151, 197)
         Me.ReaderTypeComboBox.Name = "ReaderTypeComboBox"
         Me.ReaderTypeComboBox.Size = New System.Drawing.Size(204, 21)
-        Me.ReaderTypeComboBox.TabIndex = 30
+        Me.ReaderTypeComboBox.TabIndex = 4
         '
         'ReaderIDTextBox
         '
@@ -151,7 +151,7 @@ Partial Class frmTaoTheDocGia
         Me.ReaderIDTextBox.Location = New System.Drawing.Point(151, 79)
         Me.ReaderIDTextBox.Name = "ReaderIDTextBox"
         Me.ReaderIDTextBox.Size = New System.Drawing.Size(204, 20)
-        Me.ReaderIDTextBox.TabIndex = 38
+        Me.ReaderIDTextBox.TabIndex = 1
         '
         'Label4
         '
@@ -168,7 +168,7 @@ Partial Class frmTaoTheDocGia
         Me.CreateButton.Location = New System.Drawing.Point(60, 388)
         Me.CreateButton.Name = "CreateButton"
         Me.CreateButton.Size = New System.Drawing.Size(100, 23)
-        Me.CreateButton.TabIndex = 36
+        Me.CreateButton.TabIndex = 9
         Me.CreateButton.Text = "Nhập"
         '
         'CreateAndCloseButton
@@ -176,7 +176,7 @@ Partial Class frmTaoTheDocGia
         Me.CreateAndCloseButton.Location = New System.Drawing.Point(203, 388)
         Me.CreateAndCloseButton.Name = "CreateAndCloseButton"
         Me.CreateAndCloseButton.Size = New System.Drawing.Size(100, 23)
-        Me.CreateAndCloseButton.TabIndex = 37
+        Me.CreateAndCloseButton.TabIndex = 10
         Me.CreateAndCloseButton.Text = "Nhập và đóng"
         '
         'Label1
@@ -195,7 +195,7 @@ Partial Class frmTaoTheDocGia
         Me.ExpirationDateTimePicker.Location = New System.Drawing.Point(151, 340)
         Me.ExpirationDateTimePicker.Name = "ExpirationDateTimePicker"
         Me.ExpirationDateTimePicker.Size = New System.Drawing.Size(204, 20)
-        Me.ExpirationDateTimePicker.TabIndex = 40
+        Me.ExpirationDateTimePicker.TabIndex = 8
         '
         'frmTaoTheDocGia
         '

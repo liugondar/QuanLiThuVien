@@ -10,6 +10,7 @@ Public Class TheLoaiSachDAO
     Public Function SelectAll(ByRef listTheLoaiSach As List(Of TheLoaiSach)) As Result
         Dim query = String.Empty
         query &= "Select * from dbo.TheLoaiSach"
+        query &= " Where DeleteFlag='N'" & " "
         Dim dataTable = New DataTable()
         Dim result = _dataProvider.ExcuteQuery(query, dataTable)
         For Each row As DataRow In dataTable.Rows
@@ -22,6 +23,7 @@ Public Class TheLoaiSachDAO
     Public Function SelectTheLoaiSachByMaTheLoaiSach(ByRef theLoaiSach As TheLoaiSach, maTheLoaiSach As String) As Result
         Dim query = String.Empty
         query &= "Select * from dbo.TheLoaiSach where MaTheLoaiSach=" & maTheLoaiSach
+        query &= " and DeleteFlag='N'" & " "
         Dim dataTable = New DataTable()
         Dim result = _dataProvider.ExcuteQuery(query, dataTable)
         For Each row As DataRow In dataTable.Rows

@@ -22,12 +22,25 @@ Imports Utility
         Dim expected = New Result()
         Dim phieuMuonSachDAO = New PhieuMuonSachDAO()
         Dim PhieuMuonSAch = New PhieuMuonSach()
-        PhieuMuonSAch.MaTheDocGia = 2
-        PhieuMuonSAch.NgayMuon = New DateTime(2018, 6, 6)
-        PhieuMuonSAch.HanTra = New DateTime(2018, 6, 12)
-        PhieuMuonSAch.TongSoSachMuon = 2
-        'act
-        Dim act = phieuMuonSachDAO.InsertOne(PhieuMuonSAch)
+        Dim maPhieuMuonSach = String.Empty
+        phieuMuonSachDAO.SelectIdTheLastOne(maPhieuMuonSach)
+        maPhieuMuonSach = maPhieuMuonSach + 1
+
+        Dim docGiaDao = New DocGiaDAO()
+        Dim maTheDocGia = String.Empty
+        Dim resultLayMaThe = docGiaDao.LayMaTheDocGiaCuoiCung(maTheDocGia)
+
+        Dim act = New Result
+        If resultLayMaThe.FlagResult Then
+            PhieuMuonSAch.MaPhieuMuonSach = maPhieuMuonSach
+            PhieuMuonSAch.MaTheDocGia = maTheDocGia
+            PhieuMuonSAch.NgayMuon = New DateTime(2018, 6, 6)
+            PhieuMuonSAch.HanTra = New DateTime(2018, 6, 12)
+            PhieuMuonSAch.TongSoSachMuon = 2
+            'act
+            act = phieuMuonSachDAO.InsertOne(PhieuMuonSAch)
+        End If
+
         'assert
         Assert.AreEqual(expected.FlagResult, act.FlagResult)
     End Sub

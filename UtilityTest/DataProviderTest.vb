@@ -4,16 +4,6 @@ Imports Utility
 
 <TestClass()> Public Class DataProviderTest
 #Region "excute nonquery test"
-    <TestMethod()> Public Sub givenValidQuery_WhenExcutingNonquery_thenTrueResultReturned()
-        'Arrange
-        Dim dataProvider = New DataProvider()
-        Dim arrange = New Result()
-        'Actual
-        Dim actual = dataProvider.ExcuteNonquery("EXECUTE USP_ThemTheDocGia @TenDocGia=N'Dinh',@Email=N'ahihi',@DiaChi =N'122c',@MaLoaiDocGia=1,@NgaySinh='1/1/1998',@NgayTao='5/30/2018 12:40:29 AM',@NgayHetHan='11/30/2018 12:40:29 AM'")
-        'Assert
-        Assert.AreEqual(arrange.FlagResult, actual.FlagResult)
-    End Sub
-
     <TestMethod()> Public Sub givenInvalidQuery_WhenExcutingNonquery_thenFalseResultReturned()
         'Arrange
         Dim dataProvider = New DataProvider()
