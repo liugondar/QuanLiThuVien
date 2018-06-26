@@ -81,6 +81,16 @@ Public Class SachBus
         Return result
     End Function
 
+    Public Function SelectALLBySpecificConditions(ByRef listSach As List(Of Sach), sach As Sach,
+                                               NgayXuatBanMin As DateTime, NgayXuatBanMax As DateTime,
+                                               NgayNhapMin As DateTime, NgayNhapMax As DateTime,
+                                               TriGiaMin As Double, TriGiaMax As Double) As Result
+        Return _sachDAO.SelectAllBySpecificConditions(listSach, sach,
+                                                      NgayXuatBanMin, NgayXuatBanMax,
+                                                      NgayNhapMin, NgayNhapMax,
+                                                        TriGiaMin, TriGiaMax)
+    End Function
+
     Public Function SelectAllByMaSach(listSach As List(Of Sach), maSach As String) As Result
         Dim result = _sachDAO.SelectAllByMaSach(listSach, maSach)
         Return result

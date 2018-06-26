@@ -117,82 +117,27 @@ Public Class frmQuanLiSach
 #Region "-   search Button click   -"
     Private Sub SearchButton_Click(sender As Object, e As EventArgs) Handles SearchButton.Click
 
-#Region "-   Lấy thông tin input    -"
-        Dim maSach As Object = Nothing
-        Dim maTacGia As Object = Nothing
-        Dim maTheLoaiSach As Object = Nothing
-        Dim tenNhaXuatBan As Object = Nothing
-        Dim ngayXuatBanMin As Date = Nothing
-        Dim ngayXuatBanMax As Date = Nothing
-        Dim ngayNhapMin As Date = Nothing
-        Dim ngayNhapMax As Date = Nothing
-        Dim triGiaMin As Decimal = Nothing
-        Dim triGiaMax As Decimal = Nothing
-        Dim listSachTheoMaSach As List(Of Sach) = Nothing
-        Dim listSachTheoTacGia As List(Of Sach) = Nothing
-        Dim listSachTheoTheLoai As List(Of Sach) = Nothing
-        Dim listSachTheoNhaXuatBan As List(Of Sach) = Nothing
-        Dim listSachTheoNgayXuatBan As List(Of Sach) = Nothing
-        Dim listSachTheoNgayNhap As List(Of Sach) = Nothing
-        Dim listSachTheoTriGia As List(Of Sach) = Nothing
-        LoadInputData(maSach, maTacGia, maTheLoaiSach, tenNhaXuatBan, ngayXuatBanMin, ngayXuatBanMax, ngayNhapMin, ngayNhapMax, triGiaMin, triGiaMax, listSachTheoMaSach, listSachTheoTacGia, listSachTheoTheLoai, listSachTheoNhaXuatBan, listSachTheoNgayXuatBan, listSachTheoNgayNhap, listSachTheoTriGia)
-#End Region
+        'get input data
+        Dim sach = New Sach()
+        sach.TenSach = BookTitleComboBox.SelectedValue
+        sach.MaTacGia = AuthorComboBox.SelectedValue
+        sach.MaTheLoaiSach = CategoryComboBox.SelectedValue
+        sach.TenNhaXuatBan = If(PublisherComboBox.SelectedValue = "-----------------------------", -1, PublisherComboBox.SelectedValue)
+        Dim ngayXuatBanMin = MinPublishYearDateTimePicker.Value
+        Dim ngayXuatBanMax = MaxPublishYearDateTimePicker.Value
+        Dim ngayNhapMin = MinDateInputDateTimePicker.Value
+        Dim ngayNhapMax = MaxDateInputDateTimePicker.Value
+        Dim triGiaMin = MinPriceNumericUpDown.Value
+        Dim triGiaMax = MaxPriceNumericUpDown.Value
 
-#Region "-   Guard clause   -"
-        Dim resultSelectAllByMaSach = _sachBus.SelectAllByMaSach(listSachTheoMaSach, maSach)
-        Dim resultSelectAllByTacGia = _sachBus.SelectAllByMaTacGia(listSachTheoTacGia, maTacGia)
-        Dim resultSelectAllByTheLoai = _sachBus.SelectAllByMaTheLoaiSach(listSachTheoTheLoai, maTheLoaiSach)
-        Dim resultSelectAllByNhaXuatBan = _sachBus.SelectAllByTenNhaXuatBan(listSachTheoNhaXuatBan, tenNhaXuatBan)
-        Dim resultSelectAllByNgayXuatBan = _sachBus.SelectAllByNgayXuatBan(listSachTheoNgayXuatBan, ngayXuatBanMin, ngayXuatBanMax)
-        Dim resultSelectAllByNgayNhap = _sachBus.SelectAllByNgayNhap(listSachTheoNgayNhap, ngayNhapMin, ngayNhapMax)
-        Dim resultSelectAllByTriGia = _sachBus.SelectAllByTriGia(listSachTheoTriGia, triGiaMin, triGiaMax)
-
-        Dim layListSachThoaManResult = resultSelectAllByMaSach.FlagResult And
-        resultSelectAllByTacGia.FlagResult And
-        resultSelectAllByTheLoai.FlagResult And
-        resultSelectAllByNhaXuatBan.FlagResult And
-        resultSelectAllByNgayXuatBan.FlagResult And
-        resultSelectAllByNgayNhap.FlagResult And
-        resultSelectAllByTriGia.FlagResult
-        If layListSachThoaManResult = False Then Return
-#End Region
-
-#Region "-  Load list sách thỏa mãn  -"
-        Dim sachComparer = New SachComparer()
-
-        Dim listThoaMan = listSachTheoTriGia.Intersect(listSachTheoNgayNhap, sachComparer).ToList()
-        listThoaMan = listThoaMan.Intersect(listSachTheoNgayXuatBan, New SachComparer()).ToList()
-
-        If BookTitleComboBox.SelectedValue <> -1 Then listThoaMan = listThoaMan.Intersect(listSachTheoMaSach, sachComparer).ToList()
-        If PublisherComboBox.SelectedValue <> "-----------------------------" Then listThoaMan = listThoaMan.Intersect(listSachTheoNhaXuatBan, sachComparer).ToList()
-        If AuthorComboBox.SelectedValue <> -1 Then listThoaMan.Intersect(listSachTheoTacGia, sachComparer).ToList()
-        If CategoryComboBox.SelectedValue <> -1 Then listThoaMan = listThoaMan.Intersect(listSachTheoTheLoai, sachComparer).ToList()
-
+        'Load searched list to datagridview
+        Dim listThoaMan = New List(Of Sach)
+        _sachBus.SelectALLBySpecificConditions(listThoaMan, sach,
+                                               ngayXuatBanMin, ngayXuatBanMax,
+                                                ngayNhapMin, ngayNhapMax,
+                                                triGiaMin, triGiaMax)
         LoadListSach(listThoaMan)
-#End Region
 
-    End Sub
-
-    Private Sub LoadInputData(ByRef maSach As Object, ByRef maTacGia As Object, ByRef maTheLoaiSach As Object, ByRef tenNhaXuatBan As Object, ByRef ngayXuatBanMin As Date, ByRef ngayXuatBanMax As Date, ByRef ngayNhapMin As Date, ByRef ngayNhapMax As Date, ByRef triGiaMin As Decimal, ByRef triGiaMax As Decimal, ByRef listSachTheoMaSach As List(Of Sach), ByRef listSachTheoTacGia As List(Of Sach), ByRef listSachTheoTheLoai As List(Of Sach), ByRef listSachTheoNhaXuatBan As List(Of Sach), ByRef listSachTheoNgayXuatBan As List(Of Sach), ByRef listSachTheoNgayNhap As List(Of Sach), ByRef listSachTheoTriGia As List(Of Sach))
-        maSach = BookTitleComboBox.SelectedValue
-        maTacGia = AuthorComboBox.SelectedValue
-        maTheLoaiSach = CategoryComboBox.SelectedValue
-        tenNhaXuatBan = PublisherComboBox.SelectedValue
-        ngayXuatBanMin = MinPublishYearDateTimePicker.Value
-        ngayXuatBanMax = MaxPublishYearDateTimePicker.Value
-        ngayNhapMin = MinDateInputDateTimePicker.Value
-        ngayNhapMax = MaxDateInputDateTimePicker.Value
-        triGiaMin = MinPriceNumericUpDown.Value
-        triGiaMax = MaxPriceNumericUpDown.Value
-
-
-        listSachTheoMaSach = New List(Of Sach)
-        listSachTheoTacGia = New List(Of Sach)
-        listSachTheoTheLoai = New List(Of Sach)
-        listSachTheoNhaXuatBan = New List(Of Sach)
-        listSachTheoNgayXuatBan = New List(Of Sach)
-        listSachTheoNgayNhap = New List(Of Sach)
-        listSachTheoTriGia = New List(Of Sach)
     End Sub
 
     Function LoadListSach(listSach As List(Of Sach))

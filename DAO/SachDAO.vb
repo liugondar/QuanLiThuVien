@@ -44,6 +44,43 @@ Public Class SachDAO
         End If
         Return result
     End Function
+    Public Function SelectAllBySpecificConditions(listSach As List(Of Sach), sachYeuCau As Sach,
+                                                  ngayXuatBanMin As Date, ngayXuatBanMax As Date,
+                                                  ngayNhapMin As Date, ngayNhapMax As Date,
+                                                  triGiaMin As Double, triGiaMax As Double) As Result
+        Dim query = String.Empty
+
+        Dim dieuKienMaSach = If(sachYeuCau.TenSach = -1, " 1=1 ", " TenSach=" & sachYeuCau.TenSach)
+        Dim dieuKienTenNhaXuatBan = If(sachYeuCau.TenNhaXuatBan = -1, " 1=1 ", "TenNhaXuatBan=" & sachYeuCau.TenNhaXuatBan)
+        Dim dieuKienMaTacGia = If(sachYeuCau.MaTacGia = -1, " 1=1 ", "MaTacGia=" & sachYeuCau.MaTacGia)
+        Dim dieuKienMaTheLoaiSach = If(sachYeuCau.MaTheLoaiSach = -1, " 1=1 ", "MaTheLoaiSach=" & sachYeuCau.MaTheLoaiSach)
+
+        Dim ngayxbMinConverted = ngayXuatBanMin.ToString("MMMM dd, yyyy")
+        Dim ngayxbMaxConverted = ngayXuatBanMax.ToString("MMMM dd, yyyy")
+        Dim ngayNhapMinConverted = ngayNhapMin.ToString("MMMM dd, yyyy")
+        Dim ngayNhapMaxConverted = ngayNhapMax.ToString("MMMM dd, yyyy")
+
+        query = String.Format("select * 
+from Sach
+where {0} and {1} and {2} and {3}
+and NgayNhap between '{4}' and '{5}'
+and NgayXuatBan between '{6}' and '{7}'
+and TriGia between {8} and {9}",
+dieuKienMaSach, dieuKienMaTheLoaiSach, dieuKienMaTacGia, dieuKienTenNhaXuatBan,
+ngayNhapMin, ngayNhapMax,
+ngayXuatBanMin, ngayXuatBanMax,
+triGiaMin, triGiaMax)
+
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        If result.FlagResult = True Then
+            For Each row In dataTable.Rows
+                Dim sachTemp = New Sach(row)
+                listSach.Add(sachTemp)
+            Next
+        End If
+        Return result
+    End Function
 
     Public Function SelectAllByMaSach(ByRef listSach As List(Of Sach), maSach As String) As Result
         Dim query = String.Empty

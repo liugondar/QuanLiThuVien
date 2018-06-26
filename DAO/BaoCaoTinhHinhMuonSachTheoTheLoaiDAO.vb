@@ -7,7 +7,7 @@ Public Class BaoCaoTinhHinhMuonSachTheoTheLoaiDAO
     Private _dataProvider As DataProvider
 #End Region
 
-#Region "-  Fields   -"
+#Region "-  Constructor   -"
     Public Sub New()
         _dataProvider = New DataProvider()
     End Sub
@@ -48,7 +48,6 @@ maBaoCao, tongSoLuotMuon)
         Next
         Return result
     End Function
-
 
 #End Region
 
