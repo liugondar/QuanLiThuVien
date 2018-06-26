@@ -77,6 +77,7 @@
     <Import Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaoCaoTinhHinhMuonSachTheoTheLoaiTest.vb" />
     <Compile Include="QuiDinhtest.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -98,6 +99,7 @@
     <Compile Include="SachTest.vb" />
     <Compile Include="TacGiaTest.vb" />
     <Compile Include="TheLoaiSachTest.vb" />
+    <Compile Include="ChiTietBaoCaoTinhHinhMuonSachTheoTheLoaiTest.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

@@ -92,6 +92,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmBaoCaoTinhHinhMuonSachTheoTheLoai.Designer.vb">
+      <DependentUpon>frmBaoCaoTinhHinhMuonSachTheoTheLoai.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmBaoCaoTinhHinhMuonSachTheoTheLoai.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmChoMuonSach.Designer.vb">
       <DependentUpon>frmChoMuonSach.vb</DependentUpon>
     </Compile>
@@ -146,6 +152,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmBaoCaoTinhHinhMuonSachTheoTheLoai.resx">
+      <DependentUpon>frmBaoCaoTinhHinhMuonSachTheoTheLoai.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmChoMuonSach.resx">
       <DependentUpon>frmChoMuonSach.vb</DependentUpon>
     </EmbeddedResource>

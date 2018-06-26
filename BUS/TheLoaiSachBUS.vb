@@ -29,5 +29,9 @@ Public Class TheLoaiSachBUS
         Return result
     End Function
 
+    Public Function GetTenTheLoaiSachByID(ByRef tentheLoaiSach As String, maTheLoaiSach As String) As Result
+        Dim result = _theLoaiSachDAO.GetTenTheLoaiSachByID(tentheLoaiSach, maTheLoaiSach)
+        Return result
+    End Function
 #End Region
 End Class

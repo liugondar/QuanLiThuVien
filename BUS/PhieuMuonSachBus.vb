@@ -112,6 +112,7 @@ Public Class PhieuMuonSachBus
     Public Function SelectIdTheLastOne(ByRef maphieuMuonSach As String) As Result
         Return _phieuMuonSachDAO.SelectIdTheLastOne(maphieuMuonSach)
     End Function
+
 #End Region
 
 End Class

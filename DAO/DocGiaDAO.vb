@@ -68,6 +68,7 @@ Public Class DocGiaDAO
             Dim docGia = New DocGia(row)
             listDocGia.Add(docGia)
         Next
+
         Return result
     End Function
 

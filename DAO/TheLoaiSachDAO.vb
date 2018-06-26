@@ -38,6 +38,18 @@ Public Class TheLoaiSachDAO
         Return result
     End Function
 
+    Public Function GetTenTheLoaiSachByID(ByRef tentheLoaiSach As String, maTheLoaiSach As String) As Object
+        Dim query = String.Format("select [TenTheLoaiSach]
+from TheLoaiSach 
+where MaTheLoaiSach={0} and DeleteFlag='N'", maTheLoaiSach)
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        For Each row As DataRow In dataTable.Rows
+            tentheLoaiSach = row("TenTheLoaiSach").ToString()
+        Next
+        Return result
+    End Function
+
 #End Region
 
 End Class

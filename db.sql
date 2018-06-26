@@ -85,7 +85,7 @@ CREATE TABLE dbo.TacGia
 (
     MaTacGia INT IDENTITY PRIMARY KEY,
     -- primary key column
-    TenTacGia NVARCHAR(50) not null,
+    TenTacGia NVARCHAR(50) not null default N'TenTacGia',
     DeleteFlag NVARCHAR(1) not null default 'N',
 );
 GO
@@ -100,7 +100,7 @@ CREATE TABLE dbo.TheLoaiSach
 (
     MaTheLoaiSach INT IDENTITY PRIMARY KEY,
     -- primary key column
-    TenTheLoaiSach NVARCHAR(50) not null,
+    TenTheLoaiSach NVARCHAR(50) not null DEFAULT N'TenLoaiSach',
     DeleteFlag NVARCHAR(1) not null default 'N',
 );
 GO
@@ -117,11 +117,11 @@ CREATE TABLE dbo.Sach
     -- primary key column
     MaTheLoaiSach Int not null,
     MaTacGia Int not null,
-    TenNhaXuatBan NVARCHAR(50) not null,
-    TenSach NVARCHAR(50),
+    TenNhaXuatBan NVARCHAR(50) not null default N'TenNXB',
+    TenSach NVARCHAR(50) not null default N'TenSach',
     NgayXuatBan date not null DEFAULT getdate(),
     NgayNhap date not null DEFAULT getdate(),
-    TriGia INT not null,
+    TriGia INT not null DEFAULT 0,
     TinhTrang INT not null DEFAULT 0,-- 0 la con, 1 la het 
     DeleteFlag NVARCHAR(1) not null default 'N',
     CONSTRAINT FK_Sach_TacGia FOREIGN KEY(MaTacGia) REFERENCES TacGia(MaTacGia),
@@ -171,75 +171,75 @@ CREATE TABLE dbo.ChiTietPhieuMuonSach
 );
 GO
 
--- Create a new table called 'BaoCaoTinhHinhMuonSach' in schema 'SchemaName'
+-- Create a new table called 'BaoCaoTinhHinhMuonSachTheoTheLoai' in schema 'SchemaName'
 -- Drop the table if it already exists
-IF OBJECT_ID('dbo.BaoCaoTinhHinhMuonSach', 'U') IS NOT NULL
-DROP TABLE dbo.BaoCaoTinhHinhMuonSach
+IF OBJECT_ID('dbo.BaoCaoTinhHinhMuonSachTheoTheLoai', 'U') IS NOT NULL
+DROP TABLE dbo.BaoCaoTinhHinhMuonSachTheoTheLoai
 GO
 -- Create the table in the specified schema
-CREATE TABLE dbo.BaoCaoTinhHinhMuonSach
+CREATE TABLE dbo.BaoCaoTinhHinhMuonSachTheoTheLoai
 (
-    MaBaoCaoTinhHinhMuonSach INT IDENTITY NOT NULL PRIMARY KEY,
+    MaBaoCaoTinhHinhMuonSachTheoTheLoai INT IDENTITY NOT NULL PRIMARY KEY,
     -- primary key column
     ThoiGian date not null default getdate(),
     DeleteFlag NVARCHAR(1) not null default 'N',
-    TongSoLuotMuon int not null
+    TongSoLuotMuon int not null default 0
 );
 GO
 
 -- Create a new table called 'ChiTietBaoCaoTinhHinhMuonSach' in schema 'SchemaName'
 -- Drop the table if it already exists
-IF OBJECT_ID('dbo.ChiTietBaoCaoTinhHinhMuonSach', 'U') IS NOT NULL
-DROP TABLE dbo.ChiTietBaoCaoTinhHinhMuonSach
+IF OBJECT_ID('dbo.ChiTietBaoCaoTinhHinhMuonSachTheotheLoai', 'U') IS NOT NULL
+DROP TABLE dbo.ChiTietBaoCaoTinhHinhMuonSachTheotheLoai
 GO
 -- Create the table in the specified schema
-CREATE TABLE dbo.ChiTietBaoCaoTinhHinhMuonSach
+CREATE TABLE dbo.ChiTietBaoCaoTinhHinhMuonSachTheotheLoai
 (
-    MaChiTietBaoCaoTinhHinhMuonSach INT IDENTITY NOT NULL PRIMARY KEY,
+    MaChiTietBaoCaoTinhHinhMuonSachTheoTheLoai INT IDENTITY NOT NULL PRIMARY KEY,
     -- primary key column
-    MaBaoCaoTinhHinhMuonSach int not null,
-    MaChiTietPhieuMuonSach int not null,
-    SoLuongMuon int not null,
-    TiLe FLOAT not null,
+    MaBaoCaoTinhHinhMuonSachTheoTheLoai int not null,
+    MaTheLoaiSach int not null ,
+    SoLuongMuon int not null DEFAULT 0,
+    TiLe FLOAT not null default 0,
     DeleteFlag NVARCHAR(1) not null default 'N',
-    CONSTRAINT FK_ChiTietBaoCaoTinhHinhMuonSach_BaoCaoTinhHinhMuonSach FOREIGN KEY(MaBaoCaoTinhHinhMuonSach)
-    REFERENCES BaoCaoTinhHinhMuonSach(MaBaoCaoTinhHinhMuonSach),
-    CONSTRAINT FK_ChiTietBaoCaoTinhHinhMuonSach_ChiTietPhieuMuonSach FOREIGN KEY(MaChiTietPhieuMuonSach)
-    REFERENCES ChiTietPhieuMuonSach(MaChiTietPhieuMuonSach),
+    CONSTRAINT FK_ChiTietBaoCaoTinhHinhMuonSach_BaoCaoTinhHinhMuonSach FOREIGN KEY(MaBaoCaoTinhHinhMuonSachTheoTheLoai)
+    REFERENCES BaoCaoTinhHinhMuonSachTheoTheLoai(MaBaoCaoTinhHinhMuonSachTheoTheLoai),
+    CONSTRAINT FK_ChiTietBaoCaoTinhHinhMuonSach_TheLoaiSAch FOREIGN KEY(MaTheLoaiSach)
+    REFERENCES TheLoaiSach(MaTheLoaiSach),
 );
 GO
 
--- Create a new table called 'BaoCaoSachTre' in schema 'dbo'
+-- Create a new table called 'BaoCaoSachTraTre' in schema 'dbo'
 -- Drop the table if it already exists
-IF OBJECT_ID('dbo.BaoCaoSachTre', 'U') IS NOT NULL
-DROP TABLE dbo.BaoCaoSachTre
+IF OBJECT_ID('dbo.BaoCaoSachTraTre', 'U') IS NOT NULL
+DROP TABLE dbo.BaoCaoSachTraTre
 GO
 -- Create the table in the specified schema
-CREATE TABLE dbo.BaoCaoSachTre
+CREATE TABLE dbo.BaoCaoSachTraTre
 (
-    MaBaoCaoSachTre INT IDENTITY NOT NULL PRIMARY KEY,
+    MaBaoCaoSachTraTre INT IDENTITY NOT NULL PRIMARY KEY,
     -- primary key column
     ThoiGian date not null DEFAULT getdate(),
     DeleteFlag NVARCHAR(1) not null default 'N',
 );
 GO
 
--- Create a new table called 'ChiTietBaoCaoSachTre' in schema 'SchemaName'
+-- Create a new table called 'ChiTietBaoCaoSachTraTre' in schema 'SchemaName'
 -- Drop the table if it already exists
-IF OBJECT_ID('dbo.ChiTietBaoCaoSachTre', 'U') IS NOT NULL
-DROP TABLE dbo.ChiTietBaoCaoSachTre
+IF OBJECT_ID('dbo.ChiTietBaoCaoSachTraTre', 'U') IS NOT NULL
+DROP TABLE dbo.ChiTietBaoCaoSachTraTre
 GO
 -- Create the table in the specified schema
-CREATE TABLE dbo.ChiTietBaoCaoSachTre
+CREATE TABLE dbo.ChiTietBaoCaoSachTraTre
 (
-    MaChiTietBaoCaoSachTre INT NOT NULL IDENTITY PRIMARY KEY,
+    MaChiTietBaoCaoSachTraTre INT NOT NULL IDENTITY PRIMARY KEY,
     -- primary key column
-    MaBaoCaoSachTre int not null,
+    MaBaoCaoSachTraTre int not null,
     MaPhieuMuonSach int not null,
     SoNgayTre int not null,
     DeleteFlag NVARCHAR(1) not null default 'N',
-    CONSTRAINT FK_ChiTietBaoCaoSachTre_BaoCaoSachTren FOREIGN KEY(MaBaoCaoSachTre)
-    REFERENCES BaoCaoSachTre(MaBaoCaoSachTre),
+    CONSTRAINT FK_ChiTietBaoCaoSachTre_BaoCaoSachTren FOREIGN KEY(MaBaoCaoSachTraTre)
+    REFERENCES BaoCaoSachTraTre(MaBaoCaoSachTraTre),
     CONSTRAINT FK_ChiTietBaoCaoSachTre_PhieuMuonSach FOREIGN KEY(MaPhieuMuonSach)
     REFERENCES PhieuMuonSach(MaPhieuMuonSach)
 );
@@ -337,7 +337,41 @@ BEGIN
         (TenSach,MaTheLoaiSach,MaTacGia,TenNhaXuatBan,NgayXuatBan,NgayNhap,TriGia)
     VALUES(@TenSach, @MaTheLoaiSach, @MaTacGia, @TenNhaXuatBan, @NgayXuatBan, @NgayNhap, @TriGia)
 END
-    GO
+GO
+
+--create procducer insert baocaotinhhinhmuonsachtheotheloai
+create PROC USP_NhapBaoCaoTinhHinhMuonSachTheoTheLoai
+    @ThoiGian date
+as
+BEGIN
+    insert into dbo.BaoCaoTinhHinhMuonSachTheoTheLoai
+        (ThoiGian)
+    VALUES(@ThoiGian)
+END
+go
+
+create proc USP_UpdateSoLuongSachMuonTheoTheLoai
+    @MaBaoCaoTinhHinhMuonSachTheoTheLoai int,
+    @TongSoLuotMuon int
+as
+BEGIN
+    update dbo.BaoCaoTinhHinhMuonSachTheoTheLoai
+    Set TongSoLuotMuon=@TongSoLuotMuon
+    where MaBaoCaoTinhHinhMuonSachTheoTheLoai=@MaBaoCaoTinhHinhMuonSachTheoTheLoai
+END
+go
+--create procducer insert baocaotinhhinhmuonsachtheotheloai
+create PROC USP_NhapChiTietBaoCaoTinhHinhMuonSachTheoTheLoai
+    @MaBaoCaoTinhHinhMuonSachTheoTheLoai int,
+    @MaTheLoaiSach int,
+    @SoLuongMuon int
+as
+BEGIN
+    insert into dbo.ChiTietBaoCaoTinhHinhMuonSachTheoTheLoai
+        (MaBaoCaoTinhHinhMuonSachTheoTheLoai,MaTheLoaiSach,SoLuongMuon)
+    VALUES(@MaBaoCaoTinhHinhMuonSachTheoTheLoai, @MaTheLoaiSach, @SoLuongMuon )
+END
+go
 
 -- Init qui dinh
 INSERT INTO dbo.QuiDinh
@@ -667,3 +701,8 @@ VALUES(N'Bruce Clark')
 INSERT INTO dbo.TacGia
     (TenTacGia)
 VALUES(N'Matie Jefferson')
+
+SELECT top 1
+    [MaBaoCaoTinhHinhMuonSachTheoTheLoai]
+from BaoCaoTinhHinhMuonSachTheoTheLoai
+ORDER by [MaBaoCaoTinhHinhMuonSachTheoTheLoai] desc

@@ -32,4 +32,10 @@
         frm.MdiParent = Me
         frm.Show()
     End Sub
+
+    Private Sub TìnhHìnhMượnSáchTheoThểLoạiToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TìnhHìnhMượnSáchTheoThểLoạiToolStripMenuItem.Click
+        Dim frm = New frmBaoCaoTinhHinhMuonSachTheoTheLoai()
+        frm.MdiParent = Me
+        frm.Show()
+    End Sub
 End Class

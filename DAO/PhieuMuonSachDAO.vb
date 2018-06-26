@@ -34,11 +34,9 @@ Public Class PhieuMuonSachDAO
 #Region "-   Retrieve data    -"
 
     Public Function GetTheLastPhieuMuonSachID(ByRef maPhieuDocSach As String) As Result
+        maPhieuDocSach = 0
         Dim query = String.Empty
-        query = String.Format("select top 1 [MaPhieuMuonSach]
-from PhieuMuonSach
-where DeleteFlag='N'
-order by  [MaPhieuMuonSach] desc")
+        query = String.Format("select top 1 [MaPhieuMuonSach] from PhieuMuonSach where DeleteFlag='N' order by [MaPhieuMuonSach] desc")
 
         Dim dataTable = New DataTable()
         Dim result = _dataProvider.ExcuteQuery(query, dataTable)
@@ -104,6 +102,5 @@ and DeleteFlag='N'", maTheDocGia)
         Next
         Return result
     End Function
-
 #End Region
 End Class

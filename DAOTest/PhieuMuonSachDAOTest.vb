@@ -1,4 +1,5 @@
 ﻿Imports System.Text
+Imports BUS
 Imports DAO
 Imports DTO
 Imports Microsoft.VisualStudio.TestTools.UnitTesting
@@ -64,5 +65,4 @@ Imports Utility
         'assert
         Assert.AreEqual(expected.FlagResult, act.FlagResult)
     End Sub
-
 End Class
