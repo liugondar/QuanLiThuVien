@@ -30,6 +30,15 @@ EXEC USP_NhapChiTietBaoCaoTinhHinhMuonSachTheoTheLoai
 
 #End Region
 
+#Region "-   Update    -"
+    Public Function UpdateTiLe(maChiTietBaoCaoTinhHinhMuonSachTheoTheLoai As String, tiLe As Single) As Result
+        Dim query = String.Format("execute USP_UpdateTiLeChiTietBaoCaoTheoTheLoai
+ @MaChiTietBaoCaoTinhHinhMuonSachTheoTheLoai={0},
+@tiLe={1}", maChiTietBaoCaoTinhHinhMuonSachTheoTheLoai, tiLe)
+        Return _dataProvider.ExcuteNonquery(query)
+    End Function
+#End Region
+
 #Region "-   Retrieve data    -"
     Public Function GetSoLuongSachMuonByMaTheLoaiSachAndThoiGian(ByRef soLuongSachMuon As String,
                                                                  maTheLoaiSach As String, thoiGian As DateTime) As Result
@@ -61,6 +70,8 @@ where MaBaoCaoTinhHinhMuonSachTheoTheLoai={0}", maBaoCaoTinhHinhMuonSachTheoTheL
         Next
         Return result
     End Function
+
+
 #End Region
 
 End Class

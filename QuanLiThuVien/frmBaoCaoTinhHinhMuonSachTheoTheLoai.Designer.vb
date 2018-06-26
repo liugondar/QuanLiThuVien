@@ -26,6 +26,7 @@ Partial Class frmBaoCaoTinhHinhMuonSachTheoTheLoai
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ChiTietBaoCaoDataGridView = New System.Windows.Forms.DataGridView()
         Me.ConfirmMetroButton = New MetroFramework.Controls.MetroButton()
+        Me.TongLuotMuonLabel = New System.Windows.Forms.Label()
         CType(Me.ChiTietBaoCaoDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -56,17 +57,28 @@ Partial Class frmBaoCaoTinhHinhMuonSachTheoTheLoai
         '
         'ConfirmMetroButton
         '
-        Me.ConfirmMetroButton.Location = New System.Drawing.Point(340, 394)
+        Me.ConfirmMetroButton.Location = New System.Drawing.Point(364, 424)
         Me.ConfirmMetroButton.Name = "ConfirmMetroButton"
         Me.ConfirmMetroButton.Size = New System.Drawing.Size(75, 23)
-        Me.ConfirmMetroButton.TabIndex = 3
+        Me.ConfirmMetroButton.TabIndex = 1
         Me.ConfirmMetroButton.Text = "Xác nhận"
+        '
+        'TongLuotMuonLabel
+        '
+        Me.TongLuotMuonLabel.AutoSize = True
+        Me.TongLuotMuonLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TongLuotMuonLabel.Location = New System.Drawing.Point(566, 395)
+        Me.TongLuotMuonLabel.Name = "TongLuotMuonLabel"
+        Me.TongLuotMuonLabel.Size = New System.Drawing.Size(128, 18)
+        Me.TongLuotMuonLabel.TabIndex = 4
+        Me.TongLuotMuonLabel.Text = "Tổng lượt mượn: 0"
         '
         'frmBaoCaoTinhHinhMuonSachTheoTheLoai
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.ClientSize = New System.Drawing.Size(800, 458)
+        Me.Controls.Add(Me.TongLuotMuonLabel)
         Me.Controls.Add(Me.ConfirmMetroButton)
         Me.Controls.Add(Me.ChiTietBaoCaoDataGridView)
         Me.Controls.Add(Me.Label1)
@@ -83,4 +95,5 @@ Partial Class frmBaoCaoTinhHinhMuonSachTheoTheLoai
     Friend WithEvents Label1 As Label
     Friend WithEvents ChiTietBaoCaoDataGridView As DataGridView
     Friend WithEvents ConfirmMetroButton As MetroFramework.Controls.MetroButton
+    Friend WithEvents TongLuotMuonLabel As Label
 End Class

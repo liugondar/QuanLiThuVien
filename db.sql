@@ -358,6 +358,7 @@ BEGIN
     update dbo.BaoCaoTinhHinhMuonSachTheoTheLoai
     Set TongSoLuotMuon=@TongSoLuotMuon
     where MaBaoCaoTinhHinhMuonSachTheoTheLoai=@MaBaoCaoTinhHinhMuonSachTheoTheLoai
+        and DeleteFlag='N'
 END
 go
 --create procducer insert baocaotinhhinhmuonsachtheotheloai
@@ -706,3 +707,37 @@ SELECT top 1
     [MaBaoCaoTinhHinhMuonSachTheoTheLoai]
 from BaoCaoTinhHinhMuonSachTheoTheLoai
 ORDER by [MaBaoCaoTinhHinhMuonSachTheoTheLoai] desc
+
+DELETE  from ChiTietPhieuMuonSach
+DELETE  from PhieuMuonSach
+DELETE  from ChiTietBaoCaoTinhHinhMuonSachTheotheLoai
+delete  from BaoCaoTinhHinhMuonSachTheoTheLoai
+select *
+from BaoCaoTinhHinhMuonSachTheoTheLoai
+SELECT *
+from ChiTietBaoCaoTinhHinhMuonSachTheotheLoai
+where MaBaoCaoTinhHinhMuonSachTheoTheLoai=7
+
+select *
+from PhieuMuonSach
+select *
+from ChiTietPhieuMuonSach
+
+select MaPhieuMuonSach
+from PhieuMuonSach
+where YEAR(NgayMuon)='2018' and MONTH(NgayMuon)='6'
+    And DeleteFlag='N'
+
+select COUNT(DISTINCT(ctpms.MaChiTietPhieuMuonSach)) as SoLuotMuon
+from PhieuMuonSach pms, ChiTietPhieuMuonSach ctpms, sach s
+where ctpms.DeleteFlag='N' and s.DeleteFlag='N' and pms.DeleteFlag='N'
+    and pms.MaPhieuMuonSach=ctpms.MaPhieuMuonSach and ctpms.MaSach=s.MaSach
+    and s.MaTheLoaiSach=3 and Year(pms.NgayMuon)='2018' and MONTH(pms.NgayMuon)='6'
+
+select [TenTheLoaiSach]
+from TheLoaiSach
+where MaTheLoaiSach=1 and DeleteFlag='N'
+
+EXECUTE USP_UpdateSoLuongSachMuonTheoTheLoai
+ @MaBaoCaoTinhHinhMuonSachTheoTheLoai=8,
+ @TongSoLuotMuon=2

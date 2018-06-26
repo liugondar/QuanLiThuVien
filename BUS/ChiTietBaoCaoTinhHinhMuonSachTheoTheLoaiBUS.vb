@@ -58,6 +58,22 @@ Public Class ChiTietBaoCaoTinhHinhMuonSachTheoTheLoaiBUS
 
 #End Region
 
+#Region "-   Update   -"
+    Public Function UpdateTiLeListChiTietBaoCaoTheoMaBaoCAo(maBaoCao As String, tongSoLuotMuon As Integer) As Result
+        Dim listChiTietBaoCao = New List(Of DTO.ChiTietBaoCaoTinhHinhMuonSachTheoTheLoai)
+        Dim getListChiTietBaoCaoResult = SelectAllByMaBaoCaoTinhHinhMuonSachTheoTheLoai(listChiTietBaoCao, maBaoCao)
+        If getListChiTietBaoCaoResult.FlagResult = False Then Return getListChiTietBaoCaoResult
+
+        For Each chiTietBaoCao In listChiTietBaoCao
+            Dim tiLe As Single = 0
+            tiLe = chiTietBaoCao.SoLuongMuon / tongSoLuotMuon
+            Dim updateResult = _chiTietbaoCaoTinhHinhMuonSachTheoTheLoaiDAO.UpdateTiLe(chiTietBaoCao.MaChiTietBaoCaoTinhHinhMuonSachTheoTheLoai, tiLe)
+            If updateResult.FlagResult = False Then Return updateResult
+        Next
+        Return New Result()
+    End Function
+#End Region
+
 #Region "-   Retrieve data  -"
     Public Function SelectAllByMaBaoCaoTinhHinhMuonSachTheoTheLoai(listChiTietBaoCAo As List(Of ChiTietBaoCaoTinhHinhMuonSachTheoTheLoai),
                                                                     maBaoCaoTinhHinhMuonSachTheoTheLoai As String) As Result

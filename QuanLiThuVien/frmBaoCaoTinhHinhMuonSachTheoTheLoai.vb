@@ -16,23 +16,22 @@ Public Class frmBaoCaoTinhHinhMuonSachTheoTheLoai : Inherits MetroFramework.Form
 
         _listChiTietBaoCao = New List(Of ChiTietBaoCaoTinhHinhMuonSachTheoTheLoai)
 
-        LoadChiTietBaoCaoGridView()
+        LoadChiTietBaoCaoGridViewAndTongLuotMuonLabel()
     End Sub
 
 #Region "-   Load chi tiet bao cao grid view   -"
-    Private Sub LoadChiTietBaoCaoGridView()
+    Private Sub LoadChiTietBaoCaoGridViewAndTongLuotMuonLabel()
         ClearSourceBeforeBinding()
 
         CreateTitleColumn()
 
-
-        BindingSourceChiTietBaoCaoGridView()
-        ''TODO: load chi tiet bao cao
+        BindingSourceChiTietBaoCaoGridViewAndTongSoLuotMuonLabel()
     End Sub
 
-    Private Sub BindingSourceChiTietBaoCaoGridView()
+    Private Sub BindingSourceChiTietBaoCaoGridViewAndTongSoLuotMuonLabel()
         Dim listChiTietBaoCaoDisplay = New List(Of ChiTietBaoCaoDisplay)
         Dim theLoaiSachBus = New TheLoaiSachBUS()
+        Dim tongSoLuotMuon = 0
         For Each chiTietBaoCao In _listChiTietBaoCao
             Dim tenTheLoaiSach = String.Empty
             theLoaiSachBus.GetTenTheLoaiSachByID(tenTheLoaiSach, chiTietBaoCao.MaTheLoaiSach)
@@ -40,11 +39,14 @@ Public Class frmBaoCaoTinhHinhMuonSachTheoTheLoai : Inherits MetroFramework.Form
             Dim chiTietBaoCaoDisplay = New ChiTietBaoCaoDisplay()
             chiTietBaoCaoDisplay.TenTheLoaiSach = tenTheLoaiSach
             chiTietBaoCaoDisplay.SoLuongMuon = chiTietBaoCao.SoLuongMuon
-            chiTietBaoCaoDisplay.TiLe = chiTietBaoCao.TiLe
+            chiTietBaoCaoDisplay.TiLe = (chiTietBaoCao.TiLe * 100).ToString() + "%"
 
             listChiTietBaoCaoDisplay.Add(chiTietBaoCaoDisplay)
+
+            tongSoLuotMuon += chiTietBaoCao.SoLuongMuon
         Next
         ChiTietBaoCaoDataGridView.DataSource = New BindingSource(listChiTietBaoCaoDisplay, String.Empty)
+        TongLuotMuonLabel.Text = "Tổng số lượt mượn: " & tongSoLuotMuon
     End Sub
 
     Private Sub ClearSourceBeforeBinding()
@@ -97,7 +99,7 @@ Public Class frmBaoCaoTinhHinhMuonSachTheoTheLoai : Inherits MetroFramework.Form
         _baoCaoTinhHinhMuonSachTheoTheLoaiBus.GetTheLastID(maBaoCao)
         _listChiTietBaoCao.Clear()
         _chiTietBaoCaoBus.SelectAllByMaBaoCaoTinhHinhMuonSachTheoTheLoai(_listChiTietBaoCao, maBaoCao)
-        LoadChiTietBaoCaoGridView()
+        LoadChiTietBaoCaoGridViewAndTongLuotMuonLabel()
     End Sub
 #End Region
 

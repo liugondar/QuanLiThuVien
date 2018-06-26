@@ -25,6 +25,18 @@ baoCaoTinhHinhMuonSachTheoTheLoai.ThoiGian)
 
 #End Region
 
+#Region "-   Update    -"
+    Public Function UpdateTongSoLuotMuon(maBaoCao As String, tongSoLuotMuon As Integer) As Result
+        Dim query = String.Format("
+EXECUTE USP_UpdateSoLuongSachMuonTheoTheLoai
+ @MaBaoCaoTinhHinhMuonSachTheoTheLoai={0},
+ @TongSoLuotMuon={1}",
+maBaoCao, tongSoLuotMuon)
+
+        Return _dataProvider.ExcuteNonquery(query)
+    End Function
+#End Region
+
 #Region "-   Retrieve data    -"
     Public Function GetTheLastID(ByRef maBaoCaoTinhHinhMuonSachTheoTheLoai) As Result
         Dim query = String.Format("SELECT top 1 [MaBaoCaoTinhHinhMuonSachTheoTheLoai] from BaoCaoTinhHinhMuonSachTheoTheLoai ORDER by [MaBaoCaoTinhHinhMuonSachTheoTheLoai] desc")
@@ -36,6 +48,8 @@ baoCaoTinhHinhMuonSachTheoTheLoai.ThoiGian)
         Next
         Return result
     End Function
+
+
 #End Region
 
 End Class
