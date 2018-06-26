@@ -16,6 +16,8 @@ Public Class frmBaoCaoTinhHinhMuonSachTheoTheLoai : Inherits MetroFramework.Form
 
         _listChiTietBaoCao = New List(Of ChiTietBaoCaoTinhHinhMuonSachTheoTheLoai)
 
+        ThoiGianCanTimDateTimePicker.Format = DateTimePickerFormat.Custom
+        ThoiGianCanTimDateTimePicker.CustomFormat = "MM/yyyy"
         LoadChiTietBaoCaoGridViewAndTongLuotMuonLabel()
     End Sub
 
