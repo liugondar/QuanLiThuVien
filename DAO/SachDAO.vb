@@ -38,6 +38,14 @@ set TinhTrang=1
 where maSach={0}", maSach)
         Return _dataProvider.ExcuteNonquery(query)
     End Function
+
+    Public Function SetStatusSachToAvailableByID(maSach As String) As Result
+        Dim query = String.Format("
+update Sach
+set TinhTrang=0
+where maSach={0}", maSach)
+        Return _dataProvider.ExcuteNonquery(query)
+    End Function
 #End Region
 
 #Region "-   Retrieve data    -"
@@ -105,6 +113,8 @@ triGiaMin, triGiaMax)
         End If
         Return result
     End Function
+
+
 
     Public Function SelectAllByMaTheLoaiSach(ByRef listSach As List(Of Sach), maTheLoaiSach As String) As Result
         Dim query = String.Empty

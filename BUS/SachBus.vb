@@ -79,6 +79,10 @@ Public Class SachBus
     Public Function SetStatusSachToUnavailableByID(maSach As String) As Result
         Return _sachDAO.SetStatusSachToUnavailableByID(maSach)
     End Function
+
+    Public Function SetStatusSachToAvailableByID(maSach As String) As Result
+        Return _sachDAO.SetStatusSachToAvailableByID(maSach)
+    End Function
 #End Region
 
 #Region "-   Retrieve data  -"

@@ -8,6 +8,7 @@ Public Class frmTraSach
     Private _chiTietPhieuMuonSachBus As ChiTietPhieuMuonSachBus
     Private _sachBus As SachBus
     Private _tacGiaBus As TacGiaBUS
+    Private _listChiTietPhieuMuonSachDaMuon As List(Of ChiTietPhieuMuonSach)
     Private _phieuMuonSachCanTra As PhieuMuonSach
 #End Region
 
@@ -19,6 +20,7 @@ Public Class frmTraSach
         _sachBus = New SachBus()
         _tacGiaBus = New TacGiaBUS()
         _phieuMuonSachCanTra = New PhieuMuonSach()
+        _listChiTietPhieuMuonSachDaMuon = New List(Of ChiTietPhieuMuonSach)
     End Sub
 
 #End Region
@@ -46,6 +48,7 @@ Public Class frmTraSach
             _phieuMuonSachCanTra = phieuMuonSach
             WarningIfMaPhieuMuonUnavailable(phieuMuonSach)
             LoadThongTinDocGiaMuonVaNgayMuon(_phieuMuonSachCanTra)
+
             LoadChiTietListSachMuon(_phieuMuonSachCanTra)
         Catch ex As Exception
         End Try
@@ -75,23 +78,22 @@ Public Class frmTraSach
 
         CreateListChiTietPMSDataGridViewTitleColumn()
 
+
         BindingSourceBookBorrowedDataGridViewData(PhieuMuonSach)
 
     End Sub
-    Private Sub BindingSourceBookBorrowedDataGridViewData(phieuMuonSach As PhieuMuonSach)
+    Private Sub BindingSourceBookBorrowedDataGridViewData(PhieuMuonSach As PhieuMuonSach)
 
-        Dim listChiTietPhieuMuonSachDaMuon = New List(Of ChiTietPhieuMuonSach)
+        _chiTietPhieuMuonSachBus.selectAllByMaphieumuonsach(_listChiTietPhieuMuonSachDaMuon, PhieuMuonSach.MaPhieuMuonSach)
+
         Dim listSachDaMuon = New List(Of Sach)
-        Dim listCustomBookInfoDisplay = New List(Of CustomBookInfoDisplay)
-
-        _chiTietPhieuMuonSachBus.selectAllByMaphieumuonsach(listChiTietPhieuMuonSachDaMuon, phieuMuonSach.MaPhieuMuonSach)
-
-        For Each chiTietPhieuMuonSach In listChiTietPhieuMuonSachDaMuon
+        For Each chiTietPhieuMuonSach In _listChiTietPhieuMuonSachDaMuon
             _sachBus.SelectAllByMaSach(listSachDaMuon, chiTietPhieuMuonSach.MaSach)
         Next
 
+        Dim listCustomBookInfoDisplay = New List(Of CustomBookInfoDisplay)
         For Each sach In listSachDaMuon
-            Dim maPhieuMuonSach = listChiTietPhieuMuonSachDaMuon.
+            Dim maPhieuMuonSach = _listChiTietPhieuMuonSachDaMuon.
                 Where(Function(s) s.MaSach = sach.MaSach).
                 Select(Function(s) s.MaPhieuMuonSach).First()
 
@@ -99,10 +101,10 @@ Public Class frmTraSach
             customBook.MaSach = sach.MaSach
             customBook.TenSach = sach.TenSach
             _tacGiaBus.GetTenTacGiaByMaTacGia(customBook.TacGia, sach.MaTacGia)
-            customBook.NgayHetHan = phieuMuonSach.HanTra
+            customBook.NgayHetHan = PhieuMuonSach.HanTra
 
             Dim dateNow As Date = Date.Now()
-            Dim isExpirated = If((phieuMuonSach.HanTra - dateNow).TotalSeconds < 0, True, False)
+            Dim isExpirated = If((PhieuMuonSach.HanTra - dateNow).TotalSeconds < 0, True, False)
             customBook.TinhTrang = If(isExpirated, "Quá hạn", "Chưa trả")
 
             listCustomBookInfoDisplay.Add(customBook)
@@ -117,6 +119,7 @@ Public Class frmTraSach
         ListSachDaMuonDataGridView.DataSource = Nothing
         ListSachDaMuonDataGridView.AutoGenerateColumns = False
         ListSachDaMuonDataGridView.AllowUserToAddRows = False
+        _listChiTietPhieuMuonSachDaMuon.Clear()
     End Sub
 
     Private Sub CreateListChiTietPMSDataGridViewTitleColumn()
@@ -169,7 +172,7 @@ Public Class frmTraSach
         _phieuMuonSachCanTra.MaPhieuMuonSach = maPhieumuon
         _phieuMuonSachCanTra.NgayTra = NgayTraDateTimePicker.Value
         If Not WarningUnavailableMaPhieuMuonLabel.Visible Then
-            If _phieuMuonSachBus.UpdateCheckOutPhieuMuonByPhieuMuonSach(_phieuMuonSachCanTra).FlagResult Then
+            If _phieuMuonSachBus.UpdateCheckOutPhieuMuonByPhieuMuonSach(_phieuMuonSachCanTra, _listChiTietPhieuMuonSachDaMuon).FlagResult Then
                 MessageBox.Show("Trả sách thành công!")
                 _phieuMuonSachCanTra = New PhieuMuonSach()
                 MaPhieuMuonTextBox.ResetText()

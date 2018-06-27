@@ -102,9 +102,17 @@ Public Class PhieuMuonSachBus
 #End Region
 
 #Region "-  Update   -"
-    Public Function UpdateCheckOutPhieuMuonByPhieuMuonSach(PhieuMuonSach As PhieuMuonSach) As Result
+    Public Function UpdateCheckOutPhieuMuonByPhieuMuonSach(PhieuMuonSach As PhieuMuonSach, listChiTietPhieuMuonSach As List(Of ChiTietPhieuMuonSach)) As Result
         If String.IsNullOrWhiteSpace(PhieuMuonSach.MaPhieuMuonSach) Then Return New Result(False, "Mã phiếu mượn không hợp lệ!", "")
-        Return _phieuMuonSachDAO.UpdateCheckOutPhieuMuonByPhieuMuonSach(PhieuMuonSach)
+
+        Dim checkOutResult = _phieuMuonSachDAO.UpdateCheckOutPhieuMuonByPhieuMuonSach(PhieuMuonSach)
+        If checkOutResult.FlagResult = False Then Return checkOutResult
+
+        Dim sachBus = New SachBus
+        For Each chiTietPhieuMuonSach In listChiTietPhieuMuonSach
+            sachBus.SetStatusSachToAvailableByID(chiTietPhieuMuonSach.MaSach)
+        Next
+        Return checkOutResult
     End Function
 #End Region
 

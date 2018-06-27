@@ -141,6 +141,10 @@ Public Class frmChoMuonSach
 #Region "-   Thay doi thong tin the doc gia khi ma doc gia thay doi   -"
     'Thay đổi thông tin thẻ độc giả khi người dùng nhập vào mã thẻ độc giả
     Private Sub ReaderIdTextBox_TextChanged(sender As Object, e As EventArgs) Handles ReaderIdTextBox.TextChanged
+        RenderDataWhenReaderIdTextBoxChanged()
+    End Sub
+
+    Private Sub RenderDataWhenReaderIdTextBoxChanged()
         Dim docGia = New DocGia()
         Dim getReaderDataResult = GetReaderDataById(docGia)
         If getReaderDataResult.FlagResult = False Then
@@ -156,6 +160,7 @@ Public Class frmChoMuonSach
                                                      docGia.MaTheDocGia)
         LoadListSachDaMuonDataGridView(_listPhieuMuonSachDaMuon)
     End Sub
+
     Private Function GetReaderDataById(ByRef docGia As DocGia) As Result
         Try
             If String.IsNullOrWhiteSpace(ReaderIdTextBox.Text) = True Then Return New Result(False, "", "")
@@ -336,6 +341,7 @@ Public Class frmChoMuonSach
         End If
 
         MessageBox.Show("Thêm phiếu mượn sách thành công", "Infomation", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        RenderDataWhenReaderIdTextBoxChanged()
     End Sub
 
     Private Function InsertCacChiTietPhieuMuonSachTuongUng() As Result
