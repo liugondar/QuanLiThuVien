@@ -130,4 +130,18 @@ New DateTime(1998, 1, 1), New DateTime(1998, 1, 1), 10000)
         'assert
         Assert.AreEqual(expected.FlagResult, act.FlagResult)
     End Sub
+
+    <TestMethod()> Public Sub ValidSetStatusSachToUnavailableByID()
+        'arrange
+        Dim expected = New Result()
+        Dim sachDao = New SachDAO()
+        Dim maSach = String.Empty
+        'act
+        Dim act = New Result()
+        If sachDao.GetTheLastID(maSach).FlagResult = True Then
+            act = sachDao.SetStatusSachToUnavailableByID(maSach)
+        End If
+        'assert
+        Assert.AreEqual(expected.FlagResult, act.FlagResult)
+    End Sub
 End Class

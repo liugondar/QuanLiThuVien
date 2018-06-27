@@ -430,12 +430,9 @@ Public Class frmChoMuonSach
             Dim theLoaiSach = New TheLoaiSach()
             sach.MaSach = maSach
 
-            Console.WriteLine("Ma sach: " & maSach)
-            _sachBus.SelectSachById(sach, maSach)
+            _sachBus.SelectAvailableSachById(sach, maSach)
             _tacGiaBus.SelectTacGiaByMaTacGia(tacGia, sach.MaTacGia)
             _theLoaiSachBus.SelectTheLoaiSachByID(theLoaiSach, sach.MaTheLoaiSach)
-            Console.WriteLine("MaThe loai: " & theLoaiSach.MaTheLoaiSach)
-            Console.WriteLine("Ma tac gia: " & tacGia.MaTacGia)
 
             bookInfoControl.GetAuthorTextBox.text = tacGia.TenTacGia
             bookInfoControl.GetTypeOfBookTextBox.text = theLoaiSach.TenTheLoaiSach
@@ -444,11 +441,11 @@ Public Class frmChoMuonSach
         Catch ex As Exception
         End Try
     End Sub
+
     Private Sub SachInfoControl_UC_ButtonClicked(sender As Object, e As EventArgs)
         Dim control As BookInfoControl = sender
         XoaDong(control)
     End Sub
-
 
     Private Function IsValidAmountBookCanBorrow() As Result
         Dim quiDinh = New QuiDinh()
@@ -463,7 +460,6 @@ Public Class frmChoMuonSach
         End If
         Return New Result(True, "", "")
     End Function
-
 
     ' Xử lí khi book info control đã được click, click tiếp để bỏ dòng
     Private Sub XoaDong(bookInfoControl As BookInfoControl)

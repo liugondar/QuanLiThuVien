@@ -30,6 +30,16 @@ Public Class SachDAO
     End Function
 #End Region
 
+#Region "-   Update   -"
+    Public Function SetStatusSachToUnavailableByID(maSach As String) As Result
+        Dim query = String.Format("
+update Sach
+set TinhTrang=1
+where maSach={0}", maSach)
+        Return _dataProvider.ExcuteNonquery(query)
+    End Function
+#End Region
+
 #Region "-   Retrieve data    -"
     Public Function SelectAll(ByRef listSach As List(Of Sach)) As Result
         Dim query = String.Empty
@@ -173,6 +183,8 @@ triGiaMin, triGiaMax)
         Return result
     End Function
 
+
+
     Public Function SelectAllByTriGia(ByRef listSach As List(Of Sach), triGiaMin As String, triGiaMax As String) As Result
         Dim query = String.Empty
         query &= "select * from Sach "
@@ -226,7 +238,7 @@ triGiaMin, triGiaMax)
         Return result
     End Function
 
-    Public Function SelectSachByMaSach(sach As Sach, maSach As String) As Result
+    Public Function SelectSachById(sach As Sach, maSach As String) As Result
         Dim query = String.Empty
         query &= "select [maSach], [tenSach], [maTacGia], [maTheLoaiSach]  "
         query &= "from sach "
@@ -253,7 +265,47 @@ triGiaMin, triGiaMax)
         End If
         Return result
     End Function
+    Public Function SelectAvailableSachById(sach As Sach, maSach As String) As Result
+        Dim query = String.Empty
+        query &= "select [maSach], [tenSach], [maTacGia], [maTheLoaiSach]  "
+        query &= "from sach "
+        query &= "where maSach= " & maSach & " "
+        query &= " And DeleteFlag='N'" & " "
+        query &= " And TinhTrang=0 " & " "
 
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        If result.FlagResult = True Then
+            For Each row In dataTable.Rows
+                Dim doesRowContainsCorrectFields = row.Table.Columns.Contains("MaSach") And
+                 row.Table.Columns.Contains("MaTheLoaiSach") And
+                 row.Table.Columns.Contains("MaTacGia") And
+                row.Table.Columns.Contains("TenSach")
+
+                If doesRowContainsCorrectFields = False Then
+                    Return New Result(False, "Lấy thông tin sách không thành công!", "")
+                End If
+                Integer.TryParse(row("MaSach").ToString(), sach.MaSach)
+                Integer.TryParse(row("MaTheLoaiSach").ToString(), sach.MaTheLoaiSach)
+                Integer.TryParse(row("MaTacGia").ToString(), sach.MaTacGia)
+                sach.TenSach = row("TenSach").ToString()
+            Next
+        End If
+        Return result
+    End Function
+
+    Public Function GetTheLastID(ByRef maSach As String) As Result
+        Dim query As String = String.Empty
+        query &= "select top 1 [MaSach] "
+        query &= "from Sach "
+        query &= "ORDER BY [MaSach] DESC "
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        For Each row In dataTable.Rows
+            maSach = row("MaSach")
+        Next
+        Return result
+    End Function
 #End Region
 
 End Class

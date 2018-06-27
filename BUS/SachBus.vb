@@ -75,6 +75,12 @@ Public Class SachBus
     End Function
 #End Region
 
+#Region "-   Update   -"
+    Public Function SetStatusSachToUnavailableByID(maSach As String) As Result
+        Return _sachDAO.SetStatusSachToUnavailableByID(maSach)
+    End Function
+#End Region
+
 #Region "-   Retrieve data  -"
     Public Function SelectAll(ByRef listSach As List(Of Sach)) As Result
         Dim result = _sachDAO.SelectAll(listSach)
@@ -136,11 +142,18 @@ Public Class SachBus
         Return _sachDAO.SelectBookIdBookTitleAuthorIdTypeIDBySpecificRequest(listSach, SachYeuCau)
     End Function
 
-
     Public Function SelectSachById(ByRef sach As Sach, maSach As String) As Result
         'Guard clause
         If String.IsNullOrWhiteSpace(sach.MaSach) Then Return New Result(False, "Mã sách không tồn tại", "")
-        Return _sachDAO.SelectSachByMaSach(sach, maSach)
+
+        Return _sachDAO.SelectSachById(sach, maSach)
+    End Function
+
+    Public Function SelectAvailableSachById(ByRef sach As Sach, maSach As String) As Result
+        'Guard clause
+        If String.IsNullOrWhiteSpace(sach.MaSach) Then Return New Result(False, "Mã sách không tồn tại", "")
+
+        Return _sachDAO.SelectAvailableSachById(sach, maSach)
     End Function
 #End Region
 End Class
