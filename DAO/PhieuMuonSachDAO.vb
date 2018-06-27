@@ -33,6 +33,7 @@ Public Class PhieuMuonSachDAO
 
 #Region "-   Update    -"
     Public Function UpdateCheckOutPhieuMuonById(MaPhieuMuon As String) As Result
+        'TODO: update ngay tra
         Dim query = String.Format("
 update PhieuMuonSach
 set TinhTrang=1

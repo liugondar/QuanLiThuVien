@@ -235,13 +235,13 @@ CREATE TABLE dbo.ChiTietBaoCaoSachTraTre
     MaChiTietBaoCaoSachTraTre INT NOT NULL IDENTITY PRIMARY KEY,
     -- primary key column
     MaBaoCaoSachTraTre int not null,
-    MaPhieuMuonSach int not null,
+    MaChiTietPhieuMuonSach int not null,
     SoNgayTre int not null,
     DeleteFlag NVARCHAR(1) not null default 'N',
     CONSTRAINT FK_ChiTietBaoCaoSachTre_BaoCaoSachTren FOREIGN KEY(MaBaoCaoSachTraTre)
     REFERENCES BaoCaoSachTraTre(MaBaoCaoSachTraTre),
-    CONSTRAINT FK_ChiTietBaoCaoSachTre_PhieuMuonSach FOREIGN KEY(MaPhieuMuonSach)
-    REFERENCES PhieuMuonSach(MaPhieuMuonSach)
+    CONSTRAINT FK_ChiTietBaoCaoSachTre_ChiTietPhieuMuonSach FOREIGN KEY(MaChiTietPhieuMuonSach)
+    REFERENCES ChiTietPhieuMuonSach(MaChiTietPhieuMuonSach)
 );
 GO
 
@@ -361,6 +361,19 @@ BEGIN
         and DeleteFlag='N'
 END
 go
+
+go
+create proc USP_UpdateTiLeChiTietBaoCaoTheoTheLoai
+    @MaChiTietBaoCaoTinhHinhMuonSachTheoTheLoai int,
+    @TiLe FLOAT
+as
+BEGIN
+    update dbo.ChiTietBaoCaoTinhHinhMuonSachTheotheLoai
+    Set TiLe=@TiLe
+    where MaChiTietBaoCaoTinhHinhMuonSachTheoTheLoai=@MaChiTietBaoCaoTinhHinhMuonSachTheoTheLoai
+        and DeleteFlag='N'
+END
+go
 --create procducer insert baocaotinhhinhmuonsachtheotheloai
 create PROC USP_NhapChiTietBaoCaoTinhHinhMuonSachTheoTheLoai
     @MaBaoCaoTinhHinhMuonSachTheoTheLoai int,
@@ -371,6 +384,29 @@ BEGIN
     insert into dbo.ChiTietBaoCaoTinhHinhMuonSachTheoTheLoai
         (MaBaoCaoTinhHinhMuonSachTheoTheLoai,MaTheLoaiSach,SoLuongMuon)
     VALUES(@MaBaoCaoTinhHinhMuonSachTheoTheLoai, @MaTheLoaiSach, @SoLuongMuon )
+END
+go
+-- create proceduer insert baocaotrasachtre
+CREATE PROC USP_NhapBaoCaoTraSachTre
+    @thoiGian date
+AS
+BEGIN
+    insert into dbo.BaoCaoSachTraTre
+        (ThoiGian)
+    VALUES(@thoiGian)
+END
+go
+
+--create proceduce insert chitietbaocaosachtratre
+create proc USP_NhapChiTietBaoCaoSachTraTre
+    @MaBaoCaoSachTraTre INTEGER,
+    @MaChiTietPhieuMuonSach INTEGER,
+    @SoNgayTre INTEGER
+AS
+BEGIN
+    INSERT into dbo.ChiTietBaoCaoSachTraTre
+        (MaBaoCaoSachTraTre,MaChiTietPhieuMuonSach,SoNgayTre)
+    VALUES(@MaBaoCaoSachTraTre, @MaChiTietPhieuMuonSach, @SoNgayTre)
 END
 go
 
@@ -702,42 +738,7 @@ VALUES(N'Bruce Clark')
 INSERT INTO dbo.TacGia
     (TenTacGia)
 VALUES(N'Matie Jefferson')
-
-SELECT top 1
-    [MaBaoCaoTinhHinhMuonSachTheoTheLoai]
-from BaoCaoTinhHinhMuonSachTheoTheLoai
-ORDER by [MaBaoCaoTinhHinhMuonSachTheoTheLoai] desc
-
-DELETE  from ChiTietPhieuMuonSach
-DELETE  from PhieuMuonSach
-DELETE  from ChiTietBaoCaoTinhHinhMuonSachTheotheLoai
-delete  from BaoCaoTinhHinhMuonSachTheoTheLoai
-select *
-from BaoCaoTinhHinhMuonSachTheoTheLoai
-SELECT *
-from ChiTietBaoCaoTinhHinhMuonSachTheotheLoai
-where MaBaoCaoTinhHinhMuonSachTheoTheLoai=7
+go
 
 select *
-from PhieuMuonSach
-select *
-from ChiTietPhieuMuonSach
-
-select MaPhieuMuonSach
-from PhieuMuonSach
-where YEAR(NgayMuon)='2018' and MONTH(NgayMuon)='6'
-    And DeleteFlag='N'
-
-select COUNT(DISTINCT(ctpms.MaChiTietPhieuMuonSach)) as SoLuotMuon
-from PhieuMuonSach pms, ChiTietPhieuMuonSach ctpms, sach s
-where ctpms.DeleteFlag='N' and s.DeleteFlag='N' and pms.DeleteFlag='N'
-    and pms.MaPhieuMuonSach=ctpms.MaPhieuMuonSach and ctpms.MaSach=s.MaSach
-    and s.MaTheLoaiSach=3 and Year(pms.NgayMuon)='2018' and MONTH(pms.NgayMuon)='6'
-
-select [TenTheLoaiSach]
-from TheLoaiSach
-where MaTheLoaiSach=1 and DeleteFlag='N'
-
-EXECUTE USP_UpdateSoLuongSachMuonTheoTheLoai
- @MaBaoCaoTinhHinhMuonSachTheoTheLoai=8,
- @TongSoLuotMuon=2
+from ChiTietBaoCaoSachTraTre

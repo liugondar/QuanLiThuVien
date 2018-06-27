@@ -44,5 +44,9 @@
         frm.Show()
     End Sub
 
-
+    Private Sub TìnhHìnhTrảSáchTrễToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TìnhHìnhTrảSáchTrễToolStripMenuItem.Click
+        Dim frm = New frmBaoCaoTraSachTre()
+        frm.MdiParent = Me
+        frm.Show()
+    End Sub
 End Class
