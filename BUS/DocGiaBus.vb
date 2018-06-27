@@ -154,14 +154,19 @@ Public Class DocGiaBus
         Return result
     End Function
 
-    Public Function SelectReaderNameById(ByRef tenDocGia As String, maThe As String) As Result
+    Public Function GetReaderNameById(ByRef tenDocGia As String, maThe As String) As Result
         Dim result = _docGiaDAO.GetReaderNameByID(tenDocGia, maThe)
         If String.IsNullOrWhiteSpace(tenDocGia) = True Then Return New Result(False, "Lấy dữ liệu độc giả không thành công! Vui lòng kiểm tra lại mã thẻ ", "")
         Return result
     End Function
 
-    Public Function SelectExpirationDateById(ByRef ngayHetHan As DateTime, maThe As String) As Result
+    Public Function GetExpirationDateById(ByRef ngayHetHan As DateTime, maThe As String) As Result
         Return _docGiaDAO.GetExpirationDateById(ngayHetHan, maThe)
+    End Function
+
+    Public Function GetReaderById(ByRef docGia As DocGia, maThe As String) As Result
+        Dim result = _docGiaDAO.GetReaderByID(docGia, maThe)
+        Return result
     End Function
 #End Region
 End Class

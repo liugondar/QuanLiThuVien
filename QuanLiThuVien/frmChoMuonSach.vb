@@ -164,7 +164,7 @@ Public Class frmChoMuonSach
             Console.WriteLine(ex)
         End Try
         Return _docGiaBus.
-            SelectReaderNameById(docGia.TenDocGia, docGia.MaTheDocGia)
+            GetReaderNameById(docGia.TenDocGia, docGia.MaTheDocGia)
     End Function
 #End Region
 
@@ -184,7 +184,7 @@ Public Class frmChoMuonSach
     Private Function IsReaderCardExist() As Boolean
         Dim maTheDocGia = ReaderIdTextBox.Text
 
-        Dim isTheDocGiaExist = _docGiaBus.SelectReaderNameById(String.Empty, maTheDocGia)
+        Dim isTheDocGiaExist = _docGiaBus.GetReaderNameById(String.Empty, maTheDocGia)
         If isTheDocGiaExist.FlagResult = False Then
             WarningValidateReaderIdLabel.Text = "Mã thẻ độc giả không tồn tại!"
             WarningValidateReaderIdLabel.Visible = True
@@ -196,7 +196,7 @@ Public Class frmChoMuonSach
         Dim maTheDocGia = ReaderIdTextBox.Text
 
         Dim expirationDate = New DateTime()
-        _docGiaBus.SelectExpirationDateById(expirationDate, maTheDocGia)
+        _docGiaBus.GetExpirationDateById(expirationDate, maTheDocGia)
 
         If expirationDate.Subtract(DateTime.Now).TotalSeconds < 0 Then
             WarningValidateReaderIdLabel.Text = "Mã thẻ độc giả hết hạn sử dụng!"

@@ -135,6 +135,12 @@
     <Compile Include="frmTaoTheDocGia.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmTraSach.Designer.vb">
+      <DependentUpon>frmTraSach.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmTraSach.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -172,6 +178,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmTaoTheDocGia.resx">
       <DependentUpon>frmTaoTheDocGia.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTraSach.resx">
+      <DependentUpon>frmTraSach.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

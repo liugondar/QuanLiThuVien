@@ -70,7 +70,7 @@ Public Class PhieuMuonSachBus
         Dim ngayHetHanThe = New DateTime()
         Dim docGiaBus = New DocGiaBus()
 
-        Dim getNgayHetHanResult = docGiaBus.SelectExpirationDateById(ngayHetHanThe, maTheDocGia)
+        Dim getNgayHetHanResult = docGiaBus.GetExpirationDateById(ngayHetHanThe, maTheDocGia)
         If getNgayHetHanResult.FlagResult = False Then Return getNgayHetHanResult
 
         If ngayHetHanThe.Subtract(ngayHienTai).TotalSeconds < 0 Then Return New Result(False, "Thẻ độc giả quá hạn sử dụng!", "")
@@ -101,6 +101,12 @@ Public Class PhieuMuonSachBus
     End Function
 #End Region
 
+#Region "-  Update   -"
+    Public Function UpdateCheckOutPhieuMuonById(MaPhieuMuon As String) As Result
+        Return _phieuMuonSachDAO.UpdateCheckOutPhieuMuonById(MaPhieuMuon)
+    End Function
+#End Region
+
 #Region "-   Retrieve data  -"
     Public Function SelectAllByMaTheDocGia(ByRef listPhieuMuonSach As List(Of PhieuMuonSach), maTheDocGia As String) As Result
         Return _phieuMuonSachDAO.SelectAllByMaTheDocGia(listPhieuMuonSach, maTheDocGia)
@@ -111,6 +117,10 @@ Public Class PhieuMuonSachBus
     End Function
     Public Function SelectIdTheLastOne(ByRef maphieuMuonSach As String) As Result
         Return _phieuMuonSachDAO.SelectIdTheLastOne(maphieuMuonSach)
+    End Function
+
+    Public Function GetPhieuMuonSachById(ByRef phieuMuonSach As PhieuMuonSach, maPhieuMuonSach As String) As Result
+        Return _phieuMuonSachDAO.GetPhieuMuonSachById(phieuMuonSach, maPhieuMuonSach)
     End Function
 
 #End Region

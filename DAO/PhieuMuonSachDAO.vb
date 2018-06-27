@@ -31,6 +31,16 @@ Public Class PhieuMuonSachDAO
 
 #End Region
 
+#Region "-   Update    -"
+    Public Function UpdateCheckOutPhieuMuonById(MaPhieuMuon As String) As Result
+        Dim query = String.Format("
+update PhieuMuonSach
+set TinhTrang=1
+where MaPhieuMuonSach={0}", MaPhieuMuon)
+        Return _dataProvider.ExcuteNonquery(query)
+    End Function
+#End Region
+
 #Region "-   Retrieve data    -"
 
     Public Function GetTheLastPhieuMuonSachID(ByRef maPhieuDocSach As String) As Result
@@ -99,6 +109,18 @@ and DeleteFlag='N'", maTheDocGia)
         Dim result = _dataProvider.ExcuteQuery(query, dataTable)
         For Each row In dataTable.Rows
             maPhieuMuonSach = row("MaPhieuMuonSach")
+        Next
+        Return result
+    End Function
+
+    Public Function GetPhieuMuonSachById(ByRef phieuMuonSach As PhieuMuonSach, maPhieuMuonSach As String) As Result
+        Dim query = String.Format("
+select * from PhieuMuonSach
+where MaPhieuMuonSach={0} And DeleteFlag='N'", maPhieuMuonSach)
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        For Each row In dataTable.Rows
+            phieuMuonSach = New PhieuMuonSach(row)
         Next
         Return result
     End Function

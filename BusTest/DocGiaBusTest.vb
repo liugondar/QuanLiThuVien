@@ -107,7 +107,7 @@ Imports Utility
 
         Dim act = New Result()
         If docGiaDao.GetTheLastTheDocGiaID(maTheDocGia).FlagResult Then
-            act = docGiaBus.SelectReaderNameById(tendocGia, maTheDocGia)
+            act = docGiaBus.GetReaderNameById(tendocGia, maTheDocGia)
         End If
         'assert
         Assert.AreEqual(expected.FlagResult, act.FlagResult)

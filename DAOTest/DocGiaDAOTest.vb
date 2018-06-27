@@ -79,6 +79,21 @@ Imports Utility
         'assert
         Assert.AreEqual(expected.FlagResult, actual.FlagResult)
     End Sub
+    <TestMethod()> Public Sub ValidGetReaderById()
+        'arr
+        Dim expected = New Result()
+        Dim DocGiaDAO = New DocGiaDAO()
+        Dim maThe As String = String.Empty
+        Dim docgia = New DocGia()
+        'act
+
+        Dim actual = New Result()
+        If DocGiaDAO.GetTheLastTheDocGiaID(maThe).FlagResult Then
+            actual = DocGiaDAO.GetReaderByID(docgia, maThe)
+        End If
+        'assert
+        Assert.AreEqual(expected.FlagResult, actual.FlagResult)
+    End Sub
 
     <TestMethod()> Public Sub ValidSelectExpirationDateByID()
         'arr

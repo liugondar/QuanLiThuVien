@@ -26,6 +26,11 @@
         frm.MdiParent = Me
         frm.Show()
     End Sub
+    Private Sub TrảSáchToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TrảSáchToolStripMenuItem.Click
+        Dim frm = New frmTraSach()
+        frm.MdiParent = Me
+        frm.Show()
+    End Sub
 
     Private Sub LậpThẻĐộcGiảToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LậpThẻĐộcGiảToolStripMenuItem.Click
         Dim frm = New frmTaoTheDocGia()
@@ -38,4 +43,6 @@
         frm.MdiParent = Me
         frm.Show()
     End Sub
+
+
 End Class

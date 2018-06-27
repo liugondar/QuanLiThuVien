@@ -29,9 +29,11 @@ Partial Class frmMain
         Me.SáchToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NhậpSáchToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.QuảnLíSáchToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ChoMượnSáchToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BáoCáoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TìnhHìnhMượnSáchTheoThểLoạiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ChoMượnSáchToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.TrảSáchToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -65,7 +67,7 @@ Partial Class frmMain
         '
         'SáchToolStripMenuItem
         '
-        Me.SáchToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NhậpSáchToolStripMenuItem, Me.QuảnLíSáchToolStripMenuItem, Me.ChoMượnSáchToolStripMenuItem})
+        Me.SáchToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NhậpSáchToolStripMenuItem, Me.QuảnLíSáchToolStripMenuItem, Me.ToolStripSeparator1, Me.ChoMượnSáchToolStripMenuItem, Me.TrảSáchToolStripMenuItem})
         Me.SáchToolStripMenuItem.Name = "SáchToolStripMenuItem"
         Me.SáchToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
         Me.SáchToolStripMenuItem.Text = "Sách"
@@ -82,12 +84,6 @@ Partial Class frmMain
         Me.QuảnLíSáchToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.QuảnLíSáchToolStripMenuItem.Text = "Quản lí sách"
         '
-        'ChoMượnSáchToolStripMenuItem
-        '
-        Me.ChoMượnSáchToolStripMenuItem.Name = "ChoMượnSáchToolStripMenuItem"
-        Me.ChoMượnSáchToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.ChoMượnSáchToolStripMenuItem.Text = "Cho mượn sách"
-        '
         'BáoCáoToolStripMenuItem
         '
         Me.BáoCáoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TìnhHìnhMượnSáchTheoThểLoạiToolStripMenuItem})
@@ -100,6 +96,23 @@ Partial Class frmMain
         Me.TìnhHìnhMượnSáchTheoThểLoạiToolStripMenuItem.Name = "TìnhHìnhMượnSáchTheoThểLoạiToolStripMenuItem"
         Me.TìnhHìnhMượnSáchTheoThểLoạiToolStripMenuItem.Size = New System.Drawing.Size(256, 22)
         Me.TìnhHìnhMượnSáchTheoThểLoạiToolStripMenuItem.Text = "Tình hình mượn sách theo thể loại"
+        '
+        'ChoMượnSáchToolStripMenuItem
+        '
+        Me.ChoMượnSáchToolStripMenuItem.Name = "ChoMượnSáchToolStripMenuItem"
+        Me.ChoMượnSáchToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ChoMượnSáchToolStripMenuItem.Text = "Cho mượn sách"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(177, 6)
+        '
+        'TrảSáchToolStripMenuItem
+        '
+        Me.TrảSáchToolStripMenuItem.Name = "TrảSáchToolStripMenuItem"
+        Me.TrảSáchToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.TrảSáchToolStripMenuItem.Text = "Trả sách"
         '
         'frmMain
         '
@@ -129,7 +142,9 @@ Partial Class frmMain
     Friend WithEvents SáchToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents NhậpSáchToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents QuảnLíSáchToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ChoMượnSáchToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents BáoCáoToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents TìnhHìnhMượnSáchTheoThểLoạiToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Friend WithEvents ChoMượnSáchToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents TrảSáchToolStripMenuItem As ToolStripMenuItem
 End Class
