@@ -32,12 +32,13 @@ Public Class PhieuMuonSachDAO
 #End Region
 
 #Region "-   Update    -"
-    Public Function UpdateCheckOutPhieuMuonById(MaPhieuMuon As String) As Result
+    Public Function UpdateCheckOutPhieuMuonByPhieuMuonSach(PhieuMuonSach As PhieuMuonSach) As Result
         'TODO: update ngay tra
         Dim query = String.Format("
-update PhieuMuonSach
-set TinhTrang=1
-where MaPhieuMuonSach={0}", MaPhieuMuon)
+update PhieuMuonSach    
+set TinhTrang=1, NgayTra='{0}'
+where MaPhieuMuonSach={1}
+ ", PhieuMuonSach.NgayTra.ToString("MM/dd/yyyy"), PhieuMuonSach.MaPhieuMuonSach)
         Return _dataProvider.ExcuteNonquery(query)
     End Function
 #End Region
@@ -117,7 +118,7 @@ and DeleteFlag='N'", maTheDocGia)
     Public Function GetPhieuMuonSachById(ByRef phieuMuonSach As PhieuMuonSach, maPhieuMuonSach As String) As Result
         Dim query = String.Format("
 select * from PhieuMuonSach
-where MaPhieuMuonSach={0} And DeleteFlag='N'", maPhieuMuonSach)
+where MaPhieuMuonSach={0} And TinhTrang=0 And DeleteFlag='N'", maPhieuMuonSach)
         Dim dataTable = New DataTable()
         Dim result = _dataProvider.ExcuteQuery(query, dataTable)
         For Each row In dataTable.Rows

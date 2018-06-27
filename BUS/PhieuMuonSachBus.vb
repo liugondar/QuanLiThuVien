@@ -102,8 +102,9 @@ Public Class PhieuMuonSachBus
 #End Region
 
 #Region "-  Update   -"
-    Public Function UpdateCheckOutPhieuMuonById(MaPhieuMuon As String) As Result
-        Return _phieuMuonSachDAO.UpdateCheckOutPhieuMuonById(MaPhieuMuon)
+    Public Function UpdateCheckOutPhieuMuonByPhieuMuonSach(PhieuMuonSach As PhieuMuonSach) As Result
+        If String.IsNullOrWhiteSpace(PhieuMuonSach.MaPhieuMuonSach) Then Return New Result(False, "Mã phiếu mượn không hợp lệ!", "")
+        Return _phieuMuonSachDAO.UpdateCheckOutPhieuMuonByPhieuMuonSach(PhieuMuonSach)
     End Function
 #End Region
 

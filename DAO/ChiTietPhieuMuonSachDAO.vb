@@ -38,7 +38,7 @@ where MaChiTietPhieuMuonSach={0}", maChiPhieuMuonSach)
 
     Public Function selectAllByMaphieumuonsach(listChitietphieumuonsach As List(Of ChiTietPhieuMuonSach), maPhieuMuonSach As String) As Result
         Dim query = String.Empty
-        query = String.Format("select * from chiTietPhieuMuonSach where MaPhieuMuonSach={0}",
+        query = String.Format("select * from chiTietPhieuMuonSach where MaPhieuMuonSach={0} and DeleteFlag='N'",
                                 maPhieuMuonSach)
         Dim DataTable = New DataTable()
         Dim result = _dataProvider.ExcuteQuery(query, DataTable)

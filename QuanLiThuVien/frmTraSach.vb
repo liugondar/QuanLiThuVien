@@ -8,6 +8,7 @@ Public Class frmTraSach
     Private _chiTietPhieuMuonSachBus As ChiTietPhieuMuonSachBus
     Private _sachBus As SachBus
     Private _tacGiaBus As TacGiaBUS
+    Private _phieuMuonSachCanTra As PhieuMuonSach
 #End Region
 
 #Region "-    Constructor  -"
@@ -17,6 +18,7 @@ Public Class frmTraSach
         _chiTietPhieuMuonSachBus = New ChiTietPhieuMuonSachBus()
         _sachBus = New SachBus()
         _tacGiaBus = New TacGiaBUS()
+        _phieuMuonSachCanTra = New PhieuMuonSach()
     End Sub
 
 #End Region
@@ -26,9 +28,13 @@ Public Class frmTraSach
 #Region "-   MaPheuMuon changed   -"
     Private Sub MaPhieuMuonTextBox_TextChanged(sender As Object, e As EventArgs) Handles MaPhieuMuonTextBox.TextChanged
         Dim maPhieuMuon = MaPhieuMuonTextBox.Text
+        _phieuMuonSachCanTra.MaPhieuMuonSach = maPhieuMuon
 
-        LoadReaderInfoOfMaPhieuMuonInput(maPhieuMuon)
+        LoadReaderInfoOfMaPhieuMuonInput(_phieuMuonSachCanTra.MaPhieuMuonSach)
+
+
     End Sub
+
 
 
 #Region "-   Load info   -"
@@ -37,19 +43,22 @@ Public Class frmTraSach
             Dim phieuMuonSach = New PhieuMuonSach()
             _phieuMuonSachBus.GetPhieuMuonSachById(phieuMuonSach, maPhieuMuon)
 
+            _phieuMuonSachCanTra = phieuMuonSach
             WarningIfMaPhieuMuonUnavailable(phieuMuonSach)
-            LoadThongTinDocGiaMuonVaNgayMuon(phieuMuonSach)
-            LoadChiTietListSachMuon(phieuMuonSach)
+            LoadThongTinDocGiaMuonVaNgayMuon(_phieuMuonSachCanTra)
+            LoadChiTietListSachMuon(_phieuMuonSachCanTra)
         Catch ex As Exception
         End Try
     End Sub
+
     Private Sub WarningIfMaPhieuMuonUnavailable(phieuMuonSach As PhieuMuonSach)
         WarningUnavailableMaPhieuMuonLabel.Visible = False
         If phieuMuonSach.MaTheDocGia = 0 Then
-            WarningUnavailableMaPhieuMuonLabel.Text = "Mã phiếu mượn không tồn tại"
+            WarningUnavailableMaPhieuMuonLabel.Text = "Mã phiếu mượn không tồn tại hoặc đã trả"
             WarningUnavailableMaPhieuMuonLabel.Visible = True
         End If
     End Sub
+
 
     Private Sub LoadThongTinDocGiaMuonVaNgayMuon(phieuMuonSAch As PhieuMuonSach)
         Dim docgia = New DocGia()
@@ -157,9 +166,15 @@ Public Class frmTraSach
 #Region "-  Confirm clicked   -"
     Private Sub ConfirmMetroButton_Click(sender As Object, e As EventArgs) Handles ConfirmMetroButton.Click
         Dim maPhieumuon = MaPhieuMuonTextBox.Text
+        _phieuMuonSachCanTra.MaPhieuMuonSach = maPhieumuon
+        _phieuMuonSachCanTra.NgayTra = NgayTraDateTimePicker.Value
         If Not WarningUnavailableMaPhieuMuonLabel.Visible Then
-            If _phieuMuonSachBus.UpdateCheckOutPhieuMuonById(maPhieumuon).FlagResult Then
+            If _phieuMuonSachBus.UpdateCheckOutPhieuMuonByPhieuMuonSach(_phieuMuonSachCanTra).FlagResult Then
                 MessageBox.Show("Trả sách thành công!")
+                _phieuMuonSachCanTra = New PhieuMuonSach()
+                MaPhieuMuonTextBox.ResetText()
+                HoTenDocGiaMaskedTextBox.ResetText()
+                BorrowDateTimePicker.ResetText()
             Else
                 MessageBox.Show("Trả sách không thành công!")
             End If
@@ -167,6 +182,7 @@ Public Class frmTraSach
             MessageBox.Show("Vui lòng nhập đúng mã phiếu mượn!")
         End If
 
+        ClearBookBorrowedDataGridViewData()
     End Sub
 #End Region
 
