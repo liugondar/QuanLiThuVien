@@ -17,6 +17,7 @@ Public Class SachDAO
     Public Function InsertOne(sach As Sach) As Result
         Dim query = String.Empty
         query &= "EXECUTE USP_NhapSach "
+        query &= "@MaSach= N'" & sach.MaSach & "',"
         query &= "@TenSach = N'" & sach.TenSach & "',"
         query &= "@MaTheLoaiSach =" & sach.MaTheLoaiSach & " ,"
         query &= "@MaTacGia =" & sach.MaTacGia & " ,"

@@ -37,8 +37,10 @@ Public Class SachBus
 
 #Region "-   insert one   -"
     Public Function InsertOne(sach As Sach) As Result
+        Dim getNextIDResult = GetNextId(sach.MaSach)
         Dim validateResult = Validate(sach)
         If validateResult.FlagResult = False Then Return validateResult
+
         Return _sachDAO.InsertOne(sach)
     End Function
     Private Function Validate(sach As Sach) As Result

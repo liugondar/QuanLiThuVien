@@ -43,7 +43,7 @@ GO
 -- Create the table in the specified schema
 CREATE TABLE dbo.TheDocGia
 (
-    MaTheDocGia INT Primary Key NOT NULL,
+    MaTheDocGia NVARCHAR(20) Primary Key NOT NULL,
     -- primary key column
     TenDocGia NVARCHAR( 50 ) not null,
     Email NVARCHAR(50) not null,
@@ -113,7 +113,7 @@ GO
 -- Create the table in the specified schema
 CREATE TABLE dbo.Sach
 (
-    MaSach INT IDENTITY PRIMARY KEY,
+    MaSach NVARCHAR(20) NOT NUll PRIMARY KEY,
     -- primary key column
     MaTheLoaiSach Int not null,
     MaTacGia Int not null,
@@ -138,7 +138,7 @@ CREATE TABLE dbo.PhieuMuonSach
 (
     MaPhieuMuonSach INT NOT NULL PRIMARY KEY,
     -- primary key column
-    MaTheDocGia[INT] NOT NULL,
+    MaTheDocGia NVARCHAR(20) NOT NULL,
     NgayMuon[date] NOT NULL default GETDATE(),
     NgayTra[date] ,
     HanTra[date] NOT NULL DEFAULT getdate(),
@@ -161,7 +161,7 @@ CREATE TABLE dbo.ChiTietPhieuMuonSach
     MaChiTietPhieuMuonSach INT IDENTITY NOT NULL PRIMARY KEY,
     -- primary key column
     MaPhieuMuonSach INT NOT NULL,
-    MaSach int not null,
+    MaSach NVARCHAR(20) not null,
     DeleteFlag NVARCHAR(1) not null default 'N',
     CONSTRAINT FK_ChiTietPhieuMuonSach_PhieuMuonSach FOREIGN KEY(MaPhieuMuonSach)
     REFERENCES PhieuMuonSach(MaPhieuMuonSach),
@@ -248,7 +248,7 @@ GO
 
 --create producer insert Reader
 CREATE PROC USP_ThemTheDocGia
-    @MaTheDocGia INT,
+    @MaTheDocGia NVARCHAR(20),
     @TenDocGia NVARCHAR(50),
     @Email NVARCHAR(50),
     @DiaChi NVARCHAR(50),
@@ -324,6 +324,7 @@ go
 
 --create producer insert sach
 create PROC USP_NhapSach
+    @MaSach NVARCHAR(20),
     @TenSach NVARCHAR(50),
     @MaTheLoaiSach int,
     @MaTacGia int,
@@ -334,8 +335,8 @@ create PROC USP_NhapSach
 AS
 BEGIN
     insert into dbo.Sach
-        (TenSach,MaTheLoaiSach,MaTacGia,TenNhaXuatBan,NgayXuatBan,NgayNhap,TriGia)
-    VALUES(@TenSach, @MaTheLoaiSach, @MaTacGia, @TenNhaXuatBan, @NgayXuatBan, @NgayNhap, @TriGia)
+        (MaSach,TenSach,MaTheLoaiSach,MaTacGia,TenNhaXuatBan,NgayXuatBan,NgayNhap,TriGia)
+    VALUES(@MaSach, @TenSach, @MaTheLoaiSach, @MaTacGia, @TenNhaXuatBan, @NgayXuatBan, @NgayNhap, @TriGia)
 END
 GO
 
