@@ -193,7 +193,28 @@ triGiaMin, triGiaMax)
         Return result
     End Function
 
-
+    Public Function SelectByType(maSach As String,
+                                 ByRef tenSach As String, ByRef theLoai As String,
+                                 ByRef tenTacGia As String, ByRef tinhTrangSach As Integer) As Result
+        Dim query = String.Format("
+select s.MaSach as MaSach,s.TenSach as tenSach,
+tls.TenTheLoaiSach as TenTheLoaiSach,tg.TenTacGia as TenTacGia,TinhTrang 
+from sach s,TheLoaiSach tls,TacGia tg
+where s.MaTheLoaiSach=tls.MaTheLoaiSach and s.MaTacGia=tg.MaTacGia
+and s.DeleteFlag='N' and tls.DeleteFlag='N' and tg.DeleteFlag='N'
+and s.MaSach={0}", maSach)
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        If result.FlagResult = True Then
+            For Each row In dataTable.Rows
+                tenSach = row("TenSach").ToString()
+                theLoai = row("TenTheLoaiSach").ToString()
+                tenTacGia = row("TenTacGia").ToString()
+                Integer.TryParse(row("TinhTrang").ToString(), tinhTrangSach)
+            Next
+        End If
+        Return result
+    End Function
 
     Public Function SelectAllByTriGia(ByRef listSach As List(Of Sach), triGiaMin As String, triGiaMax As String) As Result
         Dim query = String.Empty

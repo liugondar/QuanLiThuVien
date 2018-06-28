@@ -45,6 +45,7 @@ Public Class frmChoMuonSach
 
         '"-  Load data for controls  -"
         LoadMaPhieuMuonSach()
+        CreateListSachCanMuonDataGridViewColumn()
 
         If MapBorrowDateToExpirationDate().FlagResult = False Then Return
         LoadListSachDaMuonDataGridView(New List(Of PhieuMuonSach))
@@ -54,67 +55,48 @@ Public Class frmChoMuonSach
         If _sachBus.SelectAll(_listSach).FlagResult = False Then Return
 
         ' design
-        AddHandler ReaderIdTextBox.LostFocus, AddressOf ReaderIdTextBox_lostFocus
-        CreateControlInChoMuonSachPanel()
+        AddHandler txtMaSach.LostFocus, AddressOf ReaderIdTextBox_lostFocus
     End Sub
+
+    Private Sub CreateListSachCanMuonDataGridViewColumn()
+        dgvDanhSachCanMuon.Columns.Clear()
+        dgvDanhSachCanMuon.DataSource = Nothing
+
+        dgvDanhSachCanMuon.AutoGenerateColumns = False
+        dgvDanhSachCanMuon.AllowUserToAddRows = False
+        Dim clMa = New DataGridViewTextBoxColumn()
+        clMa.Name = "MaSach"
+        clMa.HeaderText = "Mã Sách"
+        clMa.DataPropertyName = "MaSach"
+        dgvDanhSachCanMuon.Columns.Add(clMa)
+
+        Dim clTenSach = New DataGridViewTextBoxColumn()
+        clTenSach.Name = "TenSach"
+        clTenSach.HeaderText = "Tên Sách"
+        clTenSach.DataPropertyName = "TenSach"
+        dgvDanhSachCanMuon.Columns.Add(clTenSach)
+
+        Dim clTheLoai = New DataGridViewTextBoxColumn()
+        clTheLoai.Name = "TheLoai"
+        clTheLoai.HeaderText = "Thể Loại"
+        clTheLoai.DataPropertyName = "TheLoai"
+        dgvDanhSachCanMuon.Columns.Add(clTheLoai)
+
+        Dim clTacGia = New DataGridViewTextBoxColumn()
+        clTacGia.Name = "TacGia"
+        clTacGia.HeaderText = "Tác Giả"
+        clTacGia.DataPropertyName = "Tacgia"
+        dgvDanhSachCanMuon.Columns.Add(clTacGia)
+
+        dgvDanhSachCanMuon.Columns(3).Width = 170
+
+    End Sub
+
     Private Sub LoadMaPhieuMuonSach()
         Dim maPhieuMuonSach = String.Empty
         Dim result = _phieuMuonSachBus.LayMaSoPhieuMuonSachTiepTheo(maPhieuMuonSach)
         If result.FlagResult = True Then PhieuMuonSachIdTextBox.Text = maPhieuMuonSach
     End Sub
-
-#Region "-   Create panel controls   -"
-    Private Sub CreateControlInChoMuonSachPanel()
-        SachCanMuonPanel.Controls.Clear()
-
-        AddNewRowButton = New Button()
-        AddNewRowButton.BackColor = ColorTranslator.FromHtml("#28A745")
-        AddNewRowButton.Text = "Thêm dòng"
-        AddNewRowButton.ForeColor = Color.White
-        AddNewRowButton.Font = New Font("Microsoft Sans Serif", 10)
-        AddNewRowButton.Width = 72
-        AddNewRowButton.Height = 26
-        AddNewRowButton.FlatStyle = FlatStyle.Flat
-        AddNewRowButton.Location = New Point(SachCanMuonPanel.Width - AddNewRowButton.Width, 0)
-        AddNewRowButton.FlatAppearance.BorderSize = 0
-        RemoveHandler AddNewRowButton.Click, AddressOf addNewRowButton_Click
-        AddHandler AddNewRowButton.Click, AddressOf addNewRowButton_Click
-
-        Dim quiDinh = New QuiDinh()
-        _quiDinhBus.GetSoSachMuonToiDa(quiDinh)
-        Dim listPhieuSachDAMuon = New List(Of PhieuMuonSach)
-        _phieuMuonSachBus.SelectAllSachChuaTraByReaderID(listPhieuSachDAMuon, ReaderIdTextBox.Text)
-
-        If _listPhieuMuonSachDaMuon.Count < quiDinh.SoSachMuonToiDa Then
-            AddNewRow()
-        End If
-
-        Try
-            Dim firstControlBookInfoElement = _listControlBookInfoControl(0)
-            AddNewRowButton.Location = New Point(firstControlBookInfoElement.GetButton().Location.X,
-                                             firstControlBookInfoElement.Height + firstControlBookInfoElement.Location.Y + 10)
-        Catch
-        End Try
-
-        SachCanMuonPanel.Controls.Add(AddNewRowButton)
-    End Sub
-
-    Private Sub addNewRowButton_Click(sender As Object, e As EventArgs)
-        Try
-            'Guard clause 
-            Dim validateAmountBookCanBorrowResult = IsValidAmountBookCanBorrow()
-            If validateAmountBookCanBorrowResult.FlagResult = False Then
-                MessageBox.Show(validateAmountBookCanBorrowResult.ApplicationMessage)
-                Return
-            End If
-
-            'Add new row 
-            AddNewRow()
-        Catch ex As Exception
-        End Try
-    End Sub
-
-#End Region
 
 #End Region
 
@@ -148,8 +130,7 @@ Public Class frmChoMuonSach
         Dim docGia = New DocGia()
         Dim getReaderDataResult = GetReaderDataById(docGia)
         If getReaderDataResult.FlagResult = False Then
-            UserNameTextBox.Text = String.Empty
-            Return
+            docGia.TenDocGia = String.Empty
         End If
 
         UserNameTextBox.Text = docGia.TenDocGia
@@ -174,20 +155,22 @@ Public Class frmChoMuonSach
 #End Region
 
 #Region "-   Display warning reader id valdiate label depend on reader id   -"
-    Private Sub ReaderIdTextBox_lostFocus(sender As Object, e As EventArgs)
+    Private Sub ReaderIdTextBox_lostFocus(sender As Object, e As EventArgs) Handles ReaderIdTextBox.LostFocus
+
+        Dim maTheDocGia = ReaderIdTextBox.Text
+
         WarningValidateReaderIdLabel.Visible = False
-        If String.IsNullOrWhiteSpace(ReaderIdTextBox.Text) Then
+        If String.IsNullOrWhiteSpace(maTheDocGia) Then
             WarningValidateReaderIdLabel.Text = "Vui lòng nhập thẻ độc giả!"
             WarningValidateReaderIdLabel.Visible = True
             Return
         End If
-        If Not IsReaderCardExist() Then Return
-        If Not IsValidExpirationDateCard() Then Return
-        If haveExpirationBookBorrowed() Then Return
+        If Not IsReaderCardExist(maTheDocGia) Then Return
+        If Not IsValidExpirationDateCard(maTheDocGia) Then Return
+        If haveExpirationBookBorrowed(maTheDocGia) Then Return
     End Sub
 
-    Private Function IsReaderCardExist() As Boolean
-        Dim maTheDocGia = ReaderIdTextBox.Text
+    Private Function IsReaderCardExist(maTheDocGia As String) As Boolean
 
         Dim isTheDocGiaExist = _docGiaBus.GetReaderNameById(String.Empty, maTheDocGia)
         If isTheDocGiaExist.FlagResult = False Then
@@ -197,8 +180,7 @@ Public Class frmChoMuonSach
         End If
         Return True
     End Function
-    Private Function IsValidExpirationDateCard() As Boolean
-        Dim maTheDocGia = ReaderIdTextBox.Text
+    Private Function IsValidExpirationDateCard(maTheDocGia As String) As Boolean
 
         Dim expirationDate = New DateTime()
         _docGiaBus.GetExpirationDateById(expirationDate, maTheDocGia)
@@ -210,8 +192,7 @@ Public Class frmChoMuonSach
         End If
         Return True
     End Function
-    Private Function haveExpirationBookBorrowed() As Boolean
-        Dim maTheDocGia = ReaderIdTextBox.Text
+    Private Function haveExpirationBookBorrowed(maTheDocGia As String) As Boolean
         Dim listPhieuMuonSach = New List(Of PhieuMuonSach)
         If _phieuMuonSachBus.SelectAllSachChuaTraByReaderID(listPhieuMuonSach, maTheDocGia).FlagResult = False Then Return False
 
@@ -320,22 +301,108 @@ Public Class frmChoMuonSach
 
 #End Region
 
+#Region "-   Cập nhật thông tin sách chọn khi masach thay đổi    -"
+    Private Sub txtMaSach_TextChanged(sender As Object, e As EventArgs) Handles txtMaSach.TextChanged
+        Try
+            Dim maSach = txtMaSach.Text
+            LoadInfoBook(maSach)
+
+        Catch ex As Exception
+        End Try
+    End Sub
+    Private Sub LoadInfoBook(maSach As String)
+        Dim tenSach = String.Empty
+        Dim tacGia = String.Empty
+        Dim theLoai = String.Empty
+        Dim tinhTrangSach = 0
+        Dim result As Result
+
+        result = _sachBus.SelectByType(maSach, tenSach, theLoai, tacGia, tinhTrangSach)
+
+        txtTenSach.Text = tenSach
+        txtTacGia.Text = tacGia
+        txtTheLoai.Text = theLoai
+        txtTinhTrangSach.Text = If(tinhTrangSach = 0, "Còn", "Đã hết sách")
+
+    End Sub
+#End Region
+
+#Region "-  Thêm và bớt sách cần mượn"
+    Private Sub btnThem_Click(sender As Object, e As EventArgs) Handles btnThem.Click
+        'Guard clause: c Handles btnThem.Clicka chua
+        If WarningValidateReaderIdLabel.Visible Or String.IsNullOrWhiteSpace(txtMaSach.Text) Then
+            MessageBox.Show("Vui lòng nhập mã thẻ độc giả!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        Dim isUnvalidBookInfo As Boolean = String.IsNullOrWhiteSpace(txtMaSach.Text) Or
+            String.IsNullOrWhiteSpace(txtTenSach.Text) Or
+            String.IsNullOrWhiteSpace(txtTinhTrangSach.Text) Or
+            String.IsNullOrWhiteSpace(txtTheLoai.Text) Or
+            String.IsNullOrWhiteSpace(txtTacGia.Text)
+        If isUnvalidBookInfo Then
+            Return
+        End If
+
+
+        If Not _phieuMuonSachBus.IsValidNumberOfBooks(dgvDanhSachCanMuon.Rows.Count + ListSachDaMuonDataGridView.Rows.Count) Then
+            MessageBox.Show("Quá số lượng sách cho mượn", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+
+        If (txtTinhTrangSach.Text = "Đã hết sách") Then
+            MessageBox.Show("Sách đã cho mượn", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        'Add distince book info
+        ThemInfoSachCanMuonVaoDataGridView()
+    End Sub
+
+    Private Sub ThemInfoSachCanMuonVaoDataGridView()
+        Dim rnum As Integer = dgvDanhSachCanMuon.Rows.Add()
+
+        dgvDanhSachCanMuon.Rows.Item(rnum).Cells("MaSach").Value = txtMaSach.Text
+        dgvDanhSachCanMuon.Rows.Item(rnum).Cells("TenSach").Value = txtTenSach.Text
+        dgvDanhSachCanMuon.Rows.Item(rnum).Cells("TheLoai").Value = txtTheLoai.Text
+        dgvDanhSachCanMuon.Rows.Item(rnum).Cells("TacGia").Value = txtTacGia.Text
+
+        Dim numberOfRows = dgvDanhSachCanMuon.Rows.Count - 1 'subtract the last row which is an editing row
+        Dim i As Integer = 0
+
+        While i < numberOfRows
+
+            For j As Integer = (numberOfRows) To (i + 1) Step -1
+                If dgvDanhSachCanMuon.Rows(i).Cells("MaSach").Value.ToString() = dgvDanhSachCanMuon.Rows(j).Cells("MaSach").Value.ToString() Then
+                    dgvDanhSachCanMuon.Rows.Remove(dgvDanhSachCanMuon.Rows(j))
+                    numberOfRows -= 1
+                End If
+            Next
+            i += 1
+        End While
+
+    End Sub
+
+    Private Sub btnXoa_Click(sender As Object, e As EventArgs) Handles btnXoa.Click
+
+        For Each row As DataGridViewRow In dgvDanhSachCanMuon.SelectedRows
+            dgvDanhSachCanMuon.Rows.RemoveAt(row.Index)
+        Next
+    End Sub
+#End Region
+
 #Region "-   Insert confirm button click   -"
     Private Sub ConfirmButton_Click(sender As Object, e As EventArgs) Handles ConfirmButton.Click
-        RemoveNoneBookInfoRow()
 
         Dim insertPhieuMuonSachResult = InsertPhieuMuonSach()
         If insertPhieuMuonSachResult.FlagResult = False Then
-            _listControlBookInfoControl.Clear()
-            CreateControlInChoMuonSachPanel()
             MessageBox.Show(insertPhieuMuonSachResult.ApplicationMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
         End If
 
         Dim insertCacChiTietPhieuMuonSachResult = InsertCacChiTietPhieuMuonSachTuongUng()
         If insertCacChiTietPhieuMuonSachResult.FlagResult = False Then
-            _listControlBookInfoControl.Clear()
-            CreateControlInChoMuonSachPanel()
             MessageBox.Show("Cho mượn sách không thành công!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
         End If
@@ -363,7 +430,7 @@ Public Class frmChoMuonSach
 
     Private Function InsertPhieuMuonSach() As Result
         Dim phieuMuonSAch = New PhieuMuonSach()
-        phieuMuonSAch.MaTheDocGia = ReaderIdTextBox.Text
+        phieuMuonSAch.MaTheDocGia = txtMaSach.Text
         phieuMuonSAch.NgayMuon = BorrowDateTimePicker.Value
         phieuMuonSAch.HanTra = ExpirationTimePicker.Value
         phieuMuonSAch.TongSoSachMuon = _listControlBookInfoControl.Count
@@ -372,148 +439,6 @@ Public Class frmChoMuonSach
         Return New Result()
     End Function
 
-    Private Sub RemoveNoneBookInfoRow()
-        'remove none info row
-        For index = 0 To _listControlBookInfoControl.Count - 1
-            If _listControlBookInfoControl.Count < 1 Then Return
-            If RemoveSpecificRowIfItEmptyBookId(index) Then index = index - 1
-        Next
-    End Sub
-
-    Private Function RemoveSpecificRowIfItEmptyBookId(index As Integer) As Boolean
-        Dim Control = _listControlBookInfoControl(index)
-        Dim isEmptyTextBox = Control.GetBookIdTextBox.Text = Control.GetBookIdTextBox.PlaceHolderText Or String.IsNullOrWhiteSpace(Control.GetBookIdTextBox.Text)
-        If isEmptyTextBox Then
-            _listControlBookInfoControl.Remove(Control)
-            Return True
-        End If
-        Return False
-    End Function
-#End Region
-
-#Region "-  Events for Custom book info controls  -"
-    'Event thêm cho phần custom control hiển thị control để mượn sách
-
-
-    'Xử lí khi book info control vừa được tạo, click để tạo hàng mới
-    Private Sub AddNewRow()
-        Dim bookInfoControl = New BookInfoControl()
-
-        If _listControlBookInfoControl.Count < 1 Then
-            bookInfoControl.Location = New Point(0, 0)
-            bookInfoControl.GetSTTTextBox.Text = 1
-        Else
-            Dim control = _listControlBookInfoControl(_listControlBookInfoControl.Count - 1)
-            Dim y = control.Location.Y + control.Height
-            bookInfoControl.Location = New Point(0, y)
-            bookInfoControl.GetSTTTextBox.Text = _listControlBookInfoControl.Count + 1
-        End If
-
-        AddHandler bookInfoControl.UC_Button_Click, AddressOf SachInfoControl_UC_ButtonClicked
-        AddHandler bookInfoControl.UC_BookIDTextBox_TextChanged, AddressOf SachInfoControl_UC_BookIDTextBoxChanged
-
-        _listControlBookInfoControl.Add(bookInfoControl)
-        SachCanMuonPanel.Controls.Add(bookInfoControl)
-
-        Dim lastBookInfoControl = _listControlBookInfoControl(_listControlBookInfoControl.Count - 1)
-        AddNewRowButton.Location = New Point(AddNewRowButton.Location.X,
-                                             lastBookInfoControl.Location.Y + lastBookInfoControl.Height + 10)
-    End Sub
-
-    Private Sub SachInfoControl_UC_BookIDTextBoxChanged(sender As Object, e As EventArgs)
-        DongBoHoaThongTinSachCanMuon(sender)
-    End Sub
-
-    Private Sub DongBoHoaThongTinSachCanMuon(sender As Object)
-        Try
-            Dim bookInfoControl As BookInfoControl = sender
-            Dim maSach = bookInfoControl.GetBookIdTextBox.Text
-
-            If String.IsNullOrWhiteSpace(maSach) Then Return
-
-            Dim sach = New Sach()
-            Dim tacGia = New TacGia()
-            Dim theLoaiSach = New TheLoaiSach()
-            sach.MaSach = maSach
-
-            _sachBus.SelectAvailableSachById(sach, maSach)
-            _tacGiaBus.SelectTacGiaByMaTacGia(tacGia, sach.MaTacGia)
-            _theLoaiSachBus.SelectTheLoaiSachByID(theLoaiSach, sach.MaTheLoaiSach)
-
-            bookInfoControl.GetAuthorTextBox.text = tacGia.TenTacGia
-            bookInfoControl.GetTypeOfBookTextBox.text = theLoaiSach.TenTheLoaiSach
-            bookInfoControl.GetTitleTextBox.text = sach.TenSach
-
-        Catch ex As Exception
-        End Try
-    End Sub
-
-    Private Sub SachInfoControl_UC_ButtonClicked(sender As Object, e As EventArgs)
-        Dim control As BookInfoControl = sender
-        XoaDong(control)
-    End Sub
-
-    Private Function IsValidAmountBookCanBorrow() As Result
-        Dim quiDinh = New QuiDinh()
-        Dim result = _quiDinhBus.GetSoSachMuonToiDa(quiDinh)
-
-        Dim listChiTietPhieuMuonSAchDaMuon = New List(Of ChiTietPhieuMuonSach)
-        For Each phieuMuonSach In _listPhieuMuonSachDaMuon
-            _chiTietPhieuMuonSach.selectAllByMaphieumuonsach(listChiTietPhieuMuonSAchDaMuon, phieuMuonSach.MaPhieuMuonSach)
-        Next
-        If _listControlBookInfoControl.Count + listChiTietPhieuMuonSAchDaMuon.Count >= quiDinh.SoSachMuonToiDa Then
-            Return New Result(False, "Đã đạt tối đa số lượng sách đã mượn :" + quiDinh.SoSachMuonToiDa.ToString(), "")
-        End If
-        Return New Result(True, "", "")
-    End Function
-
-    ' Xử lí khi book info control đã được click, click tiếp để bỏ dòng
-    Private Sub XoaDong(bookInfoControl As BookInfoControl)
-        Try
-            RemoveDongCanXoa(bookInfoControl)
-
-            If _listControlBookInfoControl.Count >= 1 Then
-                MoveTheOtherRowsToNewLocation(bookInfoControl)
-            Else
-                SetAddNewRowButtonLocationToFirstRow()
-            End If
-        Catch
-        End Try
-    End Sub
-
-    Private Sub MoveTheOtherRowsToNewLocation(bookInfoControl As BookInfoControl)
-        Dim firstControl = _listControlBookInfoControl(0)
-        firstControl.Location = New Point(0, 0)
-        firstControl.GetSTTTextBox.Text = 1
-
-        If _listControlBookInfoControl.Count > 1 Then
-            For index = 1 To _listControlBookInfoControl.Count - 1
-                Dim previousControl As BookInfoControl = _listControlBookInfoControl(index - 1)
-                Dim currentControl As BookInfoControl = _listControlBookInfoControl(index)
-
-                Dim yLocation = previousControl.Location.Y +
-                    previousControl.Height
-
-                currentControl.GetSTTTextBox.Text = index + 1
-                currentControl.TabIndex = 5 + index
-                currentControl.Location = New Point(0, yLocation)
-            Next
-        End If
-
-        Dim lastBookInfoControl = _listControlBookInfoControl(_listControlBookInfoControl.Count - 1)
-        AddNewRowButton.Location = New Point(AddNewRowButton.Location.X,
-                                             lastBookInfoControl.Location.Y + bookInfoControl.Height + 10)
-    End Sub
-
-    Private Sub SetAddNewRowButtonLocationToFirstRow()
-        AddNewRowButton.Location = New Point(AddNewRowButton.Location.X,
-                                                     0)
-    End Sub
-
-    Private Sub RemoveDongCanXoa(bookInfoControl As BookInfoControl)
-        SachCanMuonPanel.Controls.Remove(bookInfoControl)
-        _listControlBookInfoControl.Remove(bookInfoControl)
-    End Sub
 
 #End Region
 

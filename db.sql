@@ -742,3 +742,39 @@ go
 
 select *
 from ChiTietBaoCaoSachTraTre
+
+EXECUTE USP_NhapChiTietBaoCaoSachTraTre @MaBaoCaoSachTraTre=1,
+@MaChiTietPhieuMuonSach=1,
+@SoNgayTre=1
+
+select top 1
+    [MaChiTietBaoCaoSachTraTre]
+from ChiTietBaoCaoSachTraTre
+ORDER by [MaChiTietBaoCaoSachTraTre]
+
+update PhieuMuonSach
+set TinhTrang=0
+
+
+
+select *
+from PhieuMuonSach
+where MaPhieuMuonSach=2
+    and TinhTrang=0
+    and DeleteFlag='N'
+
+update PhieuMuonSach set TinhTrang=1,NgayTra='1/1/0001 12:00:00 AM' 
+where MaPhieuMuonSach=1
+
+select *
+from sach
+
+update PhieuMuonSach  set TinhTrang=1, NgayTra='06/27/2018' where MaPhieuMuonSach=1
+
+
+select s.MaSach as MaSach, s.TenSach as tenSach,
+    tls.TenTheLoaiSach as TenTheLoaiSach, tg.TenTacGia as TenTacGia, TinhTrang
+from sach s, TheLoaiSach tls, TacGia tg
+where s.MaTheLoaiSach=tls.MaTheLoaiSach and s.MaTacGia=tg.MaTacGia
+    and s.DeleteFlag='N' and tls.DeleteFlag='N' and tg.DeleteFlag='N'
+    and s.MaSach=3

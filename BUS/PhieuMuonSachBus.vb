@@ -6,9 +6,11 @@ Public Class PhieuMuonSachBus
 #Region "-   Field   -"
     Private _phieuMuonSachDAO As PhieuMuonSachDAO
     Private _quiDinh As QuiDinh
+    Private _quiDinhBus As QuiDinhBus
     Public Sub New()
         _phieuMuonSachDAO = New PhieuMuonSachDAO()
         _quiDinh = New QuiDinh()
+        _quiDinhBus = New QuiDinhBus()
     End Sub
 #End Region
 
@@ -92,9 +94,8 @@ Public Class PhieuMuonSachBus
         Return result
     End Function
     Public Function GetQuiDinh() As Result
-        Dim quiDinhBus = New QuiDinhBus()
-        Dim layThoiHanMuonSachResult = quiDinhBus.GetSoNgayMuonSachToiDa(_quiDinh)
-        Dim laySoSachMuonToiDaResult = quiDinhBus.GetSoSachMuonToiDa(_quiDinh)
+        Dim layThoiHanMuonSachResult = _quiDinhBus.GetSoNgayMuonSachToiDa(_quiDinh)
+        Dim laySoSachMuonToiDaResult = _quiDinhBus.GetSoSachMuonToiDa(_quiDinh)
         If laySoSachMuonToiDaResult.FlagResult = False Then Return laySoSachMuonToiDaResult
         If layThoiHanMuonSachResult.FlagResult = False Then Return layThoiHanMuonSachResult
         Return New Result()
@@ -130,6 +131,13 @@ Public Class PhieuMuonSachBus
 
     Public Function GetPhieuMuonSachById(ByRef phieuMuonSach As PhieuMuonSach, maPhieuMuonSach As String) As Result
         Return _phieuMuonSachDAO.GetPhieuMuonSachById(phieuMuonSach, maPhieuMuonSach)
+    End Function
+
+    Public Function IsValidNumberOfBooks(numberOfRows As Integer) As Boolean
+        GetQuiDinh()
+
+        If numberOfRows >= _quiDinh.SoSachMuonToiDa Then Return False
+        Return True
     End Function
 
 #End Region

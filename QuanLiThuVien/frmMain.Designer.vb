@@ -40,6 +40,7 @@ Partial Class frmMain
         '
         'MenuStrip1
         '
+        Me.MenuStrip1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ThẻĐộcGiảToolStripMenuItem, Me.SáchToolStripMenuItem, Me.BáoCáoToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
@@ -130,7 +131,7 @@ Partial Class frmMain
         Me.ClientSize = New System.Drawing.Size(909, 394)
         Me.Controls.Add(Me.MenuStrip1)
         Me.DoubleBuffered = True
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.HelpButton = True
         Me.IsMdiContainer = True
         Me.Name = "frmMain"

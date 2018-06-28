@@ -159,5 +159,10 @@ Public Class SachBus
 
         Return _sachDAO.SelectAvailableSachById(sach, maSach)
     End Function
+
+    Public Function SelectByType(maSach As String, ByRef tenSach As String, ByRef theLoai As String,
+                                 ByRef tacGia As String, ByRef tinhTrangSach As Integer) As Result
+        Return _sachDAO.SelectByType(maSach, tenSach, theLoai, tacGia, tinhTrangSach)
+    End Function
 #End Region
 End Class
