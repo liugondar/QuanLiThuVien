@@ -1,4 +1,6 @@
-﻿Public Class LoaiDocGia
+﻿Imports Utility
+
+Public Class LoaiDocGia
     Public Property MaLoaiDocGia As Integer
     Public Property TenLoaiDocGia As String
     Public Sub New()
@@ -19,4 +21,8 @@
         Me.MaLoaiDocGia = LoaiDocGiaId
         Me.TenLoaiDocGia = TenLoaiDocGia
     End Sub
+
+    Public Function Validate() As Boolean
+        Return Not String.IsNullOrWhiteSpace(TenLoaiDocGia)
+    End Function
 End Class

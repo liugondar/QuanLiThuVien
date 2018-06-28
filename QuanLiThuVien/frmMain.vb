@@ -55,4 +55,10 @@
         frm.MdiParent = Me
         frm.Show()
     End Sub
+
+    Private Sub ThêmLoạiĐộcGiảToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ThêmLoạiĐộcGiảToolStripMenuItem.Click
+        Dim frm = New frmThemLoaiDocGia()
+        frm.MdiParent = Me
+        frm.Show()
+    End Sub
 End Class
