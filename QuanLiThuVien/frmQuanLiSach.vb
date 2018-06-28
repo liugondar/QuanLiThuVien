@@ -145,26 +145,25 @@ Public Class frmQuanLiSach
         DataGridViewQuanLiSach.DataSource = Nothing
         DataGridViewQuanLiSach.AutoGenerateColumns = False
         DataGridViewQuanLiSach.AllowUserToAddRows = False
-        DataGridViewQuanLiSach.Width = 60 + 200 + 150 + 200 + 120 + 60
         Dim columnMaSach = New DataGridViewTextBoxColumn()
         columnMaSach.Name = "MaSach"
         columnMaSach.HeaderText = "Mã Sách"
         columnMaSach.DataPropertyName = "MaSach"
-        columnMaSach.Width = 60
+        columnMaSach.Width = 100
         DataGridViewQuanLiSach.Columns.Add(columnMaSach)
 
         Dim columnTenSach = New DataGridViewTextBoxColumn()
         columnTenSach.Name = "TenSach"
         columnTenSach.HeaderText = "Tên Sách"
         columnTenSach.DataPropertyName = "TenSach"
-        columnTenSach.Width = 200
+        columnTenSach.Width = 250
         DataGridViewQuanLiSach.Columns.Add(columnTenSach)
 
         Dim columnTenTheLoaiSach = New DataGridViewTextBoxColumn()
         columnTenTheLoaiSach.Name = "TenTheLoaiSach"
         columnTenTheLoaiSach.HeaderText = "Thể loại sách"
         columnTenTheLoaiSach.DataPropertyName = "TenTheLoaiSach"
-        columnTenTheLoaiSach.Width = 150
+        columnTenTheLoaiSach.Width = 200
         DataGridViewQuanLiSach.Columns.Add(columnTenTheLoaiSach)
 
         Dim columnTenTacGia = New DataGridViewTextBoxColumn()
@@ -178,7 +177,7 @@ Public Class frmQuanLiSach
         columnTriGia.Name = "TinhTrang"
         columnTriGia.HeaderText = "Tình trạng"
         columnTriGia.DataPropertyName = "TinhTrang"
-        columnTriGia.Width = 120
+        columnTriGia.Width = 150
         DataGridViewQuanLiSach.Columns.Add(columnTriGia)
 
         For index = 0 To listSach.Count - 1
