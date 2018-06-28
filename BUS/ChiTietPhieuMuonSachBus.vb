@@ -43,5 +43,9 @@ Public Class ChiTietPhieuMuonSachBus
                                                maPhieuMuonSach As String) As Result
         Return _chiTietPhieuMuonSachDAO.selectAllByMaphieumuonsach(listChitietphieumuonsach, maPhieuMuonSach)
     End Function
+
+    Public Function GetByID(ByRef chiTietPhieuMuonSach As ChiTietPhieuMuonSach, id As String) As Result
+        Return _chiTietPhieuMuonSachDAO.GetByID(chiTietPhieuMuonSach, id)
+    End Function
 #End Region
 End Class

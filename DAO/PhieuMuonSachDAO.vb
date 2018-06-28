@@ -118,11 +118,27 @@ and DeleteFlag='N'", maTheDocGia)
     Public Function GetPhieuMuonSachById(ByRef phieuMuonSach As PhieuMuonSach, maPhieuMuonSach As String) As Result
         Dim query = String.Format("
 select * from PhieuMuonSach
-where MaPhieuMuonSach={0} And TinhTrang=0 And DeleteFlag='N'", maPhieuMuonSach)
+where MaPhieuMuonSach={0} And DeleteFlag='N'", maPhieuMuonSach)
         Dim dataTable = New DataTable()
         Dim result = _dataProvider.ExcuteQuery(query, dataTable)
         For Each row In dataTable.Rows
             phieuMuonSach = New PhieuMuonSach(row)
+        Next
+        Return result
+    End Function
+
+    Public Function SelectAllPhieuMuonSachByDate(ByRef listPhieuMuonSach As List(Of PhieuMuonSach), thoiGian As DateTime) As Result
+        'Get all phieu muon sach in time input
+        Dim query = String.Format("
+select * from PhieuMuonSach
+where DeleteFlag='N' and TinhTrang='1'
+And YEAR(NgayTra)='{0}' and month(NgayMuon)='{1}'
+", thoiGian.ToString("yyyy"), thoiGian.ToString("MM"))
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        For Each row In dataTable.Rows
+            Dim PhieuMuonSach = New PhieuMuonSach(row)
+            listPhieuMuonSach.Add(PhieuMuonSach)
         Next
         Return result
     End Function

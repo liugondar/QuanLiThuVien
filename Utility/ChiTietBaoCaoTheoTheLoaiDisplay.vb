@@ -1,4 +1,4 @@
-﻿Public Class ChiTietBaoCaoDisplay
+﻿Public Class ChiTietBaoCaoTheoTheLoaiDisplay
     Public Property TenTheLoaiSach As String
     Public Property SoLuongMuon As Integer
     Public Property TiLe As String

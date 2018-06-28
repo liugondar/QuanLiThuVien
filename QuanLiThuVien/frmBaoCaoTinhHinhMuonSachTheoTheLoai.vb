@@ -31,14 +31,14 @@ Public Class frmBaoCaoTinhHinhMuonSachTheoTheLoai : Inherits MetroFramework.Form
     End Sub
 
     Private Sub BindingSourceChiTietBaoCaoGridViewAndTongSoLuotMuonLabel()
-        Dim listChiTietBaoCaoDisplay = New List(Of ChiTietBaoCaoDisplay)
+        Dim listChiTietBaoCaoDisplay = New List(Of ChiTietBaoCaoTheoTheLoaiDisplay)
         Dim theLoaiSachBus = New TheLoaiSachBUS()
         Dim tongSoLuotMuon = 0
         For Each chiTietBaoCao In _listChiTietBaoCao
             Dim tenTheLoaiSach = String.Empty
             theLoaiSachBus.GetTenTheLoaiSachByID(tenTheLoaiSach, chiTietBaoCao.MaTheLoaiSach)
 
-            Dim chiTietBaoCaoDisplay = New ChiTietBaoCaoDisplay()
+            Dim chiTietBaoCaoDisplay = New ChiTietBaoCaoTheoTheLoaiDisplay()
             chiTietBaoCaoDisplay.TenTheLoaiSach = tenTheLoaiSach
             chiTietBaoCaoDisplay.SoLuongMuon = chiTietBaoCao.SoLuongMuon
             chiTietBaoCaoDisplay.TiLe = (chiTietBaoCao.TiLe * 100).ToString() + "%"

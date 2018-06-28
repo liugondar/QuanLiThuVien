@@ -79,4 +79,15 @@ Imports Utility
         'assert
         Assert.AreEqual(expected.FlagResult, act.FlagResult)
     End Sub
+
+    <TestMethod()> Public Sub ValidSeleteAllByDate()
+        'arr
+        Dim expected = New Result()
+        Dim phieuMuonSachDAO = New PhieuMuonSachDAO()
+        Dim s = String.Empty
+        'act
+        Dim act = phieuMuonSachDAO.SelectAllPhieuMuonSachByDate(New List(Of PhieuMuonSach), DateTime.Now)
+        'assert
+        Assert.AreEqual(expected.FlagResult, act.FlagResult)
+    End Sub
 End Class

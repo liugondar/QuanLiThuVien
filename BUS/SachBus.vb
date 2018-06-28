@@ -106,58 +106,11 @@ Public Class SachBus
         Return result
     End Function
 
-    Public Function SelectAllByMaTheLoaiSach(listSach As List(Of Sach), maTheLoaiSach As String) As Result
-        Dim result = _sachDAO.SelectAllByMaTheLoaiSach(listSach, maTheLoaiSach)
-        Return result
-    End Function
-    Public Function SelectAllByMaTacGia(listSach As List(Of Sach), maTacGia As String) As Result
-        Dim result = _sachDAO.SelectAllByMaTacGia(listSach, maTacGia)
-        Return result
-    End Function
-
-    Public Function SelectAllByTenNhaXuatBan(listSach As List(Of Sach), tenNhaXuatBan As String) As Result
-        Dim result = _sachDAO.SelectAllByTenNhaXuatBan(listSach, tenNhaXuatBan)
-        Return result
-    End Function
-
-    Public Function SelectAllByNgayXuatBan(listSach As List(Of Sach), ngayMin As DateTime, ngayMax As DateTime) As Result
-        Dim result = _sachDAO.SelectAllByNgayXuatBan(listSach, ngayMin, ngayMax)
-        Return result
-    End Function
-
-    Public Function SelectAllByNgayNhap(listSach As List(Of Sach), ngayMin As DateTime, ngayMax As DateTime) As Result
-        Dim result = _sachDAO.SelectAllByNgayNhap(listSach, ngayMin, ngayMax)
-        Return result
-    End Function
-
-    Public Function SelectAllByTriGia(listSach As List(Of Sach), triGiaMin As String, triGiaMax As String) As Result
-        Dim result = _sachDAO.SelectAllByTriGia(listSach, triGiaMin, triGiaMax)
-        Return result
-    End Function
-
-    Public Function SelectAllByBookIdBookTitleAuthorIdTypeID(ByRef listSach As List(Of Sach),
-                                                                      SachYeuCau As Sach) As Result
-        'Guard clause
-        If String.IsNullOrWhiteSpace(SachYeuCau.MaSach) Then SachYeuCau.MaSach = -1
-        If String.IsNullOrWhiteSpace(SachYeuCau.TenSach) Then SachYeuCau.TenSach = -1
-        If String.IsNullOrWhiteSpace(SachYeuCau.MaTheLoaiSach) Then SachYeuCau.MaTheLoaiSach = -1
-        If String.IsNullOrWhiteSpace(SachYeuCau.MaTacGia) Then SachYeuCau.MaTacGia = -1
-
-        Return _sachDAO.SelectBookIdBookTitleAuthorIdTypeIDBySpecificRequest(listSach, SachYeuCau)
-    End Function
-
     Public Function SelectSachById(ByRef sach As Sach, maSach As String) As Result
         'Guard clause
-        If String.IsNullOrWhiteSpace(sach.MaSach) Then Return New Result(False, "Mã sách không tồn tại", "")
+        If String.IsNullOrWhiteSpace(maSach) Then Return New Result(False, "Mã sách không tồn tại", "")
 
         Return _sachDAO.SelectSachById(sach, maSach)
-    End Function
-
-    Public Function SelectAvailableSachById(ByRef sach As Sach, maSach As String) As Result
-        'Guard clause
-        If String.IsNullOrWhiteSpace(sach.MaSach) Then Return New Result(False, "Mã sách không tồn tại", "")
-
-        Return _sachDAO.SelectAvailableSachById(sach, maSach)
     End Function
 
     Public Function SelectByType(maSach As String, ByRef tenSach As String, ByRef theLoai As String,
@@ -166,8 +119,9 @@ Public Class SachBus
     End Function
 
     Public Function GetNextId(ByRef maSach) As Result
+        maSach = String.Empty
         Dim result = _sachDAO.GetTheLastID(maSach)
-        maSach = maSach + 1
+        maSach = If(String.IsNullOrWhiteSpace(maSach), 1, maSach + 1)
         Return result
     End Function
 #End Region

@@ -40,4 +40,15 @@ Imports Utility
         Assert.AreEqual(expected.FlagResult, act.FlagResult)
     End Sub
 
+
+    <TestMethod()> Public Sub ValidSelectAllPhieuTraTreByDate()
+        'arr
+        Dim expected = New Result()
+        Dim PhieuMuonSachBus = New PhieuMuonSachBus()
+        'act
+        Dim act = PhieuMuonSachBus.SelectAllPhieuTraTreByDate(New List(Of PhieuMuonSach), DateTime.Now)
+        'assert
+        Assert.AreEqual(expected.FlagResult, act.FlagResult)
+    End Sub
+
 End Class

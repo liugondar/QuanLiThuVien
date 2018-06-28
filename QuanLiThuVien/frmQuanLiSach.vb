@@ -119,7 +119,7 @@ Public Class frmQuanLiSach
 
         'get input data
         Dim sach = New Sach()
-        sach.TenSach = BookTitleComboBox.SelectedValue
+        sach.MaSach = BookTitleComboBox.SelectedValue
         sach.MaTacGia = AuthorComboBox.SelectedValue
         sach.MaTheLoaiSach = CategoryComboBox.SelectedValue
         sach.TenNhaXuatBan = If(PublisherComboBox.SelectedValue = "-----------------------------", -1, PublisherComboBox.SelectedValue)

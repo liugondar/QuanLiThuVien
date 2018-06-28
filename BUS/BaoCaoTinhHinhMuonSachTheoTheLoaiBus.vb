@@ -23,7 +23,6 @@ Public Class BaoCaoTinhHinhMuonSachTheoTheLoaiBus
         Return _baoCaoTinhHinhMuonSachTheoTheLoaiDAO.InsertOne(baoCaoTinhHinhMuonSach)
     End Function
 
-
     'Input thời gian, insert baoCao và chitietbaocao phụ thuộc vào thời gian đó
     Public Function InsertByThoiGian(thoiGian As DateTime) As Result
 
@@ -42,6 +41,7 @@ Public Class BaoCaoTinhHinhMuonSachTheoTheLoaiBus
 
         Dim tongSoLuotMuon = 0
         UpdateTongSoLuotMuonAndTiLe(tongSoLuotMuon, maBaoCAo)
+        Return New Result()
     End Function
 
     Private Sub UpdateTongSoLuotMuonAndTiLe(ByRef tongSoLuotMuon As Integer, maBaoCao As String)
@@ -62,7 +62,6 @@ Public Class BaoCaoTinhHinhMuonSachTheoTheLoaiBus
         baoCaoTinhHinhMuonSach.ThoiGian = thoiGian
         Return InsertOne(baoCaoTinhHinhMuonSach)
     End Function
-
 
 #End Region
 

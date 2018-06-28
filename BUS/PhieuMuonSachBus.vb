@@ -140,6 +140,13 @@ Public Class PhieuMuonSachBus
         Return True
     End Function
 
+    Public Function SelectAllPhieuTraTreByDate(ByRef listPhieuMuonSach As List(Of PhieuMuonSach), thoiGian As DateTime) As Result
+        Dim result = _phieuMuonSachDAO.SelectAllPhieuMuonSachByDate(listPhieuMuonSach, thoiGian)
+        _quiDinhBus.GetSoNgayMuonSachToiDa(_quiDinh)
+        listPhieuMuonSach = listPhieuMuonSach.Where(Function(x) (x.NgayTra - x.NgayMuon).TotalDays > _quiDinh.SoNgayMuonSachToiDa).ToList()
+        Return result
+    End Function
+
 #End Region
 
 End Class
