@@ -45,13 +45,13 @@ Partial Class frmChoMuonSach
         Me.MetroLabel9 = New MetroFramework.Controls.MetroLabel()
         Me.MetroLabel7 = New MetroFramework.Controls.MetroLabel()
         Me.MetroLabel11 = New MetroFramework.Controls.MetroLabel()
+        Me.MetroLabel10 = New MetroFramework.Controls.MetroLabel()
         Me.MetroLabel8 = New MetroFramework.Controls.MetroLabel()
+        Me.txtTinhTrangSach = New System.Windows.Forms.TextBox()
         Me.txtTenSach = New System.Windows.Forms.TextBox()
         Me.txtTheLoai = New System.Windows.Forms.TextBox()
         Me.txtTacGia = New System.Windows.Forms.TextBox()
         Me.txtMaSach = New System.Windows.Forms.TextBox()
-        Me.MetroLabel10 = New MetroFramework.Controls.MetroLabel()
-        Me.txtTinhTrangSach = New System.Windows.Forms.TextBox()
         CType(Me.ListSachDaMuonDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -133,9 +133,9 @@ Partial Class frmChoMuonSach
         'ListSachDaMuonDataGridView
         '
         Me.ListSachDaMuonDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.ListSachDaMuonDataGridView.Location = New System.Drawing.Point(5, 18)
+        Me.ListSachDaMuonDataGridView.Location = New System.Drawing.Point(29, 18)
         Me.ListSachDaMuonDataGridView.Name = "ListSachDaMuonDataGridView"
-        Me.ListSachDaMuonDataGridView.Size = New System.Drawing.Size(737, 108)
+        Me.ListSachDaMuonDataGridView.Size = New System.Drawing.Size(684, 108)
         Me.ListSachDaMuonDataGridView.TabIndex = 51
         '
         'ConfirmButton
@@ -143,7 +143,7 @@ Partial Class frmChoMuonSach
         Me.ConfirmButton.Location = New System.Drawing.Point(316, 674)
         Me.ConfirmButton.Name = "ConfirmButton"
         Me.ConfirmButton.Size = New System.Drawing.Size(85, 23)
-        Me.ConfirmButton.TabIndex = 98
+        Me.ConfirmButton.TabIndex = 12
         Me.ConfirmButton.Text = "Xác nhận"
         '
         'PhieuMuonSachIdTextBox
@@ -152,7 +152,7 @@ Partial Class frmChoMuonSach
         Me.PhieuMuonSachIdTextBox.Location = New System.Drawing.Point(172, 24)
         Me.PhieuMuonSachIdTextBox.Name = "PhieuMuonSachIdTextBox"
         Me.PhieuMuonSachIdTextBox.Size = New System.Drawing.Size(200, 20)
-        Me.PhieuMuonSachIdTextBox.TabIndex = 109
+        Me.PhieuMuonSachIdTextBox.TabIndex = 0
         '
         'Label12
         '
@@ -217,7 +217,7 @@ Partial Class frmChoMuonSach
         Me.GroupBox4.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Padding = New System.Windows.Forms.Padding(2)
-        Me.GroupBox4.Size = New System.Drawing.Size(464, 254)
+        Me.GroupBox4.Size = New System.Drawing.Size(464, 264)
         Me.GroupBox4.TabIndex = 113
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Danh sách mượn"
@@ -225,9 +225,9 @@ Partial Class frmChoMuonSach
         'dgvDanhSachCanMuon
         '
         Me.dgvDanhSachCanMuon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvDanhSachCanMuon.Location = New System.Drawing.Point(16, 20)
+        Me.dgvDanhSachCanMuon.Location = New System.Drawing.Point(27, 31)
         Me.dgvDanhSachCanMuon.Name = "dgvDanhSachCanMuon"
-        Me.dgvDanhSachCanMuon.Size = New System.Drawing.Size(419, 209)
+        Me.dgvDanhSachCanMuon.Size = New System.Drawing.Size(408, 219)
         Me.dgvDanhSachCanMuon.TabIndex = 52
         '
         'GroupBox2
@@ -248,7 +248,7 @@ Partial Class frmChoMuonSach
         Me.GroupBox2.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Padding = New System.Windows.Forms.Padding(2)
-        Me.GroupBox2.Size = New System.Drawing.Size(261, 254)
+        Me.GroupBox2.Size = New System.Drawing.Size(261, 264)
         Me.GroupBox2.TabIndex = 114
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Thêm Sách Mượn"
@@ -259,7 +259,7 @@ Partial Class frmChoMuonSach
         Me.btnXoa.Margin = New System.Windows.Forms.Padding(2)
         Me.btnXoa.Name = "btnXoa"
         Me.btnXoa.Size = New System.Drawing.Size(76, 23)
-        Me.btnXoa.TabIndex = 6
+        Me.btnXoa.TabIndex = 11
         Me.btnXoa.Text = "Xoá"
         '
         'btnThem
@@ -268,7 +268,7 @@ Partial Class frmChoMuonSach
         Me.btnThem.Margin = New System.Windows.Forms.Padding(2)
         Me.btnThem.Name = "btnThem"
         Me.btnThem.Size = New System.Drawing.Size(80, 23)
-        Me.btnThem.TabIndex = 6
+        Me.btnThem.TabIndex = 10
         Me.btnThem.Text = "Thêm"
         '
         'MetroLabel9
@@ -298,46 +298,6 @@ Partial Class frmChoMuonSach
         Me.MetroLabel11.TabIndex = 5
         Me.MetroLabel11.Text = "Thể Loại"
         '
-        'MetroLabel8
-        '
-        Me.MetroLabel8.AutoSize = True
-        Me.MetroLabel8.Location = New System.Drawing.Point(15, 109)
-        Me.MetroLabel8.Name = "MetroLabel8"
-        Me.MetroLabel8.Size = New System.Drawing.Size(52, 19)
-        Me.MetroLabel8.TabIndex = 5
-        Me.MetroLabel8.Text = "Tác Giả"
-        '
-        'txtTenSach
-        '
-        Me.txtTenSach.Location = New System.Drawing.Point(122, 73)
-        Me.txtTenSach.Name = "txtTenSach"
-        Me.txtTenSach.ReadOnly = True
-        Me.txtTenSach.Size = New System.Drawing.Size(108, 20)
-        Me.txtTenSach.TabIndex = 0
-        '
-        'txtTheLoai
-        '
-        Me.txtTheLoai.Location = New System.Drawing.Point(122, 150)
-        Me.txtTheLoai.Name = "txtTheLoai"
-        Me.txtTheLoai.ReadOnly = True
-        Me.txtTheLoai.Size = New System.Drawing.Size(108, 20)
-        Me.txtTheLoai.TabIndex = 0
-        '
-        'txtTacGia
-        '
-        Me.txtTacGia.Location = New System.Drawing.Point(122, 109)
-        Me.txtTacGia.Name = "txtTacGia"
-        Me.txtTacGia.ReadOnly = True
-        Me.txtTacGia.Size = New System.Drawing.Size(108, 20)
-        Me.txtTacGia.TabIndex = 0
-        '
-        'txtMaSach
-        '
-        Me.txtMaSach.Location = New System.Drawing.Point(122, 31)
-        Me.txtMaSach.Name = "txtMaSach"
-        Me.txtMaSach.Size = New System.Drawing.Size(108, 20)
-        Me.txtMaSach.TabIndex = 0
-        '
         'MetroLabel10
         '
         Me.MetroLabel10.AutoSize = True
@@ -347,6 +307,15 @@ Partial Class frmChoMuonSach
         Me.MetroLabel10.TabIndex = 5
         Me.MetroLabel10.Text = "Tình Trạng Sách"
         '
+        'MetroLabel8
+        '
+        Me.MetroLabel8.AutoSize = True
+        Me.MetroLabel8.Location = New System.Drawing.Point(15, 109)
+        Me.MetroLabel8.Name = "MetroLabel8"
+        Me.MetroLabel8.Size = New System.Drawing.Size(52, 19)
+        Me.MetroLabel8.TabIndex = 5
+        Me.MetroLabel8.Text = "Tác Giả"
+        '
         'txtTinhTrangSach
         '
         Me.txtTinhTrangSach.ForeColor = System.Drawing.SystemColors.WindowText
@@ -354,10 +323,42 @@ Partial Class frmChoMuonSach
         Me.txtTinhTrangSach.Name = "txtTinhTrangSach"
         Me.txtTinhTrangSach.ReadOnly = True
         Me.txtTinhTrangSach.Size = New System.Drawing.Size(108, 20)
-        Me.txtTinhTrangSach.TabIndex = 0
+        Me.txtTinhTrangSach.TabIndex = 9
+        '
+        'txtTenSach
+        '
+        Me.txtTenSach.Location = New System.Drawing.Point(122, 73)
+        Me.txtTenSach.Name = "txtTenSach"
+        Me.txtTenSach.ReadOnly = True
+        Me.txtTenSach.Size = New System.Drawing.Size(108, 20)
+        Me.txtTenSach.TabIndex = 6
+        '
+        'txtTheLoai
+        '
+        Me.txtTheLoai.Location = New System.Drawing.Point(122, 150)
+        Me.txtTheLoai.Name = "txtTheLoai"
+        Me.txtTheLoai.ReadOnly = True
+        Me.txtTheLoai.Size = New System.Drawing.Size(108, 20)
+        Me.txtTheLoai.TabIndex = 8
+        '
+        'txtTacGia
+        '
+        Me.txtTacGia.Location = New System.Drawing.Point(122, 109)
+        Me.txtTacGia.Name = "txtTacGia"
+        Me.txtTacGia.ReadOnly = True
+        Me.txtTacGia.Size = New System.Drawing.Size(108, 20)
+        Me.txtTacGia.TabIndex = 7
+        '
+        'txtMaSach
+        '
+        Me.txtMaSach.Location = New System.Drawing.Point(122, 31)
+        Me.txtMaSach.Name = "txtMaSach"
+        Me.txtMaSach.Size = New System.Drawing.Size(108, 20)
+        Me.txtMaSach.TabIndex = 5
         '
         'frmChoMuonSach
         '
+        Me.AcceptButton = Me.ConfirmButton
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(817, 708)

@@ -44,14 +44,14 @@ Partial Class frmBaoCaoTraSachTre
         Me.ThoiGianCanTimDateTimePicker.Location = New System.Drawing.Point(102, 78)
         Me.ThoiGianCanTimDateTimePicker.Name = "ThoiGianCanTimDateTimePicker"
         Me.ThoiGianCanTimDateTimePicker.Size = New System.Drawing.Size(200, 20)
-        Me.ThoiGianCanTimDateTimePicker.TabIndex = 2
+        Me.ThoiGianCanTimDateTimePicker.TabIndex = 1
         '
         'ConfirmMetroButton
         '
         Me.ConfirmMetroButton.Location = New System.Drawing.Point(358, 376)
         Me.ConfirmMetroButton.Name = "ConfirmMetroButton"
         Me.ConfirmMetroButton.Size = New System.Drawing.Size(75, 23)
-        Me.ConfirmMetroButton.TabIndex = 4
+        Me.ConfirmMetroButton.TabIndex = 2
         Me.ConfirmMetroButton.Text = "Xác nhận"
         '
         'ChiTietBaoCaoDataGridView
@@ -64,6 +64,7 @@ Partial Class frmBaoCaoTraSachTre
         '
         'frmBaoCaoTraSachTre
         '
+        Me.AcceptButton = Me.ConfirmMetroButton
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 423)

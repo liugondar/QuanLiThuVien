@@ -47,14 +47,14 @@ Partial Class frmQuanLiLoaiDocGia
         Me.txtMaLoai.Location = New System.Drawing.Point(203, 323)
         Me.txtMaLoai.Name = "txtMaLoai"
         Me.txtMaLoai.Size = New System.Drawing.Size(142, 20)
-        Me.txtMaLoai.TabIndex = 16
+        Me.txtMaLoai.TabIndex = 1
         '
         'txtTenLoai
         '
         Me.txtTenLoai.Location = New System.Drawing.Point(203, 359)
         Me.txtTenLoai.Name = "txtTenLoai"
         Me.txtTenLoai.Size = New System.Drawing.Size(142, 20)
-        Me.txtTenLoai.TabIndex = 17
+        Me.txtTenLoai.TabIndex = 2
         '
         'Label1
         '
@@ -92,7 +92,7 @@ Partial Class frmQuanLiLoaiDocGia
         Me.btnXoa.Margin = New System.Windows.Forms.Padding(2)
         Me.btnXoa.Name = "btnXoa"
         Me.btnXoa.Size = New System.Drawing.Size(80, 19)
-        Me.btnXoa.TabIndex = 21
+        Me.btnXoa.TabIndex = 4
         Me.btnXoa.Text = "Xoá"
         '
         'btnCapNhap
@@ -101,11 +101,12 @@ Partial Class frmQuanLiLoaiDocGia
         Me.btnCapNhap.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCapNhap.Name = "btnCapNhap"
         Me.btnCapNhap.Size = New System.Drawing.Size(81, 19)
-        Me.btnCapNhap.TabIndex = 22
+        Me.btnCapNhap.TabIndex = 3
         Me.btnCapNhap.Text = "Cập Nhập"
         '
         'frmQuanLiLoaiDocGia
         '
+        Me.AcceptButton = Me.btnCapNhap
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(446, 441)

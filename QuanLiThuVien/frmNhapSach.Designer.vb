@@ -213,7 +213,7 @@ Partial Class frmNhapSach
         Me.txtMaSach.Location = New System.Drawing.Point(223, 71)
         Me.txtMaSach.Name = "txtMaSach"
         Me.txtMaSach.Size = New System.Drawing.Size(204, 20)
-        Me.txtMaSach.TabIndex = 100
+        Me.txtMaSach.TabIndex = 0
         '
         'frmNhapSach
         '

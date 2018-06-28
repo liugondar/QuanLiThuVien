@@ -331,7 +331,7 @@ Partial Class frmQuanLiSach
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.DataGridViewQuanLiSach)
         Me.Name = "frmQuanLiSach"
-        Me.Text = "frmQuanLiSach"
+        Me.Text = "Quản lí sách"
         CType(Me.DataGridViewQuanLiSach, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.MinPriceNumericUpDown, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.MaxPriceNumericUpDown, System.ComponentModel.ISupportInitialize).EndInit()

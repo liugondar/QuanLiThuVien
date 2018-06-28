@@ -39,7 +39,7 @@ Partial Class frmQuanLiTheLoaiSach
         Me.btnXoa.Margin = New System.Windows.Forms.Padding(2)
         Me.btnXoa.Name = "btnXoa"
         Me.btnXoa.Size = New System.Drawing.Size(80, 19)
-        Me.btnXoa.TabIndex = 29
+        Me.btnXoa.TabIndex = 4
         Me.btnXoa.Text = "Xoá"
         '
         'btnCapNhap
@@ -48,7 +48,7 @@ Partial Class frmQuanLiTheLoaiSach
         Me.btnCapNhap.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCapNhap.Name = "btnCapNhap"
         Me.btnCapNhap.Size = New System.Drawing.Size(81, 19)
-        Me.btnCapNhap.TabIndex = 30
+        Me.btnCapNhap.TabIndex = 3
         Me.btnCapNhap.Text = "Cập Nhập"
         '
         'Label1
@@ -94,7 +94,7 @@ Partial Class frmQuanLiTheLoaiSach
         Me.txtTenTheLoaiSach.Location = New System.Drawing.Point(234, 358)
         Me.txtTenTheLoaiSach.Name = "txtTenTheLoaiSach"
         Me.txtTenTheLoaiSach.Size = New System.Drawing.Size(195, 20)
-        Me.txtTenTheLoaiSach.TabIndex = 32
+        Me.txtTenTheLoaiSach.TabIndex = 2
         '
         'txtMaTheLoaiSach
         '
@@ -103,13 +103,14 @@ Partial Class frmQuanLiTheLoaiSach
         Me.txtMaTheLoaiSach.Location = New System.Drawing.Point(234, 322)
         Me.txtMaTheLoaiSach.Name = "txtMaTheLoaiSach"
         Me.txtMaTheLoaiSach.Size = New System.Drawing.Size(195, 20)
-        Me.txtMaTheLoaiSach.TabIndex = 31
+        Me.txtMaTheLoaiSach.TabIndex = 1
         '
         'frmQuanLiTheLoaiSach
         '
+        Me.AcceptButton = Me.btnCapNhap
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(535, 447)
+        Me.ClientSize = New System.Drawing.Size(538, 435)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.txtTenTheLoaiSach)

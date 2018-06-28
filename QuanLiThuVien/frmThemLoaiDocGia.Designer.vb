@@ -35,7 +35,7 @@ Partial Class frmThemLoaiDocGia
         Me.btnNhapVaDong.Location = New System.Drawing.Point(211, 147)
         Me.btnNhapVaDong.Name = "btnNhapVaDong"
         Me.btnNhapVaDong.Size = New System.Drawing.Size(95, 23)
-        Me.btnNhapVaDong.TabIndex = 5
+        Me.btnNhapVaDong.TabIndex = 4
         Me.btnNhapVaDong.Text = "Nhập và Đóng"
         '
         'btnNhap
@@ -43,7 +43,7 @@ Partial Class frmThemLoaiDocGia
         Me.btnNhap.Location = New System.Drawing.Point(78, 147)
         Me.btnNhap.Name = "btnNhap"
         Me.btnNhap.Size = New System.Drawing.Size(95, 23)
-        Me.btnNhap.TabIndex = 4
+        Me.btnNhap.TabIndex = 3
         Me.btnNhap.Text = "Nhập"
         '
         'Label3
@@ -71,7 +71,7 @@ Partial Class frmThemLoaiDocGia
         Me.txtTenLoaiDocGiaDocGia.Location = New System.Drawing.Point(145, 107)
         Me.txtTenLoaiDocGiaDocGia.Name = "txtTenLoaiDocGiaDocGia"
         Me.txtTenLoaiDocGiaDocGia.Size = New System.Drawing.Size(195, 20)
-        Me.txtTenLoaiDocGiaDocGia.TabIndex = 22
+        Me.txtTenLoaiDocGiaDocGia.TabIndex = 2
         '
         'txtMaLoaiDocGia
         '
@@ -80,10 +80,11 @@ Partial Class frmThemLoaiDocGia
         Me.txtMaLoaiDocGia.Location = New System.Drawing.Point(145, 71)
         Me.txtMaLoaiDocGia.Name = "txtMaLoaiDocGia"
         Me.txtMaLoaiDocGia.Size = New System.Drawing.Size(195, 20)
-        Me.txtMaLoaiDocGia.TabIndex = 21
+        Me.txtMaLoaiDocGia.TabIndex = 1
         '
         'frmThemLoaiDocGia
         '
+        Me.AcceptButton = Me.btnNhap
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(403, 199)

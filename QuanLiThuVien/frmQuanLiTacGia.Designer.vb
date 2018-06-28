@@ -58,7 +58,7 @@ Partial Class frmQuanLiTacGia
         Me.txtTenTacGia.Location = New System.Drawing.Point(255, 367)
         Me.txtTenTacGia.Name = "txtTenTacGia"
         Me.txtTenTacGia.Size = New System.Drawing.Size(195, 20)
-        Me.txtTenTacGia.TabIndex = 40
+        Me.txtTenTacGia.TabIndex = 2
         '
         'txtMaTacGia
         '
@@ -67,7 +67,7 @@ Partial Class frmQuanLiTacGia
         Me.txtMaTacGia.Location = New System.Drawing.Point(255, 331)
         Me.txtMaTacGia.Name = "txtMaTacGia"
         Me.txtMaTacGia.Size = New System.Drawing.Size(195, 20)
-        Me.txtMaTacGia.TabIndex = 39
+        Me.txtMaTacGia.TabIndex = 1
         '
         'btnXoa
         '
@@ -75,7 +75,7 @@ Partial Class frmQuanLiTacGia
         Me.btnXoa.Margin = New System.Windows.Forms.Padding(2)
         Me.btnXoa.Name = "btnXoa"
         Me.btnXoa.Size = New System.Drawing.Size(80, 19)
-        Me.btnXoa.TabIndex = 37
+        Me.btnXoa.TabIndex = 4
         Me.btnXoa.Text = "Xoá"
         '
         'btnCapNhap
@@ -84,7 +84,7 @@ Partial Class frmQuanLiTacGia
         Me.btnCapNhap.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCapNhap.Name = "btnCapNhap"
         Me.btnCapNhap.Size = New System.Drawing.Size(81, 19)
-        Me.btnCapNhap.TabIndex = 38
+        Me.btnCapNhap.TabIndex = 3
         Me.btnCapNhap.Text = "Cập Nhập"
         '
         'Label1
@@ -107,6 +107,7 @@ Partial Class frmQuanLiTacGia
         '
         'frmQuanLiTacGia
         '
+        Me.AcceptButton = Me.btnCapNhap
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(576, 450)

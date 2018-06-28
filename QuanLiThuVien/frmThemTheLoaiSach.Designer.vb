@@ -55,7 +55,7 @@ Partial Class frmThemTheLoaiSach
         Me.txtTenTheLoaiSach.Location = New System.Drawing.Point(178, 120)
         Me.txtTenTheLoaiSach.Name = "txtTenTheLoaiSach"
         Me.txtTenTheLoaiSach.Size = New System.Drawing.Size(195, 20)
-        Me.txtTenTheLoaiSach.TabIndex = 28
+        Me.txtTenTheLoaiSach.TabIndex = 2
         '
         'txtMaTheLoaiSach
         '
@@ -64,14 +64,14 @@ Partial Class frmThemTheLoaiSach
         Me.txtMaTheLoaiSach.Location = New System.Drawing.Point(178, 84)
         Me.txtMaTheLoaiSach.Name = "txtMaTheLoaiSach"
         Me.txtMaTheLoaiSach.Size = New System.Drawing.Size(195, 20)
-        Me.txtMaTheLoaiSach.TabIndex = 27
+        Me.txtMaTheLoaiSach.TabIndex = 1
         '
         'btnNhapVaDong
         '
         Me.btnNhapVaDong.Location = New System.Drawing.Point(226, 160)
         Me.btnNhapVaDong.Name = "btnNhapVaDong"
         Me.btnNhapVaDong.Size = New System.Drawing.Size(95, 23)
-        Me.btnNhapVaDong.TabIndex = 26
+        Me.btnNhapVaDong.TabIndex = 4
         Me.btnNhapVaDong.Text = "Nhập và Đóng"
         '
         'btnNhap
@@ -79,11 +79,12 @@ Partial Class frmThemTheLoaiSach
         Me.btnNhap.Location = New System.Drawing.Point(93, 160)
         Me.btnNhap.Name = "btnNhap"
         Me.btnNhap.Size = New System.Drawing.Size(95, 23)
-        Me.btnNhap.TabIndex = 25
+        Me.btnNhap.TabIndex = 3
         Me.btnNhap.Text = "Nhập"
         '
         'frmThemTheLoaiSach
         '
+        Me.AcceptButton = Me.btnNhap
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(421, 211)
