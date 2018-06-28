@@ -45,13 +45,13 @@ Partial Class frmChoMuonSach
         Me.MetroLabel9 = New MetroFramework.Controls.MetroLabel()
         Me.MetroLabel7 = New MetroFramework.Controls.MetroLabel()
         Me.MetroLabel11 = New MetroFramework.Controls.MetroLabel()
-        Me.MetroLabel10 = New MetroFramework.Controls.MetroLabel()
         Me.MetroLabel8 = New MetroFramework.Controls.MetroLabel()
         Me.txtTenSach = New System.Windows.Forms.TextBox()
         Me.txtTheLoai = New System.Windows.Forms.TextBox()
-        Me.txtTinhTrangSach = New System.Windows.Forms.TextBox()
         Me.txtTacGia = New System.Windows.Forms.TextBox()
         Me.txtMaSach = New System.Windows.Forms.TextBox()
+        Me.MetroLabel10 = New MetroFramework.Controls.MetroLabel()
+        Me.txtTinhTrangSach = New System.Windows.Forms.TextBox()
         CType(Me.ListSachDaMuonDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -239,9 +239,9 @@ Partial Class frmChoMuonSach
         Me.GroupBox2.Controls.Add(Me.MetroLabel11)
         Me.GroupBox2.Controls.Add(Me.MetroLabel10)
         Me.GroupBox2.Controls.Add(Me.MetroLabel8)
+        Me.GroupBox2.Controls.Add(Me.txtTinhTrangSach)
         Me.GroupBox2.Controls.Add(Me.txtTenSach)
         Me.GroupBox2.Controls.Add(Me.txtTheLoai)
-        Me.GroupBox2.Controls.Add(Me.txtTinhTrangSach)
         Me.GroupBox2.Controls.Add(Me.txtTacGia)
         Me.GroupBox2.Controls.Add(Me.txtMaSach)
         Me.GroupBox2.Location = New System.Drawing.Point(38, 403)
@@ -274,7 +274,7 @@ Partial Class frmChoMuonSach
         'MetroLabel9
         '
         Me.MetroLabel9.AutoSize = True
-        Me.MetroLabel9.Location = New System.Drawing.Point(17, 148)
+        Me.MetroLabel9.Location = New System.Drawing.Point(17, 73)
         Me.MetroLabel9.Name = "MetroLabel9"
         Me.MetroLabel9.Size = New System.Drawing.Size(59, 19)
         Me.MetroLabel9.TabIndex = 5
@@ -292,25 +292,16 @@ Partial Class frmChoMuonSach
         'MetroLabel11
         '
         Me.MetroLabel11.AutoSize = True
-        Me.MetroLabel11.Location = New System.Drawing.Point(17, 189)
+        Me.MetroLabel11.Location = New System.Drawing.Point(17, 150)
         Me.MetroLabel11.Name = "MetroLabel11"
         Me.MetroLabel11.Size = New System.Drawing.Size(58, 19)
         Me.MetroLabel11.TabIndex = 5
         Me.MetroLabel11.Text = "Thể Loại"
         '
-        'MetroLabel10
-        '
-        Me.MetroLabel10.AutoSize = True
-        Me.MetroLabel10.Location = New System.Drawing.Point(15, 111)
-        Me.MetroLabel10.Name = "MetroLabel10"
-        Me.MetroLabel10.Size = New System.Drawing.Size(102, 19)
-        Me.MetroLabel10.TabIndex = 5
-        Me.MetroLabel10.Text = "Tình Trạng Sách"
-        '
         'MetroLabel8
         '
         Me.MetroLabel8.AutoSize = True
-        Me.MetroLabel8.Location = New System.Drawing.Point(15, 72)
+        Me.MetroLabel8.Location = New System.Drawing.Point(15, 109)
         Me.MetroLabel8.Name = "MetroLabel8"
         Me.MetroLabel8.Size = New System.Drawing.Size(52, 19)
         Me.MetroLabel8.TabIndex = 5
@@ -318,7 +309,7 @@ Partial Class frmChoMuonSach
         '
         'txtTenSach
         '
-        Me.txtTenSach.Location = New System.Drawing.Point(122, 148)
+        Me.txtTenSach.Location = New System.Drawing.Point(122, 73)
         Me.txtTenSach.Name = "txtTenSach"
         Me.txtTenSach.ReadOnly = True
         Me.txtTenSach.Size = New System.Drawing.Size(108, 20)
@@ -326,23 +317,15 @@ Partial Class frmChoMuonSach
         '
         'txtTheLoai
         '
-        Me.txtTheLoai.Location = New System.Drawing.Point(122, 189)
+        Me.txtTheLoai.Location = New System.Drawing.Point(122, 150)
         Me.txtTheLoai.Name = "txtTheLoai"
         Me.txtTheLoai.ReadOnly = True
         Me.txtTheLoai.Size = New System.Drawing.Size(108, 20)
         Me.txtTheLoai.TabIndex = 0
         '
-        'txtTinhTrangSach
-        '
-        Me.txtTinhTrangSach.Location = New System.Drawing.Point(122, 111)
-        Me.txtTinhTrangSach.Name = "txtTinhTrangSach"
-        Me.txtTinhTrangSach.ReadOnly = True
-        Me.txtTinhTrangSach.Size = New System.Drawing.Size(108, 20)
-        Me.txtTinhTrangSach.TabIndex = 0
-        '
         'txtTacGia
         '
-        Me.txtTacGia.Location = New System.Drawing.Point(122, 72)
+        Me.txtTacGia.Location = New System.Drawing.Point(122, 109)
         Me.txtTacGia.Name = "txtTacGia"
         Me.txtTacGia.ReadOnly = True
         Me.txtTacGia.Size = New System.Drawing.Size(108, 20)
@@ -354,6 +337,24 @@ Partial Class frmChoMuonSach
         Me.txtMaSach.Name = "txtMaSach"
         Me.txtMaSach.Size = New System.Drawing.Size(108, 20)
         Me.txtMaSach.TabIndex = 0
+        '
+        'MetroLabel10
+        '
+        Me.MetroLabel10.AutoSize = True
+        Me.MetroLabel10.Location = New System.Drawing.Point(15, 189)
+        Me.MetroLabel10.Name = "MetroLabel10"
+        Me.MetroLabel10.Size = New System.Drawing.Size(102, 19)
+        Me.MetroLabel10.TabIndex = 5
+        Me.MetroLabel10.Text = "Tình Trạng Sách"
+        '
+        'txtTinhTrangSach
+        '
+        Me.txtTinhTrangSach.ForeColor = System.Drawing.SystemColors.WindowText
+        Me.txtTinhTrangSach.Location = New System.Drawing.Point(122, 189)
+        Me.txtTinhTrangSach.Name = "txtTinhTrangSach"
+        Me.txtTinhTrangSach.ReadOnly = True
+        Me.txtTinhTrangSach.Size = New System.Drawing.Size(108, 20)
+        Me.txtTinhTrangSach.TabIndex = 0
         '
         'frmChoMuonSach
         '

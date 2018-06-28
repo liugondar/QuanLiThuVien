@@ -54,8 +54,6 @@ Public Class frmChoMuonSach
         If _theLoaiSachBus.SelectAll(_listTheLoaiSach).FlagResult = False Then Return
         If _sachBus.SelectAll(_listSach).FlagResult = False Then Return
 
-        ' design
-        AddHandler txtMaSach.LostFocus, AddressOf ReaderIdTextBox_lostFocus
     End Sub
 
     Private Sub CreateListSachCanMuonDataGridViewColumn()
@@ -322,7 +320,10 @@ Public Class frmChoMuonSach
         txtTenSach.Text = tenSach
         txtTacGia.Text = tacGia
         txtTheLoai.Text = theLoai
+
         txtTinhTrangSach.Text = If(tinhTrangSach = 0, "Còn", "Đã hết sách")
+        txtTinhTrangSach.BackColor = txtTinhTrangSach.BackColor
+        txtTinhTrangSach.ForeColor = If(tinhTrangSach = 0, Color.Black, Color.Red)
 
     End Sub
 #End Region
@@ -330,7 +331,7 @@ Public Class frmChoMuonSach
 #Region "-  Thêm và bớt sách cần mượn"
     Private Sub btnThem_Click(sender As Object, e As EventArgs) Handles btnThem.Click
         'Guard clause: c Handles btnThem.Clicka chua
-        If WarningValidateReaderIdLabel.Visible Or String.IsNullOrWhiteSpace(txtMaSach.Text) Then
+        If WarningValidateReaderIdLabel.Visible Or String.IsNullOrWhiteSpace(ReaderIdTextBox.Text) Then
             MessageBox.Show("Vui lòng nhập mã thẻ độc giả!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
@@ -408,14 +409,35 @@ Public Class frmChoMuonSach
         End If
 
         MessageBox.Show("Thêm phiếu mượn sách thành công", "Infomation", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        'Update sachdatmuon grid view
         RenderDataWhenReaderIdTextBoxChanged()
+        'Reset sach can muon dataGridview
+        dgvDanhSachCanMuon.Rows.Clear()
+        dgvDanhSachCanMuon.Refresh()
+        'Update ma phieu muon sach tiep theo
+        PhieuMuonSachIdTextBox.Text = PhieuMuonSachIdTextBox.Text + 1
     End Sub
 
     Private Function InsertCacChiTietPhieuMuonSachTuongUng() As Result
         Dim maPhieuMuonSachHienTai = String.Empty
         _phieuMuonSachBus.SelectIdTheLastOne(maPhieuMuonSachHienTai)
 
+        Dim numberOfRows = dgvDanhSachCanMuon.Rows.Count - 1
+        For i As Integer = 0 To numberOfRows
+            Dim chiTietPhieuMuonSach = New ChiTietPhieuMuonSach()
+            chiTietPhieuMuonSach.MaPhieuMuonSach = maPhieuMuonSachHienTai
+            chiTietPhieuMuonSach.MaSach = dgvDanhSachCanMuon.Rows(i).Cells("MaSach").Value.ToString()
+
+            Dim insertChitietphieumuonsachResult = _chiTietPhieuMuonSach.InsertOne(chiTietPhieuMuonSach)
+            If insertChitietphieumuonsachResult.FlagResult = False Then
+                'TODO: xóa phiếu mượn sách và các chi tiết phiếu mượn sách đã insert phía trước
+                Return insertChitietphieumuonsachResult
+            End If
+        Next
+
+
         For Each control As BookInfoControl In _listControlBookInfoControl
+
             Dim chiTietPhieuMuonSach = New ChiTietPhieuMuonSach()
             chiTietPhieuMuonSach.MaPhieuMuonSach = maPhieuMuonSachHienTai
             chiTietPhieuMuonSach.MaSach = control.GetBookIdTextBox.text
@@ -430,7 +452,7 @@ Public Class frmChoMuonSach
 
     Private Function InsertPhieuMuonSach() As Result
         Dim phieuMuonSAch = New PhieuMuonSach()
-        phieuMuonSAch.MaTheDocGia = txtMaSach.Text
+        phieuMuonSAch.MaTheDocGia = ReaderIdTextBox.Text
         phieuMuonSAch.NgayMuon = BorrowDateTimePicker.Value
         phieuMuonSAch.HanTra = ExpirationTimePicker.Value
         phieuMuonSAch.TongSoSachMuon = _listControlBookInfoControl.Count
@@ -438,7 +460,6 @@ Public Class frmChoMuonSach
         If insertPhieumuonsachResult.FlagResult = False Then Return insertPhieumuonsachResult
         Return New Result()
     End Function
-
 
 #End Region
 
