@@ -121,7 +121,7 @@ Public Class DocGiaBus
 #End Region
 
 #Region "-  Edit and remove   -"
-    Public Function SuaTheDocGiaBangDocGia(docGia As DocGia) As Result
+    Public Function UpdateById(docGia As DocGia) As Result
         Dim validateResult = docGia.Validate()
         Dim validateYearsoldResult = ValidateYearsold(docGia.NgaySinh)
         Dim validateReaderTypeResult = ValidateReaderType(docGia.MaLoaiDocGia)
@@ -134,7 +134,7 @@ Public Class DocGiaBus
         Return result
     End Function
 
-    Public Function XoaTheDocGiaBangMaThe(maThe As String) As Result
+    Public Function DeleteByID(maThe As String) As Result
         If String.IsNullOrWhiteSpace(maThe) Then Return New Result(False, "Mã thẻ độc giả không được để trống", "")
         Dim result = _docGiaDAO.DeleteByReaderID(maThe)
         Return result

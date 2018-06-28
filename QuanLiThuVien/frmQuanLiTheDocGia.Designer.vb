@@ -22,10 +22,10 @@ Partial Class frmQuanLiTheDocGia
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.BirthDateTimePicker = New System.Windows.Forms.DateTimePicker()
-        Me.AddressTextBox = New System.Windows.Forms.TextBox()
-        Me.EmailTextBox = New System.Windows.Forms.TextBox()
-        Me.UserNameTextBox = New System.Windows.Forms.TextBox()
+        Me.dtpBirthDate = New System.Windows.Forms.DateTimePicker()
+        Me.txtAddress = New System.Windows.Forms.TextBox()
+        Me.txtEmail = New System.Windows.Forms.TextBox()
+        Me.txtUserName = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -33,43 +33,42 @@ Partial Class frmQuanLiTheDocGia
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ReaderTypeComboBox = New System.Windows.Forms.ComboBox()
         Me.DataGridViewQuanLiTheDocGia = New System.Windows.Forms.DataGridView()
-        Me.MaTheDocGiaTextBox = New System.Windows.Forms.TextBox()
+        Me.txtMaTheDocGia = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.LoaiDocGiaEditComboBox = New System.Windows.Forms.ComboBox()
+        Me.cbLoaiDocGiaEdit = New System.Windows.Forms.ComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.EditButton = New MetroFramework.Controls.MetroButton()
         Me.RemoveButton = New MetroFramework.Controls.MetroButton()
         CType(Me.DataGridViewQuanLiTheDocGia, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'BirthDateTimePicker
+        'dtpBirthDate
         '
-        Me.BirthDateTimePicker.Location = New System.Drawing.Point(347, 520)
-        Me.BirthDateTimePicker.Name = "BirthDateTimePicker"
-        Me.BirthDateTimePicker.Size = New System.Drawing.Size(204, 20)
-        Me.BirthDateTimePicker.TabIndex = 5
+        Me.dtpBirthDate.Location = New System.Drawing.Point(347, 520)
+        Me.dtpBirthDate.Name = "dtpBirthDate"
+        Me.dtpBirthDate.Size = New System.Drawing.Size(204, 20)
+        Me.dtpBirthDate.TabIndex = 5
         '
-        'AddressTextBox
+        'txtAddress
         '
-        Me.AddressTextBox.Location = New System.Drawing.Point(347, 477)
-        Me.AddressTextBox.Name = "AddressTextBox"
-        Me.AddressTextBox.Size = New System.Drawing.Size(204, 20)
-        Me.AddressTextBox.TabIndex = 4
-        Me.AddressTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtAddress.Location = New System.Drawing.Point(347, 477)
+        Me.txtAddress.Name = "txtAddress"
+        Me.txtAddress.Size = New System.Drawing.Size(204, 20)
+        Me.txtAddress.TabIndex = 4
         '
-        'EmailTextBox
+        'txtEmail
         '
-        Me.EmailTextBox.Location = New System.Drawing.Point(347, 430)
-        Me.EmailTextBox.Name = "EmailTextBox"
-        Me.EmailTextBox.Size = New System.Drawing.Size(204, 20)
-        Me.EmailTextBox.TabIndex = 3
+        Me.txtEmail.Location = New System.Drawing.Point(347, 430)
+        Me.txtEmail.Name = "txtEmail"
+        Me.txtEmail.Size = New System.Drawing.Size(204, 20)
+        Me.txtEmail.TabIndex = 3
         '
-        'UserNameTextBox
+        'txtUserName
         '
-        Me.UserNameTextBox.Location = New System.Drawing.Point(347, 387)
-        Me.UserNameTextBox.Name = "UserNameTextBox"
-        Me.UserNameTextBox.Size = New System.Drawing.Size(204, 20)
-        Me.UserNameTextBox.TabIndex = 2
+        Me.txtUserName.Location = New System.Drawing.Point(347, 387)
+        Me.txtUserName.Name = "txtUserName"
+        Me.txtUserName.Size = New System.Drawing.Size(204, 20)
+        Me.txtUserName.TabIndex = 2
         '
         'Label7
         '
@@ -137,13 +136,13 @@ Partial Class frmQuanLiTheDocGia
         Me.DataGridViewQuanLiTheDocGia.Size = New System.Drawing.Size(703, 206)
         Me.DataGridViewQuanLiTheDocGia.TabIndex = 51
         '
-        'MaTheDocGiaTextBox
+        'txtMaTheDocGia
         '
-        Me.MaTheDocGiaTextBox.Location = New System.Drawing.Point(347, 347)
-        Me.MaTheDocGiaTextBox.Name = "MaTheDocGiaTextBox"
-        Me.MaTheDocGiaTextBox.ReadOnly = True
-        Me.MaTheDocGiaTextBox.Size = New System.Drawing.Size(204, 20)
-        Me.MaTheDocGiaTextBox.TabIndex = 53
+        Me.txtMaTheDocGia.Location = New System.Drawing.Point(347, 347)
+        Me.txtMaTheDocGia.Name = "txtMaTheDocGia"
+        Me.txtMaTheDocGia.ReadOnly = True
+        Me.txtMaTheDocGia.Size = New System.Drawing.Size(204, 20)
+        Me.txtMaTheDocGia.TabIndex = 53
         '
         'Label4
         '
@@ -155,13 +154,13 @@ Partial Class frmQuanLiTheDocGia
         Me.Label4.TabIndex = 52
         Me.Label4.Text = "Mã thẻ độc giả"
         '
-        'LoaiDocGiaEditComboBox
+        'cbLoaiDocGiaEdit
         '
-        Me.LoaiDocGiaEditComboBox.FormattingEnabled = True
-        Me.LoaiDocGiaEditComboBox.Location = New System.Drawing.Point(347, 556)
-        Me.LoaiDocGiaEditComboBox.Name = "LoaiDocGiaEditComboBox"
-        Me.LoaiDocGiaEditComboBox.Size = New System.Drawing.Size(204, 21)
-        Me.LoaiDocGiaEditComboBox.TabIndex = 6
+        Me.cbLoaiDocGiaEdit.FormattingEnabled = True
+        Me.cbLoaiDocGiaEdit.Location = New System.Drawing.Point(347, 556)
+        Me.cbLoaiDocGiaEdit.Name = "cbLoaiDocGiaEdit"
+        Me.cbLoaiDocGiaEdit.Size = New System.Drawing.Size(204, 21)
+        Me.cbLoaiDocGiaEdit.TabIndex = 6
         '
         'Label5
         '
@@ -194,20 +193,20 @@ Partial Class frmQuanLiTheDocGia
         Me.AcceptButton = Me.EditButton
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(822, 664)
+        Me.ClientSize = New System.Drawing.Size(822, 634)
         Me.Controls.Add(Me.RemoveButton)
         Me.Controls.Add(Me.EditButton)
-        Me.Controls.Add(Me.LoaiDocGiaEditComboBox)
+        Me.Controls.Add(Me.cbLoaiDocGiaEdit)
         Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.MaTheDocGiaTextBox)
+        Me.Controls.Add(Me.txtMaTheDocGia)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.DataGridViewQuanLiTheDocGia)
         Me.Controls.Add(Me.ReaderTypeComboBox)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.BirthDateTimePicker)
-        Me.Controls.Add(Me.AddressTextBox)
-        Me.Controls.Add(Me.EmailTextBox)
-        Me.Controls.Add(Me.UserNameTextBox)
+        Me.Controls.Add(Me.dtpBirthDate)
+        Me.Controls.Add(Me.txtAddress)
+        Me.Controls.Add(Me.txtEmail)
+        Me.Controls.Add(Me.txtUserName)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label3)
@@ -219,10 +218,10 @@ Partial Class frmQuanLiTheDocGia
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents BirthDateTimePicker As DateTimePicker
-    Friend WithEvents AddressTextBox As TextBox
-    Friend WithEvents EmailTextBox As TextBox
-    Friend WithEvents UserNameTextBox As TextBox
+    Friend WithEvents dtpBirthDate As DateTimePicker
+    Friend WithEvents txtAddress As TextBox
+    Friend WithEvents txtEmail As TextBox
+    Friend WithEvents txtUserName As TextBox
     Friend WithEvents Label7 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents Label3 As Label
@@ -230,9 +229,9 @@ Partial Class frmQuanLiTheDocGia
     Friend WithEvents Label1 As Label
     Friend WithEvents ReaderTypeComboBox As ComboBox
     Friend WithEvents DataGridViewQuanLiTheDocGia As DataGridView
-    Friend WithEvents MaTheDocGiaTextBox As TextBox
+    Friend WithEvents txtMaTheDocGia As TextBox
     Friend WithEvents Label4 As Label
-    Friend WithEvents LoaiDocGiaEditComboBox As ComboBox
+    Friend WithEvents cbLoaiDocGiaEdit As ComboBox
     Friend WithEvents Label5 As Label
     Friend WithEvents EditButton As MetroFramework.Controls.MetroButton
     Friend WithEvents RemoveButton As MetroFramework.Controls.MetroButton

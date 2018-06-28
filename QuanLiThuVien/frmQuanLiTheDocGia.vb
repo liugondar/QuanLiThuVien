@@ -15,7 +15,10 @@ Public Class frmQuanLiTheDocGia
         _loaiDocGiaBus = New LoaiDocGiaBus()
         _docGiaBus = New DocGiaBus()
         Dim loadReaderTypeComboBoxResult = LoadReaderTypeComboBoxData()
-        If loadReaderTypeComboBoxResult.FlagResult = False Then MessageBox.Show(loadReaderTypeComboBoxResult.ApplicationMessage)
+        If loadReaderTypeComboBoxResult.FlagResult = False Then
+            MessageBox.Show(loadReaderTypeComboBoxResult.ApplicationMessage)
+            Me.Close()
+        End If
 
         RemoveButton.BackColor = ColorTranslator.FromHtml("#DC3545")
         EditButton.BackColor = ColorTranslator.FromHtml("#28A745")
@@ -29,12 +32,12 @@ Public Class frmQuanLiTheDocGia
         ReaderTypeComboBox.DisplayMember = "TenLoaiDocGia"
         ReaderTypeComboBox.ValueMember = "MaLoaiDocGia"
 
-        LoaiDocGiaEditComboBox.DataSource = New BindingSource(listLoaiDocGia, String.Empty)
-        LoaiDocGiaEditComboBox.DisplayMember = "TenLoaiDocGia"
-        LoaiDocGiaEditComboBox.ValueMember = "MaLoaiDocGia"
+        cbLoaiDocGiaEdit.DataSource = New BindingSource(listLoaiDocGia, String.Empty)
+        cbLoaiDocGiaEdit.DisplayMember = "TenLoaiDocGia"
+        cbLoaiDocGiaEdit.ValueMember = "MaLoaiDocGia"
 
         If listLoaiDocGia.Count < 1 Then
-            Return New Result(False, "Load loại thẻ combo box không thành công!", "")
+            Return New Result(False, "Load loại danh sách thẻ độc giả không thành công!", "")
         End If
 
         Try
@@ -47,21 +50,32 @@ Public Class frmQuanLiTheDocGia
     End Function
 
     Function LoadListDocGia(maLoai As String) As Result
-        DataGridViewQuanLiTheDocGia.Columns.Clear()
-        DataGridViewQuanLiTheDocGia.DataSource = Nothing
-        DataGridViewQuanLiTheDocGia.AutoGenerateColumns = False
-        DataGridViewQuanLiTheDocGia.AllowUserToAddRows = False
-        LoadInfoSelectedRow()
+        ClearDataGridViewSource()
+
+        CreateDataGridViewColumn()
 
         Dim listLoaiDocGia = New List(Of DocGia)
         Dim result = _docGiaBus.SelectAllByType(maLoai, listLoaiDocGia)
         If result.FlagResult = False Then
-            MessageBox.Show(result.ApplicationMessage)
+            ResetSpecificRowSelectedControlTextInfo()
             Return result
         End If
 
         DataGridViewQuanLiTheDocGia.DataSource = listLoaiDocGia
 
+        LoadInfoSelectedRow()
+
+        Return result
+    End Function
+
+    Private Sub ClearDataGridViewSource()
+        DataGridViewQuanLiTheDocGia.Columns.Clear()
+        DataGridViewQuanLiTheDocGia.DataSource = Nothing
+        DataGridViewQuanLiTheDocGia.AutoGenerateColumns = False
+        DataGridViewQuanLiTheDocGia.AllowUserToAddRows = False
+    End Sub
+
+    Private Sub CreateDataGridViewColumn()
         Dim columnMaDocGia = New DataGridViewTextBoxColumn()
         columnMaDocGia.Name = "MaTheDocGia"
         columnMaDocGia.HeaderText = "Mã Thẻ Độc Giả"
@@ -112,8 +126,7 @@ Public Class frmQuanLiTheDocGia
         columnNgayHetHan.HeaderText = "Ngày hết hạn"
         columnNgayHetHan.DataPropertyName = "NgayHetHan"
         DataGridViewQuanLiTheDocGia.Columns.Add(columnNgayHetHan)
-        Return result
-    End Function
+    End Sub
 
 #End Region
 
@@ -122,9 +135,17 @@ Public Class frmQuanLiTheDocGia
     Private Sub ReaderTypeComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ReaderTypeComboBox.SelectedIndexChanged
         Try
             Dim maLoai = Convert.ToInt32(ReaderTypeComboBox.SelectedValue)
+            ResetSpecificRowSelectedControlTextInfo()
             LoadListDocGia(maLoai)
         Catch ex As Exception
         End Try
+    End Sub
+
+    Private Sub ResetSpecificRowSelectedControlTextInfo()
+        txtUserName.ResetText()
+        txtAddress.ResetText()
+        txtEmail.ResetText()
+        txtMaTheDocGia.ResetText()
     End Sub
 
 #Region "-   Load info cho thẻ độc giả được chọn   - "
@@ -136,20 +157,20 @@ Public Class frmQuanLiTheDocGia
         Dim docGia = New DocGia()
         Dim result = GetSelectedDocGiaData(docGia)
         If result.FlagResult = False Then
-            MaTheDocGiaTextBox.Text = ""
-            UserNameTextBox.Text = ""
-            EmailTextBox.Text = ""
-            AddressTextBox.Text = ""
-            BirthDateTimePicker.Value = Now
-            LoaiDocGiaEditComboBox.SelectedIndex = ReaderTypeComboBox.SelectedIndex
+            txtMaTheDocGia.Text = ""
+            txtUserName.Text = ""
+            txtEmail.Text = ""
+            txtAddress.Text = ""
+            dtpBirthDate.Value = Now
+            cbLoaiDocGiaEdit.SelectedIndex = ReaderTypeComboBox.SelectedIndex
             Return result
         End If
-        MaTheDocGiaTextBox.Text = docGia.MaTheDocGia
-        UserNameTextBox.Text = docGia.TenDocGia
-        EmailTextBox.Text = docGia.Email
-        AddressTextBox.Text = docGia.DiaChi
-        BirthDateTimePicker.Value = docGia.NgaySinh
-        LoaiDocGiaEditComboBox.SelectedIndex = ReaderTypeComboBox.SelectedIndex
+        txtMaTheDocGia.Text = docGia.MaTheDocGia
+        txtUserName.Text = docGia.TenDocGia
+        txtEmail.Text = docGia.Email
+        txtAddress.Text = docGia.DiaChi
+        dtpBirthDate.Value = docGia.NgaySinh
+        cbLoaiDocGiaEdit.SelectedIndex = ReaderTypeComboBox.SelectedIndex
         Return result
     End Function
 #End Region
@@ -173,16 +194,17 @@ Public Class frmQuanLiTheDocGia
 
     Private Sub EditButton_Click(sender As Object, e As EventArgs) Handles EditButton.Click
         Dim docGia = New DocGia()
-        docGia.MaTheDocGia = MaTheDocGiaTextBox.Text
-        docGia.TenDocGia = UserNameTextBox.Text
-        docGia.Email = EmailTextBox.Text
-        docGia.DiaChi = AddressTextBox.Text
-        docGia.NgaySinh = BirthDateTimePicker.Value
-        docGia.MaLoaiDocGia = (LoaiDocGiaEditComboBox.SelectedValue)
+        docGia.MaTheDocGia = txtMaTheDocGia.Text
+        docGia.TenDocGia = txtUserName.Text
+        docGia.Email = txtEmail.Text
+        docGia.DiaChi = txtAddress.Text
+        docGia.NgaySinh = dtpBirthDate.Value
+        docGia.MaLoaiDocGia = (cbLoaiDocGiaEdit.SelectedValue)
 
-        Dim result = _docGiaBus.SuaTheDocGiaBangDocGia(docGia)
+        Dim result = _docGiaBus.UpdateById(docGia)
         If result.FlagResult = False Then
             MessageBox.Show(result.ApplicationMessage)
+            Return
         Else
             MessageBox.Show("Sửa thành công")
             LoadListDocGia(docGia.MaLoaiDocGia)
@@ -192,18 +214,23 @@ Public Class frmQuanLiTheDocGia
     Private Sub RemoveButton_Click(sender As Object, e As EventArgs) Handles RemoveButton.Click
         Dim docGia = New DocGia()
         Dim getDataResult = GetSelectedDocGiaData(docGia)
-        If getDataResult.FlagResult = False Then
-            MessageBox.Show("Không thể nhận dạng độc giả cần xóa")
-            Return
-        End If
+        Select Case MsgBox("Bạn có thực sự muốn xóa thể loại sách có mã: " + docGia.MaTheDocGia.ToString(), MsgBoxStyle.YesNo, "Information")
+            Case MsgBoxResult.Yes
+                If getDataResult.FlagResult = False Then
+                    MessageBox.Show("Không thể nhận dạng độc giả cần xóa")
+                    Return
+                End If
 
-        Dim result = _docGiaBus.XoaTheDocGiaBangMaThe(docGia.MaTheDocGia)
-        If result.FlagResult = False Then
-            MessageBox.Show(result.ApplicationMessage)
-        Else
-            MessageBox.Show("Xóa thành công")
-            LoadListDocGia(docGia.MaLoaiDocGia)
-        End If
+                Dim result = _docGiaBus.DeleteByID(docGia.MaTheDocGia)
+                If result.FlagResult = False Then
+                    MessageBox.Show(result.ApplicationMessage)
+                Else
+                    MessageBox.Show("Xóa thành công")
+                    LoadListDocGia(docGia.MaLoaiDocGia)
+                End If
+            Case MsgBoxResult.No
+                Return
+        End Select
     End Sub
 
 #End Region

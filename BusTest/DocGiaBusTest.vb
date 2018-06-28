@@ -127,7 +127,7 @@ Imports Utility
             Dim docGia = New DocGia(1, "ahiinh", "123@gmail.com", "122c",
                       New DateTime(1998, 1, 1), DateTime.Now, DateTime.Now.AddMonths(6), 1)
 
-            act = docGiaBus.SuaTheDocGiaBangDocGia(docGia)
+            act = docGiaBus.UpdateById(docGia)
         End If
         'assert
         Assert.AreEqual(expected.FlagResult, act.FlagResult)
@@ -140,7 +140,7 @@ Imports Utility
                       New DateTime(198, 1, 1), DateTime.Now, DateTime.Now.AddMonths(6), 1)
 
         'act
-        Dim act = docGiaBus.SuaTheDocGiaBangDocGia(docGia)
+        Dim act = docGiaBus.UpdateById(docGia)
         'assert
         Assert.AreEqual(expected.FlagResult, act.FlagResult)
     End Sub
@@ -152,7 +152,7 @@ Imports Utility
                       New DateTime(1998, 1, 1), DateTime.Now, DateTime.Now.AddMonths(6), 1)
 
         'act
-        Dim act = docGiaBus.SuaTheDocGiaBangDocGia(docGia)
+        Dim act = docGiaBus.UpdateById(docGia)
         'assert
         Assert.AreEqual(expected.FlagResult, act.FlagResult)
         Assert.AreEqual(expected.ApplicationMessage, act.ApplicationMessage)
@@ -165,7 +165,7 @@ Imports Utility
                       New DateTime(1998, 1, 1), DateTime.Now, DateTime.Now.AddMonths(6), 1)
 
         'act
-        Dim act = docGiaBus.SuaTheDocGiaBangDocGia(docGia)
+        Dim act = docGiaBus.UpdateById(docGia)
         'assert
         Assert.AreEqual(expected.FlagResult, act.FlagResult)
         Assert.AreEqual(expected.ApplicationMessage, act.ApplicationMessage)
@@ -179,7 +179,7 @@ Imports Utility
                       New DateTime(1998, 1, 1), DateTime.Now, DateTime.Now.AddMonths(6), 1)
 
         'act
-        Dim act = docGiaBus.SuaTheDocGiaBangDocGia(docGia)
+        Dim act = docGiaBus.UpdateById(docGia)
         'assert
         Assert.AreEqual(expected.FlagResult, act.FlagResult)
         Assert.AreEqual(expected.ApplicationMessage, act.ApplicationMessage)
@@ -193,7 +193,7 @@ Imports Utility
                       New DateTime(199, 1, 1), DateTime.Now, DateTime.Now.AddMonths(6), 1)
 
         'act
-        Dim act = docGiaBus.SuaTheDocGiaBangDocGia(docGia)
+        Dim act = docGiaBus.UpdateById(docGia)
         'assert
         Assert.AreEqual(expected.FlagResult, act.FlagResult)
         Assert.AreEqual(expected.ApplicationMessage, act.ApplicationMessage)
@@ -206,7 +206,7 @@ Imports Utility
                       New DateTime(2010, 1, 1), DateTime.Now, DateTime.Now.AddMonths(6), 1)
 
         'act
-        Dim act = docGiaBus.SuaTheDocGiaBangDocGia(docGia)
+        Dim act = docGiaBus.UpdateById(docGia)
         'assert
         Assert.AreEqual(expected.FlagResult, act.FlagResult)
         Assert.AreEqual(expected.ApplicationMessage, act.ApplicationMessage)
@@ -220,7 +220,7 @@ Imports Utility
                       New DateTime(2010, 1, 1), DateTime.Now, DateTime.Now.AddMonths(6), 5)
 
         'act
-        Dim act = docGiaBus.SuaTheDocGiaBangDocGia(docGia)
+        Dim act = docGiaBus.UpdateById(docGia)
         'assert
         Assert.AreEqual(expected.FlagResult, act.FlagResult)
         Assert.AreEqual(expected.ApplicationMessage, act.ApplicationMessage)
@@ -235,7 +235,7 @@ Imports Utility
         Dim listDocGia = New List(Of DocGia)
         Dim result = docGiaBus.SelectAllByType(1, listDocGia)
         'act
-        Dim act = docGiaBus.XoaTheDocGiaBangMaThe(listDocGia(0).MaTheDocGia)
+        Dim act = docGiaBus.DeleteByID(listDocGia(0).MaTheDocGia)
         'assert
         Assert.AreEqual(expected.FlagResult, act.FlagResult)
     End Sub
@@ -245,7 +245,7 @@ Imports Utility
         Dim expected = New Result(False, "Mã thẻ độc giả không được để trống", "")
         Dim docGiaBus = New DocGiaBus()
         'act
-        Dim act = docGiaBus.XoaTheDocGiaBangMaThe("")
+        Dim act = docGiaBus.DeleteByID("")
         'assert
         Assert.AreEqual(expected.FlagResult, act.FlagResult)
         Assert.AreEqual(expected.ApplicationMessage, act.ApplicationMessage)
