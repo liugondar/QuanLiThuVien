@@ -75,10 +75,14 @@
     End Sub
 
     Private Sub NhậpTácGiảToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NhậpTácGiảToolStripMenuItem.Click
-        'TODO: nhap tac gia click
+        Dim frm = New frmThemTacGia()
+        frm.MdiParent = Me
+        frm.Show()
     End Sub
 
     Private Sub QuảnLíTácGiảToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles QuảnLíTácGiảToolStripMenuItem.Click
-        'TODO: Quan li tac gia click
+        Dim frm = New frmQuanLiTacGia()
+        frm.MdiParent = Me
+        frm.Show()
     End Sub
 End Class

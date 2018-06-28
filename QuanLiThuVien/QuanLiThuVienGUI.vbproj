@@ -118,10 +118,22 @@
     <Compile Include="frmNhapSach.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmQuanLiTacGia.Designer.vb">
+      <DependentUpon>frmQuanLiTacGia.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmQuanLiTacGia.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmQuanLiTheLoaiSach.Designer.vb">
       <DependentUpon>frmQuanLiTheLoaiSach.vb</DependentUpon>
     </Compile>
     <Compile Include="frmQuanLiTheLoaiSach.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmThemTacGia.Designer.vb">
+      <DependentUpon>frmThemTacGia.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmThemTacGia.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmThemTheLoaiSach.Designer.vb">
@@ -198,8 +210,14 @@
     <EmbeddedResource Include="frmNhapSach.resx">
       <DependentUpon>frmNhapSach.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmQuanLiTacGia.resx">
+      <DependentUpon>frmQuanLiTacGia.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmQuanLiTheLoaiSach.resx">
       <DependentUpon>frmQuanLiTheLoaiSach.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmThemTacGia.resx">
+      <DependentUpon>frmThemTacGia.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmThemTheLoaiSach.resx">
       <DependentUpon>frmThemTheLoaiSach.vb</DependentUpon>

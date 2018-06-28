@@ -54,6 +54,43 @@ Public Class TacGiaDAO
         Return result
     End Function
 
+    Function GetTheLastId(ByRef maTacGia As String) As Result
+        Dim data = New DataTable()
+        Dim query = String.Format("select top 1 [MaTacGia]
+from TacGia
+order by MaTacGia desc")
+        Dim result = _dataProvider.ExcuteQuery(query, data)
+
+        For Each row In data.Rows
+            maTacGia = row("MaTacGia").ToString()
+        Next
+        Return New Result()
+    End Function
+#End Region
+
+#Region "-    Insert,delete,update   -"
+    Function UpdateById(tacGia As TacGia, tacGiaId As String) As Result
+        Dim query = String.Format("
+update TacGia
+set TenTacGia='{0}'
+where MaTacGia={1} and DeleteFlag='N'", tacGia.TenTacGia, tacGiaId)
+        Return _dataProvider.ExcuteNonquery(query)
+    End Function
+
+    Function DeleteById(tacGiaId As String) As Result
+        Dim query = String.Format("
+update TacGia
+set DeleteFlag='Y'
+where MaTacGia={0}", tacGiaId)
+        Return _dataProvider.ExcuteNonquery(query)
+    End Function
+
+    Function InsertOne(tacGia As TacGia) As Result
+        Dim query = String.Format("
+INSERT into dbo.TacGia(TenTacGia)
+VALUES('{0}')", tacGia.TenTacGia)
+        Return _dataProvider.ExcuteNonquery(query)
+    End Function
 #End Region
 
 End Class

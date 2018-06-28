@@ -59,4 +59,5 @@ Public Class TheLoaiSachBUS
         Return result
     End Function
 #End Region
+
 End Class
