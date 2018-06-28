@@ -55,7 +55,7 @@ Public Class PhieuMuonSach
         Me.TinhTrang = tinhTrang
     End Sub
 
-    Public Function validate() As Result
+    Public Function ValidateMaPhieuMuonSachAndMaTheDocGia() As Result
         If String.IsNullOrWhiteSpace(MaPhieuMuonSach) Then Return New Result(False, "Mã phiếu mượn sách trống!", "")
         If String.IsNullOrWhiteSpace(MaTheDocGia) Then Return New Result(False, "Mã độc giả trống !", "")
         Return New Result()

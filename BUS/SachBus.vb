@@ -43,7 +43,7 @@ Public Class SachBus
     End Function
     Private Function Validate(sach As Sach) As Result
         If _ketQuaLayQuiDinh.FlagResult = False Then Return New Result(False, "Không thể lấy qui định trong cơ sở dữ liệu để xác nhập thông tin sách!", "")
-        Dim validateTenSachVaTenNhaXuatBanResult = sach.Validate()
+        Dim validateTenSachVaTenNhaXuatBanResult = sach.ValidateTenSachAndTenNhaXuatBan()
         Dim validateNgayXuatBanResult = ValidateNgayXuatBan(sach.NgayXuatBan, sach.NgayNhap)
         Dim validateTheLoaiSachResult = ValidateTheLoaiSach(sach.MaTheLoaiSach)
         Dim validateTacGiaResult = ValidateTacGia(sach.MaTacGia)

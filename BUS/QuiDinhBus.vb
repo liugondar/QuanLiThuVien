@@ -39,4 +39,10 @@ Public Class QuiDinhBus
 
 #End Region
 
+#Region "-   Update    -"
+    Public Function Update(quiDinh As QuiDinh) As Result
+        Return _quiDinhDAO.Update(quiDinh)
+    End Function
+#End Region
+
 End Class

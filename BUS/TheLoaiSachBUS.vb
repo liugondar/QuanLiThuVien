@@ -27,7 +27,7 @@ Public Class TheLoaiSachBUS
     End Function
 
     Function InsertOne(theLoaiSach As TheLoaiSach) As Result
-        If Not theLoaiSach.Validate() Then Return New Result(False, "Thông tin input không hợp lệ!", "")
+        If Not theLoaiSach.ValidateTenTheLoaiSach() Then Return New Result(False, "Thông tin input không hợp lệ!", "")
         Return _theLoaiSachDAO.InsertOne(theLoaiSach)
     End Function
 #End Region

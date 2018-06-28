@@ -20,7 +20,7 @@
     Public Property MaTheLoaiSach() As Integer
     Public Property TenTheLoaiSach() As String
 
-    Public Function Validate() As Boolean
+    Public Function ValidateTenTheLoaiSach() As Boolean
         If String.IsNullOrWhiteSpace(TenTheLoaiSach) Then Return False
         Return True
     End Function

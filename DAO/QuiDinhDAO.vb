@@ -76,4 +76,20 @@ Public Class QuiDinhDAO
     End Function
 #End Region
 
+#Region "-   Update    -"
+    Public Function Update(quiDinh As QuiDinh) As Result
+        Dim query = String.Format("select * from QuiDinh
+update QuiDinh
+set TuoiToiDa={0},TuoiToiThieu={1},
+ThoiHanToiDaTheDocGia={2},
+ThoiHanNhanSach={3},
+SoNgayMuonToiDa={4},SoSachMuonToiDa={5}",
+quiDinh.TuoiToiDa, quiDinh.TuoiToiThieu,
+quiDinh.ThoiHanToiDaTheDocGia,
+quiDinh.ThoiHanNhanSach,
+quiDinh.SoNgayMuonSachToiDa, quiDinh.SoSachMuonToiDa)
+        Return _dataProvider.ExcuteNonquery(query)
+    End Function
+
+#End Region
 End Class

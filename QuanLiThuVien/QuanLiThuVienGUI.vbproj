@@ -48,10 +48,6 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ComponentFactory.Krypton.Design, Version=4.4.0.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\wingondar\Desktop\Krypton-2-master\Krypton-2-master\Bin\PublisherSigned\ComponentFactory.Krypton.Design.dll</HintPath>
-    </Reference>
     <Reference Include="MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
       <HintPath>..\packages\MetroFramework.RunTime.1.2.0.3\lib\net40-Client\MetroFramework.dll</HintPath>
     </Reference>
@@ -116,6 +112,12 @@
       <DependentUpon>frmNhapSach.vb</DependentUpon>
     </Compile>
     <Compile Include="frmNhapSach.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmQuanLiQuiDinh.Designer.vb">
+      <DependentUpon>frmQuanLiQuiDinh.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmQuanLiQuiDinh.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmQuanLiTacGia.Designer.vb">
@@ -209,6 +211,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmNhapSach.resx">
       <DependentUpon>frmNhapSach.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmQuanLiQuiDinh.resx">
+      <DependentUpon>frmQuanLiQuiDinh.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmQuanLiTacGia.resx">
       <DependentUpon>frmQuanLiTacGia.vb</DependentUpon>

@@ -20,7 +20,7 @@
     Public Property MaTacGia() As Integer
     Public Property TenTacGia() As String
 
-    Public Function Validate() As Boolean
+    Public Function ValidateTenTacGia() As Boolean
         If String.IsNullOrWhiteSpace(TenTacGia) Then Return False
         Return True
     End Function

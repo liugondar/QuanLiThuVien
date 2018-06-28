@@ -79,7 +79,7 @@ New DateTime(1998, 1, 1), New DateTime(1998, 1, 1), 10000, 0)
         'act
         Dim sach = New Sach(1, "Di ve dau", 1, 1, "Kim dong",
 New DateTime(1998, 1, 1), New DateTime(1998, 1, 1), 10000)
-        Dim act = sach.Validate()
+        Dim act = sach.ValidateTenSachAndTenNhaXuatBan()
 
         'assert
         Assert.AreEqual(expected.FlagResult, act.FlagResult)
@@ -91,7 +91,7 @@ New DateTime(1998, 1, 1), New DateTime(1998, 1, 1), 10000)
         'act
         Dim sach = New Sach(0, "", 1, 1, "Kim dong",
 New DateTime(1998, 1, 1), New DateTime(1998, 1, 1), 10000)
-        Dim act = sach.Validate()
+        Dim act = sach.ValidateTenSachAndTenNhaXuatBan()
 
         'assert
         Assert.AreEqual(expected.FlagResult, act.FlagResult)
@@ -104,7 +104,7 @@ New DateTime(1998, 1, 1), New DateTime(1998, 1, 1), 10000)
         'act
         Dim sach = New Sach(0, "12334", 1, 1, "",
 New DateTime(1998, 1, 1), New DateTime(1998, 1, 1), 10000)
-        Dim act = sach.Validate()
+        Dim act = sach.ValidateTenSachAndTenNhaXuatBan()
 
         'assert
         Assert.AreEqual(expected.FlagResult, act.FlagResult)

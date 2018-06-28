@@ -29,7 +29,7 @@ Public Class TacGiaBUS
     End Function
 
     Function InsertOne(tacGia As TacGia) As Result
-        If Not tacGia.Validate() Then Return New Result(False, "Thông tin input không hợp lệ!", "")
+        If Not tacGia.ValidateTenTacGia() Then Return New Result(False, "Thông tin input không hợp lệ!", "")
         Return _tacGiaDAO.InsertOne(tacGia)
     End Function
 #End Region

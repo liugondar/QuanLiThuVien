@@ -62,7 +62,7 @@ Public Class Sach
     Public Property TinhTrang() As Integer
 
 
-    Public Function Validate() As Result
+    Public Function ValidateTenSachAndTenNhaXuatBan() As Result
         If String.IsNullOrWhiteSpace(TenSach).ToString() Then Return New Result(False, "Tên sách không đúng định dạng!", "")
         If String.IsNullOrWhiteSpace(TenNhaXuatBan).ToString() Then Return New Result(False, "Tên nhà xuất bản không đúng định dạng!", "")
         Return New Result()

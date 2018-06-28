@@ -34,7 +34,7 @@ Public Class PhieuMuonSachBus
 
         'kiem tra phieu muon sach hop le khong
 
-        Dim isValidPhieuMuonSach = phieuMuonSach.validate()
+        Dim isValidPhieuMuonSach = phieuMuonSach.ValidateMaPhieuMuonSachAndMaTheDocGia()
         If isValidPhieuMuonSach.FlagResult = False Then Return isValidPhieuMuonSach
 
         Dim isValidSoSachMuonToiDa = ValidateSoSachMuonToiDa(phieuMuonSach.TongSoSachMuon, listPhieuMuonSachChuaTra)
