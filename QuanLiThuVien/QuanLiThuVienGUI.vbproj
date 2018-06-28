@@ -180,6 +180,9 @@
     <EmbeddedResource Include="frmNhapSach.resx">
       <DependentUpon>frmNhapSach.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmQuanLiLoaiDocGia.resx">
+      <DependentUpon>frmQuanLiLoaiDocGia.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmQuanLiSach.resx">
       <DependentUpon>frmQuanLiSach.vb</DependentUpon>
     </EmbeddedResource>

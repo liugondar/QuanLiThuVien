@@ -17,5 +17,6 @@ Imports Utility
         Assert.AreEqual(expected.FlagResult, actual.FlagResult)
         Assert.AreNotEqual(0, listLoaiDocGia.Count)
     End Sub
+
 #End Region
 End Class

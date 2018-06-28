@@ -7,6 +7,7 @@ Public Class LoaiDocGiaDAO
     Public Sub New()
         _dataProvider = New DataProvider()
     End Sub
+
     Function SelectAll(listLoaiDocGia As List(Of LoaiDocGia)) As Result
         Dim data = New DataTable()
         Dim query = String.Empty
@@ -21,5 +22,21 @@ Public Class LoaiDocGiaDAO
             listLoaiDocGia.Add(readertypeTemp)
         Next
         Return New Result()
+    End Function
+
+    Function UpdateById(loaiDocgia As LoaiDocGia, loaiDocGiaId As String) As Result
+        Dim query = String.Format("
+update LoaiDocGia
+set TenLoaiDocGia='{0}'
+where MaLoaiDocGia={1} and DeleteFlag='N'", loaiDocgia.TenLoaiDocGia, loaiDocGiaId)
+        Return _dataProvider.ExcuteNonquery(query)
+    End Function
+
+    Function DeleteById(loaiDocGiaId As String) As Result
+        Dim query = String.Format("
+update LoaiDocGia
+set DeleteFlag='Y'
+where MaLoaiDocGia={0}", loaiDocGiaId)
+        Return _dataProvider.ExcuteNonquery(query)
     End Function
 End Class
