@@ -61,4 +61,24 @@
         frm.MdiParent = Me
         frm.Show()
     End Sub
+
+    Private Sub NhaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NhaToolStripMenuItem.Click
+        Dim frm = New frmThemTheLoaiSach()
+        frm.MdiParent = Me
+        frm.Show()
+    End Sub
+
+    Private Sub QuảnLíThểLoạiToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles QuảnLíThểLoạiToolStripMenuItem.Click
+        Dim frm = New frmQuanLiTheLoaiSach()
+        frm.MdiParent = Me
+        frm.Show()
+    End Sub
+
+    Private Sub NhậpTácGiảToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NhậpTácGiảToolStripMenuItem.Click
+        'TODO: nhap tac gia click
+    End Sub
+
+    Private Sub QuảnLíTácGiảToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles QuảnLíTácGiảToolStripMenuItem.Click
+        'TODO: Quan li tac gia click
+    End Sub
 End Class

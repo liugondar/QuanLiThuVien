@@ -12,6 +12,33 @@ Public Class TheLoaiSachDAO
 
 #End Region
 
+
+#Region "-    Insert,delete,update   -"
+
+    Function UpdateById(theLoaiSach As TheLoaiSach, theLoaiSachID As String) As Result
+        Dim query = String.Format("
+update TheLoaiSach
+set TenTheLoaiSach='{0}'
+where maTheLoaiSach={1} and DeleteFlag='N'", theLoaiSach.TenTheLoaiSach, theLoaiSachID)
+        Return _dataProvider.ExcuteNonquery(query)
+    End Function
+
+    Function DeleteById(theLoaiSachId As String) As Result
+        Dim query = String.Format("
+update TheLoaiSach
+set DeleteFlag='Y'
+where maTheLoaiSach={0}", theLoaiSachId)
+        Return _dataProvider.ExcuteNonquery(query)
+    End Function
+
+    Function InsertOne(theLoaiSach As TheLoaiSach) As Result
+        Dim query = String.Format("
+INSERT into dbo.TheLoaiSach(TenTheLoaiSach)
+VALUES('{0}')", theLoaiSach.TenTheLoaiSach)
+        Return _dataProvider.ExcuteNonquery(query)
+    End Function
+#End Region
+
 #Region "-   Retrieve data    -"
     Public Function SelectAll(ByRef listTheLoaiSach As List(Of TheLoaiSach)) As Result
         Dim query = String.Empty
@@ -50,6 +77,18 @@ where MaTheLoaiSach={0} and DeleteFlag='N'", maTheLoaiSach)
         Return result
     End Function
 
+    Function GetTheLastId(ByRef maTheLoaiSAch As String) As Result
+        Dim data = New DataTable()
+        Dim query = String.Format("select top 1 [maTheLoaiSach]
+from theloaisach
+order by maTheLoaiSach desc")
+        Dim result = _dataProvider.ExcuteQuery(query, data)
+
+        For Each row In data.Rows
+            maTheLoaiSAch = row("maTheLoaiSach").ToString()
+        Next
+        Return New Result()
+    End Function
 #End Region
 
 End Class
