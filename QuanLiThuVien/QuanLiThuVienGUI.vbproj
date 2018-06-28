@@ -118,6 +118,12 @@
     <Compile Include="frmNhapSach.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmQuanLiLoaiDocGia.Designer.vb">
+      <DependentUpon>frmQuanLiLoaiDocGia.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmQuanLiLoaiDocGia.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmQuanLiSach.Designer.vb">
       <DependentUpon>frmQuanLiSach.vb</DependentUpon>
     </Compile>
