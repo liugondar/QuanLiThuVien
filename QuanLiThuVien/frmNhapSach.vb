@@ -76,8 +76,8 @@ Public Class frmNhapSach
     Private Sub InsertSach()
         Dim sach = New Sach()
         sach.TenSach = BookTitleTextBox.Text
-        sach.MaTheLoaiSach = CategoryComboBox.SelectedValue
-        sach.MaTacGia = AuthorComboBox.SelectedValue
+        sach.MaTheLoaiSach = CategoryComboBox.SelectedItem.MaTheLoaiSach
+        sach.MaTacGia = AuthorComboBox.SelectedItem.MaTacGia
         sach.TenNhaXuatBan = PulisherTextBox.Text
         sach.NgayXuatBan = PublishYearDateTimePicker.Value
         sach.NgayNhap = DateInputDateTimePicker.Value
