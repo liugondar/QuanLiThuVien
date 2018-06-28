@@ -38,12 +38,14 @@ Partial Class frmNhapSach
         Me.PriceNumericUpDown = New System.Windows.Forms.NumericUpDown()
         Me.CreateButton = New MetroFramework.Controls.MetroButton()
         Me.CreateAndCloseButton = New MetroFramework.Controls.MetroButton()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.txtMaSach = New System.Windows.Forms.TextBox()
         CType(Me.PriceNumericUpDown, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'BookTitleTextBox
         '
-        Me.BookTitleTextBox.Location = New System.Drawing.Point(217, 77)
+        Me.BookTitleTextBox.Location = New System.Drawing.Point(223, 105)
         Me.BookTitleTextBox.Name = "BookTitleTextBox"
         Me.BookTitleTextBox.Size = New System.Drawing.Size(204, 20)
         Me.BookTitleTextBox.TabIndex = 1
@@ -53,7 +55,7 @@ Partial Class frmNhapSach
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label8.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label8.Location = New System.Drawing.Point(68, 257)
+        Me.Label8.Location = New System.Drawing.Point(74, 285)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(91, 20)
         Me.Label8.TabIndex = 40
@@ -64,7 +66,7 @@ Partial Class frmNhapSach
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label7.Location = New System.Drawing.Point(68, 187)
+        Me.Label7.Location = New System.Drawing.Point(74, 215)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(107, 20)
         Me.Label7.TabIndex = 39
@@ -75,7 +77,7 @@ Partial Class frmNhapSach
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label6.Location = New System.Drawing.Point(68, 113)
+        Me.Label6.Location = New System.Drawing.Point(74, 141)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(68, 20)
         Me.Label6.TabIndex = 38
@@ -86,7 +88,7 @@ Partial Class frmNhapSach
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label5.Location = New System.Drawing.Point(68, 220)
+        Me.Label5.Location = New System.Drawing.Point(74, 248)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(111, 20)
         Me.Label5.TabIndex = 37
@@ -97,7 +99,7 @@ Partial Class frmNhapSach
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label3.Location = New System.Drawing.Point(68, 151)
+        Me.Label3.Location = New System.Drawing.Point(74, 179)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(64, 20)
         Me.Label3.TabIndex = 36
@@ -108,7 +110,7 @@ Partial Class frmNhapSach
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label2.Location = New System.Drawing.Point(68, 77)
+        Me.Label2.Location = New System.Drawing.Point(74, 105)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(78, 20)
         Me.Label2.TabIndex = 35
@@ -119,7 +121,7 @@ Partial Class frmNhapSach
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label4.Location = New System.Drawing.Point(68, 293)
+        Me.Label4.Location = New System.Drawing.Point(74, 321)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(55, 20)
         Me.Label4.TabIndex = 49
@@ -127,7 +129,7 @@ Partial Class frmNhapSach
         '
         'PulisherTextBox
         '
-        Me.PulisherTextBox.Location = New System.Drawing.Point(217, 187)
+        Me.PulisherTextBox.Location = New System.Drawing.Point(223, 215)
         Me.PulisherTextBox.Name = "PulisherTextBox"
         Me.PulisherTextBox.Size = New System.Drawing.Size(204, 20)
         Me.PulisherTextBox.TabIndex = 4
@@ -137,7 +139,7 @@ Partial Class frmNhapSach
         Me.CategoryComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.CategoryComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.CategoryComboBox.FormattingEnabled = True
-        Me.CategoryComboBox.Location = New System.Drawing.Point(217, 112)
+        Me.CategoryComboBox.Location = New System.Drawing.Point(223, 140)
         Me.CategoryComboBox.Name = "CategoryComboBox"
         Me.CategoryComboBox.Size = New System.Drawing.Size(204, 21)
         Me.CategoryComboBox.TabIndex = 2
@@ -147,7 +149,7 @@ Partial Class frmNhapSach
         Me.AuthorComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.AuthorComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.AuthorComboBox.FormattingEnabled = True
-        Me.AuthorComboBox.Location = New System.Drawing.Point(217, 150)
+        Me.AuthorComboBox.Location = New System.Drawing.Point(223, 178)
         Me.AuthorComboBox.Name = "AuthorComboBox"
         Me.AuthorComboBox.Size = New System.Drawing.Size(204, 21)
         Me.AuthorComboBox.Sorted = True
@@ -155,14 +157,14 @@ Partial Class frmNhapSach
         '
         'PublishYearDateTimePicker
         '
-        Me.PublishYearDateTimePicker.Location = New System.Drawing.Point(217, 220)
+        Me.PublishYearDateTimePicker.Location = New System.Drawing.Point(223, 248)
         Me.PublishYearDateTimePicker.Name = "PublishYearDateTimePicker"
         Me.PublishYearDateTimePicker.Size = New System.Drawing.Size(200, 20)
         Me.PublishYearDateTimePicker.TabIndex = 5
         '
         'DateInputDateTimePicker
         '
-        Me.DateInputDateTimePicker.Location = New System.Drawing.Point(217, 257)
+        Me.DateInputDateTimePicker.Location = New System.Drawing.Point(223, 285)
         Me.DateInputDateTimePicker.Name = "DateInputDateTimePicker"
         Me.DateInputDateTimePicker.Size = New System.Drawing.Size(200, 20)
         Me.DateInputDateTimePicker.TabIndex = 6
@@ -170,7 +172,7 @@ Partial Class frmNhapSach
         'PriceNumericUpDown
         '
         Me.PriceNumericUpDown.ForeColor = System.Drawing.SystemColors.WindowText
-        Me.PriceNumericUpDown.Location = New System.Drawing.Point(217, 293)
+        Me.PriceNumericUpDown.Location = New System.Drawing.Point(223, 321)
         Me.PriceNumericUpDown.Maximum = New Decimal(New Integer() {1215752192, 23, 0, 0})
         Me.PriceNumericUpDown.Name = "PriceNumericUpDown"
         Me.PriceNumericUpDown.Size = New System.Drawing.Size(204, 20)
@@ -180,7 +182,7 @@ Partial Class frmNhapSach
         '
         'CreateButton
         '
-        Me.CreateButton.Location = New System.Drawing.Point(116, 344)
+        Me.CreateButton.Location = New System.Drawing.Point(114, 358)
         Me.CreateButton.Name = "CreateButton"
         Me.CreateButton.Size = New System.Drawing.Size(103, 23)
         Me.CreateButton.TabIndex = 97
@@ -188,18 +190,39 @@ Partial Class frmNhapSach
         '
         'CreateAndCloseButton
         '
-        Me.CreateAndCloseButton.Location = New System.Drawing.Point(243, 344)
+        Me.CreateAndCloseButton.Location = New System.Drawing.Point(241, 358)
         Me.CreateAndCloseButton.Name = "CreateAndCloseButton"
         Me.CreateAndCloseButton.Size = New System.Drawing.Size(103, 23)
         Me.CreateAndCloseButton.TabIndex = 98
         Me.CreateAndCloseButton.Text = "Nhập và đóng"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Label1.Location = New System.Drawing.Point(74, 71)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(73, 20)
+        Me.Label1.TabIndex = 99
+        Me.Label1.Text = "Mã sách:"
+        '
+        'txtMaSach
+        '
+        Me.txtMaSach.Enabled = False
+        Me.txtMaSach.Location = New System.Drawing.Point(223, 71)
+        Me.txtMaSach.Name = "txtMaSach"
+        Me.txtMaSach.Size = New System.Drawing.Size(204, 20)
+        Me.txtMaSach.TabIndex = 100
         '
         'frmNhapSach
         '
         Me.AcceptButton = Me.CreateButton
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(478, 404)
+        Me.ClientSize = New System.Drawing.Size(495, 404)
+        Me.Controls.Add(Me.txtMaSach)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.CreateAndCloseButton)
         Me.Controls.Add(Me.CreateButton)
         Me.Controls.Add(Me.PriceNumericUpDown)
@@ -239,4 +262,6 @@ Partial Class frmNhapSach
     Friend WithEvents PriceNumericUpDown As NumericUpDown
     Friend WithEvents CreateButton As MetroFramework.Controls.MetroButton
     Friend WithEvents CreateAndCloseButton As MetroFramework.Controls.MetroButton
+    Friend WithEvents Label1 As Label
+    Friend WithEvents txtMaSach As TextBox
 End Class

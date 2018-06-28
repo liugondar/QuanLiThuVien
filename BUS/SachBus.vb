@@ -164,5 +164,11 @@ Public Class SachBus
                                  ByRef tacGia As String, ByRef tinhTrangSach As Integer) As Result
         Return _sachDAO.SelectByType(maSach, tenSach, theLoai, tacGia, tinhTrangSach)
     End Function
+
+    Public Function GetNextId(ByRef maSach) As Result
+        Dim result = _sachDAO.GetTheLastID(maSach)
+        maSach = maSach + 1
+        Return result
+    End Function
 #End Region
 End Class

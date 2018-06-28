@@ -30,6 +30,13 @@ Public Class frmNhapSach
         PublishYearDateTimePicker.MaxDate = Now
 
         DateInputDateTimePicker.MaxDate = Now
+        LoadTxtMaSach()
+    End Sub
+
+    Private Sub LoadTxtMaSach()
+        Dim maSach = String.Empty
+        _sachBus.GetNextId(maSach)
+        txtMaSach.Text = maSach
     End Sub
 
     Private Sub LoadAuthorComboBoxData()

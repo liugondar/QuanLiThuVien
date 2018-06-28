@@ -114,8 +114,6 @@ triGiaMin, triGiaMax)
         Return result
     End Function
 
-
-
     Public Function SelectAllByMaTheLoaiSach(ByRef listSach As List(Of Sach), maTheLoaiSach As String) As Result
         Dim query = String.Empty
         query = String.Format("Select * from Sach where MaTheLoaiSach={0} and DeleteFlag='N'", maTheLoaiSach)
@@ -296,6 +294,7 @@ and s.MaSach={0}", maSach)
         End If
         Return result
     End Function
+
     Public Function SelectAvailableSachById(sach As Sach, maSach As String) As Result
         Dim query = String.Empty
         query &= "select [maSach], [tenSach], [maTacGia], [maTheLoaiSach]  "
