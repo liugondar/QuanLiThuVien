@@ -19,7 +19,6 @@ Public Class frmChoMuonSach
     Private _listTheLoaiSach As List(Of TheLoaiSach)
 
 
-    Private _listControlBookInfoControl As List(Of BookInfoControl)
     Private AddNewRowButton As Button
 
 #End Region
@@ -40,7 +39,6 @@ Public Class frmChoMuonSach
         _listTacGia = New List(Of TacGia)
         _listTheLoaiSach = New List(Of TheLoaiSach)
 
-        _listControlBookInfoControl = New List(Of BookInfoControl)
 
 
         '"-  Load data for controls  -"
@@ -435,18 +433,6 @@ Public Class frmChoMuonSach
             End If
         Next
 
-
-        For Each control As BookInfoControl In _listControlBookInfoControl
-
-            Dim chiTietPhieuMuonSach = New ChiTietPhieuMuonSach()
-            chiTietPhieuMuonSach.MaPhieuMuonSach = maPhieuMuonSachHienTai
-            chiTietPhieuMuonSach.MaSach = control.GetBookIdTextBox.text
-            Dim insertChitietphieumuonsachResult = _chiTietPhieuMuonSach.InsertOne(chiTietPhieuMuonSach)
-            If insertChitietphieumuonsachResult.FlagResult = False Then
-                'TODO: xóa phiếu mượn sách và các chi tiết phiếu mượn sách đã insert phía trước
-                Return insertChitietphieumuonsachResult
-            End If
-        Next
         Return New Result()
     End Function
 
@@ -455,7 +441,6 @@ Public Class frmChoMuonSach
         phieuMuonSAch.MaTheDocGia = ReaderIdTextBox.Text
         phieuMuonSAch.NgayMuon = BorrowDateTimePicker.Value
         phieuMuonSAch.HanTra = ExpirationTimePicker.Value
-        phieuMuonSAch.TongSoSachMuon = _listControlBookInfoControl.Count
         Dim insertPhieumuonsachResult = _phieuMuonSachBus.InsertOne(phieuMuonSAch)
         If insertPhieumuonsachResult.FlagResult = False Then Return insertPhieumuonsachResult
         Return New Result()

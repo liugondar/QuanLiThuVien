@@ -1,5 +1,6 @@
 ﻿Imports System.Text
 Imports BUS
+Imports DAO
 Imports DTO
 Imports Microsoft.VisualStudio.TestTools.UnitTesting
 Imports Utility
@@ -11,8 +12,16 @@ Imports Utility
         Dim expected = New Result()
         Dim chiTietPhieuMuonSachBus = New ChiTietPhieuMuonSachBus()
         Dim chiTietPhieuMuonSach = New ChiTietPhieuMuonSach()
-        chiTietPhieuMuonSach.MaPhieuMuonSach = 1
-        chiTietPhieuMuonSach.MaSach = 1
+        Dim sachDao = New SachDAO()
+        Dim maSach = String.Empty
+        Dim phieuMuonSachDAO = New PhieuMuonSachDAO()
+        Dim maPhieuMuonSAch = String.Empty
+
+        phieuMuonSachDAO.GetTheLastPhieuMuonSachID(maPhieuMuonSAch)
+        sachDao.GetTheLastID(maSach)
+
+        chiTietPhieuMuonSach.MaPhieuMuonSach = maPhieuMuonSAch
+        chiTietPhieuMuonSach.MaSach = maSach
         'act
         Dim act = chiTietPhieuMuonSachBus.InsertOne(chiTietPhieuMuonSach)
         'assert

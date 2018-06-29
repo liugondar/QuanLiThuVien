@@ -1,4 +1,5 @@
 ﻿Imports System.Text
+Imports BUS
 Imports DAO
 Imports DTO
 Imports Microsoft.VisualStudio.TestTools.UnitTesting
@@ -10,7 +11,10 @@ Imports Utility
         'arrange
         Dim expected = New Result()
         Dim sachDao = New SachDAO()
-        Dim sach = New Sach(1, "Di ve dau", 1, 1, "Kim dong",
+        Dim sachBus = New SachBus()
+        Dim maSach = String.Empty
+        sachBus.GetNextId(maSach)
+        Dim sach = New Sach(maSach, "Di ve dau", 1, 1, "Kim dong",
 New DateTime(1998, 1, 1), New DateTime(1998, 1, 1), 10000)
         'act
         Dim act = sachDao.InsertOne(sach)
