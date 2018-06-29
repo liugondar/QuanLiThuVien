@@ -60,8 +60,9 @@ Public Class DocGiaDAO
 #Region "-   Retrieve data    -"
 
     Public Function SelectAllByType(maLoai As String, ByRef listDocGia As List(Of DocGia)) As Result
+        Dim dieuKienMaLoai = If(maLoai = -1, "1=1", "[MaLoaiDocGia]=" & maLoai)
         Dim query As String = String.Empty
-        query = String.Format("select * from TheDocGia where [MaLoaiDocGia]={0} and DeleteFlag='N'", maLoai)
+        query = String.Format("select * from TheDocGia where {0} and DeleteFlag='N'", dieuKienMaLoai)
         Dim dataTable = New DataTable()
         Dim result = _dataProvider.ExcuteQuery(query, dataTable)
         For Each row In dataTable.Rows

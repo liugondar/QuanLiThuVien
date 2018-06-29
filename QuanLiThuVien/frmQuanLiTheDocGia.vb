@@ -20,12 +20,14 @@ Public Class frmQuanLiTheDocGia
             Me.Close()
         End If
 
-        RemoveButton.BackColor = ColorTranslator.FromHtml("#DC3545")
-        EditButton.BackColor = ColorTranslator.FromHtml("#28A745")
     End Sub
 
     Private Function LoadReaderTypeComboBoxData() As Result
         Dim listLoaiDocGia = New List(Of LoaiDocGia)
+        Dim firstLoaiDocGia = New LoaiDocGia()
+        firstLoaiDocGia.MaLoaiDocGia = -1
+        firstLoaiDocGia.TenLoaiDocGia = "Tất cả"
+        listLoaiDocGia.Add(firstLoaiDocGia)
         Dim result = _loaiDocGiaBus.SelectAll(listLoaiDocGia)
 
         ReaderTypeComboBox.DataSource = New BindingSource(listLoaiDocGia, String.Empty)
