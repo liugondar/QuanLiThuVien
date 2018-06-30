@@ -12,7 +12,6 @@ Public Class TheLoaiSachDAO
 
 #End Region
 
-
 #Region "-    Insert,delete,update   -"
 
     Function UpdateById(theLoaiSach As TheLoaiSach, theLoaiSachID As String) As Result

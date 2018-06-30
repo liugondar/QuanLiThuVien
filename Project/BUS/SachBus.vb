@@ -77,13 +77,26 @@ Public Class SachBus
     End Function
 #End Region
 
-#Region "-   Update   -"
+#Region "-   Update and delete  -"
     Public Function SetStatusSachToUnavailableByID(maSach As String) As Result
         Return _sachDAO.SetStatusSachToUnavailableByID(maSach)
     End Function
 
     Public Function SetStatusSachToAvailableByID(maSach As String) As Result
         Return _sachDAO.SetStatusSachToAvailableByID(maSach)
+    End Function
+
+    Public Function Update(sach As Sach) As Result
+        Dim validateTenSachAndTenNXBResult = sach.ValidateTenSachAndTenNhaXuatBan()
+        If Not validateTenSachAndTenNXBResult.FlagResult Then Return validateTenSachAndTenNXBResult
+
+        If String.IsNullOrWhiteSpace(sach.MaSach) Then Return New Result(False, "Mã sách không hợp lệ!", "")
+        Return _sachDAO.Update(sach)
+    End Function
+
+    Public Function DeleteById(id As String) As Result
+        If String.IsNullOrWhiteSpace(id) Then Return New Result(False, "Mã sách không hợp lệ!", "")
+        Return _sachDAO.DeleteById(id)
     End Function
 #End Region
 
@@ -126,6 +139,13 @@ Public Class SachBus
         maSach = If(String.IsNullOrWhiteSpace(maSach), 1, maSach + 1)
         Return result
     End Function
+
+    Public Function GetById(ByRef sach As Sach, maSach As Integer) As Result
+        If String.IsNullOrWhiteSpace(maSach) Then Return New Result(False, "Mã sách không hợp lệ!", "")
+        Return _sachDAO.GetByID(sach, maSach)
+    End Function
+
+
 #End Region
 
 End Class

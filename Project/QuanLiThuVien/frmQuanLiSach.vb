@@ -16,6 +16,10 @@ Public Class frmQuanLiSach
 #Region "-   Constructor   -"
 
     Private Sub frmQuanLiSach_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        InitComponenents()
+    End Sub
+
+    Private Sub InitComponenents()
         _theLoaiSachBus = New TheLoaiSachBUS()
         _tacGiaBus = New TacGiaBUS()
         _sachBus = New SachBus()
@@ -42,17 +46,17 @@ Public Class frmQuanLiSach
         End If
 
 
-        BookTitleComboBox.DataSource = New BindingSource(_listSach, String.Empty)
-        BookTitleComboBox.DisplayMember = "TenSach"
-        BookTitleComboBox.ValueMember = "MaSach"
+        cbTenSachCanTim.DataSource = New BindingSource(_listSach, String.Empty)
+        cbTenSachCanTim.DisplayMember = "TenSach"
+        cbTenSachCanTim.ValueMember = "MaSach"
 
         Dim listNhaXuatBan = New List(Of Sach)
         Dim nhaXuatBanComparer = New TenNhaXuatBanComparer()
 
         listNhaXuatBan = _listSach.Distinct(nhaXuatBanComparer).ToList()
-        PublisherComboBox.DataSource = New BindingSource(listNhaXuatBan, String.Empty)
-        PublisherComboBox.DisplayMember = "TenNhaXuatBan"
-        PublisherComboBox.ValueMember = "TenNhaXuatBan"
+        cbNhaXuatBanCanTim.DataSource = New BindingSource(listNhaXuatBan, String.Empty)
+        cbNhaXuatBanCanTim.DisplayMember = "TenNhaXuatBan"
+        cbNhaXuatBanCanTim.ValueMember = "TenNhaXuatBan"
     End Sub
 
     Private Sub InitCategoryComboboxData()
@@ -66,9 +70,9 @@ Public Class frmQuanLiSach
             Return
         End If
 
-        CategoryComboBox.DataSource = New BindingSource(_listTheLoaiSach, String.Empty)
-        CategoryComboBox.DisplayMember = "TenTheLoaiSach"
-        CategoryComboBox.ValueMember = "MaTheLoaiSach"
+        cbTheLoaiCanTim.DataSource = New BindingSource(_listTheLoaiSach, String.Empty)
+        cbTheLoaiCanTim.DisplayMember = "TenTheLoaiSach"
+        cbTheLoaiCanTim.ValueMember = "MaTheLoaiSach"
     End Sub
 
     Private Sub InitAuthorsComboBoxData()
@@ -82,51 +86,55 @@ Public Class frmQuanLiSach
             Return
         End If
 
-        AuthorComboBox.DataSource = New BindingSource(_listTacGia, String.Empty)
-        AuthorComboBox.DisplayMember = "TenTacGia"
-        AuthorComboBox.ValueMember = "MaTacGia"
+        cbTacGiaCanTim.DataSource = New BindingSource(_listTacGia, String.Empty)
+        cbTacGiaCanTim.DisplayMember = "TenTacGia"
+        cbTacGiaCanTim.ValueMember = "MaTacGia"
     End Sub
 
     Private Sub InitDateTimePickers()
-        MinDateInputDateTimePicker.Format = DateTimePickerFormat.Custom
-        MinDateInputDateTimePicker.CustomFormat = "yyyy"
-        MinDateInputDateTimePicker.ShowUpDown = True
-        MinDateInputDateTimePicker.MaxDate = Now
-        MinDateInputDateTimePicker.Value = New Date(1753, 1, 1)
+        dpNgayNhapMin.Format = DateTimePickerFormat.Custom
+        dpNgayNhapMin.CustomFormat = "yyyy"
+        dpNgayNhapMin.ShowUpDown = True
+        dpNgayNhapMin.MaxDate = Now
+        dpNgayNhapMin.Value = New Date(1753, 1, 1)
 
-        MaxDateInputDateTimePicker.Format = DateTimePickerFormat.Custom
-        MaxDateInputDateTimePicker.CustomFormat = "yyyy"
-        MaxDateInputDateTimePicker.ShowUpDown = True
-        MaxDateInputDateTimePicker.MaxDate = Now
+        dpNgayNhapMax.Format = DateTimePickerFormat.Custom
+        dpNgayNhapMax.CustomFormat = "yyyy"
+        dpNgayNhapMax.ShowUpDown = True
+        dpNgayNhapMax.MaxDate = Now
 
-        MinPublishYearDateTimePicker.Format = DateTimePickerFormat.Custom
-        MinPublishYearDateTimePicker.CustomFormat = "yyyy"
-        MinPublishYearDateTimePicker.ShowUpDown = True
-        MinPublishYearDateTimePicker.MaxDate = Now
-        MinPublishYearDateTimePicker.Value = New Date(1753, 1, 1)
+        dpNamXBCanTimMin.Format = DateTimePickerFormat.Custom
+        dpNamXBCanTimMin.CustomFormat = "yyyy"
+        dpNamXBCanTimMin.ShowUpDown = True
+        dpNamXBCanTimMin.MaxDate = Now
+        dpNamXBCanTimMin.Value = New Date(1753, 1, 1)
 
-        MaxPublishYearDateTimePicker.Format = DateTimePickerFormat.Custom
-        MaxPublishYearDateTimePicker.CustomFormat = "yyyy"
-        MaxPublishYearDateTimePicker.ShowUpDown = True
-        MaxPublishYearDateTimePicker.MaxDate = Now
+        dpNamXBCanTimMax.Format = DateTimePickerFormat.Custom
+        dpNamXBCanTimMax.CustomFormat = "yyyy"
+        dpNamXBCanTimMax.ShowUpDown = True
+        dpNamXBCanTimMax.MaxDate = Now
     End Sub
 #End Region
 
 #Region "-   Events   -"
 
 #Region "-   search Button click   -"
-    Private Sub SearchButton_Click(sender As Object, e As EventArgs) Handles SearchButton.Click
+    Private Sub SearchButton_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+        SearchByDataInput()
+    End Sub
+
+    Private Sub SearchByDataInput()
 
         'get input data
         Dim sach = New Sach()
-        sach.MaSach = BookTitleComboBox.SelectedValue
-        sach.MaTacGia = AuthorComboBox.SelectedValue
-        sach.MaTheLoaiSach = CategoryComboBox.SelectedValue
-        sach.TenNhaXuatBan = If(PublisherComboBox.SelectedValue = "-----------------------------", -1, PublisherComboBox.SelectedValue)
-        Dim ngayXuatBanMin = MinPublishYearDateTimePicker.Value
-        Dim ngayXuatBanMax = MaxPublishYearDateTimePicker.Value
-        Dim ngayNhapMin = MinDateInputDateTimePicker.Value
-        Dim ngayNhapMax = MaxDateInputDateTimePicker.Value
+        sach.MaSach = cbTenSachCanTim.SelectedValue
+        sach.MaTacGia = cbTacGiaCanTim.SelectedValue
+        sach.MaTheLoaiSach = cbTheLoaiCanTim.SelectedValue
+        sach.TenNhaXuatBan = If(cbNhaXuatBanCanTim.SelectedValue = "-----------------------------", -1, cbNhaXuatBanCanTim.SelectedValue)
+        Dim ngayXuatBanMin = dpNamXBCanTimMin.Value
+        Dim ngayXuatBanMax = dpNamXBCanTimMax.Value
+        Dim ngayNhapMin = dpNgayNhapMin.Value
+        Dim ngayNhapMax = dpNgayNhapMax.Value
         Dim triGiaMin = MinPriceNumericUpDown.Value
         Dim triGiaMax = MaxPriceNumericUpDown.Value
 
@@ -137,10 +145,9 @@ Public Class frmQuanLiSach
                                                 ngayNhapMin, ngayNhapMax,
                                                 triGiaMin, triGiaMax)
         LoadListSach(listThoaMan)
-
     End Sub
 
-    Function LoadListSach(listSach As List(Of Sach))
+    Private Sub LoadListSach(listSach As List(Of Sach))
         DataGridViewQuanLiSach.Columns.Clear()
         DataGridViewQuanLiSach.DataSource = Nothing
         DataGridViewQuanLiSach.AutoGenerateColumns = False
@@ -195,7 +202,7 @@ Public Class frmQuanLiSach
             Dim maTacGiaTemp = listSach(index).MaTacGia
             Dim tenTacGiaTemp As String
             Dim listTacGiaThoaMan = From tg In _listTacGia
-                                    Where tg.MaTacGia = maTheLoaiSachTemp
+                                    Where tg.MaTacGia = maTacGiaTemp
                                     Select tg
             For Each tacGia In listTacGiaThoaMan
                 tenTacGiaTemp = tacGia.TenTacGia
@@ -208,21 +215,38 @@ Public Class frmQuanLiSach
             listSach(index).TenSach, tenTheLoaiSachTemp, tenTacGiaTemp,
              tinhTrangTemp)
         Next
-    End Function
+    End Sub
+
 #End Region
 
+#Region "-   Load info selected row in datagridview   -"
     Private Sub DataGridViewQuanLiSach_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridViewQuanLiSach.SelectionChanged
+        Try
+            LoadInfoSelectedRow()
+        Catch
+        End Try
+    End Sub
+
+    Private Function LoadInfoSelectedRow() As Result
         Dim sach = New Sach()
         Dim result = GetSelectedSachData(sach)
-    End Sub
+        If result.FlagResult = False Then Return result
+
+        If sach Is Nothing Then Return New Result(False, "", "")
+
+        LoadThongTinSachCanTimGroupBox(sach)
+        Return result
+    End Function
 
     Private Function GetSelectedSachData(ByRef sach As Sach) As Result
         Dim currentRowIndex As Integer = DataGridViewQuanLiSach.CurrentCellAddress.Y
         'Verify that indexing OK
         If (-1 < currentRowIndex And currentRowIndex < DataGridViewQuanLiSach.RowCount) Then
             Try
+                Dim MaSach = Convert.ToInt32(DataGridViewQuanLiSach.Rows(currentRowIndex).Cells("MaSach").Value.ToString())
                 sach = New Sach()
-                sach.MaSach = Convert.ToInt32(DataGridViewQuanLiSach.Rows(currentRowIndex).Cells("MaSach").Value.ToString())
+                sach.MaSach = MaSach
+                _sachBus.GetById(sach, MaSach)
             Catch ex As Exception
                 Console.WriteLine(ex.StackTrace)
                 Return New Result(False, "Không lấy được thông tin độc giả đã chọn", "")
@@ -233,6 +257,81 @@ Public Class frmQuanLiSach
 
         Return New Result()
     End Function
+
+    Private Sub LoadThongTinSachCanTimGroupBox(sach As Sach)
+        txtMaSachDangChon.Text = sach.MaSach
+        txtTenNxbDangChon.Text = sach.TenNhaXuatBan
+        txtTenSachDangChon.Text = sach.TenSach
+
+        Dim listTacGia = _listTacGia.Where(Function(x) x.MaTacGia <> -1).ToList()
+        cbTacGiaDangChon.DataSource = listTacGia
+        cbTacGiaDangChon.DisplayMember = "TenTacGia"
+        cbTacGiaDangChon.ValueMember = "MaTacGia"
+        Dim selectedTacGia = _listTacGia.Where(Function(x) x.MaTacGia = sach.MaTacGia).FirstOrDefault
+        cbTacGiaDangChon.SelectedIndex = cbTacGiaDangChon.Items.IndexOf(selectedTacGia)
+
+        Dim listTheLoai = _listTheLoaiSach.Where(Function(x) x.MaTheLoaiSach <> -1).ToList()
+        cbTheLoaiDangChon.DataSource = listTheLoai
+        cbTheLoaiDangChon.DisplayMember = "TenTheLoaiSach"
+        cbTheLoaiDangChon.ValueMember = "MaTheLoaiSach"
+        Dim selectedTheLoai = _listTheLoaiSach.Where(Function(x) x.MaTheLoaiSach = sach.MaTheLoaiSach).FirstOrDefault
+        cbTheLoaiDangChon.SelectedIndex = cbTheLoaiDangChon.Items.IndexOf(selectedTheLoai)
+
+        dpNamXBDangChon.Value = sach.NgayXuatBan
+        dpNgayNhapDangChon.Value = sach.NgayNhap
+        nudTriGiaDangChon.Value = sach.TriGia
+    End Sub
+
+#End Region
+
+#Region "-    Update,Delete selected row    -"
+    Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
+        Try
+            Dim sach = New Sach()
+            sach.MaSach = txtMaSachDangChon.Text
+            sach.TenSach = txtTenSachDangChon.Text
+            sach.TenNhaXuatBan = txtTenNxbDangChon.Text
+            sach.MaTheLoaiSach = cbTheLoaiDangChon.SelectedItem.maTheLoaiSach
+            sach.MaTacGia = cbTacGiaDangChon.SelectedItem.MaTacGia
+            sach.NgayXuatBan = dpNamXBDangChon.Value
+            sach.TriGia = nudTriGiaDangChon.Value
+
+            Dim result = _sachBus.Update(sach)
+            If result.FlagResult Then
+                MessageBox.Show("Cập nhật thành công thông tin sách!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                SearchByDataInput()
+            Else
+                MessageBox.Show("Cập nhật không thành công thông tin sách!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Cập nhật không thành công thông tin sách!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Console.WriteLine(ex)
+        End Try
+    End Sub
+
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        Try
+            Dim MaSach = txtMaSachDangChon.Text
+            Dim result = _sachBus.DeleteById(MaSach)
+            If result.FlagResult Then
+                MessageBox.Show("Xoá thành công thông tin sách!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                SearchByDataInput()
+            Else
+                MessageBox.Show("Xoá không thành công thông tin sách!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Xoá không thành công thông tin sách!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Console.WriteLine(ex)
+        End Try
+    End Sub
+
+    Private Sub btnReload_Click(sender As Object, e As EventArgs) Handles btnReload.Click
+        Me.Controls.Clear()
+        Me.InitializeComponent()
+        InitComponenents()
+    End Sub
+#End Region
+
 #End Region
 
 End Class

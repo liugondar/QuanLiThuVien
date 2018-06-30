@@ -54,7 +54,6 @@ Public Class frmQuanLiTacGia
     End Sub
 #End Region
 
-
 #Region "-   Events    -"
     Private Sub dgvDanhSachTacGia_SelectionChanged(sender As Object, e As EventArgs) Handles dgvDanhSachTacGia.SelectionChanged
         ' Get the current cell location.
@@ -159,4 +158,5 @@ Public Class frmQuanLiTacGia
         End If
     End Sub
 #End Region
+
 End Class

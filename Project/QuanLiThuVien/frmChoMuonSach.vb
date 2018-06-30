@@ -25,6 +25,9 @@ Public Class frmChoMuonSach
 
 #Region "-   Constructor    -"
     Private Sub frmChoMuonSach_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        InitComponenents()
+    End Sub
+    Private Sub InitComponenents()
         ' -  Init Fields contant objects  
         _quiDinhBus = New QuiDinhBus()
         _docGiaBus = New DocGiaBus()
@@ -38,8 +41,6 @@ Public Class frmChoMuonSach
         _listSach = New List(Of Sach)
         _listTacGia = New List(Of TacGia)
         _listTheLoaiSach = New List(Of TheLoaiSach)
-
-
 
         '"-  Load data for controls  -"
         LoadMaPhieuMuonSach()
@@ -445,6 +446,12 @@ Public Class frmChoMuonSach
         If insertPhieumuonsachResult.FlagResult = False Then Return insertPhieumuonsachResult
         Return New Result()
     End Function
+
+    Private Sub btnReload_Click(sender As Object, e As EventArgs) Handles btnReload.Click
+        Me.Controls.Clear()
+        Me.InitializeComponent()
+        InitComponenents()
+    End Sub
 
 #End Region
 

@@ -31,7 +31,7 @@ Public Class SachDAO
     End Function
 #End Region
 
-#Region "-   Update   -"
+#Region "-   Update and delete  -"
     Public Function SetStatusSachToUnavailableByID(maSach As String) As Result
         Dim query = String.Format("
 update Sach
@@ -45,6 +45,26 @@ where maSach={0}", maSach)
 update Sach
 set TinhTrang=0
 where maSach={0}", maSach)
+        Return _dataProvider.ExcuteNonquery(query)
+    End Function
+
+    Public Function Update(sach As Sach) As Result
+        Dim query = String.Format("update Sach
+set TenSach=N'{0}', MaTheLoaiSach={1},
+MaTacGia={2},TenNhaXuatBan=N'{3}',
+NgayXuatBan='{4}',TriGia={5}
+WHERE MaSach={6} and DeleteFlag='N'",
+sach.TenSach, sach.MaTheLoaiSach,
+sach.MaTacGia, sach.TenNhaXuatBan,
+sach.NgayXuatBan, sach.TriGia,
+sach.MaSach)
+        Return _dataProvider.ExcuteNonquery(query)
+    End Function
+
+    Public Function DeleteById(id As String) As Result
+        Dim query = String.Format("update Sach
+set DeleteFlag='Y'
+where MaSach={0}", id)
         Return _dataProvider.ExcuteNonquery(query)
     End Function
 #End Region
@@ -85,7 +105,8 @@ from Sach
 where {0} and {1} and {2} and {3}
 and NgayNhap between '{4}' and '{5}'
 and NgayXuatBan between '{6}' and '{7}'
-and TriGia between {8} and {9}",
+and TriGia between {8} and {9}
+and DeleteFlag='N'",
 dieuKienMaSach, dieuKienMaTheLoaiSach, dieuKienMaTacGia, dieuKienTenNhaXuatBan,
 ngayNhapMin, ngayNhapMax,
 ngayXuatBanMin, ngayXuatBanMax,
@@ -164,6 +185,19 @@ and s.MaSach={0}", maSach)
                 sach.TenSach = row("TenSach").ToString()
             Next
         End If
+        Return result
+    End Function
+
+    Public Function GetByID(ByRef sach As Sach, maSach As Integer) As Result
+        Dim query = String.Format("select * 
+from sach
+where DeleteFlag='N' and 
+maSach={0}", maSach)
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        For Each row In dataTable.Rows
+            sach = New Sach(row)
+        Next
         Return result
     End Function
 

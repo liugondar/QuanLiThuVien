@@ -52,6 +52,7 @@ Partial Class frmChoMuonSach
         Me.txtTheLoai = New System.Windows.Forms.TextBox()
         Me.txtTacGia = New System.Windows.Forms.TextBox()
         Me.txtMaSach = New System.Windows.Forms.TextBox()
+        Me.btnReload = New MetroFramework.Controls.MetroButton()
         CType(Me.ListSachDaMuonDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -140,7 +141,7 @@ Partial Class frmChoMuonSach
         '
         'ConfirmButton
         '
-        Me.ConfirmButton.Location = New System.Drawing.Point(316, 674)
+        Me.ConfirmButton.Location = New System.Drawing.Point(385, 683)
         Me.ConfirmButton.Name = "ConfirmButton"
         Me.ConfirmButton.Size = New System.Drawing.Size(85, 23)
         Me.ConfirmButton.TabIndex = 12
@@ -356,12 +357,21 @@ Partial Class frmChoMuonSach
         Me.txtMaSach.Size = New System.Drawing.Size(108, 20)
         Me.txtMaSach.TabIndex = 5
         '
+        'btnReload
+        '
+        Me.btnReload.Location = New System.Drawing.Point(265, 683)
+        Me.btnReload.Name = "btnReload"
+        Me.btnReload.Size = New System.Drawing.Size(85, 23)
+        Me.btnReload.TabIndex = 121
+        Me.btnReload.Text = "Reload "
+        '
         'frmChoMuonSach
         '
         Me.AcceptButton = Me.ConfirmButton
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(817, 708)
+        Me.ClientSize = New System.Drawing.Size(817, 714)
+        Me.Controls.Add(Me.btnReload)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox3)
@@ -411,4 +421,5 @@ Partial Class frmChoMuonSach
     Friend WithEvents txtTinhTrangSach As TextBox
     Friend WithEvents txtTacGia As TextBox
     Friend WithEvents txtMaSach As TextBox
+    Friend WithEvents btnReload As MetroFramework.Controls.MetroButton
 End Class
