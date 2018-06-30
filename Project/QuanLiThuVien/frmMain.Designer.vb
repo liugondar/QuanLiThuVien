@@ -46,13 +46,17 @@ Partial Class frmMain
         Me.TìnhHìnhTrảSáchTrễToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.QuiĐịnhToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.QuảnLíQuiĐịnhToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AboutMeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.QuitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'MenuStrip1
         '
         Me.MenuStrip1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ThẻĐộcGiảToolStripMenuItem, Me.SáchToolStripMenuItem, Me.BáoCáoToolStripMenuItem, Me.QuiĐịnhToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ThẻĐộcGiảToolStripMenuItem, Me.SáchToolStripMenuItem, Me.BáoCáoToolStripMenuItem, Me.QuiĐịnhToolStripMenuItem, Me.AboutMeToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(909, 24)
@@ -194,8 +198,34 @@ Partial Class frmMain
         'QuảnLíQuiĐịnhToolStripMenuItem
         '
         Me.QuảnLíQuiĐịnhToolStripMenuItem.Name = "QuảnLíQuiĐịnhToolStripMenuItem"
-        Me.QuảnLíQuiĐịnhToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.QuảnLíQuiĐịnhToolStripMenuItem.Size = New System.Drawing.Size(159, 22)
         Me.QuảnLíQuiĐịnhToolStripMenuItem.Text = "Quản lí qui định"
+        '
+        'AboutMeToolStripMenuItem
+        '
+        Me.AboutMeToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MeToolStripMenuItem})
+        Me.AboutMeToolStripMenuItem.Name = "AboutMeToolStripMenuItem"
+        Me.AboutMeToolStripMenuItem.Size = New System.Drawing.Size(52, 20)
+        Me.AboutMeToolStripMenuItem.Text = "About"
+        '
+        'MeToolStripMenuItem
+        '
+        Me.MeToolStripMenuItem.Name = "MeToolStripMenuItem"
+        Me.MeToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.MeToolStripMenuItem.Text = "Me"
+        '
+        'FileToolStripMenuItem
+        '
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.QuitToolStripMenuItem})
+        Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
+        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
+        Me.FileToolStripMenuItem.Text = "File"
+        '
+        'QuitToolStripMenuItem
+        '
+        Me.QuitToolStripMenuItem.Name = "QuitToolStripMenuItem"
+        Me.QuitToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.QuitToolStripMenuItem.Text = "Quit"
         '
         'frmMain
         '
@@ -242,4 +272,8 @@ Partial Class frmMain
     Friend WithEvents QuảnLíTácGiảToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents QuiĐịnhToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents QuảnLíQuiĐịnhToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AboutMeToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents MeToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents FileToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents QuitToolStripMenuItem As ToolStripMenuItem
 End Class

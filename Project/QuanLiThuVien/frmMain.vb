@@ -91,4 +91,14 @@
         frm.MdiParent = Me
         frm.Show()
     End Sub
+
+    Private Sub MeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MeToolStripMenuItem.Click
+        Dim frm = New frmAboutMe()
+        frm.MdiParent = Me
+        frm.Show()
+    End Sub
+
+    Private Sub QuitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles QuitToolStripMenuItem.Click
+        Me.Close()
+    End Sub
 End Class
