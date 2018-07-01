@@ -35,6 +35,10 @@ Public Class AccountBUS
     Public Function SelectAll(ByRef listAccount As List(Of Account)) As Result
         Return DAO.AccountDAO.Instance.SelectAll(listAccount)
     End Function
+    Public Function SelectAllByType(ByRef listAccount As List(Of Account), type As String) As Result
+        If String.IsNullOrWhiteSpace(type) Then Return New Result(False, "Empty type", "")
+        Return DAO.AccountDAO.Instance.SelectAllByType(listAccount, type)
+    End Function
 
 #End Region
 
@@ -53,6 +57,17 @@ Public Class AccountBUS
     Public Function CreateAccount(account As Account) As Result
         If Not account.ValidateAll() Then Return New Result(False, "Tạo tài khoảng không thành công,Vui lòng kiểm tra lại thông tin tài khoản!", "")
         Return AccountDAO.Instance.CreateAccount(account)
+    End Function
+
+    Public Function UpdateAccountTypeByUserName(account As Account) As Result
+        If String.IsNullOrWhiteSpace(account.UserName) Then Return New Result(False, "Tài khoản trống", "")
+        If String.IsNullOrWhiteSpace(account.Type) Then Return New Result(False, "Tài khoản trống", "")
+        Return AccountDAO.Instance.UpdateAccountTypeByUserName(account)
+    End Function
+
+    Public Function DeleteByUserName(userName As String) As Object
+        If String.IsNullOrWhiteSpace(userName) Then Return New Result(False, "Tài khoản trống", "")
+        Return AccountDAO.Instance.DeleteByUserName(userName)
     End Function
 #End Region
 

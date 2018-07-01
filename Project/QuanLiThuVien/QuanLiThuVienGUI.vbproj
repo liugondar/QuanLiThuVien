@@ -148,6 +148,12 @@
     <Compile Include="frmNhapSach.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmQuanLiAccount.Designer.vb">
+      <DependentUpon>frmQuanLiAccount.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmQuanLiAccount.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmQuanLiQuiDinh.Designer.vb">
       <DependentUpon>frmQuanLiQuiDinh.vb</DependentUpon>
     </Compile>
@@ -263,6 +269,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmNhapSach.resx">
       <DependentUpon>frmNhapSach.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmQuanLiAccount.resx">
+      <DependentUpon>frmQuanLiAccount.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmQuanLiQuiDinh.resx">
       <DependentUpon>frmQuanLiQuiDinh.vb</DependentUpon>

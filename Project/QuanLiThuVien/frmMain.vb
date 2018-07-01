@@ -137,6 +137,8 @@ Public Class frmMain
     End Sub
 
     Private Sub QuảnLíTàiKhoảnToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles QuảnLíTàiKhoảnToolStripMenuItem.Click
-
+        Dim frm = New frmQuanLiAccount()
+        frm.MdiParent = Me
+        frm.Show()
     End Sub
 End Class

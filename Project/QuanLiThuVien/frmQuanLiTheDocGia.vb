@@ -218,7 +218,7 @@ Public Class frmQuanLiTheDocGia
             MessageBox.Show(result.ApplicationMessage)
             Return
         Else
-            MessageBox.Show("Sửa thành công")
+            MessageBox.Show("Sửa thành công", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
             LoadListDocGia(docGia.MaLoaiDocGia)
         End If
     End Sub

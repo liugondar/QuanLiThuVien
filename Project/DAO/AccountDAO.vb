@@ -40,7 +40,7 @@ salt, account.Type)
     End Function
 #End Region
 
-#Region "-   Update   -"
+#Region "-   Update  and delete -"
     Public Function UpdateAccount(newAccountProfile As Account) As Result
         Dim salt As String = BCrypt.Net.BCrypt.GenerateSalt()
         Dim newpassword = newAccountProfile.Password
@@ -62,6 +62,17 @@ newAccountProfile.AccountId)
         End If
 
         Return result
+    End Function
+
+    Public Function UpdateAccountTypeByUserName(account As Account) As Result
+        Dim query = String.Format("Update account set type={0} where userName='{1}'",
+account.Type, account.UserName)
+        Return DataProvider.Instance.ExecuteNonquery(query)
+    End Function
+
+    Public Function DeleteByUserName(userName As String) As Result
+        Dim query = String.Format("delete from Account where UserName='{0}'", userName)
+        Return DataProvider.Instance.ExecuteNonquery(query)
     End Function
 
 #End Region
@@ -96,6 +107,8 @@ newAccountProfile.AccountId)
         Return New Result(False, "Đăng nhập không thành công! ", "")
     End Function
 
+
+
     Public Function getAccountByUserName(ByRef account As Account, ByVal userName As String) As Result
         Dim data = New DataTable()
         Dim query = "select * from account where username='" & userName & "'"
@@ -110,6 +123,17 @@ newAccountProfile.AccountId)
 
     Public Function SelectAll(ByRef listAccount As List(Of Account)) As Result
         Dim query = "Select * from account"
+        Dim dataTAble = New DataTable()
+        Dim result = DataProvider.Instance.ExecuteQuery(query, dataTAble)
+        For Each row In dataTAble.Rows
+            Dim account = New Account(row)
+            listAccount.Add(account)
+        Next
+        Return result
+    End Function
+
+    Public Function SelectAllByType(ByRef listAccount As List(Of Account), type As String) As Result
+        Dim query = "Select * from account where type=" & type
         Dim dataTAble = New DataTable()
         Dim result = DataProvider.Instance.ExecuteQuery(query, dataTAble)
         For Each row In dataTAble.Rows
