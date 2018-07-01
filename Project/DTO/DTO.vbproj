@@ -74,6 +74,7 @@
     <Compile Include="ChiTietPhieuMuonSach.vb" />
     <Compile Include="DocGia.vb" />
     <Compile Include="LoaiDocGia.vb" />
+    <Compile Include="LoaiTaiKhoan.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

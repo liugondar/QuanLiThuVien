@@ -52,13 +52,16 @@ Partial Class frmMain
         Me.MeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ThôngTinTàiKhoảnToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ThôngTinCáNhânToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AdminToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ThêmTàiKhoảnToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.QuảnLíTàiKhoảnToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'MenuStrip1
         '
         Me.MenuStrip1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ThẻĐộcGiảToolStripMenuItem, Me.SáchToolStripMenuItem, Me.BáoCáoToolStripMenuItem, Me.QuiĐịnhToolStripMenuItem, Me.AboutMeToolStripMenuItem, Me.ThôngTinTàiKhoảnToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ThẻĐộcGiảToolStripMenuItem, Me.SáchToolStripMenuItem, Me.BáoCáoToolStripMenuItem, Me.QuiĐịnhToolStripMenuItem, Me.ThôngTinTàiKhoảnToolStripMenuItem, Me.AdminToolStripMenuItem, Me.AboutMeToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(909, 24)
@@ -226,7 +229,7 @@ Partial Class frmMain
         'MeToolStripMenuItem
         '
         Me.MeToolStripMenuItem.Name = "MeToolStripMenuItem"
-        Me.MeToolStripMenuItem.Size = New System.Drawing.Size(91, 22)
+        Me.MeToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.MeToolStripMenuItem.Text = "Me"
         '
         'ThôngTinTàiKhoảnToolStripMenuItem
@@ -239,8 +242,27 @@ Partial Class frmMain
         'ThôngTinCáNhânToolStripMenuItem
         '
         Me.ThôngTinCáNhânToolStripMenuItem.Name = "ThôngTinCáNhânToolStripMenuItem"
-        Me.ThôngTinCáNhânToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ThôngTinCáNhânToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
         Me.ThôngTinCáNhânToolStripMenuItem.Text = "Thông tin cá nhân"
+        '
+        'AdminToolStripMenuItem
+        '
+        Me.AdminToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ThêmTàiKhoảnToolStripMenuItem, Me.QuảnLíTàiKhoảnToolStripMenuItem})
+        Me.AdminToolStripMenuItem.Name = "AdminToolStripMenuItem"
+        Me.AdminToolStripMenuItem.Size = New System.Drawing.Size(55, 20)
+        Me.AdminToolStripMenuItem.Text = "Admin"
+        '
+        'ThêmTàiKhoảnToolStripMenuItem
+        '
+        Me.ThêmTàiKhoảnToolStripMenuItem.Name = "ThêmTàiKhoảnToolStripMenuItem"
+        Me.ThêmTàiKhoảnToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ThêmTàiKhoảnToolStripMenuItem.Text = "Thêm tài khoản"
+        '
+        'QuảnLíTàiKhoảnToolStripMenuItem
+        '
+        Me.QuảnLíTàiKhoảnToolStripMenuItem.Name = "QuảnLíTàiKhoảnToolStripMenuItem"
+        Me.QuảnLíTàiKhoảnToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.QuảnLíTàiKhoảnToolStripMenuItem.Text = "Quản lí tài khoản"
         '
         'frmMain
         '
@@ -293,4 +315,7 @@ Partial Class frmMain
     Friend WithEvents QuitToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ThôngTinTàiKhoảnToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ThôngTinCáNhânToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AdminToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ThêmTàiKhoảnToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents QuảnLíTàiKhoảnToolStripMenuItem As ToolStripMenuItem
 End Class

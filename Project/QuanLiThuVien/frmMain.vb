@@ -9,6 +9,7 @@ Public Class frmMain
             ThêmLoạiĐộcGiảToolStripMenuItem.Enabled = False
             ThêmTheLoaiToolStripMenuItem.Enabled = False
             ThêmTácGiảToolStripMenuItem.Enabled = False
+            AdminToolStripMenuItem.Visible = False
         End If
     End Sub
 
@@ -128,4 +129,14 @@ Public Class frmMain
     Private Function AccountProfileForm_UpdateAccount(sender As Object, e As AccountEvent) As Object
         loginAccount = e.Acc
     End Function
+
+    Private Sub ThêmTàiKhoảnToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ThêmTàiKhoảnToolStripMenuItem.Click
+        Dim frm = New frmThemAccount()
+        frm.MdiParent = Me
+        frm.Show()
+    End Sub
+
+    Private Sub QuảnLíTàiKhoảnToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles QuảnLíTàiKhoảnToolStripMenuItem.Click
+
+    End Sub
 End Class
