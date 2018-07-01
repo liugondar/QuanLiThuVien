@@ -26,7 +26,7 @@ Public Class SachDAO
         query &= "@NgayNhap='" & sach.NgayNhap & "' ,"
         query &= "@TriGia =" & sach.TriGia & " "
 
-        Dim result = _dataProvider.ExcuteNonquery(query)
+        Dim result = _dataProvider.ExecuteNonquery(query)
         Return result
     End Function
 #End Region
@@ -37,7 +37,7 @@ Public Class SachDAO
 update Sach
 set TinhTrang=1
 where maSach={0}", maSach)
-        Return _dataProvider.ExcuteNonquery(query)
+        Return _dataProvider.ExecuteNonquery(query)
     End Function
 
     Public Function SetStatusSachToAvailableByID(maSach As String) As Result
@@ -45,7 +45,7 @@ where maSach={0}", maSach)
 update Sach
 set TinhTrang=0
 where maSach={0}", maSach)
-        Return _dataProvider.ExcuteNonquery(query)
+        Return _dataProvider.ExecuteNonquery(query)
     End Function
 
     Public Function Update(sach As Sach) As Result
@@ -58,14 +58,14 @@ sach.TenSach, sach.MaTheLoaiSach,
 sach.MaTacGia, sach.TenNhaXuatBan,
 sach.NgayXuatBan, sach.TriGia,
 sach.MaSach)
-        Return _dataProvider.ExcuteNonquery(query)
+        Return _dataProvider.ExecuteNonquery(query)
     End Function
 
     Public Function DeleteById(id As String) As Result
         Dim query = String.Format("update Sach
 set DeleteFlag='Y'
 where MaSach={0}", id)
-        Return _dataProvider.ExcuteNonquery(query)
+        Return _dataProvider.ExecuteNonquery(query)
     End Function
 #End Region
 
@@ -74,7 +74,7 @@ where MaSach={0}", id)
         Dim query = String.Empty
         query &= "Select * from Sach where DeleteFlag='N'"
         Dim dataTable = New DataTable()
-        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         If result.FlagResult = True Then
             For Each row In dataTable.Rows
                 Dim sach = New Sach(row)
@@ -113,7 +113,7 @@ ngayXuatBanMin, ngayXuatBanMax,
 triGiaMin, triGiaMax)
 
         Dim dataTable = New DataTable()
-        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         If result.FlagResult = True Then
             For Each row In dataTable.Rows
                 Dim sachTemp = New Sach(row)
@@ -127,7 +127,7 @@ triGiaMin, triGiaMax)
         Dim query = String.Empty
         query = String.Format("Select * from Sach where MaSach={0} and DeleteFlag='N'", maSach)
         Dim dataTable = New DataTable()
-        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         If result.FlagResult = True Then
             For Each row In dataTable.Rows
                 Dim sach = New Sach(row)
@@ -148,7 +148,7 @@ where s.MaTheLoaiSach=tls.MaTheLoaiSach and s.MaTacGia=tg.MaTacGia
 and s.DeleteFlag='N' and tls.DeleteFlag='N' and tg.DeleteFlag='N'
 and s.MaSach={0}", maSach)
         Dim dataTable = New DataTable()
-        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         If result.FlagResult = True Then
             For Each row In dataTable.Rows
                 tenSach = row("TenSach").ToString()
@@ -168,7 +168,7 @@ and s.MaSach={0}", maSach)
         query &= " And DeleteFlag='N'" & " "
 
         Dim dataTable = New DataTable()
-        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         If result.FlagResult = True Then
             For Each row In dataTable.Rows
                 Dim doesRowContainsCorrectFields = row.Table.Columns.Contains("MaSach") And
@@ -194,7 +194,7 @@ from sach
 where DeleteFlag='N' and 
 maSach={0}", maSach)
         Dim dataTable = New DataTable()
-        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         For Each row In dataTable.Rows
             sach = New Sach(row)
         Next
@@ -208,7 +208,7 @@ maSach={0}", maSach)
         query &= "where DeleteFlag='N'"
         query &= "ORDER BY [MaSach] DESC "
         Dim dataTable = New DataTable()
-        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         For Each row In dataTable.Rows
             maSach = row("MaSach")
         Next
@@ -221,7 +221,7 @@ maSach={0}", maSach)
         query &= "from Sach "
         query &= "ORDER BY [MaSach] DESC "
         Dim dataTable = New DataTable()
-        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         For Each row In dataTable.Rows
             maSach = row("MaSach")
         Next

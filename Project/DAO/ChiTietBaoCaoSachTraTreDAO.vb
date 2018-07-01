@@ -20,7 +20,7 @@ EXECUTE USP_NhapChiTietBaoCaoSachTraTre @MaBaoCaoSachTraTre={0},
 @SoNgayTre={2}", ChiTietBaoCaoSachTraTre.MaBaoCaoSachTraTre,
 ChiTietBaoCaoSachTraTre.MaChiTietPhieuMuonSach,
 ChiTietBaoCaoSachTraTre.SoNgayTraTre)
-        Return _dataProvider.ExcuteNonquery(query)
+        Return _dataProvider.ExecuteNonquery(query)
     End Function
 #End Region
 
@@ -30,7 +30,7 @@ ChiTietBaoCaoSachTraTre.SoNgayTraTre)
 from ChiTietBaoCaoSachTraTre
 ORDER by [MaChiTietBaoCaoSachTraTre]")
         Dim dataTable = New DataTable()
-        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
 
         For Each row In dataTable.Rows
             maChiTietBaoCaoSachTraTre = row("MaChiTietBaoCaoSachTraTre").ToString()
@@ -48,7 +48,7 @@ where pms.DeleteFlag='N' and ctpms.DeleteFlag='N'
  and pms.TinhTrang='1' and pms.MaPhieuMuonSach=ctpms.MaPhieuMuonSach
 And YEAR(NgayTra)='{0}' and month(NgayMuon)='{1}' ", thoiGian.ToString("yyyy"), thoiGian.ToString("MM"))
         Dim dataTable = New DataTable()
-        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         For Each row In dataTable.Rows
             Dim chiTietBaoCao = New ChiTietBaoCaoSachTraTre()
             chiTietBaoCao.MaChiTietPhieuMuonSach = row("MaChiTietPhieuMuonSach").ToString()
@@ -69,7 +69,7 @@ where DeleteFlag='N'
 and MaBaoCaoSachTraTre={0}", maBaoCaoSachTraTre)
 
         Dim dataTable = New DataTable()
-        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         For Each row In dataTable.Rows
             Dim chiTietBaoCao = New ChiTietBaoCaoSachTraTre()
             chiTietBaoCao = New ChiTietBaoCaoSachTraTre(row)

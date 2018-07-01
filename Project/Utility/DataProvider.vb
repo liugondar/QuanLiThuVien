@@ -2,11 +2,25 @@
 Imports System.Data.SqlClient
 
 Public Class DataProvider
+    Private Shared _instance As DataProvider
+    Public Shared Property Instance As DataProvider
+        Get
+
+            If _instance Is Nothing Then
+                _instance = New DataProvider()
+            End If
+
+            Return DataProvider._instance
+        End Get
+        Private Set(ByVal value As DataProvider)
+            DataProvider._instance = value
+        End Set
+    End Property
     Private connectionString As String
     Public Sub New()
-        connectionString = "Data Source=.\SQLEXPRESS;Initial Catalog=QuanLiThuVien;Integrated Security=True"
+        connectionString = ConfigurationManager.AppSettings("ConnectionString")
     End Sub
-    Public Function ExcuteNonquery(query As String) As Result
+    Public Function ExecuteNonquery(query As String) As Result
         If String.IsNullOrWhiteSpace(query) Then
             Return New Result(False, "Dữ liệu nhập vào không hợp lệ", "")
         End If
@@ -31,7 +45,7 @@ Public Class DataProvider
         Return New Result(True)
     End Function
 
-    Public Function ExcuteQuery(query As String, ByRef dataTable As DataTable) As Result
+    Public Function ExecuteQuery(query As String, ByRef dataTable As DataTable) As Result
         If String.IsNullOrWhiteSpace(query) Then
             Return New Result(False, "Không thể lấy dữ liệu", "")
         End If

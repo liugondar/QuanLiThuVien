@@ -20,6 +20,24 @@ GO
 
 USE QuanLiThuVien
 Go
+
+-- Create a new table called 'Account' in schema 'SchemaName'
+-- Drop the table if it already exists
+-- Create the table in the specified schema
+CREATE TABLE Account
+(
+    AccountId INT IDENTITY ,
+    -- primary key column
+    UserName NVARCHAR(100) not null,
+    -- specify more columns here
+    DisplayName NVARCHAR(100) NOT NULL default N'Nhan vien',
+    Password NVARCHAR(1000) not NULL DEFAULT 0,
+    salt NVARCHAR(1000) ,
+    Type int NOT null DEFAULT 0,
+    -- 0 is nhan vien, 1 is admin
+    CONSTRAINT PK_Acount PRIMARY key(AccountId,UserName)
+);
+GO
 -- Create a new table called 'LoaiDocGia' in schema 'SchemaName'
 -- Drop the table if it already exists
 IF OBJECT_ID('dbo.LoaiDocGia', 'U') IS NOT NULL
@@ -245,6 +263,41 @@ CREATE TABLE dbo.ChiTietBaoCaoSachTraTre
 );
 GO
 
+Create PROC USP_CreateAccount
+    @userName NVARCHAR(100),
+    @DisplayName NVARCHAR(100),
+    @Password NVARCHAR(1000) ,
+    @salt NVARCHAR(1000) ,
+    @Type int
+AS
+BEGIN
+    INSERT into Account
+        (UserName,DisplayName,[Password],salt,[Type])
+    VALUES(@userName, @DisplayName, @Password, @salt, @Type)
+END
+go
+
+
+create PROC USP_getAccountByUserName
+    @UserName NVARCHAR(100)
+AS
+BEGIN
+    SELECT *
+    from Account
+    where UserName=@UserName
+end
+go
+
+create PROC USP_LOGIN
+    @userName NVARCHAR(100),
+    @password NVARCHAR(100)
+AS
+BEGIN
+    select *
+    from Account
+    where UserName=@userName and [Password]=@password
+END
+GO
 
 --create producer insert Reader
 CREATE PROC USP_ThemTheDocGia

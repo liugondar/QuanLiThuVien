@@ -13,7 +13,7 @@ Public Class LoaiDocGiaDAO
         Dim query = String.Empty
         query &= "Select * from LoaiDocGia "
         query &= " Where DeleteFlag='N'" & " "
-        Dim result = _dataProvider.ExcuteQuery(query, data)
+        Dim result = _dataProvider.ExecuteQuery(query, data)
 
         For Each row In data.Rows
             Dim readertypeTemp = New LoaiDocGia()
@@ -29,7 +29,7 @@ Public Class LoaiDocGiaDAO
         Dim query = String.Format("select top 1 [maLoaiDocGia]
 from LoaiDocGia
 order by MaLoaiDocGia desc")
-        Dim result = _dataProvider.ExcuteQuery(query, data)
+        Dim result = _dataProvider.ExecuteQuery(query, data)
 
         For Each row In data.Rows
             maLoaiDocGia = row("maLoaiDocGia").ToString()
@@ -42,7 +42,7 @@ order by MaLoaiDocGia desc")
 update LoaiDocGia
 set TenLoaiDocGia='{0}'
 where MaLoaiDocGia={1} and DeleteFlag='N'", loaiDocgia.TenLoaiDocGia, loaiDocGiaId)
-        Return _dataProvider.ExcuteNonquery(query)
+        Return _dataProvider.ExecuteNonquery(query)
     End Function
 
     Function DeleteById(loaiDocGiaId As String) As Result
@@ -50,13 +50,13 @@ where MaLoaiDocGia={1} and DeleteFlag='N'", loaiDocgia.TenLoaiDocGia, loaiDocGia
 update LoaiDocGia
 set DeleteFlag='Y'
 where MaLoaiDocGia={0}", loaiDocGiaId)
-        Return _dataProvider.ExcuteNonquery(query)
+        Return _dataProvider.ExecuteNonquery(query)
     End Function
 
     Function InsertOne(loaiDocGia As LoaiDocGia) As Result
         Dim query = String.Format("
 INSERT into dbo.LoaiDocGia(TenLoaiDocGia)
 VALUES('{0}')", loaiDocGia.TenLoaiDocGia)
-        Return _dataProvider.ExcuteNonquery(query)
+        Return _dataProvider.ExecuteNonquery(query)
     End Function
 End Class

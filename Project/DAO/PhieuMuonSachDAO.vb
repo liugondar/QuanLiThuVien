@@ -26,7 +26,7 @@ Public Class PhieuMuonSachDAO
         query &= "@NgayMuon='" & phieuMuonSach.NgayMuon & "' , "
         query &= "@HanTra='" & phieuMuonSach.HanTra & "', "
         query &= "@TongSoSachMuon=" & phieuMuonSach.TongSoSachMuon
-        Return _dataProvider.ExcuteNonquery(query)
+        Return _dataProvider.ExecuteNonquery(query)
     End Function
 
 #End Region
@@ -39,7 +39,7 @@ update PhieuMuonSach
 set TinhTrang=1, NgayTra='{0}'
 where MaPhieuMuonSach={1}
  ", PhieuMuonSach.NgayTra.ToString("MM/dd/yyyy"), PhieuMuonSach.MaPhieuMuonSach)
-        Return _dataProvider.ExcuteNonquery(query)
+        Return _dataProvider.ExecuteNonquery(query)
     End Function
 #End Region
 
@@ -51,7 +51,7 @@ where MaPhieuMuonSach={1}
         query = String.Format("select top 1 [MaPhieuMuonSach] from PhieuMuonSach where DeleteFlag='N' order by [MaPhieuMuonSach] desc")
 
         Dim dataTable = New DataTable()
-        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         If result.FlagResult = False Then Return New Result(False, "Không thể lấy mã phiếu mượn sách gần nhất!", "")
         Dim phieuMuonSach = New PhieuMuonSach()
         phieuMuonSach.MaPhieuMuonSach = 0
@@ -71,7 +71,7 @@ where MaPhieuMuonSach={1}
 
 
         Dim dataTable = New DataTable()
-        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         If result.FlagResult = False Then Return New Result(False, "Không thể lấy danh sach phiếu mượn sách đã có!", "")
         For Each row In dataTable.Rows
             Dim phieuMuonSach = New PhieuMuonSach()
@@ -89,7 +89,7 @@ WHERE [MaTheDocGia]={0} AND [TinhTrang]=0
 and DeleteFlag='N'", maTheDocGia)
 
         Dim dataTable = New DataTable()
-        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         If result.FlagResult = False Then Return New Result(False, "Không thể lấy danh sach phiếu mượn sách đã có!", "")
         For Each row In dataTable.Rows
             Dim phieuMuonSach = New PhieuMuonSach()
@@ -108,7 +108,7 @@ and DeleteFlag='N'", maTheDocGia)
         query &= "ORDER BY [MaPhieuMuonSach] DESC "
 
         Dim dataTable = New DataTable()
-        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         For Each row In dataTable.Rows
             maPhieuMuonSach = row("MaPhieuMuonSach")
         Next
@@ -120,7 +120,7 @@ and DeleteFlag='N'", maTheDocGia)
 select * from PhieuMuonSach
 where MaPhieuMuonSach={0} And DeleteFlag='N'", maPhieuMuonSach)
         Dim dataTable = New DataTable()
-        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         For Each row In dataTable.Rows
             phieuMuonSach = New PhieuMuonSach(row)
         Next
@@ -135,7 +135,7 @@ where DeleteFlag='N' and TinhTrang='1'
 And YEAR(NgayTra)='{0}' and month(NgayMuon)='{1}'
 ", thoiGian.ToString("yyyy"), thoiGian.ToString("MM"))
         Dim dataTable = New DataTable()
-        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         For Each row In dataTable.Rows
             Dim PhieuMuonSach = New PhieuMuonSach(row)
             listPhieuMuonSach.Add(PhieuMuonSach)

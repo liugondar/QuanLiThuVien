@@ -30,7 +30,7 @@ Public Class DocGiaDAO
         query &= "@NgayTao='" & docGia.NgayTao & "', "
         query &= "@NgayHetHan='" & docGia.NgayHetHan & "' "
 
-        Dim result = _dataProvider.ExcuteNonquery(query)
+        Dim result = _dataProvider.ExecuteNonquery(query)
         Return result
     End Function
 
@@ -38,7 +38,7 @@ Public Class DocGiaDAO
         Dim query As String = String.Empty
         query &= "EXECUTE USP_XoaTheDocGia "
         query &= "@MaTheDocGia=" & maThe
-        Dim result = _dataProvider.ExcuteNonquery(query)
+        Dim result = _dataProvider.ExecuteNonquery(query)
         Return result
     End Function
 
@@ -51,7 +51,7 @@ Public Class DocGiaDAO
         query &= "@DiaChi =N'" & DocGia.DiaChi & "', "
         query &= "@MaLoaiDocGia=" & DocGia.MaLoaiDocGia & ", "
         query &= "@NgaySinh='" & DocGia.NgaySinh & "'"
-        Dim result = _dataProvider.ExcuteNonquery(query)
+        Dim result = _dataProvider.ExecuteNonquery(query)
         Return result
     End Function
 
@@ -64,7 +64,7 @@ Public Class DocGiaDAO
         Dim query As String = String.Empty
         query = String.Format("select * from TheDocGia where {0} and DeleteFlag='N'", dieuKienMaLoai)
         Dim dataTable = New DataTable()
-        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         For Each row In dataTable.Rows
             Dim docGia = New DocGia(row)
             listDocGia.Add(docGia)
@@ -78,7 +78,7 @@ Public Class DocGiaDAO
         query = String.Format("select TenDocGia from TheDocGia where MaTheDocGia={0} and DeleteFlag='N'", maThe)
 
         Dim dataTable = New DataTable()
-        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         For Each row In dataTable.Rows
             tenDocGia = row("TenDocGia")
         Next
@@ -91,7 +91,7 @@ Public Class DocGiaDAO
         query &= "from TheDocGia "
         query &= "ORDER BY [MaTheDocGia] DESC "
         Dim dataTable = New DataTable()
-        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         For Each row In dataTable.Rows
             maTheDocGia = row("MaTheDocGia")
         Next
@@ -102,7 +102,7 @@ Public Class DocGiaDAO
         Dim query = String.Empty
         query = String.Format("Select ngayHetHan from TheDocGia where MaTheDocGia={0} and DeleteFlag='N'", maThe)
         Dim dataTable = New DataTable()
-        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         For Each row In dataTable.Rows
             DateTime.TryParse(row("NgayHetHan").ToString(), ngayHetHan)
         Next
@@ -114,7 +114,7 @@ Public Class DocGiaDAO
         query = String.Format("select * from TheDocGia where MaTheDocGia={0} and DeleteFlag='N'", maThe)
 
         Dim dataTable = New DataTable()
-        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         For Each row In dataTable.Rows
             docGia = New DocGia(row)
         Next

@@ -19,7 +19,7 @@ Public Class TheLoaiSachDAO
 update TheLoaiSach
 set TenTheLoaiSach='{0}'
 where maTheLoaiSach={1} and DeleteFlag='N'", theLoaiSach.TenTheLoaiSach, theLoaiSachID)
-        Return _dataProvider.ExcuteNonquery(query)
+        Return _dataProvider.ExecuteNonquery(query)
     End Function
 
     Function DeleteById(theLoaiSachId As String) As Result
@@ -27,14 +27,14 @@ where maTheLoaiSach={1} and DeleteFlag='N'", theLoaiSach.TenTheLoaiSach, theLoai
 update TheLoaiSach
 set DeleteFlag='Y'
 where maTheLoaiSach={0}", theLoaiSachId)
-        Return _dataProvider.ExcuteNonquery(query)
+        Return _dataProvider.ExecuteNonquery(query)
     End Function
 
     Function InsertOne(theLoaiSach As TheLoaiSach) As Result
         Dim query = String.Format("
 INSERT into dbo.TheLoaiSach(TenTheLoaiSach)
 VALUES('{0}')", theLoaiSach.TenTheLoaiSach)
-        Return _dataProvider.ExcuteNonquery(query)
+        Return _dataProvider.ExecuteNonquery(query)
     End Function
 #End Region
 
@@ -44,7 +44,7 @@ VALUES('{0}')", theLoaiSach.TenTheLoaiSach)
         query &= "Select * from dbo.TheLoaiSach"
         query &= " Where DeleteFlag='N'" & " "
         Dim dataTable = New DataTable()
-        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         For Each row As DataRow In dataTable.Rows
             Dim theLoaiSach = New TheLoaiSach(row)
             listTheLoaiSach.Add(theLoaiSach)
@@ -57,7 +57,7 @@ VALUES('{0}')", theLoaiSach.TenTheLoaiSach)
         query &= "Select * from dbo.TheLoaiSach where MaTheLoaiSach=" & maTheLoaiSach
         query &= " and DeleteFlag='N'" & " "
         Dim dataTable = New DataTable()
-        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         For Each row As DataRow In dataTable.Rows
             theLoaiSach = New TheLoaiSach(row)
         Next
@@ -69,7 +69,7 @@ VALUES('{0}')", theLoaiSach.TenTheLoaiSach)
 from TheLoaiSach 
 where MaTheLoaiSach={0} and DeleteFlag='N'", maTheLoaiSach)
         Dim dataTable = New DataTable()
-        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         For Each row As DataRow In dataTable.Rows
             tentheLoaiSach = row("TenTheLoaiSach").ToString()
         Next
@@ -81,7 +81,7 @@ where MaTheLoaiSach={0} and DeleteFlag='N'", maTheLoaiSach)
         Dim query = String.Format("select top 1 [maTheLoaiSach]
 from theloaisach
 order by maTheLoaiSach desc")
-        Dim result = _dataProvider.ExcuteQuery(query, data)
+        Dim result = _dataProvider.ExecuteQuery(query, data)
 
         For Each row In data.Rows
             maTheLoaiSAch = row("maTheLoaiSach").ToString()

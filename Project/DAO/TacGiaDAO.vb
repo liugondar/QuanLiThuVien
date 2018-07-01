@@ -22,7 +22,7 @@ Public Class TacGiaDAO
         query &= " Where DeleteFlag='N'" & " "
 
         Dim dataTable = New DataTable()
-        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         For Each row As DataRow In dataTable.Rows
             Dim tacGia = New TacGia(row)
             listTacGia.Add(tacGia)
@@ -35,7 +35,7 @@ Public Class TacGiaDAO
         query &= "Select * from dbo.TacGia where MaTacGia=" & maTacGia
         query &= " and DeleteFlag='N'" & " "
         Dim dataTable = New DataTable()
-        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         For Each row As DataRow In dataTable.Rows
             tacGia = New TacGia(row)
         Next
@@ -47,7 +47,7 @@ Public Class TacGiaDAO
         query &= "Select * from dbo.TacGia where MaTacGia=" & maTacGia
         query &= " and DeleteFlag='N'" & " "
         Dim dataTable = New DataTable()
-        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         For Each row As DataRow In dataTable.Rows
             tenTacGia = row("TenTacGia").ToString()
         Next
@@ -59,7 +59,7 @@ Public Class TacGiaDAO
         Dim query = String.Format("select top 1 [MaTacGia]
 from TacGia
 order by MaTacGia desc")
-        Dim result = _dataProvider.ExcuteQuery(query, data)
+        Dim result = _dataProvider.ExecuteQuery(query, data)
 
         For Each row In data.Rows
             maTacGia = row("MaTacGia").ToString()
@@ -74,7 +74,7 @@ order by MaTacGia desc")
 update TacGia
 set TenTacGia='{0}'
 where MaTacGia={1} and DeleteFlag='N'", tacGia.TenTacGia, tacGiaId)
-        Return _dataProvider.ExcuteNonquery(query)
+        Return _dataProvider.ExecuteNonquery(query)
     End Function
 
     Function DeleteById(tacGiaId As String) As Result
@@ -82,14 +82,14 @@ where MaTacGia={1} and DeleteFlag='N'", tacGia.TenTacGia, tacGiaId)
 update TacGia
 set DeleteFlag='Y'
 where MaTacGia={0}", tacGiaId)
-        Return _dataProvider.ExcuteNonquery(query)
+        Return _dataProvider.ExecuteNonquery(query)
     End Function
 
     Function InsertOne(tacGia As TacGia) As Result
         Dim query = String.Format("
 INSERT into dbo.TacGia(TenTacGia)
 VALUES('{0}')", tacGia.TenTacGia)
-        Return _dataProvider.ExcuteNonquery(query)
+        Return _dataProvider.ExecuteNonquery(query)
     End Function
 #End Region
 

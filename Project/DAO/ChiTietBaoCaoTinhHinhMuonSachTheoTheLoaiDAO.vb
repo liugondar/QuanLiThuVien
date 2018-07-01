@@ -25,7 +25,7 @@ EXEC USP_NhapChiTietBaoCaoTinhHinhMuonSachTheoTheLoai
         chiTietbaoCaoTinhHinhMuonSachTheoTheLoai.MaTheLoaiSach,
         chiTietbaoCaoTinhHinhMuonSachTheoTheLoai.SoLuongMuon
 )
-        Return _dataProvider.ExcuteNonquery(query)
+        Return _dataProvider.ExecuteNonquery(query)
     End Function
 
 #End Region
@@ -35,7 +35,7 @@ EXEC USP_NhapChiTietBaoCaoTinhHinhMuonSachTheoTheLoai
         Dim query = String.Format("execute USP_UpdateTiLeChiTietBaoCaoTheoTheLoai
  @MaChiTietBaoCaoTinhHinhMuonSachTheoTheLoai={0},
 @tiLe={1}", maChiTietBaoCaoTinhHinhMuonSachTheoTheLoai, tiLe)
-        Return _dataProvider.ExcuteNonquery(query)
+        Return _dataProvider.ExecuteNonquery(query)
     End Function
 #End Region
 
@@ -51,7 +51,7 @@ where ctpms.DeleteFlag='N' and s.DeleteFlag='N' and pms.DeleteFlag='N'
 and pms.MaPhieuMuonSach=ctpms.MaPhieuMuonSach and ctpms.MaSach=s.MaSach
 and s.MaTheLoaiSach={0} and Year(pms.NgayMuon)='{1}' and MONTH(pms.NgayMuon)='{2}'", maTheLoaiSach, year, month)
         Dim dataTable = New DataTable()
-        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         For Each row In dataTable.Rows
             soLuongSachMuon = row("SoLuotMuon").ToString()
         Next
@@ -63,7 +63,7 @@ and s.MaTheLoaiSach={0} and Year(pms.NgayMuon)='{1}' and MONTH(pms.NgayMuon)='{2
         Dim query = String.Format("SELECT * from ChiTietBaoCaoTinhHinhMuonSachTheotheLoai
 where MaBaoCaoTinhHinhMuonSachTheoTheLoai={0}", maBaoCaoTinhHinhMuonSachTheoTheLoai)
         Dim dataTable = New DataTable()
-        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         For Each row In dataTable.Rows
             Dim chiTietBaoCao = New ChiTietBaoCaoTinhHinhMuonSachTheoTheLoai(row)
             listChiTietBaoCao.Add(chiTietBaoCao)

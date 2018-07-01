@@ -1,4 +1,12 @@
-﻿Public Class frmMain
+﻿Imports DTO
+
+Public Class frmMain
+    Private loginAccount As Account
+    Public Sub New(loginAccount As Account)
+        InitializeComponent()
+        Me.loginAccount = loginAccount
+    End Sub
+
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.WindowState = WindowState.Maximized
     End Sub

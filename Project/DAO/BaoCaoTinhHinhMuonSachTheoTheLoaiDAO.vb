@@ -20,7 +20,7 @@ Public Class BaoCaoTinhHinhMuonSachTheoTheLoaiDAO
         Dim query = String.Format("EXECUTE USP_NhapBaoCaoTinhHinhMuonSachTheoTheLoai @thoiGian='{0}'",
 baoCaoTinhHinhMuonSachTheoTheLoai.ThoiGian)
 
-        Return _dataProvider.ExcuteNonquery(query)
+        Return _dataProvider.ExecuteNonquery(query)
     End Function
 
 #End Region
@@ -33,7 +33,7 @@ EXECUTE USP_UpdateSoLuongSachMuonTheoTheLoai
  @TongSoLuotMuon={1}",
 maBaoCao, tongSoLuotMuon)
 
-        Return _dataProvider.ExcuteNonquery(query)
+        Return _dataProvider.ExecuteNonquery(query)
     End Function
 #End Region
 
@@ -42,7 +42,7 @@ maBaoCao, tongSoLuotMuon)
         Dim query = String.Format("SELECT top 1 [MaBaoCaoTinhHinhMuonSachTheoTheLoai] from BaoCaoTinhHinhMuonSachTheoTheLoai ORDER by [MaBaoCaoTinhHinhMuonSachTheoTheLoai] desc")
 
         Dim dataTable = New DataTable()
-        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         For Each row In dataTable.Rows
             maBaoCaoTinhHinhMuonSachTheoTheLoai = row("MaBaoCaoTinhHinhMuonSachTheoTheLoai")
         Next

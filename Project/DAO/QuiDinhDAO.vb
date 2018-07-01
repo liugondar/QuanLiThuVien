@@ -23,7 +23,7 @@ Public Class QuiDinhDAO
         Dim query = String.Empty
         query &= "Select * from QuiDinh"
         Dim dataTable = New DataTable()
-        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         For Each row In dataTable.Rows
             quiDinh = New QuiDinh(row)
         Next
@@ -34,7 +34,7 @@ Public Class QuiDinhDAO
         Dim query = String.Empty
         query &= "Select [TuoiToiDa],[TuoiToiThieu] from QuiDinh"
         Dim dataTable = New DataTable()
-        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         For Each row In dataTable.Rows
             Integer.TryParse(row("TuoiToiDa"), quiDinh.TuoiToiDa)
             Integer.TryParse(row("TuoiToiThieu"), quiDinh.TuoiToiThieu)
@@ -46,7 +46,7 @@ Public Class QuiDinhDAO
         Dim query = String.Empty
         Dim dataTable = New DataTable()
         query &= "Select [ThoiHanToiDaTheDocGia] from QuiDinh"
-        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         For Each row In dataTable.Rows
             Integer.TryParse(row("ThoiHanToiDaTheDocGia"), quiDinh.ThoiHanToiDaTheDocGia)
         Next
@@ -57,7 +57,7 @@ Public Class QuiDinhDAO
         Dim query = String.Empty
         Dim dataTable = New DataTable()
         query &= "Select [SoNgayMuonToiDa] from QuiDinh"
-        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         For Each row In dataTable.Rows
             Integer.TryParse(row("SoNgayMuonToiDa"), quiDinh.SoNgayMuonSachToiDa)
         Next
@@ -68,7 +68,7 @@ Public Class QuiDinhDAO
         Dim query = String.Empty
         Dim dataTable = New DataTable()
         query &= "Select [SoSachMuonToiDa] from QuiDinh"
-        Dim result = _dataProvider.ExcuteQuery(query, dataTable)
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         For Each row In dataTable.Rows
             Integer.TryParse(row("SoSachMuonToiDa"), quiDinh.SoSachMuonToiDa)
         Next
@@ -88,7 +88,7 @@ quiDinh.TuoiToiDa, quiDinh.TuoiToiThieu,
 quiDinh.ThoiHanToiDaTheDocGia,
 quiDinh.ThoiHanNhanSach,
 quiDinh.SoNgayMuonSachToiDa, quiDinh.SoSachMuonToiDa)
-        Return _dataProvider.ExcuteNonquery(query)
+        Return _dataProvider.ExecuteNonquery(query)
     End Function
 
 #End Region
