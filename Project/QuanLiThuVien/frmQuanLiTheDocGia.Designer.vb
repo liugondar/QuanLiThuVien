@@ -37,8 +37,8 @@ Partial Class frmQuanLiTheDocGia
         Me.Label4 = New System.Windows.Forms.Label()
         Me.cbLoaiDocGiaEdit = New System.Windows.Forms.ComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.EditButton = New MetroFramework.Controls.MetroButton()
-        Me.RemoveButton = New MetroFramework.Controls.MetroButton()
+        Me.btnUpdate = New MetroFramework.Controls.MetroButton()
+        Me.btnDelete = New MetroFramework.Controls.MetroButton()
         CType(Me.DataGridViewQuanLiTheDocGia, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -172,30 +172,30 @@ Partial Class frmQuanLiTheDocGia
         Me.Label5.TabIndex = 54
         Me.Label5.Text = "Loại độc giả"
         '
-        'EditButton
+        'btnUpdate
         '
-        Me.EditButton.Location = New System.Drawing.Point(271, 594)
-        Me.EditButton.Name = "EditButton"
-        Me.EditButton.Size = New System.Drawing.Size(86, 23)
-        Me.EditButton.TabIndex = 55
-        Me.EditButton.Text = "Cập nhật"
+        Me.btnUpdate.Location = New System.Drawing.Point(271, 594)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(86, 23)
+        Me.btnUpdate.TabIndex = 55
+        Me.btnUpdate.Text = "Cập nhật"
         '
-        'RemoveButton
+        'btnDelete
         '
-        Me.RemoveButton.Location = New System.Drawing.Point(380, 594)
-        Me.RemoveButton.Name = "RemoveButton"
-        Me.RemoveButton.Size = New System.Drawing.Size(86, 23)
-        Me.RemoveButton.TabIndex = 56
-        Me.RemoveButton.Text = "Xoá thẻ"
+        Me.btnDelete.Location = New System.Drawing.Point(380, 594)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(86, 23)
+        Me.btnDelete.TabIndex = 56
+        Me.btnDelete.Text = "Xoá thẻ"
         '
         'frmQuanLiTheDocGia
         '
-        Me.AcceptButton = Me.EditButton
+        Me.AcceptButton = Me.btnUpdate
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(822, 634)
-        Me.Controls.Add(Me.RemoveButton)
-        Me.Controls.Add(Me.EditButton)
+        Me.Controls.Add(Me.btnDelete)
+        Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.cbLoaiDocGiaEdit)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.txtMaTheDocGia)
@@ -233,6 +233,6 @@ Partial Class frmQuanLiTheDocGia
     Friend WithEvents Label4 As Label
     Friend WithEvents cbLoaiDocGiaEdit As ComboBox
     Friend WithEvents Label5 As Label
-    Friend WithEvents EditButton As MetroFramework.Controls.MetroButton
-    Friend WithEvents RemoveButton As MetroFramework.Controls.MetroButton
+    Friend WithEvents btnUpdate As MetroFramework.Controls.MetroButton
+    Friend WithEvents btnDelete As MetroFramework.Controls.MetroButton
 End Class

@@ -7,10 +7,20 @@ Public Class frmQuanLiTheDocGia
 #Region "-   Fields   -"
     Private _docGiaBus As DocGiaBus
     Private _loaiDocGiaBus As LoaiDocGiaBus
+    Private loginAccount As Account
+
 #End Region
 
 #Region "-   Constructor   -"
-
+    Public Sub New(loginAccount As Account)
+        Me.loginAccount = loginAccount
+        InitializeComponent()
+        'nếu là nhân viên bình thường không cho phép can thiệp sửa xoá db
+        If loginAccount.Type = 0 Then
+            btnDelete.Visible = False
+            btnUpdate.Visible = False
+        End If
+    End Sub
     Private Sub frmQuanLiTheDocGia_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         _loaiDocGiaBus = New LoaiDocGiaBus()
         _docGiaBus = New DocGiaBus()
@@ -194,7 +204,7 @@ Public Class frmQuanLiTheDocGia
         Return New Result()
     End Function
 
-    Private Sub EditButton_Click(sender As Object, e As EventArgs) Handles EditButton.Click
+    Private Sub EditButton_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
         Dim docGia = New DocGia()
         docGia.MaTheDocGia = txtMaTheDocGia.Text
         docGia.TenDocGia = txtUserName.Text
@@ -213,7 +223,7 @@ Public Class frmQuanLiTheDocGia
         End If
     End Sub
 
-    Private Sub RemoveButton_Click(sender As Object, e As EventArgs) Handles RemoveButton.Click
+    Private Sub RemoveButton_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         Dim docGia = New DocGia()
         Dim getDataResult = GetSelectedDocGiaData(docGia)
         Select Case MsgBox("Bạn có thực sự muốn xóa thể loại sách có mã: " + docGia.MaTheDocGia.ToString(), MsgBoxStyle.YesNo, "Information")

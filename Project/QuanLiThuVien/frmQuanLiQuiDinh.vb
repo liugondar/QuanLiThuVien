@@ -5,11 +5,21 @@ Imports Utility
 Public Class frmQuanLiQuiDinh
     Private _quiDinhBus As QuiDinhBus
     Private _quiDinh As QuiDinh
+    Private loginAccount As Account
 
 #Region "-   Constructor   -"
+    Public Sub New(loginAccount As Account)
+        Me.loginAccount = loginAccount
+        InitializeComponent()
+        'nếu là nhân viên bình thường không cho phép can thiệp sửa xoá db
+        If loginAccount.Type = 0 Then
+            btnUpdate.Visible = False
+            btnUpdateVaDong.Visible = False
+        End If
+    End Sub
     Private Sub frmQuanLiQuiDinh_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         _quiDinhBus = New QuiDinhBus()
-        _quidinh = New QuiDinh()
+        _quiDinh = New QuiDinh()
         LoadThongTinQuiDinh()
     End Sub
 

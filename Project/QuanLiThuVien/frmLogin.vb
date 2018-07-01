@@ -53,7 +53,7 @@ Public Class frmLogin
                 Dim frmMain = New frmMain(loginAccount)
                 Me.Hide()
                 frmMain.ShowDialog()
-                Me.ShowDialog()
+                Me.Show()
             End If
         Else
             MessageBox.Show("Tên đăng nhập hoặc mật khẩu đăng nhập đã sai!")

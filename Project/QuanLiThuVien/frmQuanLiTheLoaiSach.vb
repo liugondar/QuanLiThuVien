@@ -4,7 +4,18 @@ Imports Utility
 
 Public Class frmQuanLiTheLoaiSach
     Private theloaiSachBUS As TheLoaiSachBUS
+    Private loginAccount As Account
+
 #Region "-   Constructor   -"
+    Public Sub New(loginAccount As Account)
+        Me.loginAccount = loginAccount
+        InitializeComponent()
+        'nếu là nhân viên bình thường không cho phép can thiệp sửa xoá db
+        If loginAccount.Type = 0 Then
+            btnCapNhap.Visible = False
+            btnXoa.Visible = False
+        End If
+    End Sub
     Private Sub frmQuanLiTheLoaiSach_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         theloaiSachBUS = New TheLoaiSachBUS()

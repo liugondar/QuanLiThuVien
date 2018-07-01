@@ -11,10 +11,20 @@ Public Class frmQuanLiSach
     Private _listTheLoaiSach As List(Of TheLoaiSach)
     Private _listTacGia As List(Of TacGia)
     Private _listSach As List(Of Sach)
+    Private loginAccount As Account
+
 #End Region
 
 #Region "-   Constructor   -"
-
+    Public Sub New(loginAccount As Account)
+        Me.loginAccount = loginAccount
+        InitializeComponent()
+        'nếu là nhân viên bình thường không cho phép can thiệp sửa xoá db
+        If loginAccount.Type = 0 Then
+            btnDelete.Visible = False
+            btnUpdate.Visible = False
+        End If
+    End Sub
     Private Sub frmQuanLiSach_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         InitComponenents()
     End Sub
