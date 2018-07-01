@@ -240,14 +240,14 @@ Public Class frmChoMuonSach
         tinhTrangColumn.Name = "TinhTrang"
         tinhTrangColumn.HeaderText = "Tình trạng"
         tinhTrangColumn.DataPropertyName = "TinhTrang"
-        tinhTrangColumn.Width = 100
+        tinhTrangColumn.Width = 120
         ListSachDaMuonDataGridView.Columns.Add(tinhTrangColumn)
 
         Dim ngayHetHanColumn = New DataGridViewTextBoxColumn()
         ngayHetHanColumn.Name = "NgayHetHan"
         ngayHetHanColumn.HeaderText = "Ngày hết hạn"
         ngayHetHanColumn.DataPropertyName = "NgayHetHan"
-        ngayHetHanColumn.Width = 120
+        ngayHetHanColumn.Width = 140
         ListSachDaMuonDataGridView.Columns.Add(ngayHetHanColumn)
     End Sub
 

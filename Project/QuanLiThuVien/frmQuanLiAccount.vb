@@ -78,6 +78,7 @@ Public Class frmQuanLiAccount
         columnDisplayName.Name = "DisplayName"
         columnDisplayName.HeaderText = "Tên hiển thị"
         columnDisplayName.DataPropertyName = "DisplayName"
+        columnDisplayName.Width = 150
         dgvListAccount.Columns.Add(columnDisplayName)
     End Sub
 #End Region
