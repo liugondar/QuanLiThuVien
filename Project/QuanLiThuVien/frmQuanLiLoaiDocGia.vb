@@ -78,42 +78,44 @@ Public Class frmQuanLiLoaiDocGia
     End Sub
 
     Private Sub btnCapNhap_Click(sender As Object, e As EventArgs) Handles btnCapNhap.Click
-        ' Get the current cell location.
-        Dim currentRowIndex As Integer = dgvDanhSachLoaiDocGia.CurrentCellAddress.Y 'current row selected
-        'Verify that indexing OK
-        If (-1 < currentRowIndex And currentRowIndex < dgvDanhSachLoaiDocGia.RowCount) Then
-            Try
-                Dim loaiDocGia As LoaiDocGia
-                loaiDocGia = New LoaiDocGia()
+        If MessageBox.Show("Bạn có chắc thay đổi thông tin?", "Thông Báo", MessageBoxButtons.OKCancel) = System.Windows.Forms.DialogResult.OK Then
+            ' Get the current cell location.
+            Dim currentRowIndex As Integer = dgvDanhSachLoaiDocGia.CurrentCellAddress.Y 'current row selected
+            'Verify that indexing OK
+            If (-1 < currentRowIndex And currentRowIndex < dgvDanhSachLoaiDocGia.RowCount) Then
+                Try
+                    Dim loaiDocGia As LoaiDocGia
+                    loaiDocGia = New LoaiDocGia()
 
-                '1. Mapping data from GUI control
-                loaiDocGia.MaLoaiDocGia = Convert.ToInt32(txtMaLoai.Text)
-                loaiDocGia.TenLoaiDocGia = txtTenLoai.Text
+                    '1. Mapping data from GUI control
+                    loaiDocGia.MaLoaiDocGia = Convert.ToInt32(txtMaLoai.Text)
+                    loaiDocGia.TenLoaiDocGia = txtTenLoai.Text
 
-                '2. Insert to DB
-                Dim result As Result
-                result = loaiDocGiaBUS.UpdateById(loaiDocGia, loaiDocGia.MaLoaiDocGia)
-                If (result.FlagResult) Then
-                    ' Re-Load LoaiHocSinh list
-                    LoadListLoaiDocGia()
-                    ' Hightlight the row has been updated on table
-                    dgvDanhSachLoaiDocGia.Rows(currentRowIndex).Selected = True
-                    Try
-                        loaiDocGia = CType(dgvDanhSachLoaiDocGia.Rows(currentRowIndex).DataBoundItem, LoaiDocGia)
-                        txtMaLoai.Text = loaiDocGia.MaLoaiDocGia
-                        txtTenLoai.Text = loaiDocGia.TenLoaiDocGia
-                    Catch ex As Exception
-                        Console.WriteLine(ex.StackTrace)
-                    End Try
-                    MessageBox.Show("Cập nhật loại độc giả thành công.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Else
-                    MessageBox.Show("Cập nhật loại độc giả không thành công.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    System.Console.WriteLine(result.SystemMessage)
-                End If
-            Catch ex As Exception
-                Console.WriteLine(ex.StackTrace)
-            End Try
+                    '2. Insert to DB
+                    Dim result As Result
+                    result = loaiDocGiaBUS.UpdateById(loaiDocGia, loaiDocGia.MaLoaiDocGia)
+                    If (result.FlagResult) Then
+                        ' Re-Load LoaiHocSinh list
+                        LoadListLoaiDocGia()
+                        ' Hightlight the row has been updated on table
+                        dgvDanhSachLoaiDocGia.Rows(currentRowIndex).Selected = True
+                        Try
+                            loaiDocGia = CType(dgvDanhSachLoaiDocGia.Rows(currentRowIndex).DataBoundItem, LoaiDocGia)
+                            txtMaLoai.Text = loaiDocGia.MaLoaiDocGia
+                            txtTenLoai.Text = loaiDocGia.TenLoaiDocGia
+                        Catch ex As Exception
+                            Console.WriteLine(ex.StackTrace)
+                        End Try
+                        MessageBox.Show("Cập nhật loại độc giả thành công.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Else
+                        MessageBox.Show("Cập nhật loại độc giả không thành công.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        System.Console.WriteLine(result.SystemMessage)
+                    End If
+                Catch ex As Exception
+                    Console.WriteLine(ex.StackTrace)
+                End Try
 
+            End If
         End If
     End Sub
 

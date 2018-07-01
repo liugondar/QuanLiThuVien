@@ -296,43 +296,48 @@ Public Class frmQuanLiSach
 
 #Region "-    Update,Delete selected row    -"
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
-        Try
-            Dim sach = New Sach()
-            sach.MaSach = txtMaSachDangChon.Text
-            sach.TenSach = txtTenSachDangChon.Text
-            sach.TenNhaXuatBan = txtTenNxbDangChon.Text
-            sach.MaTheLoaiSach = cbTheLoaiDangChon.SelectedItem.maTheLoaiSach
-            sach.MaTacGia = cbTacGiaDangChon.SelectedItem.MaTacGia
-            sach.NgayXuatBan = dpNamXBDangChon.Value
-            sach.TriGia = nudTriGiaDangChon.Value
+        If MessageBox.Show("Bạn có chắc thay đổi thông tin?", "Thông Báo", MessageBoxButtons.OKCancel) = System.Windows.Forms.DialogResult.OK Then
+            Try
+                Dim sach = New Sach()
+                sach.MaSach = txtMaSachDangChon.Text
+                sach.TenSach = txtTenSachDangChon.Text
+                sach.TenNhaXuatBan = txtTenNxbDangChon.Text
+                sach.MaTheLoaiSach = cbTheLoaiDangChon.SelectedItem.maTheLoaiSach
+                sach.MaTacGia = cbTacGiaDangChon.SelectedItem.MaTacGia
+                sach.NgayXuatBan = dpNamXBDangChon.Value
+                sach.TriGia = nudTriGiaDangChon.Value
 
-            Dim result = _sachBus.Update(sach)
-            If result.FlagResult Then
-                MessageBox.Show("Cập nhật thành công thông tin sách!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                SearchByDataInput()
-            Else
+                Dim result = _sachBus.Update(sach)
+                If result.FlagResult Then
+                    MessageBox.Show("Cập nhật thành công thông tin sách!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    SearchByDataInput()
+                Else
+                    MessageBox.Show("Cập nhật không thành công thông tin sách!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+            Catch ex As Exception
                 MessageBox.Show("Cập nhật không thành công thông tin sách!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End If
-        Catch ex As Exception
-            MessageBox.Show("Cập nhật không thành công thông tin sách!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Console.WriteLine(ex)
-        End Try
+                Console.WriteLine(ex)
+            End Try
+        End If
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
-        Try
-            Dim MaSach = txtMaSachDangChon.Text
-            Dim result = _sachBus.DeleteById(MaSach)
-            If result.FlagResult Then
-                MessageBox.Show("Xoá thành công thông tin sách!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                SearchByDataInput()
-            Else
+        If MessageBox.Show("Bạn có muốn xoá sach có mã: " & txtMaSachDangChon.Text, "Thông Báo", MessageBoxButtons.OKCancel) = System.Windows.Forms.DialogResult.OK Then
+
+            Try
+                Dim MaSach = txtMaSachDangChon.Text
+                Dim result = _sachBus.DeleteById(MaSach)
+                If result.FlagResult Then
+                    MessageBox.Show("Xoá thành công thông tin sách!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    SearchByDataInput()
+                Else
+                    MessageBox.Show("Xoá không thành công thông tin sách!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+            Catch ex As Exception
                 MessageBox.Show("Xoá không thành công thông tin sách!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End If
-        Catch ex As Exception
-            MessageBox.Show("Xoá không thành công thông tin sách!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Console.WriteLine(ex)
-        End Try
+                Console.WriteLine(ex)
+            End Try
+        End If
     End Sub
 
     Private Sub btnReload_Click(sender As Object, e As EventArgs) Handles btnReload.Click

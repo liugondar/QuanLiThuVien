@@ -40,21 +40,27 @@ Public Class frmQuanLiQuiDinh
 
 #Region "-  Events   -"
     Private Sub btnNhap_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
-        If Not UpdateQuiDinh().FlagResult Then
-            MessageBox.Show("Cập nhật không thành công!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Return
+        If MessageBox.Show("Bạn có chắc thay đổi thông tin?", "Thông Báo", MessageBoxButtons.OKCancel) = System.Windows.Forms.DialogResult.OK Then
+
+            If Not UpdateQuiDinh().FlagResult Then
+                MessageBox.Show("Cập nhật không thành công!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
+            MessageBox.Show("Cập nhật thành công!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            LoadThongTinQuiDinh()
         End If
-        MessageBox.Show("Cập nhật thành công!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        LoadThongTinQuiDinh()
     End Sub
 
     Private Sub btnNhapVaDong_Click(sender As Object, e As EventArgs) Handles btnUpdateVaDong.Click
-        If Not UpdateQuiDinh().FlagResult Then
-            MessageBox.Show("Cập nhật không thành công!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Return
+        If MessageBox.Show("Bạn có chắc thay đổi thông tin?", "Thông Báo", MessageBoxButtons.OKCancel) = System.Windows.Forms.DialogResult.OK Then
+
+            If Not UpdateQuiDinh().FlagResult Then
+                MessageBox.Show("Cập nhật không thành công!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
+            MessageBox.Show("Cập nhật thành công!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Me.Close()
         End If
-        MessageBox.Show("Cập nhật thành công!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        Me.Close()
     End Sub
 
     Private Function UpdateQuiDinh() As Result

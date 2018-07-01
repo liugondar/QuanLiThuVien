@@ -205,21 +205,26 @@ Public Class frmQuanLiTheDocGia
     End Function
 
     Private Sub EditButton_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
-        Dim docGia = New DocGia()
-        docGia.MaTheDocGia = txtMaTheDocGia.Text
-        docGia.TenDocGia = txtUserName.Text
-        docGia.Email = txtEmail.Text
-        docGia.DiaChi = txtAddress.Text
-        docGia.NgaySinh = dtpBirthDate.Value
-        docGia.MaLoaiDocGia = (cbLoaiDocGiaEdit.SelectedValue)
+        If MessageBox.Show("Bạn có chắc thay đổi thông tin?", "Thông Báo", MessageBoxButtons.OKCancel) = System.Windows.Forms.DialogResult.OK Then
+            Try
+                Dim docGia = New DocGia()
+                docGia.MaTheDocGia = txtMaTheDocGia.Text
+                docGia.TenDocGia = txtUserName.Text
+                docGia.Email = txtEmail.Text
+                docGia.DiaChi = txtAddress.Text
+                docGia.NgaySinh = dtpBirthDate.Value
+                docGia.MaLoaiDocGia = (cbLoaiDocGiaEdit.SelectedValue)
 
-        Dim result = _docGiaBus.UpdateById(docGia)
-        If result.FlagResult = False Then
-            MessageBox.Show(result.ApplicationMessage)
-            Return
-        Else
-            MessageBox.Show("Sửa thành công", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            LoadListDocGia(docGia.MaLoaiDocGia)
+                Dim result = _docGiaBus.UpdateById(docGia)
+                If result.FlagResult = False Then
+                    MessageBox.Show(result.ApplicationMessage)
+                    Return
+                Else
+                    MessageBox.Show("Sửa thành công", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    LoadListDocGia(docGia.MaLoaiDocGia)
+                End If
+            Catch
+            End Try
         End If
     End Sub
 
