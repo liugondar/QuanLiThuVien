@@ -41,19 +41,27 @@ salt, account.Type)
 #End Region
 
 #Region "-   Update   -"
-    Public Function changeAccountProfile(ByVal AccountId As Integer, ByVal newAccountDisplayName As String, ByVal newpassword As String) As Result
+    Public Function UpdateAccount(newAccountProfile As Account) As Result
         Dim salt As String = BCrypt.Net.BCrypt.GenerateSalt()
+        Dim newpassword = newAccountProfile.Password
         Dim passwordHash As String = BCrypt.Net.BCrypt.HashPassword(newpassword, salt)
         Dim doesPasswordMatch As Boolean = BCrypt.Net.BCrypt.Verify(newpassword, passwordHash)
+        Dim result = New Result()
 
         If doesPasswordMatch Then
-            Dim query = String.Format("EXEC USP_changeAccountProfile @AccountId={0} , @newAccountDisplayName='{1}', @password='{2}', @salt='{3}'",
-                                      AccountId, newAccountDisplayName, passwordHash, salt
-                                      )
-            Dim result = DataProvider.Instance.ExecuteNonquery(query)
+            Dim dieuKienPassword = If(
+        String.IsNullOrWhiteSpace(newAccountProfile.Password),
+        "",
+        String.Format(",[Password]='{0}',
+salt='{1}'", passwordHash, salt))
+            Dim query = String.Format("update Account
+set DisplayName='{0}' {1}
+where AccountId={2}", newAccountProfile.DisplayName, dieuKienPassword,
+newAccountProfile.AccountId)
+            result = DataProvider.Instance.ExecuteNonquery(query)
         End If
 
-        Return New Result()
+        Return result
     End Function
 
 #End Region

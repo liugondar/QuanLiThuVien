@@ -277,6 +277,17 @@ BEGIN
 END
 go
 
+create PROC USP_UpdateAccount
+    @AccountId int,
+    @newAccountDisplayName NVARCHAR(100),
+    @password NVARCHAR(100) ,
+    @salt NVARCHAR(100)
+as
+begin
+    update Account SET DisplayName=@newAccountDisplayName, Password=@password , salt=@salt where AccountId=@AccountId
+end
+go
+
 
 create PROC USP_getAccountByUserName
     @UserName NVARCHAR(100)

@@ -116,4 +116,16 @@ Public Class frmMain
     Private Sub QuitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles QuitToolStripMenuItem.Click
         Me.Close()
     End Sub
+
+    Private Sub ThôngTinCáNhânToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ThôngTinCáNhânToolStripMenuItem.Click
+        Dim frm = New frmAccountProfile(loginAccount) With {
+                .MdiParent = Me
+            }
+        AddHandler frm.UpdateAccount, AddressOf AccountProfileForm_UpdateAccount
+        frm.Show()
+    End Sub
+
+    Private Function AccountProfileForm_UpdateAccount(sender As Object, e As AccountEvent) As Object
+        loginAccount = e.Acc
+    End Function
 End Class

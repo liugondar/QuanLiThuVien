@@ -39,10 +39,12 @@ Public Class AccountBUS
 #End Region
 
 #Region "-   Update    -"
-    Public Function changeAccountProfile(ByVal AccountId As Integer, ByVal newAccountDisplayName As String, ByVal newpassword As String) As Result
-        If String.IsNullOrWhiteSpace(newAccountDisplayName) Then Return New Result(False, "Tên hiển thị tài khoản trống!", "")
-        If String.IsNullOrWhiteSpace(newpassword) Then Return New Result(False, "Password mới trống!", "")
-        Return DAO.AccountDAO.Instance.changeAccountProfile(AccountId, newAccountDisplayName, newpassword)
+    Public Function UpdateAccount(newAccountProfile As Account) As Result
+        If String.IsNullOrWhiteSpace(newAccountProfile.UserName) Then Return New Result(False, "Tên đăng nhập trống !", "")
+        If String.IsNullOrWhiteSpace(newAccountProfile.Type) Then Return New Result(False, "Loại tài khoản trống!", "")
+        If String.IsNullOrWhiteSpace(newAccountProfile.DisplayName) Then Return New Result(False, "Tên hiển thị nhập trống !", "")
+
+        Return AccountDAO.Instance.UpdateAccount(newAccountProfile)
     End Function
 
 #End Region

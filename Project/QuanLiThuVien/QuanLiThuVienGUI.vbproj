@@ -103,10 +103,17 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountEvent.vb" />
     <Compile Include="frmAboutMe.Designer.vb">
       <DependentUpon>frmAboutMe.vb</DependentUpon>
     </Compile>
     <Compile Include="frmAboutMe.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAccountProfile.Designer.vb">
+      <DependentUpon>frmAccountProfile.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAccountProfile.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmBaoCaoTinhHinhMuonSachTheoTheLoai.Designer.vb">
@@ -231,6 +238,9 @@
   <ItemGroup>
     <EmbeddedResource Include="frmAboutMe.resx">
       <DependentUpon>frmAboutMe.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAccountProfile.resx">
+      <DependentUpon>frmAccountProfile.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmBaoCaoTinhHinhMuonSachTheoTheLoai.resx">
       <DependentUpon>frmBaoCaoTinhHinhMuonSachTheoTheLoai.vb</DependentUpon>

@@ -48,7 +48,7 @@ Public Class frmLogin
 
         If Login(userName, password) Then
             Dim loginAccount = New Account()
-            Dim getAccountResult = AccountDAO.Instance.getAccountByUserName(loginAccount, userName)
+            Dim getAccountResult = AccountBUS.Instance.getAccountByUserName(loginAccount, userName)
             If getAccountResult.FlagResult Then
                 Dim frmMain = New frmMain(loginAccount)
                 Me.Hide()
