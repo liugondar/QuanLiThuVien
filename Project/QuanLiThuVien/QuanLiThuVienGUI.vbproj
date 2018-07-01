@@ -353,9 +353,6 @@
   <ItemGroup>
     <Content Include="MetroFramework.txt" />
     <None Include="Resources\AboutMeImage.png" />
-    <Content Include="Resources\BCrypt.Net.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\icon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
