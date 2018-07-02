@@ -429,7 +429,6 @@ Public Class frmChoMuonSach
 
             Dim insertChitietphieumuonsachResult = _chiTietPhieuMuonSach.InsertOne(chiTietPhieuMuonSach)
             If insertChitietphieumuonsachResult.FlagResult = False Then
-                'TODO: xóa phiếu mượn sách và các chi tiết phiếu mượn sách đã insert phía trước
                 Return insertChitietphieumuonsachResult
             End If
         Next

@@ -39,7 +39,6 @@ Public Class ChiTietBaoCaoSachTraTreBus
             chiTietBaocaoTraTre.MaBaoCaoSachTraTre = maBaoCAo
             Dim insertResult = InsertOne(chiTietBaocaoTraTre)
             If Not insertResult.FlagResult Then
-                'TODO: xu li khi insert 1 chi tiet bao cao khong thanh cohng
             End If
         Next
         Return New Result()

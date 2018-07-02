@@ -33,7 +33,7 @@ Public Class BaoCaoTinhHinhMuonSachTheoTheLoaiBus
         Dim maBaoCAo = 0
         Dim getBaoCaoIdResult = _baoCaoTinhHinhMuonSachTheoTheLoaiDAO.GetTheLastID(maBaoCAo)
         If getBaoCaoIdResult.FlagResult = False Then
-            'TODO: delete bao cao and list chitietbaocao insert before then return
+            Return New Result(False, "", "")
         End If
 
         Dim insertChiTietBaoCaoResult = _chiTietBaoCaoBus.InsertByMaBaoCaoTinhHinhMuonSachTheoTheLoaiAndDate(maBaoCAo, thoiGian)

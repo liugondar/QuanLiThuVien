@@ -35,7 +35,6 @@ Public Class ChiTietBaoCaoTinhHinhMuonSachTheoTheLoaiBUS
         'thoi gian yeu cau. Diem so luong sach muon trong phieumuonsach
         For Each theLoaiSach As TheLoaiSach In listTheLoaiSAch
             If InsertChiTietBaoCaoByMaTheLoaiSachAndTime(theLoaiSach.MaTheLoaiSach, thoiGian, maBaoCao).FlagResult = False Then
-                'TODO: xu li khi 1 trong cac chi tiet insert that bai
             End If
         Next
         Return New Result()

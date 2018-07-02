@@ -17,7 +17,6 @@ Public Class ChiTietPhieuMuonSachBus
 
 #Region "-   Insert   -"
     Public Function InsertOne(chiTietPhieuMuonSach As ChiTietPhieuMuonSach) As Result
-        'TODO: udpate status sach 
         Dim insertResult = _chiTietPhieuMuonSachDAO.InsertOne(chiTietPhieuMuonSach)
         If insertResult.FlagResult = False Then Return insertResult
 
