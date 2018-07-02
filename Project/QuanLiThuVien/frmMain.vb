@@ -10,6 +10,7 @@ Public Class frmMain
             ThêmTheLoaiToolStripMenuItem.Enabled = False
             ThêmTácGiảToolStripMenuItem.Enabled = False
             AdminToolStripMenuItem.Visible = False
+            BáoCáoToolStripMenuItem.Visible = False
         End If
     End Sub
 
