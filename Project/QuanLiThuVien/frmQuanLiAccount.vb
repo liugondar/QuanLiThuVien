@@ -19,7 +19,7 @@ Public Class frmQuanLiAccount
 
         Dim loaitkAdmin = New LoaiTaiKhoan()
         loaitkAdmin.MaLoaiTaiKhoan = 1
-        loaitkAdmin.TenLoaiTaiKhoan = "Admin"
+        loaitkAdmin.TenLoaiTaiKhoan = "Quản lí"
         _listLoaiTK.Add(loaitkAdmin)
 
         cbDefaultType.DataSource = New BindingSource(_listLoaiTK, String.Empty)

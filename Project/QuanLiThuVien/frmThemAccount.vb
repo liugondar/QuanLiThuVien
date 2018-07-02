@@ -14,7 +14,7 @@ Public Class frmThemAccount
         cbType.Items.Add(loaiTaiKhoanNhanVien)
         Dim loaitkAdmin = New LoaiTaiKhoan()
         loaitkAdmin.MaLoaiTaiKhoan = 1
-        loaitkAdmin.TenLoaiTaiKhoan = "Admin"
+        loaitkAdmin.TenLoaiTaiKhoan = "Quản lí"
         cbType.Items.Add(loaitkAdmin)
 
         cbType.ValueMember = "MaLoaiTaiKhoan"
