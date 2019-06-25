@@ -19,6 +19,7 @@ Public Class DocGiaDAO
 #Region "-   Insert,update and delete -"
 
     Public Function InsertOne(docGia As DocGia) As Result
+        Dim formatDate = DateHelper.Instance.GetFormatType()
         Dim query As String = String.Empty
         query &= "EXECUTE USP_ThemTheDocGia "
         query &= "@MaTheDocGia=N'" & docGia.MaTheDocGia & "', "
@@ -26,9 +27,9 @@ Public Class DocGiaDAO
         query &= "@Email=N'" & docGia.Email & "', "
         query &= "@DiaChi =N'" & docGia.DiaChi & "', "
         query &= "@MaLoaiDocGia=" & docGia.MaLoaiDocGia & ", "
-        query &= "@NgaySinh='" & docGia.NgaySinh & "', "
-        query &= "@NgayTao='" & docGia.NgayTao & "', "
-        query &= "@NgayHetHan='" & docGia.NgayHetHan & "' "
+        query &= "@NgaySinh='" & docGia.NgaySinh.ToString(formatDate) & "', "
+        query &= "@NgayTao='" & docGia.NgayTao.ToString(formatDate) & "', "
+        query &= "@NgayHetHan='" & docGia.NgayHetHan.ToString(formatDate) & "' "
 
         Dim result = _dataProvider.ExecuteNonquery(query)
         Return result
@@ -44,13 +45,14 @@ Public Class DocGiaDAO
 
     Public Function UpdateByReaderId(DocGia As DocGia) As Result
         Dim query As String = String.Empty
+        Dim formatDate = DateHelper.Instance.GetFormatType()
         query &= "EXECUTE USP_SuaTheDocGia "
         query &= "@MaTheDocGia=N'" & DocGia.MaTheDocGia & "', "
         query &= "@TenDocGia=N'" & DocGia.TenDocGia & "', "
         query &= "@Email=N'" & DocGia.Email & "', "
         query &= "@DiaChi =N'" & DocGia.DiaChi & "', "
         query &= "@MaLoaiDocGia=" & DocGia.MaLoaiDocGia & ", "
-        query &= "@NgaySinh='" & DocGia.NgaySinh & "'"
+        query &= "@NgaySinh='" & DocGia.NgaySinh.ToString(formatDate) & "'"
         Dim result = _dataProvider.ExecuteNonquery(query)
         Return result
     End Function

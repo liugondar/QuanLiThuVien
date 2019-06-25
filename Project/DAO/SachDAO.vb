@@ -5,11 +5,13 @@ Public Class SachDAO
 
 #Region "-   Fields   -"
     Private _dataProvider As DataProvider
+    Private formatDate As String
 #End Region
 
 #Region "-   Constructors   -"
     Public Sub New()
         _dataProvider = New DataProvider()
+        formatDate = DateHelper.Instance.GetFormatType()
     End Sub
 #End Region
 
@@ -22,8 +24,8 @@ Public Class SachDAO
         query &= "@MaTheLoaiSach =" & sach.MaTheLoaiSach & " ,"
         query &= "@MaTacGia =" & sach.MaTacGia & " ,"
         query &= "@TenNhaXuatBan =N'" & sach.TenNhaXuatBan & "',"
-        query &= "@NgayXuatBan='" & sach.NgayXuatBan & "' ,"
-        query &= "@NgayNhap='" & sach.NgayNhap & "' ,"
+        query &= "@NgayXuatBan='" & sach.NgayXuatBan.ToString(formatDate) & "' ,"
+        query &= "@NgayNhap='" & sach.NgayNhap.ToString(formatDate) & "' ,"
         query &= "@TriGia =" & sach.TriGia & " "
 
         Dim result = _dataProvider.ExecuteNonquery(query)
@@ -91,14 +93,15 @@ where MaSach={0}", id)
         Dim query = String.Empty
 
         Dim dieuKienMaSach = If(sachYeuCau.MaSach = -1, " 1=1 ", " MaSach=" & sachYeuCau.MaSach)
-        Dim dieuKienTenNhaXuatBan = If(sachYeuCau.TenNhaXuatBan = -1, " 1=1 ", "TenNhaXuatBan=" & sachYeuCau.TenNhaXuatBan)
+        Dim dieuKienTenNhaXuatBan = If(sachYeuCau.TenNhaXuatBan = "-1", " 1=1 ", "TenNhaXuatBan='" & sachYeuCau.TenNhaXuatBan & "'")
         Dim dieuKienMaTacGia = If(sachYeuCau.MaTacGia = -1, " 1=1 ", "MaTacGia=" & sachYeuCau.MaTacGia)
         Dim dieuKienMaTheLoaiSach = If(sachYeuCau.MaTheLoaiSach = -1, " 1=1 ", "MaTheLoaiSach=" & sachYeuCau.MaTheLoaiSach)
 
-        Dim ngayxbMinConverted = ngayXuatBanMin.ToString("MMMM dd, yyyy")
-        Dim ngayxbMaxConverted = ngayXuatBanMax.ToString("MMMM dd, yyyy")
-        Dim ngayNhapMinConverted = ngayNhapMin.ToString("MMMM dd, yyyy")
-        Dim ngayNhapMaxConverted = ngayNhapMax.ToString("MMMM dd, yyyy")
+        Dim formatDate = DateHelper.Instance.GetFormatType()
+        Dim ngayxbMinConverted = ngayXuatBanMin.ToString(formatDate)
+        Dim ngayxbMaxConverted = ngayXuatBanMax.ToString(formatDate)
+        Dim ngayNhapMinConverted = ngayNhapMin.ToString(formatDate)
+        Dim ngayNhapMaxConverted = ngayNhapMax.ToString(formatDate)
 
         query = String.Format("select * 
 from Sach
@@ -108,8 +111,8 @@ and NgayXuatBan between '{6}' and '{7}'
 and TriGia between {8} and {9}
 and DeleteFlag='N'",
 dieuKienMaSach, dieuKienMaTheLoaiSach, dieuKienMaTacGia, dieuKienTenNhaXuatBan,
-ngayNhapMin, ngayNhapMax,
-ngayXuatBanMin, ngayXuatBanMax,
+ngayNhapMinConverted, ngayNhapMaxConverted,
+ngayxbMinConverted, ngayxbMaxConverted,
 triGiaMin, triGiaMax)
 
         Dim dataTable = New DataTable()

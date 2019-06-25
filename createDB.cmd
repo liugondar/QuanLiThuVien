@@ -1,1 +1,1 @@
-SQLCMD -S .\SQLEXPRESS -E -i db.sql
+SQLCMD -S DESKTOP-LA6BQ9P -E -i db.sql

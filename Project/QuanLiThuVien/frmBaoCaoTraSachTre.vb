@@ -1,6 +1,9 @@
 ﻿Imports Utility
 Imports BUS
 Imports DTO
+Imports Excel = Microsoft.Office.Interop.Excel
+Imports ExcelAutoFormat = Microsoft.Office.Interop.Excel.XlRangeAutoFormat
+
 
 Public Class frmBaoCaoTraSachTre
 #Region "-   Fields   -"
@@ -10,6 +13,8 @@ Public Class frmBaoCaoTraSachTre
     Private _phieuMuonSachBus As PhieuMuonSachBus
     Private _chiTietPhieuMuonBus As ChiTietPhieuMuonSachBus
     Private _sachBus As SachBus
+    Dim directory As String = My.Application.Info.DirectoryPath
+
 #End Region
 
 #Region "-   Constructor   -"
@@ -86,6 +91,7 @@ Public Class frmBaoCaoTraSachTre
         Next
 
         ChiTietBaoCaoDataGridView.DataSource = New BindingSource(listChiTietDisplay, String.Empty)
+
     End Sub
 
 
@@ -101,6 +107,48 @@ Public Class frmBaoCaoTraSachTre
         _baoCaoSachTraTreBus.GetTheLastID(maBaoCao)
         _chiTietBaoCaoBus.SelectAllByMaBaoCaoSachTraTre(_listChiTietBaoCaoSachTraTre, maBaoCao)
         LoadChiTietBaoCaoGrid()
+    End Sub
+
+    Private Sub BtnExport_Click(sender As Object, e As EventArgs) Handles btnExport.Click
+        ExportExcel.Instance.Export("testing", directory & "danhsachthanhvien.xls", LayDulieu())
+    End Sub
+
+    Private Function LayDulieu() As DataTable
+        Dim Table1 As DataTable
+        Table1 = New DataTable("TableName")
+
+        Dim column1 As DataColumn = New DataColumn("Column1")
+        column1.DataType = System.Type.GetType("System.String")
+        Dim column2 As DataColumn = New DataColumn("Column2")
+        column2.DataType = System.Type.GetType("System.String")
+        Dim column3 As DataColumn = New DataColumn("Column3")
+        column3.DataType = System.Type.GetType("System.String")
+
+        Table1.Columns.Add(column1)
+        Table1.Columns.Add(column2)
+        Table1.Columns.Add(column3)
+
+        For Each row As DataGridViewRow In ChiTietBaoCaoDataGridView.Rows
+            For Each cell As DataGridViewCell In row.Cells
+                Table1.Rows.Add(cell, cell, cell)
+            Next
+        Next
+
+
+
+
+        Return Table1
+    End Function
+
+    Private Sub releaseObject(ByVal obj As Object)
+        Try
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(obj)
+            obj = Nothing
+        Catch ex As Exception
+            obj = Nothing
+        Finally
+            GC.Collect()
+        End Try
     End Sub
 #End Region
 #End Region

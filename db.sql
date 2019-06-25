@@ -453,7 +453,7 @@ END
 go
 -- create proceduer insert baocaotrasachtre
 CREATE PROC USP_NhapBaoCaoTraSachTre
-    @thoiGian date
+    @thoiGian datetime
 AS
 BEGIN
     insert into dbo.BaoCaoSachTraTre

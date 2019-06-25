@@ -26,6 +26,7 @@ Partial Class frmBaoCaoTraSachTre
         Me.ThoiGianCanTimDateTimePicker = New System.Windows.Forms.DateTimePicker()
         Me.ConfirmMetroButton = New MetroFramework.Controls.MetroButton()
         Me.ChiTietBaoCaoDataGridView = New System.Windows.Forms.DataGridView()
+        Me.btnExport = New MetroFramework.Controls.MetroButton()
         CType(Me.ChiTietBaoCaoDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -62,12 +63,21 @@ Partial Class frmBaoCaoTraSachTre
         Me.ChiTietBaoCaoDataGridView.Size = New System.Drawing.Size(741, 238)
         Me.ChiTietBaoCaoDataGridView.TabIndex = 5
         '
+        'btnExport
+        '
+        Me.btnExport.Location = New System.Drawing.Point(257, 376)
+        Me.btnExport.Name = "btnExport"
+        Me.btnExport.Size = New System.Drawing.Size(75, 23)
+        Me.btnExport.TabIndex = 6
+        Me.btnExport.Text = "Export"
+        '
         'frmBaoCaoTraSachTre
         '
         Me.AcceptButton = Me.ConfirmMetroButton
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 423)
+        Me.Controls.Add(Me.btnExport)
         Me.Controls.Add(Me.ConfirmMetroButton)
         Me.Controls.Add(Me.ChiTietBaoCaoDataGridView)
         Me.Controls.Add(Me.Label1)
@@ -84,4 +94,5 @@ Partial Class frmBaoCaoTraSachTre
     Friend WithEvents ThoiGianCanTimDateTimePicker As DateTimePicker
     Friend WithEvents ConfirmMetroButton As MetroFramework.Controls.MetroButton
     Friend WithEvents ChiTietBaoCaoDataGridView As DataGridView
+    Friend WithEvents btnExport As MetroFramework.Controls.MetroButton
 End Class

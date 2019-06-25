@@ -20,11 +20,12 @@ Public Class PhieuMuonSachDAO
 
     Public Function InsertOne(phieuMuonSach As PhieuMuonSach) As Result
         Dim query = String.Empty
+        Dim formatDate = DateHelper.Instance.GetFormatType()
         query &= "EXECUTE USP_ThemPhieuMuonSach "
         query &= "@MaPhieuMuonSach=" & phieuMuonSach.MaPhieuMuonSach & ", "
         query &= "@MaTheDocGia=" & phieuMuonSach.MaTheDocGia & ", "
-        query &= "@NgayMuon='" & phieuMuonSach.NgayMuon & "' , "
-        query &= "@HanTra='" & phieuMuonSach.HanTra & "', "
+        query &= "@NgayMuon='" & phieuMuonSach.NgayMuon.ToString(formatDate) & "' , "
+        query &= "@HanTra='" & phieuMuonSach.HanTra.ToString(formatDate) & "', "
         query &= "@TongSoSachMuon=" & phieuMuonSach.TongSoSachMuon
         Return _dataProvider.ExecuteNonquery(query)
     End Function
@@ -33,11 +34,12 @@ Public Class PhieuMuonSachDAO
 
 #Region "-   Update    -"
     Public Function UpdateCheckOutPhieuMuonByPhieuMuonSach(PhieuMuonSach As PhieuMuonSach) As Result
+        Dim formatDate = DateHelper.Instance.GetFormatType()
         Dim query = String.Format("
 update PhieuMuonSach    
 set TinhTrang=1, NgayTra='{0}'
 where MaPhieuMuonSach={1}
- ", PhieuMuonSach.NgayTra.ToString("MM/dd/yyyy"), PhieuMuonSach.MaPhieuMuonSach)
+ ", PhieuMuonSach.NgayTra.ToString(formatDate), PhieuMuonSach.MaPhieuMuonSach)
         Return _dataProvider.ExecuteNonquery(query)
     End Function
 #End Region

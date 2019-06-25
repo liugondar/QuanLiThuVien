@@ -17,8 +17,9 @@ Public Class BaoCaoTinhHinhMuonSachTheoTheLoaiDAO
 #Region "-   Insert   -"
     Public Function InsertOne(baoCaoTinhHinhMuonSachTheoTheLoai As BaoCaoTinhHinhMuonSachTheoTheLoai) As Result
 
-        Dim query = String.Format("EXECUTE USP_NhapBaoCaoTinhHinhMuonSachTheoTheLoai @thoiGian='{0}'",
-baoCaoTinhHinhMuonSachTheoTheLoai.ThoiGian)
+        Dim formatDate = DateHelper.Instance.GetFormatType()
+        Dim query = String.Format("EXECUTE USP_NhapBaoCaoTinhHinhMuonSachTheoTheLoai @ThoiGian='{0}'",
+baoCaoTinhHinhMuonSachTheoTheLoai.ThoiGian.ToString(formatDate))
 
         Return _dataProvider.ExecuteNonquery(query)
     End Function

@@ -16,9 +16,9 @@ Public Class BaoCaoSachTraTreDAO
 
 #Region "-  Insert   -"
     Public Function InsertOne(BaoCaoSachTraTre As BaoCaoSachTraTre) As Result
-        Dim query = String.Format("
-EXECUTE USP_NhapBaoCaoTraSachTre @thoiGian='{0}'", BaoCaoSachTraTre.ThoiGian)
-        Return _dataProvider.ExecuteNonquery(query)
+        Dim query = String.Format("EXECUTE USP_NhapBaoCaoTraSachTre @ThoiGian='{0}'", BaoCaoSachTraTre.ThoiGian.ToString(DateHelper.Instance.GetFormatType()))
+        Dim result = _dataProvider.ExecuteNonquery(query)
+        Return result
     End Function
 #End Region
 

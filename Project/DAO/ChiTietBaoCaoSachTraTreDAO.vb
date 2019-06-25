@@ -46,7 +46,7 @@ ctpms.MaChiTietPhieuMuonSach MaChiTietPhieuMuonSach
 from PhieuMuonSach pms,ChiTietPhieuMuonSach ctpms
 where pms.DeleteFlag='N' and ctpms.DeleteFlag='N'
  and pms.TinhTrang='1' and pms.MaPhieuMuonSach=ctpms.MaPhieuMuonSach
-And YEAR(NgayTra)='{0}' and month(NgayMuon)='{1}' ", thoiGian.ToString("yyyy"), thoiGian.ToString("MM"))
+And YEAR(pms.NgayTra)='{0}' and month(pms.NgayTra)='{1}' ", thoiGian.ToString("yyyy"), thoiGian.ToString("MM"))
         Dim dataTable = New DataTable()
         Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         For Each row In dataTable.Rows

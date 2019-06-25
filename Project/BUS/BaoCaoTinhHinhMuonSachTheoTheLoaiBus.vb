@@ -60,7 +60,8 @@ Public Class BaoCaoTinhHinhMuonSachTheoTheLoaiBus
     Private Function InsertBaoCaoTinhHinhMuonSach(thoiGian As Date) As Result
         Dim baoCaoTinhHinhMuonSach = New BaoCaoTinhHinhMuonSachTheoTheLoai()
         baoCaoTinhHinhMuonSach.ThoiGian = thoiGian
-        Return InsertOne(baoCaoTinhHinhMuonSach)
+        Dim result = InsertOne(baoCaoTinhHinhMuonSach)
+        Return result
     End Function
 
 #End Region
