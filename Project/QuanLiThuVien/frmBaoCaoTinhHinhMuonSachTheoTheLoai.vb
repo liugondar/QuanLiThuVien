@@ -103,6 +103,29 @@ Public Class frmBaoCaoTinhHinhMuonSachTheoTheLoai : Inherits MetroFramework.Form
         _chiTietBaoCaoBus.SelectAllByMaBaoCaoTinhHinhMuonSachTheoTheLoai(_listChiTietBaoCao, maBaoCao)
         LoadChiTietBaoCaoGridViewAndTongLuotMuonLabel()
     End Sub
+
+    Private Sub ExportButton_Click(sender As Object, e As EventArgs) Handles ExportButton.Click
+        ExportExcel.Instance.Export("Báo cáo trả sách theo thể loại " & ThoiGianCanTimDateTimePicker.Value.ToString("MM,yyyy"), LayDulieu())
+    End Sub
+
+    Private Function LayDulieu() As DataTable
+        Dim dt As DataTable = New DataTable()
+
+        For Each col As DataGridViewColumn In ChiTietBaoCaoDataGridView.Columns
+            dt.Columns.Add(col.Name)
+        Next
+
+        For Each row As DataGridViewRow In ChiTietBaoCaoDataGridView.Rows
+            Dim dRow As DataRow = dt.NewRow()
+
+            For Each cell As DataGridViewCell In row.Cells
+                dRow(cell.ColumnIndex) = cell.Value
+            Next
+
+            dt.Rows.Add(dRow)
+        Next
+        Return dt
+    End Function
 #End Region
 
 #End Region

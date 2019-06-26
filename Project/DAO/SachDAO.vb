@@ -58,7 +58,7 @@ NgayXuatBan='{4}',TriGia={5}
 WHERE MaSach={6} and DeleteFlag='N'",
 sach.TenSach, sach.MaTheLoaiSach,
 sach.MaTacGia, sach.TenNhaXuatBan,
-sach.NgayXuatBan, sach.TriGia,
+sach.NgayXuatBan.ToString(DateHelper.Instance.GetFormatType()), sach.TriGia,
 sach.MaSach)
         Return _dataProvider.ExecuteNonquery(query)
     End Function

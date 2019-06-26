@@ -15,7 +15,7 @@ Public NotInheritable Class ExportExcel
         End Get
     End Property
 
-    Public Function Export(title As String, directory As String, data As System.Data.DataTable)
+    Public Function Export(title As String, data As System.Data.DataTable, Optional ByVal chartRangeInput As String = "d")
         Dim xlApp As Excel.Application = New Microsoft.Office.Interop.Excel.Application()
         Dim xlWorkBook As Excel.Workbook
         Dim xlWorkSheet As Excel.Worksheet
@@ -49,20 +49,18 @@ Public NotInheritable Class ExportExcel
             For Each dc In data.Columns
                 colIndex = colIndex + 1
                 xlWorkSheet.Cells(rowIndex + 1, 1) = "'" & stt & "."
-                If colIndex = 2 Then
-                    xlWorkSheet.Cells(rowIndex + 1, colIndex) = "'" & dr(dc.ColumnName)
-                Else
-                    xlWorkSheet.Cells(rowIndex + 1, colIndex) = dr(dc.ColumnName)
-                End If
-
+                xlWorkSheet.Cells(rowIndex + 1, colIndex) = dr(dc.ColumnName)
             Next
         Next
+
+        Dim maxRow = data.Rows.Count
+
         xlWorkSheet.Range("a1", "z200").RowHeight = 20
         xlWorkSheet.Cells(4, 1).VerticalAlignment = Excel.Constants.xlCenter
         xlWorkSheet.Cells(4, 1).HorizontalAlignment = Excel.Constants.xlCenter
         xlWorkSheet.Range("a5", "a200").HorizontalAlignment = Excel.Constants.xlCenter
         xlWorkSheet.Range("a5", "a200").Font.Bold = True
-        chartRange = xlWorkSheet.Range("a4", "f4")
+        chartRange = xlWorkSheet.Range("a4", chartRangeInput & "4")
         chartRange.EntireColumn.AutoFit()
         chartRange.Font.Bold = True
         chartRange.RowHeight = 25
@@ -73,21 +71,19 @@ Public NotInheritable Class ExportExcel
         chartRange.Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Red)
         chartRange.Font.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Yellow)
         xlWorkSheet.Range("c4", "c149").Font.Bold = True
-        xlWorkSheet.Range("a4", "f149").Borders.LineStyle = Excel.XlLineStyle.xlContinuous
-        xlWorkSheet.Range("a4", "f149").Borders.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Orange)
-        xlWorkSheet.Range("a4", "f149").Borders.Weight = 2D
+        xlWorkSheet.Range("a4", chartRangeInput & maxRow + 4).Borders.LineStyle = Excel.XlLineStyle.xlContinuous
+        xlWorkSheet.Range("a4", chartRangeInput & maxRow + 4).Borders.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Orange)
+        xlWorkSheet.Range("a4", chartRangeInput & maxRow + 4).Borders.Weight = 2D
         xlWorkSheet.Cells.EntireColumn.AutoFit()
         xlApp.ActiveWindow.DisplayGridlines = False
         xlApp.ActiveWindow.DisplayFormulas = False
         xlApp.ActiveWindow.DisplayHeadings = False
 
-        xlWorkBook.SaveAs(directory, Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue)
         xlWorkBook.Close(True, misValue, misValue)
         xlApp.Quit()
         releaseObject(xlApp)
         releaseObject(xlWorkBook)
         releaseObject(xlWorkSheet)
-        Process.Start(directory)
     End Function
 
 

@@ -27,6 +27,7 @@ Partial Class frmBaoCaoTinhHinhMuonSachTheoTheLoai
         Me.ChiTietBaoCaoDataGridView = New System.Windows.Forms.DataGridView()
         Me.ConfirmMetroButton = New MetroFramework.Controls.MetroButton()
         Me.TongLuotMuonLabel = New System.Windows.Forms.Label()
+        Me.ExportButton = New MetroFramework.Controls.MetroButton()
         CType(Me.ChiTietBaoCaoDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -57,7 +58,7 @@ Partial Class frmBaoCaoTinhHinhMuonSachTheoTheLoai
         '
         'ConfirmMetroButton
         '
-        Me.ConfirmMetroButton.Location = New System.Drawing.Point(364, 424)
+        Me.ConfirmMetroButton.Location = New System.Drawing.Point(401, 412)
         Me.ConfirmMetroButton.Name = "ConfirmMetroButton"
         Me.ConfirmMetroButton.Size = New System.Drawing.Size(75, 23)
         Me.ConfirmMetroButton.TabIndex = 2
@@ -73,12 +74,21 @@ Partial Class frmBaoCaoTinhHinhMuonSachTheoTheLoai
         Me.TongLuotMuonLabel.TabIndex = 4
         Me.TongLuotMuonLabel.Text = "Tổng lượt mượn: 0"
         '
+        'ExportButton
+        '
+        Me.ExportButton.Location = New System.Drawing.Point(262, 412)
+        Me.ExportButton.Name = "ExportButton"
+        Me.ExportButton.Size = New System.Drawing.Size(75, 23)
+        Me.ExportButton.TabIndex = 5
+        Me.ExportButton.Text = "Export"
+        '
         'frmBaoCaoTinhHinhMuonSachTheoTheLoai
         '
         Me.AcceptButton = Me.ConfirmMetroButton
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 458)
+        Me.Controls.Add(Me.ExportButton)
         Me.Controls.Add(Me.TongLuotMuonLabel)
         Me.Controls.Add(Me.ConfirmMetroButton)
         Me.Controls.Add(Me.ChiTietBaoCaoDataGridView)
@@ -97,4 +107,5 @@ Partial Class frmBaoCaoTinhHinhMuonSachTheoTheLoai
     Friend WithEvents ChiTietBaoCaoDataGridView As DataGridView
     Friend WithEvents ConfirmMetroButton As MetroFramework.Controls.MetroButton
     Friend WithEvents TongLuotMuonLabel As Label
+    Friend WithEvents ExportButton As MetroFramework.Controls.MetroButton
 End Class

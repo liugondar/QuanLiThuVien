@@ -27,6 +27,7 @@ Public Class frmQuanLiSach
     End Sub
     Private Sub frmQuanLiSach_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         InitComponenents()
+        SearchByDataInput()
     End Sub
 
     Private Sub InitComponenents()
