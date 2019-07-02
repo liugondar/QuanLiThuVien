@@ -53,9 +53,12 @@ Public Class frmQuanLiQuiDinh
 
     Private Sub btnNhapVaDong_Click(sender As Object, e As EventArgs) Handles btnUpdateVaDong.Click
         If MessageBox.Show("Bạn có chắc thay đổi thông tin?", "Thông Báo", MessageBoxButtons.OKCancel) = System.Windows.Forms.DialogResult.OK Then
+            Dim updateQuiDinhResult = UpdateQuiDinh()
 
-            If Not UpdateQuiDinh().FlagResult Then
-                MessageBox.Show("Cập nhật không thành công!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            If Not updateQuiDinhResult.FlagResult Then
+                Dim message = "Cập nhật không thành công!"
+                If Not String.IsNullOrEmpty(updateQuiDinhResult.ApplicationMessage) Then message = updateQuiDinhResult.ApplicationMessage
+                MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Return
             End If
             MessageBox.Show("Cập nhật thành công!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -64,6 +67,8 @@ Public Class frmQuanLiQuiDinh
     End Sub
 
     Private Function UpdateQuiDinh() As Result
+        Dim validateResult = ValidateField()
+        If validateResult.FlagResult = False Then Return validateResult
         _quiDinh.SoNgayMuonSachToiDa = txtSoNgayMuonToiDa.Text
         _quiDinh.SoSachMuonToiDa = txtSoSachMuonToiDa.Text
         _quiDinh.ThoiHanNhanSach = txtThoiHanNhanSach.Text
@@ -72,6 +77,15 @@ Public Class frmQuanLiQuiDinh
         _quiDinh.TuoiToiThieu = txtTuoiToiThieu.Text
 
         Return _quiDinhBus.Update(_quiDinh)
+    End Function
+
+    Private Function ValidateField() As Result
+        If String.IsNullOrEmpty(txtSoNgayMuonToiDa.Text) Then Return New Result(False, "Xin nhập số ngày mượng tối đa!", "")
+        If String.IsNullOrEmpty(txtSoSachMuonToiDa.Text) Then Return New Result(False, "Xin nhập số mượng tối đa!", "")
+        If String.IsNullOrEmpty(txtThoiHanNhanSach.Text) Then Return New Result(False, "Xin nhập thời hạn nhận sách!", "")
+        If String.IsNullOrEmpty(txtThoiHanThe.Text) Then Return New Result(False, "Xin nhập thời hạn thẻ!", "")
+
+        Return New Result(True)
     End Function
 #End Region
 End Class
