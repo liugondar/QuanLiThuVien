@@ -1,10 +1,11 @@
 ﻿Imports BUS
 Imports DTO
+Imports Utility
 
 Public Class frmNhapSach
 
 #Region "-  Fields   -"
-
+    Dim cuonsachBus As New CuonSachBus
     Private _tacGiaBus As TacGiaBUS
     Private _theLoaiSachBus As TheLoaiSachBUS
     Private _sachBus As SachBus
@@ -74,6 +75,8 @@ Public Class frmNhapSach
     End Sub
 
     Private Sub InsertSach()
+        Dim result As New Result
+
         Dim sach = New Sach()
         sach.TenSach = BookTitleTextBox.Text
         sach.MaTheLoaiSach = CategoryComboBox.SelectedItem.MaTheLoaiSach
@@ -83,19 +86,48 @@ Public Class frmNhapSach
         sach.NgayNhap = DateInputDateTimePicker.Value
         sach.TriGia = PriceNumericUpDown.Value
 
-        Dim result = _sachBus.InsertOne(sach)
+        result = _sachBus.InsertOne(sach)
         If result.FlagResult = False Then
             MessageBox.Show(result.ApplicationMessage)
         Else
             MessageBox.Show("Đã nhập thành công sách mới!")
         End If
+
+        For i As Integer = 1 To nudSoLuong.Value
+            Dim cuonsach As New CuonSachDTO
+            Dim macuonsach As String
+            macuonsach = ""
+            cuonsachBus.buildMaCuonSach(macuonsach)
+
+            cuonsach.MaCuonSach = macuonsach
+            cuonsach.TinhTrang = txbTinhTrang.Text
+            cuonsach.DauSach = txtMaSach.Text
+            cuonsach.SoKe = nudViTriKe.Value
+
+            result = cuonsachBus.insert(cuonsach)
+            If result.FlagResult = False Then
+                Dim mes = "Thêm cuốn sách thất bại: " + macuonsach + "\n" + result.SystemMessage
+                MessageBox.Show(mes, "Lỗi", MessageBoxButtons.OK)
+            End If
+        Next
+
+
     End Sub
+
+
+
+
 #End Region
 
     Private Sub CreateAndCloseButton_Click(sender As Object, e As EventArgs) Handles CreateAndCloseButton.Click
         InsertSach()
         Close()
     End Sub
+
+    Private Sub nudSoLuong_ValueChanged(sender As Object, e As EventArgs) Handles nudSoLuong.ValueChanged
+
+    End Sub
+
 
 #End Region
 

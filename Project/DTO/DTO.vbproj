@@ -72,6 +72,7 @@
     <Compile Include="ChiTietBaoCaoSachTraTre.vb" />
     <Compile Include="ChiTietBaoCaoTinhHinhMuonSachTheoTheLoai.vb" />
     <Compile Include="ChiTietPhieuMuonSach.vb" />
+    <Compile Include="CuonSachDTO.vb" />
     <Compile Include="DocGia.vb" />
     <Compile Include="LoaiDocGia.vb" />
     <Compile Include="LoaiTaiKhoan.vb" />
