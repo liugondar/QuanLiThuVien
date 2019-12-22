@@ -4,7 +4,7 @@ Imports DTO
 
 Public Class frmLogin
     Private Sub Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'Tạo account mặc định nếu db chưa có account
+        'Tạo account mặc định nếu database chưa có account
         Dim listAccount = New List(Of Account)
         Dim result = AccountBUS.Instance.SelectAll(listAccount)
         If result.FlagResult Then
@@ -14,7 +14,6 @@ Public Class frmLogin
         If result.FlagResult = False Then
             CreateDefaultAdminAccount()
             CreateDefaultUserAccount()
-
         End If
     End Sub
 
