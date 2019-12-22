@@ -17,7 +17,8 @@ Public Class frmChoMuonSach
     Private _listSach As List(Of Sach)
     Private _listTacGia As List(Of TacGia)
     Private _listTheLoaiSach As List(Of TheLoaiSach)
-
+    Dim cuonsach As New CuonSachDTO
+    Dim cuonsachBus As New CuonSachBus
 
     Private AddNewRowButton As Button
 
@@ -250,6 +251,43 @@ Public Class frmChoMuonSach
         ngayHetHanColumn.Width = 140
         ListSachDaMuonDataGridView.Columns.Add(ngayHetHanColumn)
     End Sub
+
+    'Private Sub AddColumnTitle()
+    '    Dim macuonSachColumn = New DataGridViewTextBoxColumn()
+    '    macuonSachColumn.Name = "MaCuonSach"
+    '    macuonSachColumn.HeaderText = "Mã cuốn sách"
+    '    macuonSachColumn.DataPropertyName = "MaCuonSach"
+    '    macuonSachColumn.Width = 50
+    '    ListSachDaMuonDataGridView.Columns.Add(macuonSachColumn)
+
+    '    Dim tenSachColumn = New DataGridViewTextBoxColumn()
+    '    tenSachColumn.Name = "TenSach"
+    '    tenSachColumn.HeaderText = "Tên sách"
+    '    tenSachColumn.DataPropertyName = "TenSach"
+    '    tenSachColumn.Width = 200
+    '    ListSachDaMuonDataGridView.Columns.Add(tenSachColumn)
+
+    '    Dim tacGiaColumn = New DataGridViewTextBoxColumn()
+    '    tacGiaColumn.Name = "TacGia"
+    '    tacGiaColumn.HeaderText = "Tác giả "
+    '    tacGiaColumn.DataPropertyName = "TacGia"
+    '    tacGiaColumn.Width = 140
+    '    ListSachDaMuonDataGridView.Columns.Add(tacGiaColumn)
+
+    '    Dim tinhTrangColumn = New DataGridViewTextBoxColumn()
+    '    tinhTrangColumn.Name = "TinhTrang"
+    '    tinhTrangColumn.HeaderText = "Tình trạng"
+    '    tinhTrangColumn.DataPropertyName = "TinhTrang"
+    '    tinhTrangColumn.Width = 120
+    '    ListSachDaMuonDataGridView.Columns.Add(tinhTrangColumn)
+
+    '    Dim ngayHetHanColumn = New DataGridViewTextBoxColumn()
+    '    ngayHetHanColumn.Name = "NgayHetHan"
+    '    ngayHetHanColumn.HeaderText = "Ngày hết hạn"
+    '    ngayHetHanColumn.DataPropertyName = "NgayHetHan"
+    '    ngayHetHanColumn.Width = 140
+    '    ListSachDaMuonDataGridView.Columns.Add(ngayHetHanColumn)
+    'End Sub
 
     Private Sub BindingSourceBookBorrowedDataGridViewData(listPhieuMuonSachDaMuon As List(Of PhieuMuonSach))
 

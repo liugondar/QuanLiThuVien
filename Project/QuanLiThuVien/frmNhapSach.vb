@@ -100,9 +100,9 @@ Public Class frmNhapSach
             cuonsachBus.buildMaCuonSach(macuonsach)
 
             cuonsach.MaCuonSach = macuonsach
-            cuonsach.TinhTrang = txbTinhTrang.Text
+
             cuonsach.DauSach = txtMaSach.Text
-            cuonsach.SoKe = nudViTriKe.Value
+
 
             result = cuonsachBus.insert(cuonsach)
             If result.FlagResult = False Then

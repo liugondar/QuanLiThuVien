@@ -106,6 +106,10 @@ Public Class frmTaoTheDocGia
         ExpirationDateTimePicker.Value = ngayHetHan
     End Function
 
+    Private Sub EmailTextBox_TextChanged(sender As Object, e As EventArgs) Handles EmailTextBox.TextChanged
+
+    End Sub
+
 #End Region
 
 #End Region

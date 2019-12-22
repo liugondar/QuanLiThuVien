@@ -226,7 +226,7 @@ Partial Class frmChoMuonSach
         'dgvDanhSachCanMuon
         '
         Me.dgvDanhSachCanMuon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvDanhSachCanMuon.Location = New System.Drawing.Point(27, 31)
+        Me.dgvDanhSachCanMuon.Location = New System.Drawing.Point(17, 31)
         Me.dgvDanhSachCanMuon.Name = "dgvDanhSachCanMuon"
         Me.dgvDanhSachCanMuon.Size = New System.Drawing.Size(408, 219)
         Me.dgvDanhSachCanMuon.TabIndex = 52
@@ -277,7 +277,7 @@ Partial Class frmChoMuonSach
         Me.MetroLabel9.AutoSize = True
         Me.MetroLabel9.Location = New System.Drawing.Point(17, 73)
         Me.MetroLabel9.Name = "MetroLabel9"
-        Me.MetroLabel9.Size = New System.Drawing.Size(59, 19)
+        Me.MetroLabel9.Size = New System.Drawing.Size(57, 19)
         Me.MetroLabel9.TabIndex = 5
         Me.MetroLabel9.Text = "Tên sách"
         '
@@ -304,7 +304,7 @@ Partial Class frmChoMuonSach
         Me.MetroLabel10.AutoSize = True
         Me.MetroLabel10.Location = New System.Drawing.Point(15, 189)
         Me.MetroLabel10.Name = "MetroLabel10"
-        Me.MetroLabel10.Size = New System.Drawing.Size(102, 19)
+        Me.MetroLabel10.Size = New System.Drawing.Size(100, 19)
         Me.MetroLabel10.TabIndex = 5
         Me.MetroLabel10.Text = "Tình Trạng Sách"
         '
@@ -313,7 +313,7 @@ Partial Class frmChoMuonSach
         Me.MetroLabel8.AutoSize = True
         Me.MetroLabel8.Location = New System.Drawing.Point(15, 109)
         Me.MetroLabel8.Name = "MetroLabel8"
-        Me.MetroLabel8.Size = New System.Drawing.Size(52, 19)
+        Me.MetroLabel8.Size = New System.Drawing.Size(50, 19)
         Me.MetroLabel8.TabIndex = 5
         Me.MetroLabel8.Text = "Tác Giả"
         '

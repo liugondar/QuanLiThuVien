@@ -21,6 +21,7 @@ Public Class Sach
         Integer.TryParse(row("MaSach").ToString(), MaSach)
         Integer.TryParse(row("MaTheLoaiSach").ToString(), MaTheLoaiSach)
         Integer.TryParse(row("MaTacGia").ToString(), MaTacGia)
+        'Integer.TryParse(row("MaCuonSach").ToString(), MaCuonSach)
         TenSach = row("TenSach").ToString()
         TenNhaXuatBan = row("TenNhaXuatBan").ToString()
         DateTime.TryParse(row("NgayXuatBan").ToString(), NgayXuatBan)
@@ -28,6 +29,7 @@ Public Class Sach
         Integer.TryParse(row("TriGia").ToString(), TriGia)
         Integer.TryParse(row("TinhTrang").ToString(), TinhTrang)
     End Sub
+
     Public Sub New(maSach As Integer, tenSach As String, maLoaiSach As Integer, maTacGia As Integer, tenNhaXuatBan As String, namXuatBan As Date, ngayNhap As Date, triGia As Integer)
         Me.MaSach = maSach
         Me.TenSach = tenSach
@@ -52,6 +54,7 @@ Public Class Sach
     End Sub
 
     Public Property MaSach() As String
+    Public Property MaCuonSach() As String
     Public Property TenSach() As String
     Public Property MaTheLoaiSach() As Integer
     Public Property MaTacGia() As Integer

@@ -121,6 +121,11 @@ Public Class SachBus
         Return result
     End Function
 
+    Public Function SelectAllByMaCuonSach(listSach As List(Of Sach), maCuonSach As String) As Result
+        Dim result = _sachDAO.SelectAllByMaCuonSach(listSach, maCuonSach)
+        Return result
+    End Function
+
     Public Function SelectSachById(ByRef sach As Sach, maSach As String) As Result
         'Guard clause
         If String.IsNullOrWhiteSpace(maSach) Then Return New Result(False, "Mã sách không tồn tại", "")

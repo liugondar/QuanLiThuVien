@@ -4,6 +4,9 @@ Imports DTO
 Imports Utility
 
 Public Class CuonSachDAL
+    Private _dataProvider As DataProvider
+    Private formatDate As String
+
     Private connectionString As String
 
     Public Sub New()
@@ -86,7 +89,7 @@ Public Class CuonSachDAL
                     If reader.HasRows = True Then
                         list.Clear()
                         While reader.Read()
-                            list.Add(New CuonSachDTO(reader("MaCuonSach"), reader("TinhTrang"), reader("DauSach"), reader("SoKe")))
+                            list.Add(New CuonSachDTO(reader("MaCuonSach"), reader("DauSach")))
                         End While
                     End If
 
@@ -122,7 +125,7 @@ Public Class CuonSachDAL
                     reader = comm.ExecuteReader()
                     If reader.HasRows = True Then
                         While reader.Read()
-                            value = New CuonSachDTO(reader("MaCuonSach"), reader("TinhTrang"), reader("DauSach"), reader("SoKe"))
+                            value = New CuonSachDTO(reader("MaCuonSach"), reader("DauSach"))
                         End While
                     End If
 
@@ -140,7 +143,7 @@ Public Class CuonSachDAL
 
         Dim query As String = String.Empty
         query &= " INSERT INTO [CuonSach]"
-        query &= " VALUES (@MaCuonSach, @TinhTrang, @DauSach, @SoKe)"
+        query &= " VALUES (@MaCuonSach, @DauSach)"
 
         Using conn As New SqlConnection(connectionString)
             Using comm As New SqlCommand()
@@ -149,9 +152,9 @@ Public Class CuonSachDAL
                     .CommandType = CommandType.Text
                     .CommandText = query
                     .Parameters.AddWithValue("@MaCuonSach", value.MaCuonSach)
-                    .Parameters.AddWithValue("@TinhTrang", value.TinhTrang)
+
                     .Parameters.AddWithValue("@DauSach", value.DauSach)
-                    .Parameters.AddWithValue("@SoKe", value.SoKe)
+
                 End With
                 Try
                     conn.Open()
@@ -166,31 +169,19 @@ Public Class CuonSachDAL
         Return New Result(True)
     End Function
 
-    Public Function updateTinhTrang(macuonsach As String, value As String) As Result
 
-        Dim query As String = String.Empty
-        query &= " UPDATE [CuonSach] SET [TinhTrang] = @value WHERE [MaCuonSach] = @MaCuonSach"
-
-        Using conn As New SqlConnection(connectionString)
-            Using comm As New SqlCommand()
-                With comm
-                    .Connection = conn
-                    .CommandType = CommandType.Text
-                    .CommandText = query
-                    .Parameters.AddWithValue("@MaCuonSach", macuonsach)
-                    .Parameters.AddWithValue("@value", value)
-                End With
-                Try
-                    conn.Open()
-                    comm.ExecuteNonQuery()
-                Catch ex As Exception
-                    conn.Close()
-                    System.Console.WriteLine(ex.StackTrace)
-                    Return New Result(False)
-                End Try
-            End Using
-        End Using
-        Return New Result(True)
+    Public Function SelectAllByMaCuonSach(ByRef listSach As List(Of Sach), maCuonSach As String) As Result
+        Dim query = String.Empty
+        query = String.Format("Select * from CuonSach where MaCuonSach={0} and DeleteFlag='N'", maCuonSach)
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
+        If result.FlagResult = True Then
+            For Each row In dataTable.Rows
+                Dim sach = New Sach(row)
+                listSach.Add(sach)
+            Next
+        End If
+        Return result
     End Function
 
 End Class

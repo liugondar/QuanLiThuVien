@@ -1,0 +1,14 @@
+C:\Users\CuBill\Desktop\memhdt\QuanLiThuVien\Project\DTO\bin\Release\DTO.dll
+C:\Users\CuBill\Desktop\memhdt\QuanLiThuVien\Project\DTO\bin\Release\DTO.pdb
+C:\Users\CuBill\Desktop\memhdt\QuanLiThuVien\Project\DTO\bin\Release\DTO.xml
+C:\Users\CuBill\Desktop\memhdt\QuanLiThuVien\Project\DTO\bin\Release\Utility.dll
+C:\Users\CuBill\Desktop\memhdt\QuanLiThuVien\Project\DTO\bin\Release\Utility.pdb
+C:\Users\CuBill\Desktop\memhdt\QuanLiThuVien\Project\DTO\bin\Release\Utility.xml
+C:\Users\CuBill\Desktop\memhdt\QuanLiThuVien\Project\DTO\obj\Release\DTO.vbprojAssemblyReference.cache
+C:\Users\CuBill\Desktop\memhdt\QuanLiThuVien\Project\DTO\obj\Release\DTO.Resources.resources
+C:\Users\CuBill\Desktop\memhdt\QuanLiThuVien\Project\DTO\obj\Release\DTO.vbproj.GenerateResource.cache
+C:\Users\CuBill\Desktop\memhdt\QuanLiThuVien\Project\DTO\obj\Release\DTO.vbproj.CoreCompileInputs.cache
+C:\Users\CuBill\Desktop\memhdt\QuanLiThuVien\Project\DTO\obj\Release\DTO.vbproj.CopyComplete
+C:\Users\CuBill\Desktop\memhdt\QuanLiThuVien\Project\DTO\obj\Release\DTO.dll
+C:\Users\CuBill\Desktop\memhdt\QuanLiThuVien\Project\DTO\obj\Release\DTO.xml
+C:\Users\CuBill\Desktop\memhdt\QuanLiThuVien\Project\DTO\obj\Release\DTO.pdb

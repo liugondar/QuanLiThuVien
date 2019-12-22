@@ -18,3 +18,13 @@ C:\Users\CuBill\Desktop\QuanLiThuVien-20191109T110856Z-001\QuanLiThuVien\Project
 C:\Users\CuBill\Desktop\QuanLiThuVien-20191109T110856Z-001\QuanLiThuVien\Project\Utility\obj\Debug\Utility.dll
 C:\Users\CuBill\Desktop\QuanLiThuVien-20191109T110856Z-001\QuanLiThuVien\Project\Utility\obj\Debug\Utility.xml
 C:\Users\CuBill\Desktop\QuanLiThuVien-20191109T110856Z-001\QuanLiThuVien\Project\Utility\obj\Debug\Utility.pdb
+C:\Users\CuBill\Desktop\memhdt\QuanLiThuVien\Project\Utility\bin\Debug\Utility.dll
+C:\Users\CuBill\Desktop\memhdt\QuanLiThuVien\Project\Utility\bin\Debug\Utility.pdb
+C:\Users\CuBill\Desktop\memhdt\QuanLiThuVien\Project\Utility\bin\Debug\Utility.xml
+C:\Users\CuBill\Desktop\memhdt\QuanLiThuVien\Project\Utility\obj\Debug\Utility.vbprojAssemblyReference.cache
+C:\Users\CuBill\Desktop\memhdt\QuanLiThuVien\Project\Utility\obj\Debug\Utility.Resources.resources
+C:\Users\CuBill\Desktop\memhdt\QuanLiThuVien\Project\Utility\obj\Debug\Utility.vbproj.GenerateResource.cache
+C:\Users\CuBill\Desktop\memhdt\QuanLiThuVien\Project\Utility\obj\Debug\Utility.vbproj.CoreCompileInputs.cache
+C:\Users\CuBill\Desktop\memhdt\QuanLiThuVien\Project\Utility\obj\Debug\Utility.dll
+C:\Users\CuBill\Desktop\memhdt\QuanLiThuVien\Project\Utility\obj\Debug\Utility.xml
+C:\Users\CuBill\Desktop\memhdt\QuanLiThuVien\Project\Utility\obj\Debug\Utility.pdb

@@ -121,6 +121,11 @@ Public Class PhieuMuonSachBus
     Public Function SelectAllByMaTheDocGia(ByRef listPhieuMuonSach As List(Of PhieuMuonSach), maTheDocGia As String) As Result
         Return _phieuMuonSachDAO.SelectAllByMaTheDocGia(listPhieuMuonSach, maTheDocGia)
     End Function
+
+    Public Function SelectAllByMaCuonSach(ByRef listSach As List(Of Sach), maCuonSach As String) As Result
+        Return _phieuMuonSachDAO.SelectAllByMaCuonSach(listSach, maCuonSach)
+    End Function
+
     Public Function SelectAllSachChuaTraByReaderID(ByRef listPhieuMuonSach As List(Of PhieuMuonSach),
                                              maTheDocGia As String) As Result
         Return _phieuMuonSachDAO.SelectAllPhieuMuonSachChuaTraByReaderId(listPhieuMuonSach, maTheDocGia)

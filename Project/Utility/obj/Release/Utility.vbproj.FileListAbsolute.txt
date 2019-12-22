@@ -1,0 +1,10 @@
+C:\Users\CuBill\Desktop\memhdt\QuanLiThuVien\Project\Utility\bin\Release\Utility.dll
+C:\Users\CuBill\Desktop\memhdt\QuanLiThuVien\Project\Utility\bin\Release\Utility.pdb
+C:\Users\CuBill\Desktop\memhdt\QuanLiThuVien\Project\Utility\bin\Release\Utility.xml
+C:\Users\CuBill\Desktop\memhdt\QuanLiThuVien\Project\Utility\obj\Release\Utility.vbprojAssemblyReference.cache
+C:\Users\CuBill\Desktop\memhdt\QuanLiThuVien\Project\Utility\obj\Release\Utility.Resources.resources
+C:\Users\CuBill\Desktop\memhdt\QuanLiThuVien\Project\Utility\obj\Release\Utility.vbproj.GenerateResource.cache
+C:\Users\CuBill\Desktop\memhdt\QuanLiThuVien\Project\Utility\obj\Release\Utility.vbproj.CoreCompileInputs.cache
+C:\Users\CuBill\Desktop\memhdt\QuanLiThuVien\Project\Utility\obj\Release\Utility.dll
+C:\Users\CuBill\Desktop\memhdt\QuanLiThuVien\Project\Utility\obj\Release\Utility.xml
+C:\Users\CuBill\Desktop\memhdt\QuanLiThuVien\Project\Utility\obj\Release\Utility.pdb

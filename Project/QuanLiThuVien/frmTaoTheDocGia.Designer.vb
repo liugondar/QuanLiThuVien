@@ -115,6 +115,7 @@ Partial Class frmTaoTheDocGia
         Me.EmailTextBox.Name = "EmailTextBox"
         Me.EmailTextBox.Size = New System.Drawing.Size(204, 20)
         Me.EmailTextBox.TabIndex = 3
+        Me.EmailTextBox.Text = "ưetf"
         '
         'AddressTextBox
         '

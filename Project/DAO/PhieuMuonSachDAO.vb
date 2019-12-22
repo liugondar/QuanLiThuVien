@@ -1,9 +1,15 @@
 ﻿Imports DTO
 Imports Utility
+Imports System.Configuration
+Imports System.Data.SqlClient
 
 Public Class PhieuMuonSachDAO
 #Region "-   Fields    -"
+    'Private connectionString As String
 
+    'Public Sub New(ConnectionString As String)
+    '    Me.connectionString = ConnectionString
+    'End Sub
     Private _dataProvider As DataProvider
 
 #End Region
@@ -83,6 +89,24 @@ where MaPhieuMuonSach={1}
         Return result
     End Function
 
+    Public Function SelectAllByMaCuonSach(ByRef listSach As List(Of Sach), maCuonSach As String) As Result
+        Dim query = String.Empty
+        query &= "select * "
+        query &= "from CuonSach, Sach "
+        query &= "Where CuonSach.DauSach = Sach.MaSach "
+        query &= " And MaCuonSach=" & maCuonSach
+        query &= " And DeleteFlag='N'" & " "
+        Dim dataTablecs = New DataTable()
+        Dim resultcs = _dataProvider.ExecuteQuery(query, dataTablecs)
+        If resultcs.FlagResult = True Then
+            For Each rowcs In dataTablecs.Rows
+                Dim sach = New Sach(rowcs)
+                listSach.Add(sach)
+            Next
+        End If
+        Return resultcs
+    End Function
+
     Public Function SelectAllPhieuMuonSachChuaTraByReaderId(ByRef listPhieuMuonSach As List(Of PhieuMuonSach), maTheDocGia As String) As Result
         Dim query = String.Empty
         query = String.Format("Select * from PhieuMuonSach
@@ -143,5 +167,47 @@ And YEAR(NgayTra)='{0}' and month(NgayMuon)='{1}'
         Next
         Return result
     End Function
+
+
+    'Public Function getAll_SachDangMuon_ByMaDocGia(madocgia As String, ByRef listMaSach As List(Of String), ByRef listTenSach As List(Of String), ByRef listNgayMuon As List(Of Date)) As Result
+
+    '    Dim query As String = String.Empty
+    '    query &= "SELECT DISTINCT cs.[MaCuonSach], s.[TenSach], pm.[NgayMuon] "
+    '    query &= "FROM [CuonSach] cs, [ChiTietPhieuMuonSach] ctpm, [PhieuMuonSach] pm, [TheDocGia] dg, [Sach] s "
+    '    query &= "WHERE cs.[MaCuonSach] = ctpm.[MaCuonSach] and ctpm.[MaPhieuMuonSach] = pm.[MaPhieuMuonSach] and cs.[DauSach] = s.[MaSach] and pm.[MaTheDocGia] = @madocgia "
+
+
+    '    Using conn As New SqlConnection(connectionString)
+    '        Using comm As New SqlCommand()
+    '            With comm
+    '                .Connection = conn
+    '                .CommandType = CommandType.Text
+    '                .CommandText = query
+    '                .Parameters.AddWithValue("@madocgia", madocgia)
+    '            End With
+    '            Try
+    '                conn.Open()
+    '                Dim reader As SqlDataReader
+    '                reader = comm.ExecuteReader()
+    '                If reader.HasRows = True Then
+    '                    listMaSach.Clear()
+    '                    listTenSach.Clear()
+    '                    listNgayMuon.Clear()
+    '                    While reader.Read()
+    '                        listMaSach.Add(reader("macuonsach"))
+    '                        listTenSach.Add(reader("tendausach"))
+    '                        listNgayMuon.Add(reader("ngaymuon"))
+    '                    End While
+    '                End If
+
+    '            Catch ex As Exception
+    '                conn.Close()
+    '                System.Console.WriteLine(ex.StackTrace)
+    '                Return New Result(False)
+    '            End Try
+    '        End Using
+    '    End Using
+    '    Return New Result(True) ' thanh cong
+    'End Function
 #End Region
 End Class

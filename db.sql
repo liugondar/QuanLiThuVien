@@ -150,9 +150,7 @@ GO
 CREATE TABLE dbo.CuonSach
 (
 	MaCuonSach varchar(50) NOT NULL PRIMARY KEY,
-	TinhTrang varchar(50) NOT NULL,
 	DauSach varchar(50) NOT NULL,
-	soke int NOT NULL,
 	
 );
 -- Create a new table called 'PhieuMuonSach' in schema 'SchemaName'

@@ -1,7 +1,13 @@
 ﻿Imports DTO
 Imports Utility
+Imports System.Configuration
+Imports System.Data.SqlClient
 
 Public Class SachDAO
+
+
+
+
 
 #Region "-   Fields   -"
     Private _dataProvider As DataProvider
@@ -140,7 +146,44 @@ triGiaMin, triGiaMax)
         Return result
     End Function
 
+    Public Function SelectAllByMaCuonSach(ByRef listSach As List(Of Sach), maCuonSach As String) As Result
+        Dim querycs = String.Empty
+        querycs = String.Format("Select * from Sach, CuonSach where Sach.MaSach=CuonSach.DauSach and MaCuonSach={0} and DeleteFlag='N'", maCuonSach)
+        Dim dataTablecs = New DataTable()
+        Dim resultcs = _dataProvider.ExecuteQuery(querycs, dataTablecs)
+        If resultcs.FlagResult = True Then
+            For Each rowcs In dataTablecs.Rows
+                Dim sach = New Sach(rowcs)
+                listSach.Add(sach)
+            Next
+        End If
+        Return resultcs
+    End Function
+
     Public Function SelectByType(maSach As String,
+                                 ByRef tenSach As String, ByRef theLoai As String,
+                                 ByRef tenTacGia As String, ByRef tinhTrangSach As Integer) As Result
+        Dim query = String.Format("
+select s.MaSach as MaSach,s.TenSach as tenSach,
+tls.TenTheLoaiSach as TenTheLoaiSach,tg.TenTacGia as TenTacGia,TinhTrang 
+from sach s,TheLoaiSach tls,TacGia tg
+where s.MaTheLoaiSach=tls.MaTheLoaiSach and s.MaTacGia=tg.MaTacGia
+and s.DeleteFlag='N' and tls.DeleteFlag='N' and tg.DeleteFlag='N'
+and s.MaSach={0}", maSach)
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
+        If result.FlagResult = True Then
+            For Each row In dataTable.Rows
+                tenSach = row("TenSach").ToString()
+                theLoai = row("TenTheLoaiSach").ToString()
+                tenTacGia = row("TenTacGia").ToString()
+                Integer.TryParse(row("TinhTrang").ToString(), tinhTrangSach)
+            Next
+        End If
+        Return result
+    End Function
+
+    Public Function SelectByTypePls(maSach As String,
                                  ByRef tenSach As String, ByRef theLoai As String,
                                  ByRef tenTacGia As String, ByRef tinhTrangSach As Integer) As Result
         Dim query = String.Format("
@@ -231,5 +274,7 @@ maSach={0}", maSach)
         Return result
     End Function
 #End Region
+
+
 
 End Class
