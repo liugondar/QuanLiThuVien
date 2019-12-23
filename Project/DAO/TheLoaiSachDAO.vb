@@ -1,93 +1,101 @@
-﻿Imports DTO
-Imports Utility
+﻿Imports DTO
+Imports Utility
+Public Class TacGiaDAO
+#Region "-   Fields   -"
+    Private _dataProvider As DataProvider
+#End Region
+#Region "-   Constructor   -"
+    Public Sub New()
+        _dataProvider = New DataProvider()
+    End Sub
+#End Region
+#Region "-   Retrieve data    -"
+    Public Function SelectAll(ByRef listTacGia As List(Of TacGia)) As Result
+        Dim query = String.Empty
+        query &= "Select * from dbo.TacGia"
+        query &= " Where DeleteFlag='N'" & " "
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
+        For Each row As DataRow In dataTable.Rows
+            Dim tacGia = New TacGia(row)
+            listTacGia.Add(tacGia)
+        Next
+        Return result
+    End Function
+    Public Function SelectTacGiaByTenTacGia(ByRef listTacGia As List(Of TacGia)) As Result
+        Dim query = String.Empty
+        query &= "Select * from dbo.TacGia"
+        query &= " Where DeleteFlag='N'" & " "
+Dim query = String.Format("select top 1 [MaTacGia]
+from TacGia
+order by MaTacGia desc")
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
+        For Each row As DataRow In dataTable.Rows
+            Dim tacGia = New TacGia(row)
+            listTacGia.Add(tacGia)
+        Next
+        Return result
+    End Function
+  Public Sub New()
+        _dataProvider = New DataProvider()
+    End Sub
+    Public Function SelectTacGiaByMaTacGia(ByRef tacGia As TacGia, maTacGia As String) As Result
+        Dim query = String.Empty
+        query &= "Select * from dbo.TacGia where MaTacGia=" & maTacGia
+        query &= " and DeleteFlag='N'" & " "
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
+        For Each row As DataRow In dataTable.Rows
+            tacGia = New TacGia(row)
+        Next
+        Return result
+    End Function
+    Public Function GetTenTacGiaByMaTacGia(ByRef tenTacGia As String, maTacGia As String) As Object
+        Dim query = String.Empty
+        query &= "Select * from dbo.TacGia where MaTacGia=" & maTacGia
+        query &= " and DeleteFlag='N'" & " "
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
+        For Each row As DataRow In dataTable.Rows
+            tenTacGia = row("TenTacGia").ToString()
+        Next
+        Return result
+    End Function
+    Function GetTheLastId(ByRef maTacGia As String) As Result
+        Dim data = New DataTable()
+        Dim query = String.Format("select top 1 [MaTacGia]
+from TacGia
+order by MaTacGia desc")
+        Dim result = _dataProvider.ExecuteQuery(query, data)
+        For Each row In data.Rows
+            maTacGia = row("MaTacGia").ToString()
+        Next
+        Return New Result()
+    End Function
+#End Region
+#Region "-    Insert,delete,update   -"
+    Function UpdateById(tacGia As TacGia, tacGiaId As String) As Result
+        Dim query = String.Format("
+update TacGia
+set TenTacGia='{0}'
+where MaTacGia={1} and DeleteFlag='N'", tacGia.TenTacGia, tacGiaId)
+        Return _dataProvider.ExecuteNonquery(query)
+    End Function
+    Function DeleteById(tacGiaId As String) As Result
+        Dim query = String.Format("
+update TacGia
+set DeleteFlag='Y'
+where MaTacGia={0}", tacGiaId)
+        Return _dataProvider.ExecuteNonquery(query)
+    End Function
+    Function InsertOne(tacGia As TacGia) As Result
+        Dim query = String.Format("
+INSERT into dbo.TacGia(TenTacGia)
+VALUES('{0}')", tacGia.TenTacGia)
+        Return _dataProvider.ExecuteNonquery(query)
+    End Function
+#End Region
+End Class
+
 
-Public Class TheLoaiSachDAO
-
-#Region "-  Fields and constructor   -"
-    Private _dataProvider As DataProvider
-
-    Public Sub New()
-        _dataProvider = New DataProvider()
-    End Sub
-
-#End Region
-
-#Region "-    Insert,delete,update   -"
-
-    Function UpdateById(theLoaiSach As TheLoaiSach, theLoaiSachID As String) As Result
-        Dim query = String.Format("
-update TheLoaiSach
-set TenTheLoaiSach='{0}'
-where maTheLoaiSach={1} and DeleteFlag='N'", theLoaiSach.TenTheLoaiSach, theLoaiSachID)
-        Return _dataProvider.ExecuteNonquery(query)
-    End Function
-
-    Function DeleteById(theLoaiSachId As String) As Result
-        Dim query = String.Format("
-update TheLoaiSach
-set DeleteFlag='Y'
-where maTheLoaiSach={0}", theLoaiSachId)
-        Return _dataProvider.ExecuteNonquery(query)
-    End Function
-
-    Function InsertOne(theLoaiSach As TheLoaiSach) As Result
-        Dim query = String.Format("
-INSERT into dbo.TheLoaiSach(TenTheLoaiSach)
-VALUES('{0}')", theLoaiSach.TenTheLoaiSach)
-        Return _dataProvider.ExecuteNonquery(query)
-    End Function
-#End Region
-
-#Region "-   Retrieve data    -"
-    Public Function SelectAll(ByRef listTheLoaiSach As List(Of TheLoaiSach)) As Result
-        Dim query = String.Empty
-        query &= "Select * from dbo.TheLoaiSach"
-        query &= " Where DeleteFlag='N'" & " "
-        Dim dataTable = New DataTable()
-        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
-        For Each row As DataRow In dataTable.Rows
-            Dim theLoaiSach = New TheLoaiSach(row)
-            listTheLoaiSach.Add(theLoaiSach)
-        Next
-        Return result
-    End Function
-
-    Public Function SelectTheLoaiSachByID(ByRef theLoaiSach As TheLoaiSach, maTheLoaiSach As String) As Result
-        Dim query = String.Empty
-        query &= "Select * from dbo.TheLoaiSach where MaTheLoaiSach=" & maTheLoaiSach
-        query &= " and DeleteFlag='N'" & " "
-        Dim dataTable = New DataTable()
-        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
-        For Each row As DataRow In dataTable.Rows
-            theLoaiSach = New TheLoaiSach(row)
-        Next
-        Return result
-    End Function
-
-    Public Function GetTenTheLoaiSachByID(ByRef tentheLoaiSach As String, maTheLoaiSach As String) As Object
-        Dim query = String.Format("select [TenTheLoaiSach]
-from TheLoaiSach 
-where MaTheLoaiSach={0} and DeleteFlag='N'", maTheLoaiSach)
-        Dim dataTable = New DataTable()
-        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
-        For Each row As DataRow In dataTable.Rows
-            tentheLoaiSach = row("TenTheLoaiSach").ToString()
-        Next
-        Return result
-    End Function
-
-    Function GetTheLastId(ByRef maTheLoaiSAch As String) As Result
-        Dim data = New DataTable()
-        Dim query = String.Format("select top 1 [maTheLoaiSach]
-from theloaisach
-order by maTheLoaiSach desc")
-        Dim result = _dataProvider.ExecuteQuery(query, data)
-
-        For Each row In data.Rows
-            maTheLoaiSAch = row("maTheLoaiSach").ToString()
-        Next
-        Return New Result()
-    End Function
-#End Region
-
-End Class
