@@ -1,1 +1,2 @@
-SQLCMD -S DESKTOP-J1I1JBP -E -i db.sql
+SQLCMD -S . -E -i db.sql
+SQLCMD -S . -E -i initdata.sql

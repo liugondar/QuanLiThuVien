@@ -64,6 +64,17 @@ where MaSach={0}", id)
         Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         Return dataTable.Rows.Count
     End Function
+
+    Public Function getAvailableSachBaseOnDauSachId(dauSachId As String, ByRef soluong As Integer) As Result
+        Dim query = "EXECUTE dbo.USP_CountCuonSachBaseOnDauSachId " + dauSachId
+        Dim dtb = New DataTable()
+        Dim rs = _dataProvider.ExecuteQuery(query, dtb)
+        For Each row In dtb.Rows
+            soluong = Integer.Parse(row("soLuong"))
+        Next
+        Return rs
+    End Function
+
     Public Function SelectAll(ByRef listSach As List(Of Sach)) As Result
         Dim query = String.Empty
         query &= "Select * from Sach where DeleteFlag='N'"

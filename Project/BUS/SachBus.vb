@@ -45,6 +45,9 @@ Public Class SachBus
         Return _sachDAO.SelectByType(maSach, tenSach, theLoai, tacGia, soluongSachCon, listIdCuonSach)
     End Function
 
+    Public Function getAvailableQuanlity(maDauSach As String, ByRef slCon As Integer) As Result
+        Return _sachDAO.getAvailableSachBaseOnDauSachId(maDauSach, slCon)
+    End Function
 End Class
 
 
