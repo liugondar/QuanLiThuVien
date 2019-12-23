@@ -7,10 +7,10 @@ Public Class frmQuanLiSach
 #Region "-   Fields    -"
     Private _theLoaiSachBus As TheLoaiSachBUS
     Private _tacGiaBus As TacGiaBUS
-    Private _sachBus As SachBus
+    Private _dausachBus As DauSachBus
     Private _listTheLoaiSach As List(Of TheLoaiSach)
     Private _listTacGia As List(Of TacGia)
-    Private _listSach As List(Of Sach)
+    Private _listDauSach As List(Of DauSachDTO)
     Private loginAccount As Account
 
 #End Region
@@ -33,8 +33,8 @@ Public Class frmQuanLiSach
     Private Sub InitComponenents()
         _theLoaiSachBus = New TheLoaiSachBUS()
         _tacGiaBus = New TacGiaBUS()
-        _sachBus = New SachBus()
-        _listSach = New List(Of Sach)
+        _dausachBus = New DauSachBus()
+        _listDauSach = New List(Of DauSachDTO)
         _listTacGia = New List(Of TacGia)
         _listTheLoaiSach = New List(Of TheLoaiSach)
 
@@ -45,26 +45,26 @@ Public Class frmQuanLiSach
     End Sub
 
     Private Sub InitBookTitleComboboxDataAndPuslisherComboBoxData()
-        Dim sachTemp = New Sach()
+        Dim sachTemp = New DauSachDTO()
         sachTemp.TenSach = "-----------------------------"
         sachTemp.TenNhaXuatBan = "-----------------------------"
-        sachTemp.MaSach = -1
-        _listSach.Add(sachTemp)
-        Dim result = _sachBus.SelectAll(_listSach)
+        sachTemp.MaDauSach = -1
+        _listDauSach.Add(sachTemp)
+        Dim result = _dausachBus.SelectAll(_listDauSach)
         If result.FlagResult = False Then
             MessageBox.Show(result.ApplicationMessage)
             Return
         End If
 
 
-        cbTenSachCanTim.DataSource = New BindingSource(_listSach, String.Empty)
+        cbTenSachCanTim.DataSource = New BindingSource(_listDauSach, String.Empty)
         cbTenSachCanTim.DisplayMember = "TenSach"
-        cbTenSachCanTim.ValueMember = "MaSach"
+        cbTenSachCanTim.ValueMember = "MaDauSach"
 
-        Dim listNhaXuatBan = New List(Of Sach)
+        Dim listNhaXuatBan = New List(Of DauSachDTO)
         Dim nhaXuatBanComparer = New TenNhaXuatBanComparer()
 
-        listNhaXuatBan = _listSach.Distinct(nhaXuatBanComparer).ToList()
+        listNhaXuatBan = _listDauSach.Distinct(nhaXuatBanComparer).ToList()
         cbNhaXuatBanCanTim.DataSource = New BindingSource(listNhaXuatBan, String.Empty)
         cbNhaXuatBanCanTim.DisplayMember = "TenNhaXuatBan"
         cbNhaXuatBanCanTim.ValueMember = "TenNhaXuatBan"
@@ -137,11 +137,11 @@ Public Class frmQuanLiSach
     Private Sub SearchByDataInput()
 
         'get input data
-        Dim sach = New Sach()
-        sach.MaSach = cbTenSachCanTim.SelectedValue
-        sach.MaTacGia = cbTacGiaCanTim.SelectedValue
-        sach.MaTheLoaiSach = cbTheLoaiCanTim.SelectedValue
-        sach.TenNhaXuatBan = If(cbNhaXuatBanCanTim.SelectedValue = "-----------------------------", -1, cbNhaXuatBanCanTim.SelectedValue)
+        Dim dausach = New DauSachDTO()
+        dausach.MaDauSach = cbTenSachCanTim.SelectedValue
+        dausach.MaTacGia = cbTacGiaCanTim.SelectedValue
+        dausach.MaTheLoaiSach = cbTheLoaiCanTim.SelectedValue
+        dausach.TenNhaXuatBan = If(cbNhaXuatBanCanTim.SelectedValue = "-----------------------------", -1, cbNhaXuatBanCanTim.SelectedValue)
         Dim ngayXuatBanMin = dpNamXBCanTimMin.Value
         Dim ngayXuatBanMax = dpNamXBCanTimMax.Value
         Dim ngayNhapMin = dpNgayNhapMin.Value
@@ -150,25 +150,25 @@ Public Class frmQuanLiSach
         Dim triGiaMax = MaxPriceNumericUpDown.Value
 
         'Load searched list to datagridview
-        Dim listThoaMan = New List(Of Sach)
-        _sachBus.SelectALLBySpecificConditions(listThoaMan, sach,
+        Dim listThoaMan = New List(Of DauSachDTO)
+        _dausachBus.SelectALLBySpecificConditions(listThoaMan, dausach,
                                                ngayXuatBanMin, ngayXuatBanMax,
                                                 ngayNhapMin, ngayNhapMax,
                                                 triGiaMin, triGiaMax)
-        LoadListSach(listThoaMan)
+        LoadListDauSach(listThoaMan)
     End Sub
 
-    Private Sub LoadListSach(listSach As List(Of Sach))
+    Private Sub LoadListDauSach(listDauSach As List(Of DauSachDTO))
         DataGridViewQuanLiSach.Columns.Clear()
         DataGridViewQuanLiSach.DataSource = Nothing
         DataGridViewQuanLiSach.AutoGenerateColumns = False
         DataGridViewQuanLiSach.AllowUserToAddRows = False
-        Dim columnMaSach = New DataGridViewTextBoxColumn()
-        columnMaSach.Name = "MaSach"
-        columnMaSach.HeaderText = "Mã Sách"
-        columnMaSach.DataPropertyName = "MaSach"
-        columnMaSach.Width = 100
-        DataGridViewQuanLiSach.Columns.Add(columnMaSach)
+        Dim columnMaDauSach = New DataGridViewTextBoxColumn()
+        columnMaDauSach.Name = "MaDauSach"
+        columnMaDauSach.HeaderText = "Mã Đầu Sách"
+        columnMaDauSach.DataPropertyName = "MaSach"
+        columnMaDauSach.Width = 100
+        DataGridViewQuanLiSach.Columns.Add(columnMaDauSach)
 
         Dim columnTenSach = New DataGridViewTextBoxColumn()
         columnTenSach.Name = "TenSach"
@@ -198,9 +198,9 @@ Public Class frmQuanLiSach
         columnTriGia.Width = 150
         DataGridViewQuanLiSach.Columns.Add(columnTriGia)
 
-        For index = 0 To listSach.Count - 1
+        For index = 0 To listDauSach.Count - 1
             'load ten the loai sach
-            Dim maTheLoaiSachTemp = listSach(index).MaTheLoaiSach
+            Dim maTheLoaiSachTemp = listDauSach(index).MaTheLoaiSach
             Dim tenTheLoaiSachTemp As String
             Dim ListTheLoaiSachThoaMan = From tls In _listTheLoaiSach
                                          Where tls.MaTheLoaiSach = maTheLoaiSachTemp
@@ -210,7 +210,7 @@ Public Class frmQuanLiSach
                 tenTheLoaiSachTemp = theLoaiSach.TenTheLoaiSach
             Next
             'load ten tac gia
-            Dim maTacGiaTemp = listSach(index).MaTacGia
+            Dim maTacGiaTemp = listDauSach(index).MaTacGia
             Dim tenTacGiaTemp As String
             Dim listTacGiaThoaMan = From tg In _listTacGia
                                     Where tg.MaTacGia = maTacGiaTemp
@@ -220,11 +220,10 @@ Public Class frmQuanLiSach
             Next
 
             'load ten tinh trang
-            Dim tinhTrangTemp = If(listSach(index).TinhTrang = 0, "Còn", "Hết")
+            'Dim tinhTrangTemp = If(listDauSach(index).TinhTrang = 0, "Còn", "Hết")
 
-            DataGridViewQuanLiSach.Rows.Add(listSach(index).MaSach,
-            listSach(index).TenSach, tenTheLoaiSachTemp, tenTacGiaTemp,
-             tinhTrangTemp)
+            DataGridViewQuanLiSach.Rows.Add(listDauSach(index).MaDauSach,
+            listDauSach(index).TenSach, tenTheLoaiSachTemp, tenTacGiaTemp)
         Next
     End Sub
 
@@ -239,25 +238,25 @@ Public Class frmQuanLiSach
     End Sub
 
     Private Function LoadInfoSelectedRow() As Result
-        Dim sach = New Sach()
-        Dim result = GetSelectedSachData(sach)
+        Dim dausach = New DauSachDTO()
+        Dim result = GetSelectedSachData(dausach)
         If result.FlagResult = False Then Return result
 
-        If sach Is Nothing Then Return New Result(False, "", "")
+        If dausach Is Nothing Then Return New Result(False, "", "")
 
-        LoadThongTinSachCanTimGroupBox(sach)
+        LoadThongTinSachCanTimGroupBox(dausach)
         Return result
     End Function
 
-    Private Function GetSelectedSachData(ByRef sach As Sach) As Result
+    Private Function GetSelectedSachData(ByRef dausach As DauSachDTO) As Result
         Dim currentRowIndex As Integer = DataGridViewQuanLiSach.CurrentCellAddress.Y
         'Verify that indexing OK
         If (-1 < currentRowIndex And currentRowIndex < DataGridViewQuanLiSach.RowCount) Then
             Try
-                Dim MaSach = Convert.ToInt32(DataGridViewQuanLiSach.Rows(currentRowIndex).Cells("MaSach").Value.ToString())
-                sach = New Sach()
-                sach.MaSach = MaSach
-                _sachBus.GetById(sach, MaSach)
+                Dim MaDauSach = Convert.ToInt32(DataGridViewQuanLiSach.Rows(currentRowIndex).Cells("MaDauSach").Value.ToString())
+                dausach = New DauSachDTO()
+                dausach.MaDauSach = MaDauSach
+                _dausachBus.GetById(dausach, MaDauSach)
             Catch ex As Exception
                 Console.WriteLine(ex.StackTrace)
                 Return New Result(False, "Không lấy được thông tin độc giả đã chọn", "")
@@ -269,28 +268,28 @@ Public Class frmQuanLiSach
         Return New Result()
     End Function
 
-    Private Sub LoadThongTinSachCanTimGroupBox(sach As Sach)
-        txtMaSachDangChon.Text = sach.MaSach
-        txtTenNxbDangChon.Text = sach.TenNhaXuatBan
-        txtTenSachDangChon.Text = sach.TenSach
+    Private Sub LoadThongTinSachCanTimGroupBox(dausach As DauSachDTO)
+        txtMaDauSachDangChon.Text = dausach.MaDauSach
+        txtTenNxbDangChon.Text = dausach.TenNhaXuatBan
+        txtTenSachDangChon.Text = dausach.TenSach
 
         Dim listTacGia = _listTacGia.Where(Function(x) x.MaTacGia <> -1).ToList()
         cbTacGiaDangChon.DataSource = listTacGia
         cbTacGiaDangChon.DisplayMember = "TenTacGia"
         cbTacGiaDangChon.ValueMember = "MaTacGia"
-        Dim selectedTacGia = _listTacGia.Where(Function(x) x.MaTacGia = sach.MaTacGia).FirstOrDefault
+        Dim selectedTacGia = _listTacGia.Where(Function(x) x.MaTacGia = dausach.MaTacGia).FirstOrDefault
         cbTacGiaDangChon.SelectedIndex = cbTacGiaDangChon.Items.IndexOf(selectedTacGia)
 
         Dim listTheLoai = _listTheLoaiSach.Where(Function(x) x.MaTheLoaiSach <> -1).ToList()
         cbTheLoaiDangChon.DataSource = listTheLoai
         cbTheLoaiDangChon.DisplayMember = "TenTheLoaiSach"
         cbTheLoaiDangChon.ValueMember = "MaTheLoaiSach"
-        Dim selectedTheLoai = _listTheLoaiSach.Where(Function(x) x.MaTheLoaiSach = sach.MaTheLoaiSach).FirstOrDefault
+        Dim selectedTheLoai = _listTheLoaiSach.Where(Function(x) x.MaTheLoaiSach = dausach.MaTheLoaiSach).FirstOrDefault
         cbTheLoaiDangChon.SelectedIndex = cbTheLoaiDangChon.Items.IndexOf(selectedTheLoai)
 
-        dpNamXBDangChon.Value = sach.NgayXuatBan
-        dpNgayNhapDangChon.Value = sach.NgayNhap
-        nudTriGiaDangChon.Value = sach.TriGia
+        dpNamXBDangChon.Value = dausach.NgayXuatBan
+        dpNgayNhapDangChon.Value = dausach.NgayNhap
+        nudTriGiaDangChon.Value = dausach.TriGia
     End Sub
 
 #End Region
@@ -299,43 +298,43 @@ Public Class frmQuanLiSach
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
         If MessageBox.Show("Bạn có chắc thay đổi thông tin?", "Thông Báo", MessageBoxButtons.OKCancel) = System.Windows.Forms.DialogResult.OK Then
             Try
-                Dim sach = New Sach()
-                sach.MaSach = txtMaSachDangChon.Text
-                sach.TenSach = txtTenSachDangChon.Text
-                sach.TenNhaXuatBan = txtTenNxbDangChon.Text
-                sach.MaTheLoaiSach = cbTheLoaiDangChon.SelectedItem.maTheLoaiSach
-                sach.MaTacGia = cbTacGiaDangChon.SelectedItem.MaTacGia
-                sach.NgayXuatBan = dpNamXBDangChon.Value
-                sach.TriGia = nudTriGiaDangChon.Value
+                Dim dausach = New DauSachDTO()
+                dausach.MaDauSach = txtMaDauSachDangChon.Text
+                dausach.TenSach = txtTenSachDangChon.Text
+                dausach.TenNhaXuatBan = txtTenNxbDangChon.Text
+                dausach.MaTheLoaiSach = cbTheLoaiDangChon.SelectedItem.maTheLoaiSach
+                dausach.MaTacGia = cbTacGiaDangChon.SelectedItem.MaTacGia
+                dausach.NgayXuatBan = dpNamXBDangChon.Value
+                dausach.TriGia = nudTriGiaDangChon.Value
 
-                Dim result = _sachBus.Update(sach)
+                Dim result = _dausachBus.Update(dausach)
                 If result.FlagResult Then
-                    MessageBox.Show("Cập nhật thành công thông tin sách!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    MessageBox.Show("Cập nhật thành công thông tin đầu sách!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     SearchByDataInput()
                 Else
-                    MessageBox.Show("Cập nhật không thành công thông tin sách!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    MessageBox.Show("Cập nhật không thành công thông tin đầu sách!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
             Catch ex As Exception
-                MessageBox.Show("Cập nhật không thành công thông tin sách!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBox.Show("Cập nhật không thành công thông tin đầu sách!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Console.WriteLine(ex)
             End Try
         End If
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
-        If MessageBox.Show("Bạn có muốn xoá sach có mã: " & txtMaSachDangChon.Text, "Thông Báo", MessageBoxButtons.OKCancel) = System.Windows.Forms.DialogResult.OK Then
+        If MessageBox.Show("Bạn có muốn xoá đầu sách có mã: " & txtMaDauSachDangChon.Text, "Thông Báo", MessageBoxButtons.OKCancel) = System.Windows.Forms.DialogResult.OK Then
 
             Try
-                Dim MaSach = txtMaSachDangChon.Text
-                Dim result = _sachBus.DeleteById(MaSach)
+                Dim MaDauSach = txtMaDauSachDangChon.Text
+                Dim result = _dausachBus.DeleteById(MaDauSach)
                 If result.FlagResult Then
-                    MessageBox.Show("Xoá thành công thông tin sách!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    MessageBox.Show("Xoá thành công thông tin đầu sách!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     SearchByDataInput()
                 Else
-                    MessageBox.Show("Xoá không thành công thông tin sách!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    MessageBox.Show("Xoá không thành công thông tin đầu sách!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
             Catch ex As Exception
-                MessageBox.Show("Xoá không thành công thông tin sách!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBox.Show("Xoá không thành công thông tin đầu sách!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Console.WriteLine(ex)
             End Try
         End If

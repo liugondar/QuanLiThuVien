@@ -47,7 +47,7 @@ Partial Class frmQuanLiSach
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.btnSearch = New MetroFramework.Controls.MetroButton()
-        Me.txtMaSachDangChon = New System.Windows.Forms.TextBox()
+        Me.txtMaDauSachDangChon = New System.Windows.Forms.TextBox()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.nudTriGiaDangChon = New System.Windows.Forms.NumericUpDown()
         Me.dpNgayNhapDangChon = New System.Windows.Forms.DateTimePicker()
@@ -324,13 +324,13 @@ Partial Class frmQuanLiSach
         Me.btnSearch.TabIndex = 96
         Me.btnSearch.Text = "Tìm kiếm"
         '
-        'txtMaSachDangChon
+        'txtMaDauSachDangChon
         '
-        Me.txtMaSachDangChon.Enabled = False
-        Me.txtMaSachDangChon.Location = New System.Drawing.Point(183, 26)
-        Me.txtMaSachDangChon.Name = "txtMaSachDangChon"
-        Me.txtMaSachDangChon.Size = New System.Drawing.Size(204, 20)
-        Me.txtMaSachDangChon.TabIndex = 100
+        Me.txtMaDauSachDangChon.Enabled = False
+        Me.txtMaDauSachDangChon.Location = New System.Drawing.Point(183, 26)
+        Me.txtMaDauSachDangChon.Name = "txtMaDauSachDangChon"
+        Me.txtMaDauSachDangChon.Size = New System.Drawing.Size(204, 20)
+        Me.txtMaDauSachDangChon.TabIndex = 100
         '
         'Label14
         '
@@ -537,7 +537,7 @@ Partial Class frmQuanLiSach
         Me.GroupBoxThongTinSachDangChon.Controls.Add(Me.Label21)
         Me.GroupBoxThongTinSachDangChon.Controls.Add(Me.Label20)
         Me.GroupBoxThongTinSachDangChon.Controls.Add(Me.Label19)
-        Me.GroupBoxThongTinSachDangChon.Controls.Add(Me.txtMaSachDangChon)
+        Me.GroupBoxThongTinSachDangChon.Controls.Add(Me.txtMaDauSachDangChon)
         Me.GroupBoxThongTinSachDangChon.Controls.Add(Me.Label18)
         Me.GroupBoxThongTinSachDangChon.Controls.Add(Me.Label17)
         Me.GroupBoxThongTinSachDangChon.Controls.Add(Me.nudTriGiaDangChon)
@@ -617,7 +617,7 @@ Partial Class frmQuanLiSach
     Friend WithEvents Label12 As Label
     Friend WithEvents Label13 As Label
     Friend WithEvents btnSearch As MetroFramework.Controls.MetroButton
-    Friend WithEvents txtMaSachDangChon As TextBox
+    Friend WithEvents txtMaDauSachDangChon As TextBox
     Friend WithEvents Label14 As Label
     Friend WithEvents nudTriGiaDangChon As NumericUpDown
     Friend WithEvents dpNgayNhapDangChon As DateTimePicker

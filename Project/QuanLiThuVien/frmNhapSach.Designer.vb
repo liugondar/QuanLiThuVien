@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmNhapSach
     Inherits MetroFramework.Forms.MetroForm
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmNhapSach
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.BookTitleTextBox = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -39,8 +39,11 @@ Partial Class frmNhapSach
         Me.CreateButton = New MetroFramework.Controls.MetroButton()
         Me.CreateAndCloseButton = New MetroFramework.Controls.MetroButton()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.txtMaSach = New System.Windows.Forms.TextBox()
+        Me.txtMaDauSach = New System.Windows.Forms.TextBox()
+        Me.nudSoLuong = New System.Windows.Forms.NumericUpDown()
+        Me.Label9 = New System.Windows.Forms.Label()
         CType(Me.PriceNumericUpDown, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudSoLuong, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'BookTitleTextBox
@@ -182,7 +185,7 @@ Partial Class frmNhapSach
         '
         'CreateButton
         '
-        Me.CreateButton.Location = New System.Drawing.Point(114, 358)
+        Me.CreateButton.Location = New System.Drawing.Point(26, 420)
         Me.CreateButton.Name = "CreateButton"
         Me.CreateButton.Size = New System.Drawing.Size(103, 23)
         Me.CreateButton.TabIndex = 97
@@ -190,7 +193,7 @@ Partial Class frmNhapSach
         '
         'CreateAndCloseButton
         '
-        Me.CreateAndCloseButton.Location = New System.Drawing.Point(241, 358)
+        Me.CreateAndCloseButton.Location = New System.Drawing.Point(351, 420)
         Me.CreateAndCloseButton.Name = "CreateAndCloseButton"
         Me.CreateAndCloseButton.Size = New System.Drawing.Size(103, 23)
         Me.CreateAndCloseButton.TabIndex = 98
@@ -203,25 +206,51 @@ Partial Class frmNhapSach
         Me.Label1.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Label1.Location = New System.Drawing.Point(74, 71)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(73, 20)
+        Me.Label1.Size = New System.Drawing.Size(104, 20)
         Me.Label1.TabIndex = 99
-        Me.Label1.Text = "Mã sách:"
+        Me.Label1.Text = "Mã đầu sách:"
         '
-        'txtMaSach
+        'txtMaDauSach
         '
-        Me.txtMaSach.Enabled = False
-        Me.txtMaSach.Location = New System.Drawing.Point(223, 71)
-        Me.txtMaSach.Name = "txtMaSach"
-        Me.txtMaSach.Size = New System.Drawing.Size(204, 20)
-        Me.txtMaSach.TabIndex = 0
+        Me.txtMaDauSach.Enabled = False
+        Me.txtMaDauSach.Location = New System.Drawing.Point(223, 71)
+        Me.txtMaDauSach.Name = "txtMaDauSach"
+        Me.txtMaDauSach.Size = New System.Drawing.Size(204, 20)
+        Me.txtMaDauSach.TabIndex = 0
+        '
+        'nudSoLuong
+        '
+        Me.nudSoLuong.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.nudSoLuong.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.nudSoLuong.Location = New System.Drawing.Point(223, 347)
+        Me.nudSoLuong.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
+        Me.nudSoLuong.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudSoLuong.Name = "nudSoLuong"
+        Me.nudSoLuong.Size = New System.Drawing.Size(87, 29)
+        Me.nudSoLuong.TabIndex = 100
+        Me.nudSoLuong.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.nudSoLuong.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Label9.Location = New System.Drawing.Point(75, 354)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(76, 20)
+        Me.Label9.TabIndex = 101
+        Me.Label9.Text = "Số lượng:"
         '
         'frmNhapSach
         '
         Me.AcceptButton = Me.CreateButton
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(495, 404)
-        Me.Controls.Add(Me.txtMaSach)
+        Me.ClientSize = New System.Drawing.Size(496, 481)
+        Me.Controls.Add(Me.Label9)
+        Me.Controls.Add(Me.nudSoLuong)
+        Me.Controls.Add(Me.txtMaDauSach)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.CreateAndCloseButton)
         Me.Controls.Add(Me.CreateButton)
@@ -242,6 +271,7 @@ Partial Class frmNhapSach
         Me.Name = "frmNhapSach"
         Me.Text = "Nhập sách"
         CType(Me.PriceNumericUpDown, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudSoLuong, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -263,5 +293,7 @@ Partial Class frmNhapSach
     Friend WithEvents CreateButton As MetroFramework.Controls.MetroButton
     Friend WithEvents CreateAndCloseButton As MetroFramework.Controls.MetroButton
     Friend WithEvents Label1 As Label
-    Friend WithEvents txtMaSach As TextBox
+    Friend WithEvents txtMaDauSach As TextBox
+    Friend WithEvents nudSoLuong As NumericUpDown
+    Friend WithEvents Label9 As Label
 End Class

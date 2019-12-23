@@ -129,21 +129,31 @@ IF OBJECT_ID('dbo.Sach', 'U') IS NOT NULL
 DROP TABLE dbo.Sach
 GO
 -- Create the table in the specified schema
-CREATE TABLE dbo.Sach
+
+
+CREATE TABLE dbo.DauSach
 (
-    MaSach NVARCHAR(20) NOT NUll PRIMARY KEY,
-    -- primary key column
-    MaTheLoaiSach Int not null,
+	MaDauSach varchar(50) NOT NULL PRIMARY KEY,
+	MaTheLoaiSach Int not null,
     MaTacGia Int not null,
     TenNhaXuatBan NVARCHAR(50) not null default N'TenNXB',
     TenSach NVARCHAR(50) not null default N'TenSach',
     NgayXuatBan date not null DEFAULT getdate(),
     NgayNhap date not null DEFAULT getdate(),
     TriGia INT not null DEFAULT 0,
-    TinhTrang INT not null DEFAULT 0,-- 0 la con, 1 la het 
     DeleteFlag NVARCHAR(1) not null default 'N',
-    CONSTRAINT FK_Sach_TacGia FOREIGN KEY(MaTacGia) REFERENCES TacGia(MaTacGia),
-    CONSTRAINT FK_Sach_TheLoaiSach FOREIGN KEY(MaTheLoaiSach) REFERENCES TheLoaiSach(MaTheLoaiSach),
+    CONSTRAINT FK_DauSach_TacGia FOREIGN KEY(MaTacGia) REFERENCES TacGia(MaTacGia),
+    CONSTRAINT FK_DauSach_TheLoaiSach FOREIGN KEY(MaTheLoaiSach) REFERENCES TheLoaiSach(MaTheLoaiSach),
+);
+GO
+CREATE TABLE dbo.Sach
+(
+    MaSach NVARCHAR(20) NOT NUll PRIMARY KEY,
+    -- primary key column
+	MaDauSach varchar(50) NOT NULL,
+	 TinhTrang INT not null DEFAULT 0,-- 0 la con, 1 la het 
+	 CONSTRAINT FK_Sach_DauSach FOREIGN KEY(MaDauSach) REFERENCES DauSach(MaDauSach),
+
 );
 GO
 -- Create a new table called 'PhieuMuonSach' in schema 'SchemaName'
@@ -388,7 +398,7 @@ go
 
 --create producer insert sach
 create PROC USP_NhapSach
-    @MaSach NVARCHAR(20),
+    @MaDauSach NVARCHAR(20),
     @TenSach NVARCHAR(50),
     @MaTheLoaiSach int,
     @MaTacGia int,
@@ -398,9 +408,9 @@ create PROC USP_NhapSach
     @TriGia INT
 AS
 BEGIN
-    insert into dbo.Sach
-        (MaSach,TenSach,MaTheLoaiSach,MaTacGia,TenNhaXuatBan,NgayXuatBan,NgayNhap,TriGia)
-    VALUES(@MaSach, @TenSach, @MaTheLoaiSach, @MaTacGia, @TenNhaXuatBan, @NgayXuatBan, @NgayNhap, @TriGia)
+    insert into dbo.DauSach
+        (MaDauSach,TenSach,MaTheLoaiSach,MaTacGia,TenNhaXuatBan,NgayXuatBan,NgayNhap,TriGia)
+    VALUES(@MaDauSach, @TenSach, @MaTheLoaiSach, @MaTacGia, @TenNhaXuatBan, @NgayXuatBan, @NgayNhap, @TriGia)
 END
 GO
 

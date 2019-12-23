@@ -76,6 +76,7 @@
     <Compile Include="ChiTietBaoCaoSachTraTreDAO.vb" />
     <Compile Include="ChiTietBaoCaoTinhHinhMuonSachTheoTheLoaiDAO.vb" />
     <Compile Include="ChiTietPhieuMuonSachDAO.vb" />
+    <Compile Include="DauSachDAL.vb" />
     <Compile Include="DocGiaDAO.vb" />
     <Compile Include="LoaiDocGiaDAO.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
