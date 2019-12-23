@@ -75,6 +75,20 @@ Public Class DocGiaDAO
         Return result
     End Function
 
+    Public Function SelectAllDocGia(ByRef listDocGia As List(Of DocGia)) As Result
+        Dim query = String.Empty
+        query &= "Select * from TheDocGia where DeleteFlag='N'"
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
+        If result.FlagResult = True Then
+            For Each row In dataTable.Rows
+                Dim docgia = New DocGia(row)
+                listDocGia.Add(docgia)
+            Next
+        End If
+        Return result
+    End Function
+
     Public Function GetReaderNameByID(ByRef tenDocGia As String, maThe As String) As Result
         Dim query As String = String.Empty
         query = String.Format("select TenDocGia from TheDocGia where MaTheDocGia={0} and DeleteFlag='N'", maThe)

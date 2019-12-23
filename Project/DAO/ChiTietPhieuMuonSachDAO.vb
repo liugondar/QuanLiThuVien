@@ -73,6 +73,20 @@ ORDER by [MaChiTietPhieuMuonSach] desc")
         Return result
     End Function
 
+    Public Function SelectAll(ByRef listctpm As List(Of ChiTietPhieuMuonSach)) As Result
+        Dim query = String.Empty
+        query &= "Select * from ChiTietPhieuMuonSach where DeleteFlag='N'"
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
+        If result.FlagResult = True Then
+            For Each row In dataTable.Rows
+                Dim ptms = New ChiTietPhieuMuonSach(row)
+                listctpm.Add(ptms)
+            Next
+        End If
+        Return result
+    End Function
+
 #End Region
 
 End Class
