@@ -111,7 +111,7 @@ Public Class PhieuMuonSachBus
 
         Dim sachBus = New SachBus
         For Each chiTietPhieuMuonSach In listChiTietPhieuMuonSach
-            sachBus.SetStatusSachToAvailableByID(chiTietPhieuMuonSach.MaSach)
+            'sachBus.SetStatusSachToAvailableByID(chiTietPhieuMuonSach.MaSach)
         Next
         Return checkOutResult
     End Function

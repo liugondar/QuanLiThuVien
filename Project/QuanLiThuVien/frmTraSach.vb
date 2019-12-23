@@ -88,7 +88,7 @@ Public Class frmTraSach
 
         Dim listSachDaMuon = New List(Of Sach)
         For Each chiTietPhieuMuonSach In _listChiTietPhieuMuonSachDaMuon
-            _sachBus.SelectAllByMaSach(listSachDaMuon, chiTietPhieuMuonSach.MaSach)
+            '_sachBus.SelectAllByMaSach(listSachDaMuon, chiTietPhieuMuonSach.MaSach)
         Next
 
         Dim listCustomBookInfoDisplay = New List(Of CustomBookInfoDisplay)
@@ -99,8 +99,8 @@ Public Class frmTraSach
 
             Dim customBook = New CustomBookInfoDisplay()
             customBook.MaSach = sach.MaSach
-            customBook.TenSach = sach.TenSach
-            _tacGiaBus.GetTenTacGiaByMaTacGia(customBook.TacGia, sach.MaTacGia)
+            'customBook.TenSach = sach.TenSach
+            '_tacGiaBus.GetTenTacGiaByMaTacGia(customBook.TacGia, sach.MaTacGia)
             customBook.NgayHetHan = PhieuMuonSach.HanTra
 
             Dim dateNow As Date = Date.Now()

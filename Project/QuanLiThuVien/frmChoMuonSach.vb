@@ -51,7 +51,7 @@ Public Class frmChoMuonSach
 
         If _tacGiaBus.SelectAll(_listTacGia).FlagResult = False Then Return
         If _theLoaiSachBus.SelectAll(_listTheLoaiSach).FlagResult = False Then Return
-        If _sachBus.SelectAll(_listSach).FlagResult = False Then Return
+        'If _sachBus.SelectAll(_listSach).FlagResult = False Then Return
 
     End Sub
 
@@ -263,7 +263,8 @@ Public Class frmChoMuonSach
         Next
 
         For Each chiTietPhieuMuonSach In listChiTietPhieuMuonSachDaMuon
-            _sachBus.SelectAllByMaSach(listSachDaMuon, chiTietPhieuMuonSach.MaSach)
+            ' TODO: fix sach
+            '_sachBus.SelectAllByMaSach(listSachDaMuon, chiTietPhieuMuonSach.MaSach)
         Next
 
         For Each sach In listSachDaMuon
@@ -275,8 +276,8 @@ Public Class frmChoMuonSach
 
             Dim customBook = New CustomBookInfoDisplay()
             customBook.MaSach = sach.MaSach
-            customBook.TenSach = sach.TenSach
-            _tacGiaBus.GetTenTacGiaByMaTacGia(customBook.TacGia, sach.MaTacGia)
+            'customBook.TenSach = sach.TenSach
+            '_tacGiaBus.GetTenTacGiaByMaTacGia(customBook.TacGia, sach.MaTacGia)
             customBook.NgayHetHan = phieuMuonSach.HanTra
 
             Dim dateNow As Date = Date.Now()
@@ -305,6 +306,8 @@ Public Class frmChoMuonSach
             LoadInfoBook(maSach)
 
         Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("errror" & ex.ToString)
+
         End Try
     End Sub
     Private Sub LoadInfoBook(maSach As String)
@@ -313,12 +316,21 @@ Public Class frmChoMuonSach
         Dim theLoai = String.Empty
         Dim tinhTrangSach = 0
         Dim result As Result
-
+        txtTenSach.Text = String.Empty
+        txtTacGia.Text = String.Empty
+        txtTheLoai.Text = String.Empty
         result = _sachBus.SelectByType(maSach, tenSach, theLoai, tacGia, tinhTrangSach)
 
-        txtTenSach.Text = tenSach
-        txtTacGia.Text = tacGia
-        txtTheLoai.Text = theLoai
+        If (result.FlagResult) Then
+            txtTenSach.Text = tenSach
+            txtTacGia.Text = tacGia
+            txtTheLoai.Text = theLoai
+        Else
+            txtTenSach.Text = String.Empty
+            txtTacGia.Text = String.Empty
+            txtTheLoai.Text = String.Empty
+        End If
+
 
         txtTinhTrangSach.Text = If(tinhTrangSach = 0, "Còn", "Đã hết sách")
         txtTinhTrangSach.BackColor = txtTinhTrangSach.BackColor

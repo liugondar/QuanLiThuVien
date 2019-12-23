@@ -21,6 +21,7 @@ GO
 USE QuanLiThuVien
 Go
 
+
 -- Create a new table called 'Account' in schema 'SchemaName'
 -- Drop the table if it already exists
 -- Create the table in the specified schema
@@ -413,6 +414,22 @@ BEGIN
     VALUES(@MaDauSach, @TenSach, @MaTheLoaiSach, @MaTacGia, @TenNhaXuatBan, @NgayXuatBan, @NgayNhap, @TriGia)
 END
 GO
+
+
+--create producer insert sach
+create PROC USP_NhapCuonSach
+    @MaSach NVARCHAR(50),
+    @MaDauSach NVARCHAR(20),
+    @TinhTrang INT
+AS
+BEGIN
+    insert into dbo.Sach
+        (MaSach, MaDauSach, TinhTrang)
+    VALUES(@MaSach, @MaDauSach, @TinhTrang)
+END
+GO
+USE QuanLiThuVien
+Go
 
 --create procducer insert baocaotinhhinhmuonsachtheotheloai
 create PROC USP_NhapBaoCaoTinhHinhMuonSachTheoTheLoai

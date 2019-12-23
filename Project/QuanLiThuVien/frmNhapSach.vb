@@ -5,7 +5,8 @@ Imports Utility
 Public Class frmNhapSach
 
 #Region "-  Fields   -"
-    Dim cuonsachBus As New DauSachBus
+    Dim dausachBus As New DauSachBus
+    Dim cuonSachBus As New SachBus
     Private _tacGiaBus As TacGiaBUS
     Private _theLoaiSachBus As TheLoaiSachBUS
     Private _dausachBus As DauSachBus
@@ -22,6 +23,7 @@ Public Class frmNhapSach
         _dausachBus = New DauSachBus()
         _listTacGia = New List(Of TacGia)
         _listTheLoaiSach = New List(Of TheLoaiSach)
+        cuonSachBus = New SachBus()
         LoadCategoryComboboxData()
         LoadAuthorComboBoxData()
 
@@ -86,11 +88,33 @@ Public Class frmNhapSach
         dausach.NgayNhap = DateInputDateTimePicker.Value
         dausach.TriGia = PriceNumericUpDown.Value
 
+        Dim soLuongSach = nudSoLuong.Value
+
+
         result = _dausachBus.InsertOne(dausach)
         If result.FlagResult = False Then
             MessageBox.Show(result.ApplicationMessage)
         Else
+
+            For i As Integer = 1 To nudSoLuong.Value
+                Dim cuonsach As New Sach
+                cuonsach.MaDauSach = dausach.MaDauSach
+                cuonSachBus.InsertOne(cuonsach)
+                'cuonsachBus.buildMaCuonSach(macuonsach)
+
+                'cuonsach.MaCuonSach = macuonsach
+                'cuonsach.TinhTrang = txbTinhTrang.Text
+                'cuonsach.DauSach = txtMaSach.Text
+                'cuonsach.SoKe = nudViTriKe.Value
+
+                'result = cuonsachBus.insert(cuonsach)
+                'If result.FlagResult = False Then
+                '    Dim mes = "Thêm cuốn sách thất bại: " + macuonsach + "\n" + result.SystemMessage
+                '    MessageBox.Show(mes, "Lỗi", MessageBoxButtons.OK)
+                'End If
+            Next
             MessageBox.Show("Đã nhập thành công đầu sách mới!")
+
         End If
 
         'For i As Integer = 1 To nudSoLuong.Value

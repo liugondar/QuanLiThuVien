@@ -20,13 +20,13 @@ Public Class ChiTietPhieuMuonSachBus
         Dim insertResult = _chiTietPhieuMuonSachDAO.InsertOne(chiTietPhieuMuonSach)
         If insertResult.FlagResult = False Then Return insertResult
 
-        Dim updateSachInfoResult = _sachBus.SetStatusSachToUnavailableByID(chiTietPhieuMuonSach.MaSach)
-        If updateSachInfoResult.FlagResult = False Then
-            Dim lastID = String.Empty
-            _chiTietPhieuMuonSachDAO.GetTheLastID(lastID)
-            DeleteById(lastID)
-            Return updateSachInfoResult
-        End If
+        'Dim updateSachInfoResult = _sachBus.SetStatusSachToUnavailableByID(chiTietPhieuMuonSach.MaSach)
+        'If updateSachInfoResult.FlagResult = False Then
+        '    Dim lastID = String.Empty
+        '    _chiTietPhieuMuonSachDAO.GetTheLastID(lastID)
+        '    DeleteById(lastID)
+        '    'Return updateSachInfoResult
+        'End If
         Return New Result()
     End Function
 #End Region
