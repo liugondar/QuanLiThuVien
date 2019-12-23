@@ -10,7 +10,7 @@ BEGIN
     DECLARE @SQL varchar(max)
     SELECT @SQL = COALESCE(@SQL,'') + 'Kill ' + Convert(varchar, SPId) + ';'
     FROM MASTER..SysProcesses
-    WHERE DBId = DB_ID(N'QLHS') AND SPId <> @@SPId
+    WHERE DBId = DB_ID(N'[QuanLiThuVien]') AND SPId <> @@SPId
     EXEC(@SQL)
     DROP DATABASE [QuanLiThuVien]
 END
@@ -394,6 +394,7 @@ BEGIN
         (MaPhieuMuonSach,MaSach)
     Values
         (@MaPhieuMuonSach, @MaSach)
+    update PhieuMuonSach set TongSoSachMuon=  (  select pms.TongSoSachMuon from PhieuMuonSach pms where pms.MaPhieuMuonSach= @MaPhieuMuonSach) + 1 
 END
 go
 
@@ -415,7 +416,7 @@ BEGIN
 END
 GO
 
-
+-- sach
 --create producer insert sach
 create PROC USP_NhapCuonSach
     @MaSach NVARCHAR(50),
@@ -431,6 +432,19 @@ GO
 USE QuanLiThuVien
 Go
 
+-- create proc get info sach for rent
+create PROC USP_GetInfoBookForRent
+	@MaDauSach NVARCHAR(50)
+as
+begin
+	select cs.TinhTrang, tg.TenTacGia, ds.TenSach, tls.TenTheLoaiSach, ds.TenSach
+	from Sach cs,DauSach ds, TheLoaiSach tls, TacGia tg
+	where cs.MaDauSach = ds.MaDauSach
+	and cs.MaDauSach= @MaDauSach
+	and tls.MaTheLoaiSach= ds.MaTheLoaiSach 
+	and tg.MaTacGia = ds.MaTacGia
+end
+go
 --create procducer insert baocaotinhhinhmuonsachtheotheloai
 create PROC USP_NhapBaoCaoTinhHinhMuonSachTheoTheLoai
     @ThoiGian date

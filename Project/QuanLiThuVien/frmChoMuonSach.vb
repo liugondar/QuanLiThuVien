@@ -17,6 +17,7 @@ Public Class frmChoMuonSach
     Private _listSach As List(Of Sach)
     Private _listTacGia As List(Of TacGia)
     Private _listTheLoaiSach As List(Of TheLoaiSach)
+    Private _listIdCuonSachAvailable As List(Of Integer)
 
 
     Private AddNewRowButton As Button
@@ -62,10 +63,16 @@ Public Class frmChoMuonSach
         dgvDanhSachCanMuon.AutoGenerateColumns = False
         dgvDanhSachCanMuon.AllowUserToAddRows = False
         Dim clMa = New DataGridViewTextBoxColumn()
-        clMa.Name = "MaSach"
-        clMa.HeaderText = "Mã Sách"
-        clMa.DataPropertyName = "MaSach"
+        clMa.Name = "MaDauSach"
+        clMa.HeaderText = "Mã Đầu Sách"
+        clMa.DataPropertyName = "MaDauSach"
         dgvDanhSachCanMuon.Columns.Add(clMa)
+
+        Dim clMaCuonSAch = New DataGridViewTextBoxColumn()
+        clMaCuonSAch.Name = "MaCuonSach"
+        clMaCuonSAch.HeaderText = "Mã Cuốn Sách"
+        clMaCuonSAch.DataPropertyName = "MaCuonSach"
+        dgvDanhSachCanMuon.Columns.Add(clMaCuonSAch)
 
         Dim clTenSach = New DataGridViewTextBoxColumn()
         clTenSach.Name = "TenSach"
@@ -314,12 +321,13 @@ Public Class frmChoMuonSach
         Dim tenSach = String.Empty
         Dim tacGia = String.Empty
         Dim theLoai = String.Empty
-        Dim tinhTrangSach = 0
+        Dim soluongSach = 0
         Dim result As Result
         txtTenSach.Text = String.Empty
         txtTacGia.Text = String.Empty
         txtTheLoai.Text = String.Empty
-        result = _sachBus.SelectByType(maSach, tenSach, theLoai, tacGia, tinhTrangSach)
+        _listIdCuonSachAvailable = New List(Of Integer)
+        result = _sachBus.SelectByType(maSach, tenSach, theLoai, tacGia, soluongSach, _listIdCuonSachAvailable)
 
         If (result.FlagResult) Then
             txtTenSach.Text = tenSach
@@ -332,9 +340,11 @@ Public Class frmChoMuonSach
         End If
 
 
-        txtTinhTrangSach.Text = If(tinhTrangSach = 0, "Còn", "Đã hết sách")
-        txtTinhTrangSach.BackColor = txtTinhTrangSach.BackColor
-        txtTinhTrangSach.ForeColor = If(tinhTrangSach = 0, Color.Black, Color.Red)
+        txtSlSachCon.Text = If(soluongSach = 0, "Đã hết Sách", soluongSach)
+        txtSlSachCon.BackColor = txtSlSachCon.BackColor
+        txtSlSachCon.ForeColor = If(soluongSach = 0, Color.Red, Color.Black)
+
+        nudSoLuong.Maximum = soluongSach
 
     End Sub
 #End Region
@@ -349,7 +359,7 @@ Public Class frmChoMuonSach
 
         Dim isUnvalidBookInfo As Boolean = String.IsNullOrWhiteSpace(txtMaSach.Text) Or
             String.IsNullOrWhiteSpace(txtTenSach.Text) Or
-            String.IsNullOrWhiteSpace(txtTinhTrangSach.Text) Or
+            String.IsNullOrWhiteSpace(txtSlSachCon.Text) Or
             String.IsNullOrWhiteSpace(txtTheLoai.Text) Or
             String.IsNullOrWhiteSpace(txtTacGia.Text)
         If isUnvalidBookInfo Then
@@ -363,7 +373,7 @@ Public Class frmChoMuonSach
         End If
 
 
-        If (txtTinhTrangSach.Text = "Đã hết sách") Then
+        If (txtSlSachCon.Text = "Đã hết sách") Then
             MessageBox.Show("Sách đã cho mượn", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
@@ -377,31 +387,28 @@ Public Class frmChoMuonSach
         txtMaSach.Text = ""
         txtTenSach.Text = ""
         txtTheLoai.Text = ""
-        txtTinhTrangSach.Text = ""
+        txtSlSachCon.Text = ""
     End Sub
 
     Private Sub ThemInfoSachCanMuonVaoDataGridView()
-        Dim rnum As Integer = dgvDanhSachCanMuon.Rows.Add()
+        For i = 1 To nudSoLuong.Value
+            If _listIdCuonSachAvailable.Count > 0 Then
+                addOneRowToGrid(_listIdCuonSachAvailable(0))
+                _listIdCuonSachAvailable.RemoveAt(0)
+            End If
+        Next
 
-        dgvDanhSachCanMuon.Rows.Item(rnum).Cells("MaSach").Value = txtMaSach.Text
-        dgvDanhSachCanMuon.Rows.Item(rnum).Cells("TenSach").Value = txtTenSach.Text
-        dgvDanhSachCanMuon.Rows.Item(rnum).Cells("TheLoai").Value = txtTheLoai.Text
-        dgvDanhSachCanMuon.Rows.Item(rnum).Cells("TacGia").Value = txtTacGia.Text
+    End Sub
 
-        Dim numberOfRows = dgvDanhSachCanMuon.Rows.Count - 1 'subtract the last row which is an editing row
-        Dim i As Integer = 0
+    Private Sub addOneRowToGrid(id As Integer)
+        System.Console.WriteLine("Log text")
+        Dim maDauSach = txtMaSach.Text
+        Dim maCuonSach = id
+        Dim tenSach = txtTenSach.Text
+        Dim theLoai = txtTheLoai.Text
+        Dim tacGia = txtTacGia.Text
 
-        While i < numberOfRows
-
-            For j As Integer = (numberOfRows) To (i + 1) Step -1
-                If dgvDanhSachCanMuon.Rows(i).Cells("MaSach").Value.ToString() = dgvDanhSachCanMuon.Rows(j).Cells("MaSach").Value.ToString() Then
-                    dgvDanhSachCanMuon.Rows.Remove(dgvDanhSachCanMuon.Rows(j))
-                    numberOfRows -= 1
-                End If
-            Next
-            i += 1
-        End While
-
+        dgvDanhSachCanMuon.Rows.Add(New String() {maDauSach, maCuonSach, tenSach, theLoai, tacGia})
     End Sub
 
     Private Sub btnXoa_Click(sender As Object, e As EventArgs) Handles btnXoa.Click

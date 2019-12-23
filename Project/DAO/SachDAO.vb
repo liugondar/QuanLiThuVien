@@ -49,17 +49,10 @@ Public Class SachDAO
         Return dataTable.Rows.Count
     End Function
 
-    Public Function SelectByType(maSach As String, ByRef tenSach As String, ByRef theLoai As String, ByRef tenTacGia As String, ByRef tinhTrangSach As Integer) As Result
-        Dim query = String.Format("
-   select cs.TinhTrang, tg.TenTacGia, ds.TenSach, tls.TenTheLoaiSach
-from Sach cs,DauSach ds, TheLoaiSach tls, TacGia tg
-where cs.MaDauSach = ds.MaDauSach
-and cs.MaDauSach= '{0}'
-and tls.MaTheLoaiSach= ds.MaTheLoaiSach 
-and tg.MaTacGia = ds.MaTacGia", maSach)
+    Public Function SelectByType(maSach As String, ByRef tenSach As String, ByRef theLoai As String, ByRef tenTacGia As String, ByRef soluongSachCon As Integer, ByRef listIdCuonSach As List(Of Integer)) As Result
+        Dim query = String.Format("exec USP_GetInfoBookForRent @MaDauSach=N'{0}'", maSach)
         Dim dataTable = New DataTable()
         Dim result = _dataProvider.ExecuteQuery(query, dataTable)
-        Dim row = dataTable.Rows(0)
         If (dataTable.Rows.Count <= 0) Then
             tenSach = String.Empty
             theLoai = String.Empty
@@ -67,12 +60,19 @@ and tg.MaTacGia = ds.MaTacGia", maSach)
             result.FlagResult = False
 
             Return result
-        End If
+        Else
+            For Each row In dataTable.Rows
+                If (Integer.Parse(row("TinhTrang")) = 0) Then
+                    Dim id = Integer.Parse(row("MaSach").ToString())
+                    tenSach = row("TenSach").ToString()
+                    theLoai = row("TenTheLoaiSach").ToString()
+                    tenTacGia = row("TenTacGia").ToString()
+                    soluongSachCon += 1
+                    listIdCuonSach.Add(id)
+                End If
+            Next
 
-        tenSach = row("TenSach").ToString()
-        theLoai = row("TenTheLoaiSach").ToString()
-        tenTacGia = row("TenTacGia").ToString()
-        Integer.TryParse(row("TinhTrang").ToString(), tinhTrangSach)
+        End If
 
         Return result
     End Function
