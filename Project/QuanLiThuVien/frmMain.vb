@@ -1,6 +1,13 @@
 ﻿Imports DTO
-
+Imports BUS
+Imports Utility
+Imports System.Diagnostics
 Public Class frmMain
+
+    Dim ctpmBus As ChiTietPhieuMuonSach
+    Dim sachBus As DauSachBus
+    Dim ngBus As DocGiaBus
+
     Private loginAccount As Account
     Public Sub New(loginAccount As Account)
         InitializeComponent()
@@ -16,6 +23,53 @@ Public Class frmMain
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.WindowState = WindowState.Maximized
+
+        Dim result As Result
+        ctpmBus = New ChiTietPhieuMuonSach()
+        sachBus = New DauSachBus()
+        ngBus = New DocGiaBus()
+
+        ' Hien thi so dau sach
+        Dim listSach As New List(Of DauSachDTO)
+        result = sachBus.selectALL(listSach)
+
+        If (result.FlagResult = False) Then
+            MessageBox.Show("Lấy danh sách đầu sách thất bại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            System.Console.WriteLine(result.SystemMessage)
+            Return
+        End If
+
+        lbSoDauSach.Text = listSach.Count.ToString()
+
+        ' Hien thi so doc gia
+        Dim listDocGia As New List(Of DocGia)
+        result = ngBus.selectAllDocGia(listDocGia)
+
+        If (result.FlagResult = False) Then
+            MessageBox.Show("Lấy danh sách độc giả thất bại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            System.Console.WriteLine(result.SystemMessage)
+            Return
+        End If
+
+        lbSoDocGia.Text = listDocGia.Count.ToString()
+
+        '' Hien thi so luot muon
+        'Dim listctpm As New List(Of ChiTietPhieuMuonSach)
+        'result = ctpmBus.
+
+        'If (result.FlagResult = False) Then
+        '    MessageBox.Show("Lấy danh sách phiếu mượn thất bại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        '    System.Console.WriteLine(result.SystemMessage)
+        '    Return
+        'End If
+
+        'lbSoLuotMuon.Text = listctpm.Count.ToString()
+
+
+
+
+
+
     End Sub
 
     Private Sub QuảnLíĐộcGiảToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles QuảnLíĐộcGiảToolStripMenuItem.Click

@@ -48,13 +48,19 @@ Partial Class frmMain
         Me.TìnhHìnhTrảSáchTrễToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.QuiĐịnhToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.QuảnLíQuiĐịnhToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AboutMeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ThôngTinTàiKhoảnToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ThôngTinCáNhânToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AdminToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ThêmTàiKhoảnToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.QuảnLíTàiKhoảnToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AboutMeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.lbSoDauSach = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.lbSoDocGia = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.lbSoLuotMuon = New System.Windows.Forms.Label()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -64,7 +70,7 @@ Partial Class frmMain
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ThẻĐộcGiảToolStripMenuItem, Me.SáchToolStripMenuItem, Me.BáoCáoToolStripMenuItem, Me.QuiĐịnhToolStripMenuItem, Me.ThôngTinTàiKhoảnToolStripMenuItem, Me.AdminToolStripMenuItem, Me.AboutMeToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(909, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(726, 24)
         Me.MenuStrip1.TabIndex = 2
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -85,7 +91,7 @@ Partial Class frmMain
         '
         Me.ThẻĐộcGiảToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LậpThẻĐộcGiảToolStripMenuItem, Me.QuảnLíĐộcGiảToolStripMenuItem, Me.ToolStripSeparator2, Me.ThêmLoạiĐộcGiảToolStripMenuItem, Me.QuảnLíLoạiĐộcGảiToolStripMenuItem})
         Me.ThẻĐộcGiảToolStripMenuItem.Name = "ThẻĐộcGiảToolStripMenuItem"
-        Me.ThẻĐộcGiảToolStripMenuItem.Size = New System.Drawing.Size(81, 20)
+        Me.ThẻĐộcGiảToolStripMenuItem.Size = New System.Drawing.Size(80, 20)
         Me.ThẻĐộcGiảToolStripMenuItem.Text = "Thẻ độc giả"
         '
         'LậpThẻĐộcGiảToolStripMenuItem
@@ -197,13 +203,13 @@ Partial Class frmMain
         'TìnhHìnhMượnSáchTheoThểLoạiToolStripMenuItem
         '
         Me.TìnhHìnhMượnSáchTheoThểLoạiToolStripMenuItem.Name = "TìnhHìnhMượnSáchTheoThểLoạiToolStripMenuItem"
-        Me.TìnhHìnhMượnSáchTheoThểLoạiToolStripMenuItem.Size = New System.Drawing.Size(256, 22)
+        Me.TìnhHìnhMượnSáchTheoThểLoạiToolStripMenuItem.Size = New System.Drawing.Size(255, 22)
         Me.TìnhHìnhMượnSáchTheoThểLoạiToolStripMenuItem.Text = "Tình hình mượn sách theo thể loại"
         '
         'TìnhHìnhTrảSáchTrễToolStripMenuItem
         '
         Me.TìnhHìnhTrảSáchTrễToolStripMenuItem.Name = "TìnhHìnhTrảSáchTrễToolStripMenuItem"
-        Me.TìnhHìnhTrảSáchTrễToolStripMenuItem.Size = New System.Drawing.Size(256, 22)
+        Me.TìnhHìnhTrảSáchTrễToolStripMenuItem.Size = New System.Drawing.Size(255, 22)
         Me.TìnhHìnhTrảSáchTrễToolStripMenuItem.Text = "Tình hình trả sách trễ"
         '
         'QuiĐịnhToolStripMenuItem
@@ -219,30 +225,17 @@ Partial Class frmMain
         Me.QuảnLíQuiĐịnhToolStripMenuItem.Size = New System.Drawing.Size(159, 22)
         Me.QuảnLíQuiĐịnhToolStripMenuItem.Text = "Quản lí qui định"
         '
-        'AboutMeToolStripMenuItem
-        '
-        Me.AboutMeToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MeToolStripMenuItem})
-        Me.AboutMeToolStripMenuItem.Name = "AboutMeToolStripMenuItem"
-        Me.AboutMeToolStripMenuItem.Size = New System.Drawing.Size(52, 20)
-        Me.AboutMeToolStripMenuItem.Text = "About"
-        '
-        'MeToolStripMenuItem
-        '
-        Me.MeToolStripMenuItem.Name = "MeToolStripMenuItem"
-        Me.MeToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.MeToolStripMenuItem.Text = "Me"
-        '
         'ThôngTinTàiKhoảnToolStripMenuItem
         '
         Me.ThôngTinTàiKhoảnToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ThôngTinCáNhânToolStripMenuItem})
         Me.ThôngTinTàiKhoảnToolStripMenuItem.Name = "ThôngTinTàiKhoảnToolStripMenuItem"
-        Me.ThôngTinTàiKhoảnToolStripMenuItem.Size = New System.Drawing.Size(123, 20)
+        Me.ThôngTinTàiKhoảnToolStripMenuItem.Size = New System.Drawing.Size(122, 20)
         Me.ThôngTinTàiKhoảnToolStripMenuItem.Text = "Thông tin tài khoản"
         '
         'ThôngTinCáNhânToolStripMenuItem
         '
         Me.ThôngTinCáNhânToolStripMenuItem.Name = "ThôngTinCáNhânToolStripMenuItem"
-        Me.ThôngTinCáNhânToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.ThôngTinCáNhânToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
         Me.ThôngTinCáNhânToolStripMenuItem.Text = "Thông tin cá nhân"
         '
         'AdminToolStripMenuItem
@@ -255,14 +248,99 @@ Partial Class frmMain
         'ThêmTàiKhoảnToolStripMenuItem
         '
         Me.ThêmTàiKhoảnToolStripMenuItem.Name = "ThêmTàiKhoảnToolStripMenuItem"
-        Me.ThêmTàiKhoảnToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ThêmTàiKhoảnToolStripMenuItem.Size = New System.Drawing.Size(164, 22)
         Me.ThêmTàiKhoảnToolStripMenuItem.Text = "Thêm tài khoản"
         '
         'QuảnLíTàiKhoảnToolStripMenuItem
         '
         Me.QuảnLíTàiKhoảnToolStripMenuItem.Name = "QuảnLíTàiKhoảnToolStripMenuItem"
-        Me.QuảnLíTàiKhoảnToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.QuảnLíTàiKhoảnToolStripMenuItem.Size = New System.Drawing.Size(164, 22)
         Me.QuảnLíTàiKhoảnToolStripMenuItem.Text = "Quản lí tài khoản"
+        '
+        'AboutMeToolStripMenuItem
+        '
+        Me.AboutMeToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MeToolStripMenuItem})
+        Me.AboutMeToolStripMenuItem.Name = "AboutMeToolStripMenuItem"
+        Me.AboutMeToolStripMenuItem.Size = New System.Drawing.Size(52, 20)
+        Me.AboutMeToolStripMenuItem.Text = "About"
+        '
+        'MeToolStripMenuItem
+        '
+        Me.MeToolStripMenuItem.Name = "MeToolStripMenuItem"
+        Me.MeToolStripMenuItem.Size = New System.Drawing.Size(91, 22)
+        Me.MeToolStripMenuItem.Text = "Me"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.BackColor = System.Drawing.Color.Transparent
+        Me.Label2.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.White
+        Me.Label2.Location = New System.Drawing.Point(30, 112)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(73, 21)
+        Me.Label2.TabIndex = 5
+        Me.Label2.Text = "đầu sách"
+        '
+        'lbSoDauSach
+        '
+        Me.lbSoDauSach.AutoSize = True
+        Me.lbSoDauSach.BackColor = System.Drawing.Color.Transparent
+        Me.lbSoDauSach.Font = New System.Drawing.Font("Segoe UI", 39.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbSoDauSach.ForeColor = System.Drawing.Color.White
+        Me.lbSoDauSach.Location = New System.Drawing.Point(32, 41)
+        Me.lbSoDauSach.Name = "lbSoDauSach"
+        Me.lbSoDauSach.Size = New System.Drawing.Size(61, 71)
+        Me.lbSoDauSach.TabIndex = 4
+        Me.lbSoDauSach.Text = "X"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.BackColor = System.Drawing.Color.Transparent
+        Me.Label3.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.ForeColor = System.Drawing.Color.White
+        Me.Label3.Location = New System.Drawing.Point(201, 112)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(64, 21)
+        Me.Label3.TabIndex = 7
+        Me.Label3.Text = "độc giả" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        '
+        'lbSoDocGia
+        '
+        Me.lbSoDocGia.AutoSize = True
+        Me.lbSoDocGia.BackColor = System.Drawing.Color.Transparent
+        Me.lbSoDocGia.Font = New System.Drawing.Font("Segoe UI", 39.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbSoDocGia.ForeColor = System.Drawing.Color.White
+        Me.lbSoDocGia.Location = New System.Drawing.Point(204, 41)
+        Me.lbSoDocGia.Name = "lbSoDocGia"
+        Me.lbSoDocGia.Size = New System.Drawing.Size(61, 71)
+        Me.lbSoDocGia.TabIndex = 6
+        Me.lbSoDocGia.Text = "X"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.BackColor = System.Drawing.Color.Transparent
+        Me.Label5.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.ForeColor = System.Drawing.Color.White
+        Me.Label5.Location = New System.Drawing.Point(356, 112)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(87, 21)
+        Me.Label5.TabIndex = 9
+        Me.Label5.Text = "lượt mượn"
+        '
+        'lbSoLuotMuon
+        '
+        Me.lbSoLuotMuon.AutoSize = True
+        Me.lbSoLuotMuon.BackColor = System.Drawing.Color.Transparent
+        Me.lbSoLuotMuon.Font = New System.Drawing.Font("Segoe UI", 39.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbSoLuotMuon.ForeColor = System.Drawing.Color.White
+        Me.lbSoLuotMuon.Location = New System.Drawing.Point(367, 41)
+        Me.lbSoLuotMuon.Name = "lbSoLuotMuon"
+        Me.lbSoLuotMuon.Size = New System.Drawing.Size(61, 71)
+        Me.lbSoLuotMuon.TabIndex = 8
+        Me.lbSoLuotMuon.Text = "X"
         '
         'frmMain
         '
@@ -270,7 +348,13 @@ Partial Class frmMain
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Black
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(909, 394)
+        Me.ClientSize = New System.Drawing.Size(726, 387)
+        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.lbSoLuotMuon)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.lbSoDocGia)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.lbSoDauSach)
         Me.Controls.Add(Me.MenuStrip1)
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
@@ -318,4 +402,10 @@ Partial Class frmMain
     Friend WithEvents AdminToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ThêmTàiKhoảnToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents QuảnLíTàiKhoảnToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Label2 As Label
+    Friend WithEvents lbSoDauSach As Label
+    Friend WithEvents Label3 As Label
+    Friend WithEvents lbSoDocGia As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents lbSoLuotMuon As Label
 End Class

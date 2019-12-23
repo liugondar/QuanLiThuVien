@@ -51,7 +51,9 @@ Public Class DocGiaBus
         Return _docGiaDAO.InsertOne(docGia)
     End Function
 
-
+    Public Function selectALLDocGia(ByRef listDocGia As List(Of DocGia)) As Result
+        Return _docGiaDAO.selectALLDocGia(listDocGia)
+    End Function
     Public Function BuildMaDocGia(ByRef maTheDocGia As String) As Result
 
         maTheDocGia = String.Empty
