@@ -370,6 +370,14 @@ Public Class frmChoMuonSach
 
         'Add distince book info
         ThemInfoSachCanMuonVaoDataGridView()
+        resetSachInputFields()
+    End Sub
+
+    Private Sub resetSachInputFields()
+        txtMaSach.Text = ""
+        txtTenSach.Text = ""
+        txtTheLoai.Text = ""
+        txtTinhTrangSach.Text = ""
     End Sub
 
     Private Sub ThemInfoSachCanMuonVaoDataGridView()
