@@ -2,6 +2,7 @@
 -- Connect to the 'master' database to run this snippet
 USE master
 GO
+
 -- Create the new database if it does not exist already
 WHILE EXISTS(select NULL
 from sys.databases
@@ -56,7 +57,7 @@ GO
 
 -- Create a new table called 'DocGia' in schema 'dbo'
 -- Drop the table if it already exists
-IF OBJECT_ID('dbo.DocGia', 'U') IS NOT NULL
+IF OBJECT_ID('dbo.TheDocGia', 'U') IS NOT NULL
 DROP TABLE dbo.TheDocGia
 GO
 -- Create the table in the specified schema
@@ -126,12 +127,10 @@ GO
 
 -- Create a new tabcalled 'Sach' in schema 'dbo'
 -- Drop the table if it already exists
-IF OBJECT_ID('dbo.Sach', 'U') IS NOT NULL
-DROP TABLE dbo.Sach
+IF OBJECT_ID('dbo.DauSach', 'U') IS NOT NULL
+DROP TABLE dbo.DauSach
 GO
 -- Create the table in the specified schema
-
-
 CREATE TABLE dbo.DauSach
 (
 	MaDauSach varchar(50) NOT NULL PRIMARY KEY,
@@ -147,12 +146,20 @@ CREATE TABLE dbo.DauSach
     CONSTRAINT FK_DauSach_TheLoaiSach FOREIGN KEY(MaTheLoaiSach) REFERENCES TheLoaiSach(MaTheLoaiSach),
 );
 GO
+
+IF OBJECT_ID('dbo.Sach', 'U') IS NOT NULL
+DROP TABLE dbo.Sach
+GO
+-- Create the table in the specified schema
+
 CREATE TABLE dbo.Sach
 (
     MaSach NVARCHAR(20) NOT NUll PRIMARY KEY,
     -- primary key column
 	MaDauSach varchar(50) NOT NULL,
 	 TinhTrang INT not null DEFAULT 0,-- 0 la con, 1 la het 
+         DeleteFlag NVARCHAR(1) not null default 'N',
+
 	 CONSTRAINT FK_Sach_DauSach FOREIGN KEY(MaDauSach) REFERENCES DauSach(MaDauSach),
 
 );
@@ -368,36 +375,6 @@ BEGIN
 END
 go
 
--- create producer insert phieumuonsach
-create PROC USP_ThemPhieuMuonSach
-    @MaPhieuMuonSach int,
-    @MaTheDocGia int,
-    @NgayMuon date,
-    @HanTra date,
-    @TongSoSachMuon int
-as
-BEGIN
-    insert into dbo.PhieuMuonSach
-        (MaPhieuMuonSach,MaTheDocGia,NgayMuon,HanTra,TongSoSachMuon)
-    Values
-        (@MaPhieuMuonSach, @MaTheDocGia, @NgayMuon, @HanTra, @TongSoSachMuon)
-END
-go
-
---create procduer insert chitietphieumuonsach
-create PROC USP_ThemChiTietPhieuMuonSach
-    @MaPhieuMuonSach INT,
-    @MaSach Int
-as
-BEGIN
-    insert into dbo.ChiTietPhieuMuonSach
-        (MaPhieuMuonSach,MaSach)
-    Values
-        (@MaPhieuMuonSach, @MaSach)
-    update PhieuMuonSach set TongSoSachMuon=  (  select pms.TongSoSachMuon from PhieuMuonSach pms where pms.MaPhieuMuonSach= @MaPhieuMuonSach) + 1 
-END
-go
-
 --create producer insert sach
 create PROC USP_NhapSach
     @MaDauSach NVARCHAR(20),
@@ -431,46 +408,6 @@ END
 GO
 USE QuanLiThuVien
 Go
-
--- get sach procs
--- create proc get info sach for rent
-create PROC USP_GetInfoBookForRent
-	@MaDauSach NVARCHAR(50)
-as
-begin
-	select cs.TinhTrang, tg.TenTacGia, ds.TenSach, tls.TenTheLoaiSach, ds.TenSach
-	from Sach cs,DauSach ds, TheLoaiSach tls, TacGia tg
-	where cs.MaDauSach = ds.MaDauSach
-	and cs.MaDauSach= @MaDauSach
-	and tls.MaTheLoaiSach= ds.MaTheLoaiSach 
-	and tg.MaTacGia = ds.MaTacGia
-end
-go
-
--- Create a new stored procedure called 'USP_CountCuonSachBaseOnDauSachId' in schema 'dbo'
--- Drop the stored procedure if it already exists
-IF EXISTS (
-SELECT *
-    FROM INFORMATION_SCHEMA.ROUTINES
-WHERE SPECIFIC_SCHEMA = N'dbo'
-    AND SPECIFIC_NAME = N'USP_CountCuonSachBaseOnDauSachId'
-)
-DROP PROC dbo.USP_CountCuonSachBaseOnDauSachId
-GO
--- Create the stored procedure in the specified schema
-CREATE PROC dbo.USP_CountCuonSachBaseOnDauSachId
-    @MaDauSach NVARCHAR(20)
-AS
-    SELECT COUNT(s.MaSach) as soLuong
-    from Sach s, DauSach ds
-    WHERE s.MaDauSach = ds.MaDauSach
-    and s.MaDauSach = @MaDauSach
-    and s.TinhTrang= 0
-GO
--- example to execute the stored procedure we just created
-EXECUTE dbo.USP_CountCuonSachBaseOnDauSachId 1
-GO
-
 
 
 --create procducer insert baocaotinhhinhmuonsachtheotheloai

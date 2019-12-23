@@ -48,6 +48,18 @@ Public Class SachBus
     Public Function getAvailableQuanlity(maDauSach As String, ByRef slCon As Integer) As Result
         Return _sachDAO.getAvailableSachBaseOnDauSachId(maDauSach, slCon)
     End Function
+
+    Public Function SelectAllByMaSach(ByRef listSachDaMuon As List(Of Sach), maSach As String) As Result
+        Return _sachDAO.SelectAllByMaSach(listSachDaMuon, maSach)
+    End Function
+
+    Public Sub selectSachByType(maSach As String, ByRef tSach As String, ByRef tgia As String, ByRef maDauSach As String)
+        _sachDAO.selectSachByType(maSach, tSach, tgia, maDauSach)
+    End Sub
+
+    Friend Sub SetStatusSachToAvailableByID(maSach As String)
+        _sachDAO.SetStatusSachToAvailableByID(maSach)
+    End Sub
 End Class
 
 

@@ -111,13 +111,19 @@ Public Class PhieuMuonSachBus
 
         Dim sachBus = New SachBus
         For Each chiTietPhieuMuonSach In listChiTietPhieuMuonSach
-            'sachBus.SetStatusSachToAvailableByID(chiTietPhieuMuonSach.MaSach)
+            sachBus.SetStatusSachToAvailableByID(chiTietPhieuMuonSach.MaSach)
         Next
         Return checkOutResult
     End Function
+
+
+
 #End Region
 
 #Region "-   Retrieve data  -"
+    Public Sub SelectRentSachByDocGiaId(docGiaId As String, ByRef sachInfo As List(Of CustomBookInfoDisplay))
+        _phieuMuonSachDAO.SelectRentSachByDocGiaId(docGiaId, sachInfo)
+    End Sub
     Public Function SelectAllByMaTheDocGia(ByRef listPhieuMuonSach As List(Of PhieuMuonSach), maTheDocGia As String) As Result
         Return _phieuMuonSachDAO.SelectAllByMaTheDocGia(listPhieuMuonSach, maTheDocGia)
     End Function

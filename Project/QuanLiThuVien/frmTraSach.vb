@@ -98,7 +98,7 @@ Public Class frmTraSach
                 Select(Function(s) s.MaPhieuMuonSach).First()
 
             Dim customBook = New CustomBookInfoDisplay()
-            customBook.MaSach = sach.MaSach
+            customBook.MaDauSach = sach.MaSach
             'customBook.TenSach = sach.TenSach
             '_tacGiaBus.GetTenTacGiaByMaTacGia(customBook.TacGia, sach.MaTacGia)
             customBook.NgayHetHan = PhieuMuonSach.HanTra

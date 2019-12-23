@@ -75,6 +75,17 @@ where MaSach={0}", id)
         Return rs
     End Function
 
+    Public Sub selectSachByType(maSach As String, ByRef tSach As String, ByRef tgia As String, ByRef maDs As String)
+        Dim query = "EXECUTE dbo.USP_SelectTacGiaAndTenSachByCuonSachId " + maSach
+        Dim dtb = New DataTable()
+        Dim rs = _dataProvider.ExecuteQuery(query, dtb)
+        For Each row In dtb.Rows
+            tSach = (row("TenSach"))
+            tgia = (row("TenTacGia"))
+            maDs = row("MaDauSach")
+        Next
+    End Sub
+
     Public Function SelectAll(ByRef listSach As List(Of Sach)) As Result
         Dim query = String.Empty
         query &= "Select * from Sach where DeleteFlag='N'"
