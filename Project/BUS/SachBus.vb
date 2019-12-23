@@ -22,6 +22,10 @@ Public Class SachBus
         Return _sachDAO.InsertOne(cuonsach)
     End Function
 
+    Friend Function SetStatusSachToUnavailableByID(maSach As String) As Object
+        Return _sachDAO.SetStatusSachToUnavailableByID(maSach)
+    End Function
+
     Private Function GetNextId(ByRef maCuonSach) As Result
         Dim result = _sachDAO.GetTheLastID(maCuonSach)
         maCuonSach = If(String.IsNullOrWhiteSpace(maCuonSach), 1, maCuonSach + 1)

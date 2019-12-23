@@ -452,7 +452,7 @@ Public Class frmChoMuonSach
         For i As Integer = 0 To numberOfRows
             Dim chiTietPhieuMuonSach = New ChiTietPhieuMuonSach()
             chiTietPhieuMuonSach.MaPhieuMuonSach = maPhieuMuonSachHienTai
-            chiTietPhieuMuonSach.MaSach = dgvDanhSachCanMuon.Rows(i).Cells("MaSach").Value.ToString()
+            chiTietPhieuMuonSach.MaSach = dgvDanhSachCanMuon.Rows(i).Cells("MaCuonSach").Value.ToString()
 
             Dim insertChitietphieumuonsachResult = _chiTietPhieuMuonSach.InsertOne(chiTietPhieuMuonSach)
             If insertChitietphieumuonsachResult.FlagResult = False Then

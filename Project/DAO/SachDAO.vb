@@ -42,6 +42,14 @@ Public Class SachDAO
         Return result
     End Function
 
+    Public Function SetStatusSachToUnavailableByID(maSach As String) As Object
+        Dim query = String.Format("
+update Sach
+set TinhTrang=1
+where maSach={0}", maSach)
+        Return _dataProvider.ExecuteNonquery(query)
+    End Function
+
     Public Function getQuanlity(maDauSach As String) As Integer
         Dim query = "Select * from [QuanLiThuVien].[dbo].[Sach] where MaDauSach=N'" & maDauSach & "'"
         Dim dataTable = New DataTable()
