@@ -306,6 +306,8 @@ Public Class frmChoMuonSach
             LoadInfoBook(maSach)
 
         Catch ex As Exception
+            System.Diagnostics.Debug.WriteLine("errror" & ex.ToString)
+
         End Try
     End Sub
     Private Sub LoadInfoBook(maSach As String)
@@ -314,12 +316,21 @@ Public Class frmChoMuonSach
         Dim theLoai = String.Empty
         Dim tinhTrangSach = 0
         Dim result As Result
+        txtTenSach.Text = String.Empty
+        txtTacGia.Text = String.Empty
+        txtTheLoai.Text = String.Empty
+        result = _sachBus.SelectByType(maSach, tenSach, theLoai, tacGia, tinhTrangSach)
 
-        'result = _sachBus.SelectByType(maSach, tenSach, theLoai, tacGia, tinhTrangSach)
+        If (result.FlagResult) Then
+            txtTenSach.Text = tenSach
+            txtTacGia.Text = tacGia
+            txtTheLoai.Text = theLoai
+        Else
+            txtTenSach.Text = String.Empty
+            txtTacGia.Text = String.Empty
+            txtTheLoai.Text = String.Empty
+        End If
 
-        txtTenSach.Text = tenSach
-        txtTacGia.Text = tacGia
-        txtTheLoai.Text = theLoai
 
         txtTinhTrangSach.Text = If(tinhTrangSach = 0, "Còn", "Đã hết sách")
         txtTinhTrangSach.BackColor = txtTinhTrangSach.BackColor

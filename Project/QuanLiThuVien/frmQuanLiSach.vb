@@ -6,6 +6,7 @@ Public Class frmQuanLiSach
 
 #Region "-   Fields    -"
     Private _theLoaiSachBus As TheLoaiSachBUS
+    Private _sachBus As SachBus
     Private _tacGiaBus As TacGiaBUS
     Private _dausachBus As DauSachBus
     Private _listTheLoaiSach As List(Of TheLoaiSach)
@@ -33,6 +34,7 @@ Public Class frmQuanLiSach
     Private Sub InitComponenents()
         _theLoaiSachBus = New TheLoaiSachBUS()
         _tacGiaBus = New TacGiaBUS()
+        _sachBus = New SachBus()
         _dausachBus = New DauSachBus()
         _listDauSach = New List(Of DauSachDTO)
         _listTacGia = New List(Of TacGia)
@@ -191,15 +193,16 @@ Public Class frmQuanLiSach
         columnTenTacGia.Width = 200
         DataGridViewQuanLiSach.Columns.Add(columnTenTacGia)
 
-        Dim columnTriGia = New DataGridViewTextBoxColumn()
-        columnTriGia.Name = "TinhTrang"
-        columnTriGia.HeaderText = "Tình trạng"
-        columnTriGia.DataPropertyName = "TinhTrang"
-        columnTriGia.Width = 150
-        DataGridViewQuanLiSach.Columns.Add(columnTriGia)
+        Dim clnSoLuong = New DataGridViewTextBoxColumn()
+        clnSoLuong.Name = "TinhTrang"
+        clnSoLuong.HeaderText = "Số lượng"
+        clnSoLuong.DataPropertyName = "TinhTrang"
+        clnSoLuong.Width = 150
+        DataGridViewQuanLiSach.Columns.Add(clnSoLuong)
 
         For index = 0 To listDauSach.Count - 1
             'load ten the loai sach
+            Dim soluong = 0
             Dim maTheLoaiSachTemp = listDauSach(index).MaTheLoaiSach
             Dim tenTheLoaiSachTemp As String
             Dim ListTheLoaiSachThoaMan = From tls In _listTheLoaiSach
@@ -219,11 +222,14 @@ Public Class frmQuanLiSach
                 tenTacGiaTemp = tacGia.TenTacGia
             Next
 
+            soluong = _sachBus.getQuanlity(listDauSach(index).MaDauSach)
+
             'load ten tinh trang
             'Dim tinhTrangTemp = If(listDauSach(index).TinhTrang = 0, "Còn", "Hết")
 
+
             DataGridViewQuanLiSach.Rows.Add(listDauSach(index).MaDauSach,
-            listDauSach(index).TenSach, tenTheLoaiSachTemp, tenTacGiaTemp)
+            listDauSach(index).TenSach, tenTheLoaiSachTemp, tenTacGiaTemp, soluong)
         Next
     End Sub
 

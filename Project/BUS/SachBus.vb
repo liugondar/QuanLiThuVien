@@ -31,4 +31,14 @@ Public Class SachBus
     Private Function Validate(dausach As Object) As Result
         Return New Result()
     End Function
+
+
+    Public Function getQuanlity(maDauSach As String) As Integer
+        Return _sachDAO.getQuanlity(maDauSach)
+    End Function
+
+    Public Function SelectByType(maSach As String, ByRef tenSach As String, ByRef theLoai As String, ByRef tacGia As String, ByRef tinhTrangSach As Integer) As Result
+        Return _sachDAO.SelectByType(maSach, tenSach, theLoai, tacGia, tinhTrangSach)
+    End Function
+
 End Class
