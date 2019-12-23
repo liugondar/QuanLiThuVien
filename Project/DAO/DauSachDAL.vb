@@ -28,8 +28,9 @@ Public Class DauSachDAO
         query &= "@NgayNhap='" & dausach.NgayNhap.ToString(formatDate) & "' ,"
         query &= "@TriGia =" & dausach.TriGia & " "
 
-        Dim result = _dataProvider.ExecuteNonquery(query)
-        Return result
+        Dim resultDauSach = _dataProvider.ExecuteNonquery(query)
+
+        Return resultDauSach
     End Function
 #End Region
 

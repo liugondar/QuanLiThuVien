@@ -79,13 +79,13 @@ Public Class frmBaoCaoTraSachTre
             Dim chiTietPhieuMuon = New DTO.ChiTietPhieuMuonSach()
             _chiTietPhieuMuonBus.GetByID(chiTietPhieuMuon, chiTietBaoCaoSachTraTre.MaChiTietPhieuMuonSach)
             Dim sach = New Sach()
-            _sachBus.SelectSachById(sach, chiTietPhieuMuon.MaSach)
+            '_sachBus.SelectSachById(sach, chiTietPhieuMuon.MaSach)
             Dim phieuMuon = New PhieuMuonSach()
             _phieuMuonSachBus.GetPhieuMuonSachById(phieuMuon, chiTietPhieuMuon.MaChiTietPhieuMuonSach)
 
             Dim chiTietDisplay = New ChiTietBaoCaoSachTraTreDisplay()
             chiTietDisplay.SoNgayTraTre = chiTietBaoCaoSachTraTre.SoNgayTraTre
-            chiTietDisplay.TenSach = sach.TenSach
+            'chiTietDisplay.TenSach = sach.TenSach
             chiTietDisplay.NgayMuon = phieuMuon.NgayMuon.ToString(DateHelper.Instance.GetFormatType())
             listChiTietDisplay.Add(chiTietDisplay)
         Next

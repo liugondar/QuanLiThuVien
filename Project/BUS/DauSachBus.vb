@@ -40,7 +40,6 @@ Public Class DauSachBus
         Dim getNextIDResult = GetNextId(dausach.MaDauSach)
         Dim validateResult = Validate(dausach)
         If validateResult.FlagResult = False Then Return validateResult
-
         Return _dausachDAO.InsertOne(dausach)
     End Function
     Private Function Validate(dausach As DauSachDTO) As Result
