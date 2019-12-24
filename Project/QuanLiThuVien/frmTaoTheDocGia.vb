@@ -47,9 +47,12 @@ Public Class frmTaoTheDocGia
         Dim result = loaiDocGiaBus.SelectAll(listLoaiDocGia)
 
         ReaderTypeComboBox.DataSource = New BindingSource(listLoaiDocGia, String.Empty)
-        ReaderTypeComboBox.SelectedIndex = 0
-        ReaderTypeComboBox.DisplayMember = "TenLoaiDocGia"
-        ReaderTypeComboBox.ValueMember = "MaLoaiDocGia"
+        If listLoaiDocGia.Count > 0 Then
+
+            ReaderTypeComboBox.SelectedIndex = 0
+            ReaderTypeComboBox.DisplayMember = "TenLoaiDocGia"
+            ReaderTypeComboBox.ValueMember = "MaLoaiDocGia"
+        End If
 
         Return result
     End Function

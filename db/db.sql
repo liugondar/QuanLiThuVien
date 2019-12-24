@@ -198,6 +198,7 @@ CREATE TABLE dbo.ChiTietPhieuMuonSach
     -- primary key column
     MaPhieuMuonSach INT NOT NULL,
     MaSach NVARCHAR(20) not null,
+    TinhTrang int not null DEFAULT 0,-- 0 is not check out, 1 is check out 
     DeleteFlag NVARCHAR(1) not null default 'N',
     CONSTRAINT FK_ChiTietPhieuMuonSach_PhieuMuonSach FOREIGN KEY(MaPhieuMuonSach)
     REFERENCES PhieuMuonSach(MaPhieuMuonSach),

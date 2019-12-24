@@ -131,10 +131,17 @@ Public Class frmChoMuonSach
     End Sub
 
     Private Sub RenderDataWhenReaderIdTextBoxChanged()
-        Dim sachInfo As List(Of CustomBookInfoDisplay)
-        sachInfo = New List(Of CustomBookInfoDisplay)
-        _phieuMuonSachBus.SelectRentSachByDocGiaId(ReaderIdTextBox.Text, sachInfo)
-        LoadListSachDaMuonDataGridView(sachInfo)
+        UserNameTextBox.Text = ""
+        Dim docGia As DocGia
+        Dim result = _docGiaBus.GetReaderById(docGia, ReaderIdTextBox.Text)
+        If (result.FlagResult AndAlso docGia IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(docGia.TenDocGia)) Then
+            UserNameTextBox.Text = docGia.TenDocGia
+            Dim sachInfo As List(Of CustomBookInfoDisplay)
+            sachInfo = New List(Of CustomBookInfoDisplay)
+            _phieuMuonSachBus.SelectRentSachByDocGiaId(ReaderIdTextBox.Text, sachInfo)
+            LoadListSachDaMuonDataGridView(sachInfo)
+        End If
+
     End Sub
 
 #End Region
@@ -217,6 +224,22 @@ Public Class frmChoMuonSach
         csIdClmn.Width = 50
         ListSachDaMuonDataGridView.Columns.Add(csIdClmn)
 
+        Dim phieuMuonIdClmn = New DataGridViewTextBoxColumn()
+        phieuMuonIdClmn.Name = "MaPhieuMuonSach"
+        phieuMuonIdClmn.HeaderText = "Mã phiếu mượn sách"
+        phieuMuonIdClmn.DataPropertyName = "MaPhieuMuonSach"
+        phieuMuonIdClmn.Width = 50
+        ListSachDaMuonDataGridView.Columns.Add(phieuMuonIdClmn)
+
+
+        Dim tinhTrangColumn = New DataGridViewTextBoxColumn()
+        tinhTrangColumn.Name = "TinhTrang"
+        tinhTrangColumn.HeaderText = "Tình trạng"
+        tinhTrangColumn.DataPropertyName = "TinhTrang"
+        tinhTrangColumn.Width = 120
+        ListSachDaMuonDataGridView.Columns.Add(tinhTrangColumn)
+
+
         Dim tenSachColumn = New DataGridViewTextBoxColumn()
         tenSachColumn.Name = "TenSach"
         tenSachColumn.HeaderText = "Tên sách"
@@ -230,13 +253,6 @@ Public Class frmChoMuonSach
         tacGiaColumn.DataPropertyName = "TacGia"
         tacGiaColumn.Width = 140
         ListSachDaMuonDataGridView.Columns.Add(tacGiaColumn)
-
-        Dim tinhTrangColumn = New DataGridViewTextBoxColumn()
-        tinhTrangColumn.Name = "TinhTrang"
-        tinhTrangColumn.HeaderText = "Tình trạng"
-        tinhTrangColumn.DataPropertyName = "TinhTrang"
-        tinhTrangColumn.Width = 120
-        ListSachDaMuonDataGridView.Columns.Add(tinhTrangColumn)
 
         Dim ngMuonCln = New DataGridViewTextBoxColumn()
         ngMuonCln.Name = "NgayMuon"

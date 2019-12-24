@@ -79,6 +79,10 @@ Public Class PhieuMuonSachBus
         Return New Result()
     End Function
 
+    Public Sub SelectAllSachChuaTraByPhieuMuonId(maPhieuMuonSach As String, ByRef listBook As List(Of CustomBookInfoDisplay))
+        _phieuMuonSachDAO.SelectAllSachChuaTraByPhieuMuonId(maPhieuMuonSach, listBook)
+    End Sub
+
     Private Function ValidateSoSachMuonToiDa(tongSoSachCanMuon As Integer, listPhieuMuonSachChuaTra As List(Of PhieuMuonSach)) As Result
         Dim soSachMuonTruocDo = 0
         For Each phieuMuonSach In listPhieuMuonSachChuaTra

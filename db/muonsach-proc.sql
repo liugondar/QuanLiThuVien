@@ -1,3 +1,7 @@
+use master
+GO
+use QuanLiThuVien
+go
 
 -- create producer insert phieumuonsach
 create PROC USP_ThemPhieuMuonSach
@@ -136,7 +140,7 @@ GO
 CREATE PROCEDURE dbo.SelectRentSachByDocGiaId
     @docGiaId NVARCHAR(20)
 AS
-    select ds.MaDauSach, s.MaSach, ds.TenSach, ds.TenNhaXuatBan, pms.TinhTrang,pms.NgayMuon, pms.NgayTra, qd.SoNgayMuonToiDa,tg.TenTacGia
+    select ds.MaDauSach, s.MaSach, ds.TenSach, ds.TenNhaXuatBan, ctpm.TinhTrang,pms.NgayMuon, pms.NgayTra, qd.SoNgayMuonToiDa,tg.TenTacGia, pms.MaPhieuMuonSach, ctpm.MaChiTietPhieuMuonSach
     from PhieuMuonSach pms, TheDocGia dg, ChiTietPhieuMuonSach ctpm, sach s, DauSach ds, QuiDinh qd, TacGia tg
     where
         pms.MaPhieuMuonSach = ctpm.MaPhieuMuonSach
@@ -146,9 +150,10 @@ AS
         and s.MaDauSach= ds.MaDauSach
 		and tg.MaTacGia =ds.MaTacGia
         and pms.DeleteFlag='N'
-        and pms.TinhTrang= 0
 
 GO
 -- example to execute the stored procedure we just created
 EXECUTE dbo.SelectRentSachByDocGiaId 19000000
 EXECUTE dbo.USP_getPhieuMuonSachNotPayByDocGiaId 19000000
+
+select * from PhieuMuonSach

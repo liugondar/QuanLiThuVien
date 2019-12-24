@@ -4,6 +4,7 @@ Public Class CustomBookInfoDisplay
     Public Property TenSach() As String
     Public Property MaDauSach() As String
     Public Property MaCuonSach() As String
+    Public Property MaPhieuMuonSach() As String
     Public Property TacGia() As String
     Public Property TinhTrang() As String
     Public Property NgayHetHan() As Date
@@ -19,6 +20,7 @@ Public Class CustomBookInfoDisplay
           row.Table.Columns.Contains("TinhTrang") And
           row.Table.Columns.Contains("SoNgayMuonToiDa") And
           row.Table.Columns.Contains("TenTacGia") And
+          row.Table.Columns.Contains("MaPhieuMuonSach") And
           row.Table.Columns.Contains("NgayMuon")
         If doesRowContainsCorrectFields = False Then
             Return
@@ -26,9 +28,11 @@ Public Class CustomBookInfoDisplay
 
         MaCuonSach = row("MaSach")
         MaDauSach = row("MaDauSach")
+        MaPhieuMuonSach = row("MaPhieuMuonSach")
         TenSach = row("TenSach")
         TacGia = row("TenTacGia")
         TinhTrang = row("TinhTrang")
+        TinhTrang = If(TinhTrang = 0, "Chưa trả", "Đã trả")
         Dim snmtd As Integer
         Integer.TryParse(row("SoNgayMuonToiDa"), snmtd)
         Date.TryParse(row("NgayMuon"), ngaymuon)

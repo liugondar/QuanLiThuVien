@@ -97,6 +97,16 @@ where MaPhieuMuonSach={1}
         Return result
     End Function
 
+    Public Sub SelectAllSachChuaTraByPhieuMuonId(maPhieuMuonSach As String, ByRef listBook As List(Of CustomBookInfoDisplay))
+        Dim qr = "EXECUTE dbo.USP_SelectRentInfo " + maPhieuMuonSach
+        Dim dtb = New DataTable()
+        Dim res = _dataProvider.ExecuteQuery(qr, dtb)
+        For Each row In dtb.Rows
+            Dim sachInfo = New CustomBookInfoDisplay(row)
+            listBook.Add(sachInfo)
+        Next
+    End Sub
+
     Public Function SelectIdTheLastOne(ByRef maPhieuMuonSach As String) As Result
         Dim query As String = String.Empty
         query &= "select top 1 [MaPhieuMuonSach] "
