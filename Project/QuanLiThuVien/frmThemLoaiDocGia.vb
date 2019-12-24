@@ -21,11 +21,11 @@ Public Class frmThemLoaiDocGia
 #Region "-   Events   -"
     Private Sub btnNhapVaDong_Click(sender As Object, e As EventArgs) Handles btnNhapVaDong.Click
         Dim result As Result = InsertLoaiDocGia()
-
-        If (result.FlagResult = True) Then
+  If (result.FlagResult = True) Then
             MessageBox.Show("Thêm loại độc giả thành công.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
             txtTenLoaiDocGiaDocGia.Text = String.Empty
-            Me.Close()
+            LoadMaLoaiDocGiaTiepTheo()
+     
         Else
             MessageBox.Show(result.ApplicationMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             System.Console.WriteLine(result.SystemMessage)
@@ -57,5 +57,21 @@ Public Class frmThemLoaiDocGia
         result = _loaiDocGiaBUS.InsertOne(loaiDocGia)
         Return result
     End Function
+
+    Private Sub btnNhap_Click(sender As Object, e As EventArgs) Handles btnNhap.Click
+         Dim result As Result = InsertLoaiDocGia()
+      Dim result As Result
+        result = _loaiDocGiaBUS.InsertOne(loaiDocGia)
+        Return result
+        If (result.FlagResult = True) Then
+            MessageBox.Show("Thêm loại độc giả thành công.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            txtTenLoaiDocGiaDocGia.Text = String.Empty
+            LoadMaLoaiDocGiaTiepTheo()
+        Else
+            MessageBox.Show(result.ApplicationMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            System.Console.WriteLine(result.SystemMessage)
+        End If
+    End Sub
+
 #End Region
 End Class
