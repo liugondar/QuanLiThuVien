@@ -38,7 +38,10 @@ Public Class LoaiDocGiaBus
         If String.IsNullOrWhiteSpace(loaiDocGiaId) Then Return New Result(False, "Mã loại độc giả trống!", "")
         Return _loaiDocGiaDAO.DeleteById(loaiDocGiaId)
     End Function
-
+      Function DeleteByTenDocGia(loaiDocGiaId As String) As Result
+        If String.IsNullOrWhiteSpace(loaiDocGiaId) Then Return New Result(False, "Mã loại độc giả trống!", "")
+        Return _loaiDocGiaDAO.DeleteById(loaiDocGiaId)
+    End Function
     Function InsertOne(loaiDocGia As LoaiDocGia) As Result
         If Not loaiDocGia.Validate() Then Return New Result(False, "Thông tin nhập vào không hợp lệ!", "")
         Return _loaiDocGiaDAO.InsertOne(loaiDocGia)

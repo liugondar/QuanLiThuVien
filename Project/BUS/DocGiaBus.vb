@@ -4,6 +4,7 @@ Imports DTO
 Imports Utility
 
 Public Class DocGiaBus
+
 #Region "-   Field   -"
     Private _docGiaDAO As DocGiaDAO
     Private _quiDinh As QuiDinh
@@ -136,7 +137,42 @@ Public Class DocGiaBus
         Return result
     End Function
 
+     Public Function UpdateByTen(docGia As DocGia) As Result
+        Dim validateResult = docGia.Validate()
+        Dim validateYearsoldResult = ValidateYearsold(docGia.NgaySinh)
+        Dim validateReaderTypeResult = ValidateReaderType(docGia.MaLoaiDocGia)
+
+        If validateResult.FlagResult = False Then Return validateResult
+        If validateYearsoldResult.FlagResult = False Then Return validateYearsoldResult
+        If validateReaderTypeResult.FlagResult = False Then Return validateReaderTypeResult
+
+        Dim result = _docGiaDAO.UpdateByReaderId(docGia)
+        Return result
+    End Function
+    Public Function UpdateByLoai(docGia As DocGia) As Result
+        Dim validateResult = docGia.Validate()
+        Dim validateYearsoldResult = ValidateYearsold(docGia.NgaySinh)
+        Dim validateReaderTypeResult = ValidateReaderType(docGia.MaLoaiDocGia)
+
+        If validateResult.FlagResult = False Then Return validateResult
+        If validateYearsoldResult.FlagResult = False Then Return validateYearsoldResult
+        If validateReaderTypeResult.FlagResult = False Then Return validateReaderTypeResult
+
+        Dim result = _docGiaDAO.UpdateByReaderId(docGia)
+        Return result
+    End Function
+
     Public Function DeleteByID(maThe As String) As Result
+        If String.IsNullOrWhiteSpace(maThe) Then Return New Result(False, "Mã thẻ độc giả không được để trống", "")
+        Dim result = _docGiaDAO.DeleteByReaderID(maThe)
+        Return result
+    End Function
+    Public Function DeleteByTen(maThe As String) As Result
+        If String.IsNullOrWhiteSpace(maThe) Then Return New Result(False, "Mã thẻ độc giả không được để trống", "")
+        Dim result = _docGiaDAO.DeleteByReaderID(maThe)
+        Return result
+    End Function
+    Public Function DeleteByLoai(maThe As String) As Result
         If String.IsNullOrWhiteSpace(maThe) Then Return New Result(False, "Mã thẻ độc giả không được để trống", "")
         Dim result = _docGiaDAO.DeleteByReaderID(maThe)
         Return result
@@ -161,12 +197,36 @@ Public Class DocGiaBus
         If String.IsNullOrWhiteSpace(tenDocGia) = True Then Return New Result(False, "Lấy dữ liệu độc giả không thành công! Vui lòng kiểm tra lại mã thẻ ", "")
         Return result
     End Function
+    Public Function GetReaderNameByTen(ByRef tenDocGia As String, maThe As String) As Result
+        Dim result = _docGiaDAO.GetReaderNameByID(tenDocGia, maThe)
+        If String.IsNullOrWhiteSpace(tenDocGia) = True Then Return New Result(False, "Lấy dữ liệu độc giả không thành công! Vui lòng kiểm tra lại mã thẻ ", "")
+        Return result
+    End Function
+    Public Function GetReaderNameByLoai(ByRef tenDocGia As String, maThe As String) As Result
+        Dim result = _docGiaDAO.GetReaderNameByID(tenDocGia, maThe)
+        If String.IsNullOrWhiteSpace(tenDocGia) = True Then Return New Result(False, "Lấy dữ liệu độc giả không thành công! Vui lòng kiểm tra lại mã thẻ ", "")
+        Return result
+    End Function
 
     Public Function GetExpirationDateById(ByRef ngayHetHan As DateTime, maThe As String) As Result
         Return _docGiaDAO.GetExpirationDateById(ngayHetHan, maThe)
     End Function
+    Public Function GetExpirationDateByLoai(ByRef ngayHetHan As DateTime, maThe As String) As Result
+        Return _docGiaDAO.GetExpirationDateById(ngayHetHan, maThe)
+    End Function
+    Public Function GetExpirationDateByTenByRef ngayHetHan As DateTime, maThe As String) As Result
+        Return _docGiaDAO.GetExpirationDateById(ngayHetHan, maThe)
+    End Function
 
     Public Function GetReaderById(ByRef docGia As DocGia, maThe As String) As Result
+        Dim result = _docGiaDAO.GetReaderByID(docGia, maThe)
+        Return result
+    End Function
+    Public Function GetReaderByTen(ByRef docGia As DocGia, maThe As String) As Result
+        Dim result = _docGiaDAO.GetReaderByID(docGia, maThe)
+        Return result
+    End Function
+    Public Function GetReaderByLoai(ByRef docGia As DocGia, maThe As String) As Result
         Dim result = _docGiaDAO.GetReaderByID(docGia, maThe)
         Return result
     End Function

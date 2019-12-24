@@ -45,7 +45,26 @@ Public Class DocGiaDAO
         Dim result = _dataProvider.ExecuteNonquery(query)
         Return result
     End Function
-
+        Public Function DeleteByReaderTen(maThe As String) As Result
+        Dim query As String = String.Empty
+        query &= "EXECUTE USP_XoaTheDocGia "
+        query &= "@MaTheDocGia=" & maThe
+         query &= "@NgaySinh='" & docGia.NgaySinh.ToString(formatDate) & "', "
+        query &= "@NgayTao='" & docGia.NgayTao.ToString(formatDate) & "', "
+        query &= "@NgayHetHan='" & docGia.NgayHetHan.ToString(formatDate) & "' "
+        Dim result = _dataProvider.ExecuteNonquery(query)
+        Return result
+    End Function
+            Public Function DeleteByReaderLoai(maThe As String) As Result
+        Dim query As String = String.Empty
+        query &= "EXECUTE USP_XoaTheDocGia "
+        query &= "@MaTheDocGia=" & maThe
+         query &= "@NgaySinh='" & docGia.NgaySinh.ToString(formatDate) & "', "
+        query &= "@NgayTao='" & docGia.NgayTao.ToString(formatDate) & "', "
+        query &= "@NgayHetHan='" & docGia.NgayHetHan.ToString(formatDate) & "' "
+        Dim result = _dataProvider.ExecuteNonquery(query)
+        Return result
+    End Function
     Public Function UpdateByReaderId(DocGia As DocGia) As Result
         Dim query As String = String.Empty
         Dim formatDate = DateHelper.Instance.GetFormatType()
@@ -59,6 +78,33 @@ Public Class DocGiaDAO
         Dim result = _dataProvider.ExecuteNonquery(query)
         Return result
     End Function
+    Public Function UpdateByReaderTen(DocGia As DocGia) As Result
+        Dim query As String = String.Empty
+        Dim formatDate = DateHelper.Instance.GetFormatType()
+        query &= "EXECUTE USP_SuaTheDocGia "
+        query &= "@MaTheDocGia=N'" & DocGia.MaTheDocGia & "', "
+        query &= "@TenDocGia=N'" & DocGia.TenDocGia & "', "
+        query &= "@Email=N'" & DocGia.Email & "', "
+        query &= "@DiaChi =N'" & DocGia.DiaChi & "', "
+        query &= "@MaLoaiDocGia=" & DocGia.MaLoaiDocGia & ", "
+        query &= "@NgaySinh='" & DocGia.NgaySinh.ToString(formatDate) & "'"
+        Dim result = _dataProvider.ExecuteNonquery(query)
+        Return result
+    End Function
+        Public Function UpdateByReaderLoai(DocGia As DocGia) As Result
+        Dim query As String = String.Empty
+        Dim formatDate = DateHelper.Instance.GetFormatType()
+        query &= "EXECUTE USP_SuaTheDocGia "
+        query &= "@MaTheDocGia=N'" & DocGia.MaTheDocGia & "', "
+        query &= "@TenDocGia=N'" & DocGia.TenDocGia & "', "
+        query &= "@Email=N'" & DocGia.Email & "', "
+        query &= "@DiaChi =N'" & DocGia.DiaChi & "', "
+        query &= "@MaLoaiDocGia=" & DocGia.MaLoaiDocGia & ", "
+        query &= "@NgaySinh='" & DocGia.NgaySinh.ToString(formatDate) & "'"
+        Dim result = _dataProvider.ExecuteNonquery(query)
+        Return result
+    End Function
+
 
 #End Region
 
@@ -103,7 +149,29 @@ Public Class DocGiaDAO
         Next
         Return result
     End Function
+    Public Function GetReaderNameByTen(ByRef tenDocGia As String, maThe As String) As Result
+        Dim query As String = String.Empty
+        query = String.Format("select TenDocGia from TheDocGia where MaTheDocGia={0} and DeleteFlag='N'", maThe)
 
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
+        For Each row In dataTable.Rows
+            tenDocGia = row("TenDocGia")
+        Next
+        Return result
+    End Function
+
+    Public Function GetReaderNameByLoai(ByRef tenDocGia As String, maThe As String) As Result
+        Dim query As String = String.Empty
+        query = String.Format("select TenDocGia from TheDocGia where MaTheDocGia={0} and DeleteFlag='N'", maThe)
+
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
+        For Each row In dataTable.Rows
+            tenDocGia = row("TenDocGia")
+        Next
+        Return result
+    End Function
     Public Function GetTheLastTheDocGiaID(ByRef maTheDocGia As String) As Result
         Dim query As String = String.Empty
         query &= "select top 1 [MaTheDocGia] "
