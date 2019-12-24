@@ -14,6 +14,7 @@ Public Class ChiTietBaoCaoTinhHinhMuonSachTheoTheLoaiBUS
         _chiTietbaoCaoTinhHinhMuonSachTheoTheLoaiDAO = New ChiTietBaoCaoTinhHinhMuonSachTheoTheLoaiDAO()
         _theLoaiSachBus = New TheLoaiSachBUS()
         _phieuMuonSachBus = New PhieuMuonSachBus()
+        '
     End Sub
 
 #End Region

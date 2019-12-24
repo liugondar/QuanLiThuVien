@@ -30,6 +30,10 @@ Public Class TheLoaiSachBUS
         If Not theLoaiSach.ValidateTenTheLoaiSach() Then Return New Result(False, "Thông tin input không hợp lệ!", "")
         Return _theLoaiSachDAO.InsertOne(theLoaiSach)
     End Function
+    Function InsertMoreonetheLoaiSach As TheLoaiSach) As Result
+        If Not theLoaiSach.ValidateTenTheLoaiSach() Then Return New Result(False, "Thông tin input không hợp lệ!", "")
+        Return _theLoaiSachDAO.InsertOne(theLoaiSach)
+    End Function
 #End Region
 
 #Region "-   Retrieve data  -"
@@ -47,12 +51,23 @@ Public Class TheLoaiSachBUS
         Return result
     End Function
 
+    Public Function SelectTheLoaiSachByTen(ByRef theLoaiSach As TheLoaiSach, maTheLoaiSach As String) As Result
+        Dim result = _theLoaiSachDAO.SelectTheLoaiSachByID(theLoaiSach, maTheLoaiSach)
+        Return result
+    End Function
+
     Public Function GetTenTheLoaiSachByID(ByRef tentheLoaiSach As String, maTheLoaiSach As String) As Result
         Dim result = _theLoaiSachDAO.GetTenTheLoaiSachByID(tentheLoaiSach, maTheLoaiSach)
         Return result
     End Function
 
     Public Function GetTheNextID(ByRef id As String) As Result
+        id = String.Empty
+        Dim result = _theLoaiSachDAO.GetTheLastId(id)
+        id = If(String.IsNullOrWhiteSpace(id), 1, id + 1)
+        Return result
+    End Function
+    Public Function GetTheNextName(ByRef id As String) As Result
         id = String.Empty
         Dim result = _theLoaiSachDAO.GetTheLastId(id)
         id = If(String.IsNullOrWhiteSpace(id), 1, id + 1)

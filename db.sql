@@ -38,6 +38,20 @@ CREATE TABLE Account
     CONSTRAINT PK_Acount PRIMARY key(AccountId,UserName)
 );
 GO
+CREATE TABLE Taikhoan
+(
+    AccountId INT IDENTITY ,
+    -- primary key column
+    UserName NVARCHAR(100) not null,
+    -- specify more columns here
+    DisplayName NVARCHAR(100) NOT NULL default N'Nhan vien',
+    Password NVARCHAR(1000) not NULL DEFAULT 0,
+    salt NVARCHAR(1000) ,
+    Type int NOT null DEFAULT 0,
+    -- 0 is nhan vien, 1 is admin
+    CONSTRAINT PK_Acount PRIMARY key(AccountId,UserName)
+);
+GO
 -- Create a new table called 'LoaiDocGia' in schema 'SchemaName'
 -- Drop the table if it already exists
 IF OBJECT_ID('dbo.LoaiDocGia', 'U') IS NOT NULL
