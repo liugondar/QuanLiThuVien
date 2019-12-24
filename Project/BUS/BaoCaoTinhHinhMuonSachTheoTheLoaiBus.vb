@@ -56,6 +56,18 @@ Public Class BaoCaoTinhHinhMuonSachTheoTheLoaiBus
         _chiTietBaoCaoBus.UpdateTiLeListChiTietBaoCaoTheoMaBaoCAo(maBaoCao, tongSoLuotMuon)
 
     End Sub
+    Private Sub UpdateThoigianMuonAndTiLe(ByRef tongSoLuotMuon As Integer, maBaoCao As String)
+        tongSoLuotMuon = 0
+        Dim listChiTietBaoCao = New List(Of ChiTietBaoCaoTinhHinhMuonSachTheoTheLoai)
+        _chiTietBaoCaoBus.SelectAllByMaBaoCaoTinhHinhMuonSachTheoTheLoai(listChiTietBaoCao, maBaoCao)
+        For Each chiTietBaoCao In listChiTietBaoCao
+            tongSoLuotMuon += chiTietBaoCao.SoLuongMuon
+        Next
+
+        _baoCaoTinhHinhMuonSachTheoTheLoaiDAO.UpdateTongSoLuotMuon(maBaoCao, tongSoLuotMuon)
+        _chiTietBaoCaoBus.UpdateTiLeListChiTietBaoCaoTheoMaBaoCAo(maBaoCao, tongSoLuotMuon)
+
+    End Sub
 
     Private Function InsertBaoCaoTinhHinhMuonSach(thoiGian As Date) As Result
         Dim baoCaoTinhHinhMuonSach = New BaoCaoTinhHinhMuonSachTheoTheLoai()
