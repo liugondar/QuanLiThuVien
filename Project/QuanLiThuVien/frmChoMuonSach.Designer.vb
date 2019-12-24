@@ -40,6 +40,8 @@ Partial Class frmChoMuonSach
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.dgvDanhSachCanMuon = New System.Windows.Forms.DataGridView()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.nudSoLuong = New System.Windows.Forms.NumericUpDown()
+        Me.MetroLabel1 = New MetroFramework.Controls.MetroLabel()
         Me.btnXoa = New MetroFramework.Controls.MetroButton()
         Me.btnThem = New MetroFramework.Controls.MetroButton()
         Me.MetroLabel9 = New MetroFramework.Controls.MetroLabel()
@@ -53,8 +55,6 @@ Partial Class frmChoMuonSach
         Me.txtTacGia = New System.Windows.Forms.TextBox()
         Me.txtMaSach = New System.Windows.Forms.TextBox()
         Me.btnReload = New MetroFramework.Controls.MetroButton()
-        Me.MetroLabel1 = New MetroFramework.Controls.MetroLabel()
-        Me.nudSoLuong = New System.Windows.Forms.NumericUpDown()
         CType(Me.ListSachDaMuonDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -139,12 +139,12 @@ Partial Class frmChoMuonSach
         Me.ListSachDaMuonDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.ListSachDaMuonDataGridView.Location = New System.Drawing.Point(29, 18)
         Me.ListSachDaMuonDataGridView.Name = "ListSachDaMuonDataGridView"
-        Me.ListSachDaMuonDataGridView.Size = New System.Drawing.Size(734, 108)
+        Me.ListSachDaMuonDataGridView.Size = New System.Drawing.Size(734, 169)
         Me.ListSachDaMuonDataGridView.TabIndex = 51
         '
         'ConfirmButton
         '
-        Me.ConfirmButton.Location = New System.Drawing.Point(436, 769)
+        Me.ConfirmButton.Location = New System.Drawing.Point(436, 835)
         Me.ConfirmButton.Name = "ConfirmButton"
         Me.ConfirmButton.Size = New System.Drawing.Size(85, 30)
         Me.ConfirmButton.TabIndex = 12
@@ -209,7 +209,7 @@ Partial Class frmChoMuonSach
         Me.GroupBox3.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Padding = New System.Windows.Forms.Padding(2)
-        Me.GroupBox3.Size = New System.Drawing.Size(790, 141)
+        Me.GroupBox3.Size = New System.Drawing.Size(790, 202)
         Me.GroupBox3.TabIndex = 112
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Danh sách mượn đã mượn:"
@@ -217,7 +217,7 @@ Partial Class frmChoMuonSach
         'GroupBox4
         '
         Me.GroupBox4.Controls.Add(Me.dgvDanhSachCanMuon)
-        Me.GroupBox4.Location = New System.Drawing.Point(364, 403)
+        Me.GroupBox4.Location = New System.Drawing.Point(364, 469)
         Me.GroupBox4.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Padding = New System.Windows.Forms.Padding(2)
@@ -250,7 +250,7 @@ Partial Class frmChoMuonSach
         Me.GroupBox2.Controls.Add(Me.txtTheLoai)
         Me.GroupBox2.Controls.Add(Me.txtTacGia)
         Me.GroupBox2.Controls.Add(Me.txtMaSach)
-        Me.GroupBox2.Location = New System.Drawing.Point(38, 403)
+        Me.GroupBox2.Location = New System.Drawing.Point(38, 469)
         Me.GroupBox2.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Padding = New System.Windows.Forms.Padding(2)
@@ -258,6 +258,28 @@ Partial Class frmChoMuonSach
         Me.GroupBox2.TabIndex = 114
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Thêm Sách Mượn"
+        '
+        'nudSoLuong
+        '
+        Me.nudSoLuong.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.nudSoLuong.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.nudSoLuong.Location = New System.Drawing.Point(172, 229)
+        Me.nudSoLuong.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
+        Me.nudSoLuong.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudSoLuong.Name = "nudSoLuong"
+        Me.nudSoLuong.Size = New System.Drawing.Size(87, 29)
+        Me.nudSoLuong.TabIndex = 101
+        Me.nudSoLuong.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.nudSoLuong.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'MetroLabel1
+        '
+        Me.MetroLabel1.AutoSize = True
+        Me.MetroLabel1.Location = New System.Drawing.Point(14, 232)
+        Me.MetroLabel1.Name = "MetroLabel1"
+        Me.MetroLabel1.Size = New System.Drawing.Size(137, 19)
+        Me.MetroLabel1.TabIndex = 12
+        Me.MetroLabel1.Text = "Chọn số lượng mượn:"
         '
         'btnXoa
         '
@@ -364,40 +386,18 @@ Partial Class frmChoMuonSach
         '
         'btnReload
         '
-        Me.btnReload.Location = New System.Drawing.Point(316, 769)
+        Me.btnReload.Location = New System.Drawing.Point(316, 835)
         Me.btnReload.Name = "btnReload"
         Me.btnReload.Size = New System.Drawing.Size(85, 30)
         Me.btnReload.TabIndex = 121
         Me.btnReload.Text = "Reload "
-        '
-        'MetroLabel1
-        '
-        Me.MetroLabel1.AutoSize = True
-        Me.MetroLabel1.Location = New System.Drawing.Point(14, 232)
-        Me.MetroLabel1.Name = "MetroLabel1"
-        Me.MetroLabel1.Size = New System.Drawing.Size(137, 19)
-        Me.MetroLabel1.TabIndex = 12
-        Me.MetroLabel1.Text = "Chọn số lượng mượn:"
-        '
-        'nudSoLuong
-        '
-        Me.nudSoLuong.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.nudSoLuong.Font = New System.Drawing.Font("Segoe UI", 12.0!)
-        Me.nudSoLuong.Location = New System.Drawing.Point(172, 229)
-        Me.nudSoLuong.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
-        Me.nudSoLuong.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.nudSoLuong.Name = "nudSoLuong"
-        Me.nudSoLuong.Size = New System.Drawing.Size(87, 29)
-        Me.nudSoLuong.TabIndex = 101
-        Me.nudSoLuong.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.nudSoLuong.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'frmChoMuonSach
         '
         Me.AcceptButton = Me.ConfirmButton
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(871, 822)
+        Me.ClientSize = New System.Drawing.Size(878, 897)
         Me.Controls.Add(Me.btnReload)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox4)
