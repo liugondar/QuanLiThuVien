@@ -41,7 +41,20 @@ Public Class QuiDinhDAO
         Next
         Return result
     End Function
-
+ Public Function SelectAllByID(ByRef quiDinh As QuiDinh) As Result
+        Dim query = String.Empty
+        query &= "Select * from QuiDinh"
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
+        For Each row In dataTable.Rows
+            quiDinh = New QuiDinh(row)
+        Next
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
+        For Each row In dataTable.Rows
+            Integer.TryParse(row("TuoiToiDa"), quiDinh.TuoiToiDa)
+            Integer.TryParse(row("TuoiToiThieu"), quiDinh.TuoiToiThieu)
+        Return result
+    End Function
     Public Function GetThoiHanToiDaTheDocGia(ByRef quiDinh As QuiDinh) As Result
         Dim query = String.Empty
         Dim dataTable = New DataTable()
@@ -75,6 +88,20 @@ Public Class QuiDinhDAO
         Return result
     End Function
 #End Region
+Public Function GetThoiHanToiDa(ByRef quiDinh As QuiDinh) As Result
+        Dim query = String.Empty
+        Dim dataTable = New DataTable()
+        query &= "Select [ThoiHanToiDaTheDocGia] from QuiDinh"
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
+        For Each row In dataTable.Rows
+            Integer.TryParse(row("ThoiHanToiDaTheDocGia"), quiDinh.ThoiHanToiDaTheDocGia)
+        Next
+        set TuoiToiDa={0},TuoiToiThieu={1},
+ThoiHanToiDaTheDocGia={2},
+ThoiHanNhanSach={3},
+SoNgayMuonToiDa={4},SoSachMuonToiDa={5}",
+        Return result
+    End Function
 
 #Region "-   Update    -"
     Public Function Update(quiDinh As QuiDinh) As Result
