@@ -90,6 +90,30 @@ order by maTheLoaiSach desc")
         Next
         Return New Result()
     End Function
+    Public Function GetTenTacGiaByMaTacGia(ByRef tenTacGia As String, maTacGia As String) As Object
+        Dim query = String.Empty
+        query &= "Select * from dbo.TacGia where MaTacGia=" & maTacGia
+        query &= " and DeleteFlag='N'" & " "
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
+        For Each row As DataRow In dataTable.Rows
+            tenTacGia = row("TenTacGia").ToString()
+        Next
+        Return result
+    End Function
+
+    Function GetTheLastId(ByRef maTacGia As String) As Result
+        Dim data = New DataTable()
+        Dim query = String.Format("select top 1 [MaTacGia]
+from TacGia
+order by MaTacGia desc")
+        Dim result = _dataProvider.ExecuteQuery(query, data)
+
+        For Each row In data.Rows
+            maTacGia = row("MaTacGia").ToString()
+        Next
+        Return New Result()
+    End Function
 #End Region
 
 End Class
