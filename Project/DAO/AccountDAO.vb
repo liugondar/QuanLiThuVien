@@ -38,6 +38,23 @@ salt, account.Type)
 
         Return isRegisterSuccessfull
     End Function
+    Public Function ChangeAccount(account As Account) As Result
+        Dim salt As String = BCrypt.Net.BCrypt.GenerateSalt()
+        Dim passwordHash = BCrypt.Net.BCrypt.HashPassword(account.Password, salt)
+        Dim doesPasswordMatch = BCrypt.Net.BCrypt.Verify(account.Password, passwordHash)
+
+        Dim isRegisterSuccessfull = New Result(False, "Tạo tài khoản k thành công!", "")
+        If doesPasswordMatch Then
+            Dim query = String.Format("EXEC USP_CreateAccount @userName=N'{0}',
+@displayName=N'{1}',@password=N'{2}',
+@salt=N'{3}',@type={4}", account.UserName,
+account.DisplayName, passwordHash,
+salt, account.Type)
+            isRegisterSuccessfull = DataProvider.Instance.ExecuteNonquery(query)
+        End If
+
+        Return isRegisterSuccessfull
+    End Function
 #End Region
 
 #Region "-   Update  and delete -"
@@ -69,8 +86,17 @@ newAccountProfile.AccountId)
 account.Type, account.UserName)
         Return DataProvider.Instance.ExecuteNonquery(query)
     End Function
+    Public Function UpdateAccountTypeByUserMail(account As Account) As Result
+        Dim query = String.Format("Update account set type={0} where userName='{1}'",
+account.Type, account.UserName)
+        Return DataProvider.Instance.ExecuteNonquery(query)
+    End Function
 
     Public Function DeleteByUserName(userName As String) As Result
+        Dim query = String.Format("delete from Account where UserName='{0}'", userName)
+        Return DataProvider.Instance.ExecuteNonquery(query)
+    End Function
+     Public Function DeleteByUserMail(userName As String) As Result
         Dim query = String.Format("delete from Account where UserName='{0}'", userName)
         Return DataProvider.Instance.ExecuteNonquery(query)
     End Function
@@ -110,6 +136,17 @@ account.Type, account.UserName)
 
 
     Public Function getAccountByUserName(ByRef account As Account, ByVal userName As String) As Result
+        Dim data = New DataTable()
+        Dim query = "select * from account where username='" & userName & "'"
+        Dim result = DataProvider.Instance.ExecuteQuery(query, data)
+
+        For Each item As DataRow In data.Rows
+            account = New Account(item)
+        Next
+
+        Return result
+    End Function
+    Public Function getAccountByUserMail(ByRef account As Account, ByVal userName As String) As Result
         Dim data = New DataTable()
         Dim query = "select * from account where username='" & userName & "'"
         Dim result = DataProvider.Instance.ExecuteQuery(query, data)

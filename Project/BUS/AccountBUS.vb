@@ -50,6 +50,13 @@ Public Class AccountBUS
 
         Return AccountDAO.Instance.UpdateAccount(newAccountProfile)
     End Function
+    Public Function ChangeAccount(newAccountProfile As Account) As Result
+        If String.IsNullOrWhiteSpace(newAccountProfile.UserName) Then Return New Result(False, "Tên đăng nhập trống !", "")
+        If String.IsNullOrWhiteSpace(newAccountProfile.Type) Then Return New Result(False, "Loại tài khoản trống!", "")
+        If String.IsNullOrWhiteSpace(newAccountProfile.DisplayName) Then Return New Result(False, "Tên hiển thị nhập trống !", "")
+
+        Return AccountDAO.Instance.UpdateAccount(newAccountProfile)
+    End Function
 
 #End Region
 
@@ -64,8 +71,17 @@ Public Class AccountBUS
         If String.IsNullOrWhiteSpace(account.Type) Then Return New Result(False, "Tài khoản trống", "")
         Return AccountDAO.Instance.UpdateAccountTypeByUserName(account)
     End Function
+    Public Function UpdateAccountTypeByUserMail(account As Account) As Result
+        If String.IsNullOrWhiteSpace(account.UserName) Then Return New Result(False, "Tài khoản trống", "")
+        If String.IsNullOrWhiteSpace(account.Type) Then Return New Result(False, "Tài khoản trống", "")
+        Return AccountDAO.Instance.UpdateAccountTypeByUserName(account)
+    End Function
 
     Public Function DeleteByUserName(userName As String) As Object
+        If String.IsNullOrWhiteSpace(userName) Then Return New Result(False, "Tài khoản trống", "")
+        Return AccountDAO.Instance.DeleteByUserName(userName)
+    End Function
+    Public Function DeleteByUserMail(userName As String) As Object
         If String.IsNullOrWhiteSpace(userName) Then Return New Result(False, "Tài khoản trống", "")
         Return AccountDAO.Instance.DeleteByUserName(userName)
     End Function
