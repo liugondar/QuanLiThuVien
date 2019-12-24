@@ -131,16 +131,66 @@ account.Type, account.UserName)
         Next
         Return result
     End Function
+  Public Function GetReaderNameByID(ByRef tenDocGia As String, maThe As String) As Result
+        Dim query As String = String.Empty
+        query = String.Format("select TenDocGia from TheDocGia where MaTheDocGia={0} and DeleteFlag='N'", maThe)
 
-    Public Function SelectAllByType(ByRef listAccount As List(Of Account), type As String) As Result
-        Dim query = "Select * from account where type=" & type
-        Dim dataTAble = New DataTable()
-        Dim result = DataProvider.Instance.ExecuteQuery(query, dataTAble)
-        For Each row In dataTAble.Rows
-            Dim account = New Account(row)
-            listAccount.Add(account)
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
+        For Each row In dataTable.Rows
+            tenDocGia = row("TenDocGia")
         Next
         Return result
+    End Function
+
+    Public Function GetTheLastTheDocGiaID(ByRef maTheDocGia As String) As Result
+        Dim query As String = String.Empty
+        query &= "select top 1 [MaTheDocGia] "
+        query &= "from TheDocGia "
+          query &= "@MaTheDocGia=N'" & DocGia.MaTheDocGia & "', "
+        query &= "@TenDocGia=N'" & DocGia.TenDocGia & "', "
+        query &= "ORDER BY [MaTheDocGia] DESC "
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
+        For Each row In dataTable.Rows
+            maTheDocGia = row("MaTheDocGia")
+        Next
+        Return result
+    End Function
+
+    Public Function GetExpirationDateById(ByRef ngayHetHan As DateTime, maThe As String) As Result
+        Dim query = String.Empty
+        query = String.Format("Select ngayHetHan from TheDocGia where MaTheDocGia={0} and DeleteFlag='N'", maThe)
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
+        For Each row In dataTable.Rows
+            DateTime.TryParse(row("NgayHetHan").ToString(), ngayHetHan)
+        Next
+        Return result
+    End Function
+
+    Public Function GetReaderByID(ByRef docGia As DocGia, maThe As String) As Object
+        Dim query As String = String.Empty
+        query = String.Format("select * from TheDocGia where MaTheDocGia={0} and DeleteFlag='N'", maThe)
+
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
+        For Each row In dataTable.Rows
+            docGia = New DocGia(row)
+        Next
+        Return result
+
+           Public Function GetReaderByTen(ByRef docGia As DocGia, maThe As String) As Object
+        Dim query As String = String.Empty
+        query = String.Format("select * from TheDocGia where MaTheDocGia={0} and DeleteFlag='N'", maThe)
+  query = String.Format("select * from TheDocGia where {0} and DeleteFlag='N'", dieuKienMaLoai)
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
+        For Each row In dataTable.Rows
+            docGia = New DocGia(row)
+        Next
+        Return result
+    End Function
     End Function
 
 #End Region
