@@ -104,3 +104,4 @@ C:\Users\CuBill\Desktop\QuanLiThuVien-20191109T110856Z-001\QuanLiThuVien\Project
 C:\Users\CuBill\Desktop\QuanLiThuVien-20191109T110856Z-001\QuanLiThuVien\Project\QuanLiThuVien\obj\Debug\QuanLiThuVien.exe
 C:\Users\CuBill\Desktop\QuanLiThuVien-20191109T110856Z-001\QuanLiThuVien\Project\QuanLiThuVien\obj\Debug\QuanLiThuVien.xml
 C:\Users\CuBill\Desktop\QuanLiThuVien-20191109T110856Z-001\QuanLiThuVien\Project\QuanLiThuVien\obj\Debug\QuanLiThuVien.pdb
+C:\Users\CuBill\Desktop\QuanLiThuVien-20191109T110856Z-001\QuanLiThuVien\Project\QuanLiThuVien\obj\Debug\QuanLiThuVien.ucBaoCaoSachTre.resources
