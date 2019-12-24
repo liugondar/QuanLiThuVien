@@ -271,6 +271,58 @@ maDauSach={0}", maDauSach)
         Dim result = _dataProvider.ExecuteNonquery(query)
         Return result
     End Function
+    Public Function GetTheLastID(ByRef maDauSach As String) As Result
+        Dim query As String = String.Empty
+        query &= "select top 1 [MaDauSach] "
+        query &= "from DauSach "
+        query &= "ORDER BY [MaDauSach] DESC "
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
+        For Each row In dataTable.Rows
+            maDauSach = row("MaDauSach")
+        Next
+        Return result
+    End Function
+      Dim formatDate = DateHelper.Instance.GetFormatType()
+        Dim query As String = String.Empty
+        query &= "EXECUTE USP_ThemTheDocGia "
+        query &= "@MaTheDocGia=N'" & docGia.MaTheDocGia & "', "
+        query &= "@TenDocGia=N'" & docGia.TenDocGia & "', "
+        query &= "@Email=N'" & docGia.Email & "', "
+        query &= "@DiaChi =N'" & docGia.DiaChi & "', "
+        query &= "@MaLoaiDocGia=" & docGia.MaLoaiDocGia & ", "
+        query &= "@NgaySinh='" & docGia.NgaySinh.ToString(formatDate) & "', "
+        query &= "@NgayTao='" & docGia.NgayTao.ToString(formatDate) & "', "
+        query &= "@NgayHetHan='" & docGia.NgayHetHan.ToString(formatDate) & "' "
+
+        Dim result = _dataProvider.ExecuteNonquery(query)
+        Return result
+    End Function
+
+    Public Function DeleteByReaderID(maThe As String) As Result
+        Dim query As String = String.Empty
+        query &= "EXECUTE USP_XoaTheDocGia "
+        query &= "@MaTheDocGia=" & maThe
+         query &= "@NgaySinh='" & docGia.NgaySinh.ToString(formatDate) & "', "
+        query &= "@NgayTao='" & docGia.NgayTao.ToString(formatDate) & "', "
+        query &= "@NgayHetHan='" & docGia.NgayHetHan.ToString(formatDate) & "' "
+        Dim result = _dataProvider.ExecuteNonquery(query)
+        Return result
+    End Function
+
+    Public Function UpdateByReaderId(DocGia As DocGia) As Result
+        Dim query As String = String.Empty
+        Dim formatDate = DateHelper.Instance.GetFormatType()
+        query &= "EXECUTE USP_SuaTheDocGia "
+        query &= "@MaTheDocGia=N'" & DocGia.MaTheDocGia & "', "
+        query &= "@TenDocGia=N'" & DocGia.TenDocGia & "', "
+        query &= "@Email=N'" & DocGia.Email & "', "
+        query &= "@DiaChi =N'" & DocGia.DiaChi & "', "
+        query &= "@MaLoaiDocGia=" & DocGia.MaLoaiDocGia & ", "
+        query &= "@NgaySinh='" & DocGia.NgaySinh.ToString(formatDate) & "'"
+        Dim result = _dataProvider.ExecuteNonquery(query)
+        Return result
+    End Function
 
 #End Region
 
@@ -291,6 +343,33 @@ maDauSach={0}", maDauSach)
     End Function
 
     Public Function SelectAllDocGia(ByRef listDocGia As List(Of DocGia)) As Result
+        Dim query = String.Empty
+        query &= "Select * from TheDocGia where DeleteFlag='N'"
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
+        If result.FlagResult = True Then
+            For Each row In dataTable.Rows
+                Dim docgia = New DocGia(row)
+                listDocGia.Add(docgia)
+            Next
+        End If
+        Return result
+    End Function
+    Public Function SelectAllBy(maLoai As String, ByRef listDocGia As List(Of DocGia)) As Result
+        Dim dieuKienMaLoai = If(maLoai = -1, "1=1", "[MaLoaiDocGia]=" & maLoai)
+        Dim query As String = String.Empty
+        query = String.Format("select * from TheDocGia where {0} and DeleteFlag='N'", dieuKienMaLoai)
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
+        For Each row In dataTable.Rows
+            Dim docGia = New DocGia(row)
+            listDocGia.Add(docGia)
+        Next
+
+        Return result
+    End Function
+
+    Public Function SelectAlltenDocGia(ByRef listDocGia As List(Of DocGia)) As Result
         Dim query = String.Empty
         query &= "Select * from TheDocGia where DeleteFlag='N'"
         Dim dataTable = New DataTable()
