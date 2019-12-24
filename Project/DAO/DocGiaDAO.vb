@@ -39,6 +39,9 @@ Public Class DocGiaDAO
         Dim query As String = String.Empty
         query &= "EXECUTE USP_XoaTheDocGia "
         query &= "@MaTheDocGia=" & maThe
+         query &= "@NgaySinh='" & docGia.NgaySinh.ToString(formatDate) & "', "
+        query &= "@NgayTao='" & docGia.NgayTao.ToString(formatDate) & "', "
+        query &= "@NgayHetHan='" & docGia.NgayHetHan.ToString(formatDate) & "' "
         Dim result = _dataProvider.ExecuteNonquery(query)
         Return result
     End Function
@@ -105,6 +108,8 @@ Public Class DocGiaDAO
         Dim query As String = String.Empty
         query &= "select top 1 [MaTheDocGia] "
         query &= "from TheDocGia "
+          query &= "@MaTheDocGia=N'" & DocGia.MaTheDocGia & "', "
+        query &= "@TenDocGia=N'" & DocGia.TenDocGia & "', "
         query &= "ORDER BY [MaTheDocGia] DESC "
         Dim dataTable = New DataTable()
         Dim result = _dataProvider.ExecuteQuery(query, dataTable)
@@ -129,6 +134,19 @@ Public Class DocGiaDAO
         Dim query As String = String.Empty
         query = String.Format("select * from TheDocGia where MaTheDocGia={0} and DeleteFlag='N'", maThe)
 
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
+        For Each row In dataTable.Rows
+            docGia = New DocGia(row)
+        Next
+        Return result
+    End Function
+
+    
+    Public Function GetReaderByTen(ByRef docGia As DocGia, maThe As String) As Object
+        Dim query As String = String.Empty
+        query = String.Format("select * from TheDocGia where MaTheDocGia={0} and DeleteFlag='N'", maThe)
+  query = String.Format("select * from TheDocGia where {0} and DeleteFlag='N'", dieuKienMaLoai)
         Dim dataTable = New DataTable()
         Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         For Each row In dataTable.Rows
