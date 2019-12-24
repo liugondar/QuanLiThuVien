@@ -30,7 +30,7 @@ Public Class PhieuMuonSach
             MaPhieuMuonSach = 0
             MaTheDocGia = 0
             NgayMuon = DateTime.Now
-            NgayTra = DateTime.Now
+            NgayTra = Date.Now
             HanTra = Date.Now
             TinhTrang = 0
             Return

@@ -1,55 +1,69 @@
-﻿Imports BUS
-Imports DAO
-Imports DTO
-Imports Utility
+﻿Imports QLTVDTO
+Imports QLTVBus
+Imports System.Windows.Forms
+Public Class ucThemNguoiDung
+    Private vaitroBus As New VaiTroBUS
+    Private nguoidungBus As New NguoiDungBUS
+    Public isLapTheDocGia As New Boolean
 
-Public Class frmTaoTheDocGia
+    Private Sub ucThemNguoiDung_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'cbVaiTro
+        Dim listVaiTro = New List(Of VaiTroDTO)
 
-#Region "-   Fields -"
-    Private _didReaderTypeComboboxLoad As Result
-    Private _docGiaBus As DocGiaBus
-    Private _quiDinhBus As QuiDinhBus
-#End Region
+        vaitroBus.selectAll(listVaiTro)
+        cbVaiTro.DataSource = New BindingSource(listVaiTro, String.Empty)
+        cbVaiTro.DisplayMember = "tenvaitro"
+        cbVaiTro.ValueMember = "mavaitro"
 
-#Region "-   Constructor   -"
-
-    Private Sub FormCreateReader_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        _docGiaBus = New DocGiaBus()
-        _quiDinhBus = New QuiDinhBus()
-
-        _didReaderTypeComboboxLoad = LoadReaderTypeComboboxData()
-        SetDefaultBirthDayTimePicker()
-        LoadReaderIdTextBox()
-        BindingCreateDatetimeToExpirationDate()
-    End Sub
-
-    Private Sub SetDefaultBirthDayTimePicker()
-        Dim quiDinh = New QuiDinh()
-        _quiDinhBus.GetTuoiToiDaVaToiThieu(quiDinh)
-        DateOfBirthDateTimePicker.Value = DateTime.Now.AddYears(-quiDinh.TuoiToiThieu)
-        DateOfBirthDateTimePicker.MaxDate = DateTime.Now.AddYears(-quiDinh.TuoiToiThieu)
-    End Sub
-
-    Private Function LoadReaderIdTextBox() As Result
-        Dim maDocGia As String
-        Dim ketQuaLayMa = _docGiaBus.BuildMaDocGia(maDocGia)
-        If ketQuaLayMa.FlagResult = False Then
-            MessageBox.Show("Lỗi không thể lấy mã độc giả để tiến hành tạo thẻ!")
-            Return ketQuaLayMa
+        If isLapTheDocGia = True Then
+            cbVaiTro.SelectedValue = "VT000006"
+            cbVaiTro.Enabled = False
         End If
-        ReaderIDTextBox.Text = maDocGia
-        Return ketQuaLayMa
-    End Function
 
-    Private Function LoadReaderTypeComboboxData() As Result
-        Dim loaiDocGiaBus = New LoaiDocGiaBus()
-        Dim listLoaiDocGia = New List(Of LoaiDocGia)
-        Dim result = loaiDocGiaBus.SelectAll(listLoaiDocGia)
+        'lbMaNguoiDung
+        nguoidungBus.buildMaNguoiDung(lbMaNguoiDung.Text)
+
+        'lbNgayTao
+        lbNgayTao.Text = Today.ToString("dd/MM/yyyy")
+
+        'dtpNgaySinh
+        dtpNgaySinh.Value = New Date(2000, 1, 1)
+
+        'cbGioiTinh
+        cbGioiTinh.Items.Insert(0, "Nam")
+        cbGioiTinh.Items.Insert(1, "Nữ")
+    End Sub
+
+    Private Sub btnLuu_Click(sender As Object, e As EventArgs) Handles btnLuu.Click
+        Dim nguoidung As New NguoiDungDTO
+        nguoidung.MaNguoiDung = lbMaNguoiDung.Text
+        nguoidung.HoTen = tbHoTen.Text
+        nguoidung.CMND = tbCMND.Text
+        nguoidung.GioiTinh = cbGioiTinh.SelectedIndex
+        nguoidung.NgaySinh = dtpNgaySinh.Value
+        nguoidung.DiaChi = tbDiaChi.Text
+        nguoidung.Email = tbEmail.Text
+        nguoidung.SoDienThoai = tbSoDienThoai.Text
+        nguoidung.VaiTro = cbVaiTro.SelectedValue.ToString()
+        nguoidung.NgayTao = Today
+
+        Dim res = nguoidungBus.insert(nguoidung)
+        If res.FlagResult = False Then
+            Dim mes = "Lưu người dùng thất bại!" + "\n" + res.SystemMessage
+            MessageBox.Show(mes, "Lỗi", MessageBoxButtons.OK)
+        Else
+            MessageBox.Show("Lưu người dùng thành công!", "Thông tin", MessageBoxButtons.OK)
+        End If
+
+        TaoTaiKhoanDangNhap()
 
         ReaderTypeComboBox.DataSource = New BindingSource(listLoaiDocGia, String.Empty)
-        ReaderTypeComboBox.SelectedIndex = 0
-        ReaderTypeComboBox.DisplayMember = "TenLoaiDocGia"
-        ReaderTypeComboBox.ValueMember = "MaLoaiDocGia"
+        If listLoaiDocGia.Count > 0 Then
+
+            ReaderTypeComboBox.SelectedIndex = 0
+            ReaderTypeComboBox.DisplayMember = "TenLoaiDocGia"
+            ReaderTypeComboBox.ValueMember = "MaLoaiDocGia"
+        End If
 
         Return result
     End Function
@@ -58,56 +72,77 @@ Public Class frmTaoTheDocGia
 
 #Region "-   Events   -"
 
-#Region "-   Insert   -"
-    Private Sub CreateButton_Click_1(sender As Object, e As EventArgs) Handles CreateButton.Click
-        InsertConfirm()
-        LoadReaderIdTextBox()
+        Back2(sender)
     End Sub
 
-    Private Sub CreateAndCloseButton_Click(sender As Object, e As EventArgs) Handles CreateAndCloseButton.Click
-        If InsertConfirm() Then
-            Close()
-        End If
-    End Sub
+    Private Sub TaoTaiKhoanDangNhap()
+        Dim dangnhap As New DangNhapDTO
+        Dim dangnhapBus As New DangNhapBus
 
-    Function InsertConfirm() As Boolean
-        If _didReaderTypeComboboxLoad.FlagResult = False Then
-            MessageBox.Show(_didReaderTypeComboboxLoad.ApplicationMessage)
-            Return False
-        End If
-        Dim docGia = New DocGia()
-        docGia.TenDocGia = UserNameTextBox.Text
-        docGia.Email = EmailTextBox.Text
-        docGia.DiaChi = AddressTextBox.Text
-        docGia.MaLoaiDocGia = ReaderTypeComboBox.SelectedValue
-        docGia.NgaySinh = DateOfBirthDateTimePicker.Value
-        docGia.NgayTao = DateCreateDateTimePicker.Value
-
-        Dim result = _docGiaBus.InsertOne(docGia)
+        Dim result = dangnhapBus.buildMaDangNhap(dangnhap.MaDangNhap)
         If result.FlagResult = False Then
-            MessageBox.Show(result.ApplicationMessage)
-            Return False
-        Else
-            MessageBox.Show("Nhập thành công")
-            Return True
+            MessageBox.Show("Tạo tài khoản đăng nhập thất bại!", "Lỗi", MessageBoxButtons.OK)
+            Return
         End If
-    End Function
-#End Region
 
-#Region "-  Binding CreateDatetime data To ExpirationDate   -"
-    Private Sub DateCreateDateTimePicker_ValueChanged(sender As Object, e As EventArgs) Handles DateCreateDateTimePicker.ValueChanged
-        BindingCreateDatetimeToExpirationDate()
+        dangnhap.NguoiDung = lbMaNguoiDung.Text
+        dangnhap.TenDangNhap = tbHoTen.Text
+        dangnhap.MatKhau = CInt(Math.Ceiling(Rnd() * 999999)) + 1
+        dangnhap.DangNhapLanDau = True
+        nguoidung.GioiTinh = cbGioiTinh.SelectedIndex
+        nguoidung.NgaySinh = dtpNgaySinh.Value
+        nguoidung.DiaChi = tbDiaChi.Text
+        nguoidung.Email = tbEmail.Text
+        nguoidung.SoDienThoai = tbSoDienThoai.Text
+        nguoidung.VaiTro = cbVaiTro.SelectedValue.ToString()
+        nguoidung.NgayTao = Today
+        result = dangnhapBus.insert(dangnhap)
+        If result.FlagResult = False Then
+            MessageBox.Show("Tạo tài khoản đăng nhập thất bại!", "Lỗi", MessageBoxButtons.OK)
+        Else
+            Dim mes = "Tạo tài khoản đăng nhập thành công!" + Environment.NewLine
+            mes = mes + "Tên đăng nhập: " + dangnhap.TenDangNhap + Environment.NewLine
+            mes = mes + "Mật khẩu: " + dangnhap.MatKhau
+            MessageBox.Show(mes, "Lỗi", MessageBoxButtons.OK)
+        End If
     End Sub
 
-    Private Function BindingCreateDatetimeToExpirationDate()
-        Dim quiDinh = New QuiDinh()
-        _quiDinhBus.GetThoiHanToiDaTheDocGia(quiDinh)
-        Dim ngayHetHan = DateCreateDateTimePicker.Value.AddYears(quiDinh.ThoiHanToiDaTheDocGia)
-        ExpirationDateTimePicker.Value = ngayHetHan
-    End Function
+    Private Sub btnThoat_Click(sender As Object, e As EventArgs) Handles btnThoat.Click
+        If isLapTheDocGia = False Then
+            Back(sender)
+            Return
+        End If
 
-#End Region
+        Back2(sender)
+    End Sub
 
-#End Region
+    Private Sub Back(sender As Object)
+        Dim parent As ucThemNguoiDung
+        parent = sender.Parent
+        Dim parent2 As ucThongTinNguoiDung
+        parent2 = parent.Parent
+        Dim parent3 = New FlowLayoutPanel
+        parent3 = parent2.Parent
+        Dim parent4 = New frmHome
+        parent4 = parent3.Parent
+        Dim thongtin As New ucThongTinNguoiDung With {
+            .dangnhap = parent4.dangnhap
+        }
+        parent3.Controls.Clear()
+        parent3.Controls.Add(thongtin)
+    End Sub
 
+    Private Sub Back2(sender As Object)
+        Dim parent As ucThemNguoiDung
+        parent = sender.Parent
+        Dim parent2 As ucDocGia
+        parent2 = parent.Parent
+        Dim parent3 = New FlowLayoutPanel
+        parent3 = parent2.Parent
+        Dim parent4 = New frmHome
+        parent4 = parent3.Parent
+        Dim ucdocgia As New ucDocGia
+        parent3.Controls.Clear()
+        parent3.Controls.Add(ucdocgia)
+    End Sub
 End Class

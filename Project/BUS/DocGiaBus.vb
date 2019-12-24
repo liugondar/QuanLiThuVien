@@ -167,8 +167,7 @@ Public Class DocGiaBus
     End Function
 
     Public Function GetReaderById(ByRef docGia As DocGia, maThe As String) As Result
-        Dim result = _docGiaDAO.GetReaderByID(docGia, maThe)
-        Return result
+        Return _docGiaDAO.GetReaderByID(docGia, maThe)
     End Function
 #End Region
 End Class

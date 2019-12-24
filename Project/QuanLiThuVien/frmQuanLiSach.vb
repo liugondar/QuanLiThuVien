@@ -161,6 +161,44 @@ Public Class frmQuanLiSach
     End Sub
 
     Private Sub LoadListDauSach(listDauSach As List(Of DauSachDTO))
+        InitDataGridColumn()
+
+        For index = 0 To listDauSach.Count - 1
+            'load ten the loai sach
+            Dim soluong = 0
+            Dim maTheLoaiSachTemp = listDauSach(index).MaTheLoaiSach
+            Dim tenTheLoaiSachTemp As String
+            Dim ListTheLoaiSachThoaMan = From tls In _listTheLoaiSach
+                                         Where tls.MaTheLoaiSach = maTheLoaiSachTemp
+                                         Select tls
+
+            For Each theLoaiSach In ListTheLoaiSachThoaMan
+                tenTheLoaiSachTemp = theLoaiSach.TenTheLoaiSach
+            Next
+            'load ten tac gia
+            Dim maTacGiaTemp = listDauSach(index).MaTacGia
+            Dim tenTacGiaTemp As String
+            Dim listTacGiaThoaMan = From tg In _listTacGia
+                                    Where tg.MaTacGia = maTacGiaTemp
+                                    Select tg
+            For Each tacGia In listTacGiaThoaMan
+                tenTacGiaTemp = tacGia.TenTacGia
+            Next
+
+            soluong = _sachBus.getQuanlity(listDauSach(index).MaDauSach)
+            Dim slCon = 0
+            _sachBus.getAvailableQuanlity(listDauSach(index).MaDauSach, slCon)
+
+            'load ten tinh trang
+            'Dim TongSoLuongTemp = If(listDauSach(index).TongSoLuong = 0, "Còn", "Hết")
+
+
+            DataGridViewQuanLiSach.Rows.Add(listDauSach(index).MaDauSach,
+            listDauSach(index).TenSach, tenTheLoaiSachTemp, tenTacGiaTemp, soluong, slCon)
+        Next
+    End Sub
+
+    Private Sub InitDataGridColumn()
         DataGridViewQuanLiSach.Columns.Clear()
         DataGridViewQuanLiSach.DataSource = Nothing
         DataGridViewQuanLiSach.AutoGenerateColumns = False
@@ -194,43 +232,18 @@ Public Class frmQuanLiSach
         DataGridViewQuanLiSach.Columns.Add(columnTenTacGia)
 
         Dim clnSoLuong = New DataGridViewTextBoxColumn()
-        clnSoLuong.Name = "TinhTrang"
-        clnSoLuong.HeaderText = "Số lượng"
-        clnSoLuong.DataPropertyName = "TinhTrang"
+        clnSoLuong.Name = "TongSoLuong"
+        clnSoLuong.HeaderText = "Tổng số lượng"
+        clnSoLuong.DataPropertyName = "TongSoLuong"
         clnSoLuong.Width = 150
         DataGridViewQuanLiSach.Columns.Add(clnSoLuong)
 
-        For index = 0 To listDauSach.Count - 1
-            'load ten the loai sach
-            Dim soluong = 0
-            Dim maTheLoaiSachTemp = listDauSach(index).MaTheLoaiSach
-            Dim tenTheLoaiSachTemp As String
-            Dim ListTheLoaiSachThoaMan = From tls In _listTheLoaiSach
-                                         Where tls.MaTheLoaiSach = maTheLoaiSachTemp
-                                         Select tls
-
-            For Each theLoaiSach In ListTheLoaiSachThoaMan
-                tenTheLoaiSachTemp = theLoaiSach.TenTheLoaiSach
-            Next
-            'load ten tac gia
-            Dim maTacGiaTemp = listDauSach(index).MaTacGia
-            Dim tenTacGiaTemp As String
-            Dim listTacGiaThoaMan = From tg In _listTacGia
-                                    Where tg.MaTacGia = maTacGiaTemp
-                                    Select tg
-            For Each tacGia In listTacGiaThoaMan
-                tenTacGiaTemp = tacGia.TenTacGia
-            Next
-
-            soluong = _sachBus.getQuanlity(listDauSach(index).MaDauSach)
-
-            'load ten tinh trang
-            'Dim tinhTrangTemp = If(listDauSach(index).TinhTrang = 0, "Còn", "Hết")
-
-
-            DataGridViewQuanLiSach.Rows.Add(listDauSach(index).MaDauSach,
-            listDauSach(index).TenSach, tenTheLoaiSachTemp, tenTacGiaTemp, soluong)
-        Next
+        Dim clnSoLuongCon = New DataGridViewTextBoxColumn()
+        clnSoLuongCon.Name = "SoLuongcon"
+        clnSoLuongCon.HeaderText = "Số lượng trong kho"
+        clnSoLuongCon.DataPropertyName = "SoLuongcon"
+        clnSoLuongCon.Width = 150
+        DataGridViewQuanLiSach.Columns.Add(clnSoLuongCon)
     End Sub
 
 #End Region

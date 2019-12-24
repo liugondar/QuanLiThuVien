@@ -1,1 +1,0 @@
-SQLCMD -S DESKTOP-J1I1JBP -E -i db.sql

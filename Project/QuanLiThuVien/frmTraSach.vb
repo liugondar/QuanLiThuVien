@@ -86,31 +86,10 @@ Public Class frmTraSach
 
         _chiTietPhieuMuonSachBus.selectAllByMaphieumuonsach(_listChiTietPhieuMuonSachDaMuon, PhieuMuonSach.MaPhieuMuonSach)
 
-        Dim listSachDaMuon = New List(Of Sach)
-        For Each chiTietPhieuMuonSach In _listChiTietPhieuMuonSachDaMuon
-            '_sachBus.SelectAllByMaSach(listSachDaMuon, chiTietPhieuMuonSach.MaSach)
-        Next
+        Dim listBook = New List(Of CustomBookInfoDisplay)
+        _phieuMuonSachBus.SelectAllSachChuaTraByPhieuMuonId(PhieuMuonSach.MaPhieuMuonSach, listBook)
 
-        Dim listCustomBookInfoDisplay = New List(Of CustomBookInfoDisplay)
-        For Each sach In listSachDaMuon
-            Dim maPhieuMuonSach = _listChiTietPhieuMuonSachDaMuon.
-                Where(Function(s) s.MaSach = sach.MaSach).
-                Select(Function(s) s.MaPhieuMuonSach).First()
-
-            Dim customBook = New CustomBookInfoDisplay()
-            customBook.MaSach = sach.MaSach
-            'customBook.TenSach = sach.TenSach
-            '_tacGiaBus.GetTenTacGiaByMaTacGia(customBook.TacGia, sach.MaTacGia)
-            customBook.NgayHetHan = PhieuMuonSach.HanTra
-
-            Dim dateNow As Date = Date.Now()
-            Dim isExpirated = If((PhieuMuonSach.HanTra - dateNow).TotalSeconds < 0, True, False)
-            customBook.TinhTrang = If(isExpirated, "Quá hạn", "Chưa trả")
-
-            listCustomBookInfoDisplay.Add(customBook)
-        Next
-
-        ListSachDaMuonDataGridView.DataSource = New BindingSource(listCustomBookInfoDisplay, String.Empty)
+        ListSachDaMuonDataGridView.DataSource = New BindingSource(listBook, String.Empty)
     End Sub
 
 
@@ -124,11 +103,18 @@ Public Class frmTraSach
 
     Private Sub CreateListChiTietPMSDataGridViewTitleColumn()
         Dim maSachColumn = New DataGridViewTextBoxColumn()
-        maSachColumn.Name = "MaSach"
-        maSachColumn.HeaderText = "Mã sách"
-        maSachColumn.DataPropertyName = "MaSach"
+        maSachColumn.Name = "MaDauSach"
+        maSachColumn.HeaderText = "Mã đầu sách"
+        maSachColumn.DataPropertyName = "MaDauSach"
         maSachColumn.Width = 50
         ListSachDaMuonDataGridView.Columns.Add(maSachColumn)
+
+        Dim mcsCln = New DataGridViewTextBoxColumn()
+        mcsCln.Name = "MaCuonSach"
+        mcsCln.HeaderText = "Mã cuốn sách"
+        mcsCln.DataPropertyName = "MaCuonSach"
+        mcsCln.Width = 50
+        ListSachDaMuonDataGridView.Columns.Add(mcsCln)
 
         Dim tenSachColumn = New DataGridViewTextBoxColumn()
         tenSachColumn.Name = "TenSach"

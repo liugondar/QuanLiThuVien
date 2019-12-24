@@ -17,6 +17,7 @@ Public Class frmChoMuonSach
     Private _listSach As List(Of Sach)
     Private _listTacGia As List(Of TacGia)
     Private _listTheLoaiSach As List(Of TheLoaiSach)
+    Private _listIdCuonSachAvailable As List(Of Integer)
 
 
     Private AddNewRowButton As Button
@@ -47,7 +48,7 @@ Public Class frmChoMuonSach
         CreateListSachCanMuonDataGridViewColumn()
 
         If MapBorrowDateToExpirationDate().FlagResult = False Then Return
-        LoadListSachDaMuonDataGridView(New List(Of PhieuMuonSach))
+        LoadListSachDaMuonDataGridView(New List(Of CustomBookInfoDisplay))
 
         If _tacGiaBus.SelectAll(_listTacGia).FlagResult = False Then Return
         If _theLoaiSachBus.SelectAll(_listTheLoaiSach).FlagResult = False Then Return
@@ -62,10 +63,16 @@ Public Class frmChoMuonSach
         dgvDanhSachCanMuon.AutoGenerateColumns = False
         dgvDanhSachCanMuon.AllowUserToAddRows = False
         Dim clMa = New DataGridViewTextBoxColumn()
-        clMa.Name = "MaSach"
-        clMa.HeaderText = "Mã Sách"
-        clMa.DataPropertyName = "MaSach"
+        clMa.Name = "MaDauSach"
+        clMa.HeaderText = "Mã Đầu Sách"
+        clMa.DataPropertyName = "MaDauSach"
         dgvDanhSachCanMuon.Columns.Add(clMa)
+
+        Dim clMaCuonSAch = New DataGridViewTextBoxColumn()
+        clMaCuonSAch.Name = "MaCuonSach"
+        clMaCuonSAch.HeaderText = "Mã Cuốn Sách"
+        clMaCuonSAch.DataPropertyName = "MaCuonSach"
+        dgvDanhSachCanMuon.Columns.Add(clMaCuonSAch)
 
         Dim clTenSach = New DataGridViewTextBoxColumn()
         clTenSach.Name = "TenSach"
@@ -124,31 +131,19 @@ Public Class frmChoMuonSach
     End Sub
 
     Private Sub RenderDataWhenReaderIdTextBoxChanged()
-        Dim docGia = New DocGia()
-        Dim getReaderDataResult = GetReaderDataById(docGia)
-        If getReaderDataResult.FlagResult = False Then
-            docGia.TenDocGia = String.Empty
+        UserNameTextBox.Text = ""
+        Dim docGia As DocGia
+        Dim result = _docGiaBus.GetReaderById(docGia, ReaderIdTextBox.Text)
+        If (result.FlagResult AndAlso docGia IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(docGia.TenDocGia)) Then
+            UserNameTextBox.Text = docGia.TenDocGia
+            Dim sachInfo As List(Of CustomBookInfoDisplay)
+            sachInfo = New List(Of CustomBookInfoDisplay)
+            _phieuMuonSachBus.SelectRentSachByDocGiaId(ReaderIdTextBox.Text, sachInfo)
+            LoadListSachDaMuonDataGridView(sachInfo)
         End If
 
-        UserNameTextBox.Text = docGia.TenDocGia
-
-        _listPhieuMuonSachDaMuon.Clear()
-        Dim ketQuaLayPhieuMuonSach =
-            _phieuMuonSachBus.SelectAllSachChuaTraByReaderID(_listPhieuMuonSachDaMuon,
-                                                     docGia.MaTheDocGia)
-        LoadListSachDaMuonDataGridView(_listPhieuMuonSachDaMuon)
     End Sub
 
-    Private Function GetReaderDataById(ByRef docGia As DocGia) As Result
-        Try
-            If String.IsNullOrWhiteSpace(ReaderIdTextBox.Text) = True Then Return New Result(False, "", "")
-            docGia.MaTheDocGia = ReaderIdTextBox.Text
-        Catch ex As Exception
-            Console.WriteLine(ex)
-        End Try
-        Return _docGiaBus.
-            GetReaderNameById(docGia.TenDocGia, docGia.MaTheDocGia)
-    End Function
 #End Region
 
 #Region "-   Display warning reader id valdiate label depend on reader id   -"
@@ -206,21 +201,44 @@ Public Class frmChoMuonSach
 #End Region
 
 #Region "-   Load list sach da muon datagridview   -"
-    Private Sub LoadListSachDaMuonDataGridView(listPhieuMuonSachDaMuon As List(Of PhieuMuonSach))
+    Private Sub LoadListSachDaMuonDataGridView(sachInfo As List(Of CustomBookInfoDisplay))
         ClearBookBorrowedDataGridViewData()
 
-        BindingSourceBookBorrowedDataGridViewData(listPhieuMuonSachDaMuon)
+        BindingSourceBookBorrowedDataGridViewData(sachInfo)
 
         AddColumnTitle()
     End Sub
 
     Private Sub AddColumnTitle()
         Dim maSachColumn = New DataGridViewTextBoxColumn()
-        maSachColumn.Name = "MaSach"
-        maSachColumn.HeaderText = "Mã sách"
-        maSachColumn.DataPropertyName = "MaSach"
+        maSachColumn.Name = "MaDauSach"
+        maSachColumn.HeaderText = "Mã đầu sách"
+        maSachColumn.DataPropertyName = "MaDauSach"
         maSachColumn.Width = 50
         ListSachDaMuonDataGridView.Columns.Add(maSachColumn)
+
+        Dim csIdClmn = New DataGridViewTextBoxColumn()
+        csIdClmn.Name = "MaCuonSach"
+        csIdClmn.HeaderText = "Mã sách"
+        csIdClmn.DataPropertyName = "MaCuonSach"
+        csIdClmn.Width = 50
+        ListSachDaMuonDataGridView.Columns.Add(csIdClmn)
+
+        Dim phieuMuonIdClmn = New DataGridViewTextBoxColumn()
+        phieuMuonIdClmn.Name = "MaPhieuMuonSach"
+        phieuMuonIdClmn.HeaderText = "Mã phiếu mượn sách"
+        phieuMuonIdClmn.DataPropertyName = "MaPhieuMuonSach"
+        phieuMuonIdClmn.Width = 50
+        ListSachDaMuonDataGridView.Columns.Add(phieuMuonIdClmn)
+
+
+        Dim tinhTrangColumn = New DataGridViewTextBoxColumn()
+        tinhTrangColumn.Name = "TinhTrang"
+        tinhTrangColumn.HeaderText = "Tình trạng"
+        tinhTrangColumn.DataPropertyName = "TinhTrang"
+        tinhTrangColumn.Width = 120
+        ListSachDaMuonDataGridView.Columns.Add(tinhTrangColumn)
+
 
         Dim tenSachColumn = New DataGridViewTextBoxColumn()
         tenSachColumn.Name = "TenSach"
@@ -236,12 +254,12 @@ Public Class frmChoMuonSach
         tacGiaColumn.Width = 140
         ListSachDaMuonDataGridView.Columns.Add(tacGiaColumn)
 
-        Dim tinhTrangColumn = New DataGridViewTextBoxColumn()
-        tinhTrangColumn.Name = "TinhTrang"
-        tinhTrangColumn.HeaderText = "Tình trạng"
-        tinhTrangColumn.DataPropertyName = "TinhTrang"
-        tinhTrangColumn.Width = 120
-        ListSachDaMuonDataGridView.Columns.Add(tinhTrangColumn)
+        Dim ngMuonCln = New DataGridViewTextBoxColumn()
+        ngMuonCln.Name = "NgayMuon"
+        ngMuonCln.HeaderText = "Ngày mượn"
+        ngMuonCln.DataPropertyName = "NgayMuon"
+        ngMuonCln.Width = 140
+        ListSachDaMuonDataGridView.Columns.Add(ngMuonCln)
 
         Dim ngayHetHanColumn = New DataGridViewTextBoxColumn()
         ngayHetHanColumn.Name = "NgayHetHan"
@@ -251,43 +269,8 @@ Public Class frmChoMuonSach
         ListSachDaMuonDataGridView.Columns.Add(ngayHetHanColumn)
     End Sub
 
-    Private Sub BindingSourceBookBorrowedDataGridViewData(listPhieuMuonSachDaMuon As List(Of PhieuMuonSach))
-
-        If listPhieuMuonSachDaMuon.Count < 1 Then Return
-        Dim listChiTietPhieuMuonSachDaMuon = New List(Of ChiTietPhieuMuonSach)
-        Dim listSachDaMuon = New List(Of Sach)
-        Dim listCustomBookInfoDisplay = New List(Of CustomBookInfoDisplay)
-
-        For Each phieuMuonSach In listPhieuMuonSachDaMuon
-            _chiTietPhieuMuonSach.selectAllByMaphieumuonsach(listChiTietPhieuMuonSachDaMuon, phieuMuonSach.MaPhieuMuonSach)
-        Next
-
-        For Each chiTietPhieuMuonSach In listChiTietPhieuMuonSachDaMuon
-            ' TODO: fix sach
-            '_sachBus.SelectAllByMaSach(listSachDaMuon, chiTietPhieuMuonSach.MaSach)
-        Next
-
-        For Each sach In listSachDaMuon
-            Dim maPhieuMuonSach = listChiTietPhieuMuonSachDaMuon.
-                Where(Function(s) s.MaSach = sach.MaSach).
-                Select(Function(s) s.MaPhieuMuonSach).First()
-
-            Dim phieuMuonSach = listPhieuMuonSachDaMuon.Where(Function(s) s.MaPhieuMuonSach = maPhieuMuonSach).First()
-
-            Dim customBook = New CustomBookInfoDisplay()
-            customBook.MaSach = sach.MaSach
-            'customBook.TenSach = sach.TenSach
-            '_tacGiaBus.GetTenTacGiaByMaTacGia(customBook.TacGia, sach.MaTacGia)
-            customBook.NgayHetHan = phieuMuonSach.HanTra
-
-            Dim dateNow As Date = Date.Now()
-            Dim isExpirated = If((phieuMuonSach.HanTra - dateNow).TotalSeconds < 0, True, False)
-            customBook.TinhTrang = If(isExpirated, "Quá hạn", "Chưa trả")
-
-            listCustomBookInfoDisplay.Add(customBook)
-        Next
-
-        ListSachDaMuonDataGridView.DataSource = New BindingSource(listCustomBookInfoDisplay, String.Empty)
+    Private Sub BindingSourceBookBorrowedDataGridViewData(customBook As List(Of CustomBookInfoDisplay))
+        ListSachDaMuonDataGridView.DataSource = New BindingSource(customBook, String.Empty)
     End Sub
 
     Private Sub ClearBookBorrowedDataGridViewData()
@@ -311,20 +294,23 @@ Public Class frmChoMuonSach
         End Try
     End Sub
     Private Sub LoadInfoBook(maSach As String)
+        resetSachInputFields()
         Dim tenSach = String.Empty
         Dim tacGia = String.Empty
         Dim theLoai = String.Empty
-        Dim tinhTrangSach = 0
+        Dim soluongSach = 0
         Dim result As Result
-        txtTenSach.Text = String.Empty
-        txtTacGia.Text = String.Empty
-        txtTheLoai.Text = String.Empty
-        result = _sachBus.SelectByType(maSach, tenSach, theLoai, tacGia, tinhTrangSach)
+
+        result = _sachBus.SelectByType(maSach, tenSach, theLoai, tacGia, soluongSach, _listIdCuonSachAvailable)
 
         If (result.FlagResult) Then
             txtTenSach.Text = tenSach
             txtTacGia.Text = tacGia
             txtTheLoai.Text = theLoai
+            nudSoLuong.Maximum = soluongSach
+            txtSlSachCon.Text = If(soluongSach = 0, "Đã hết Sách", soluongSach)
+            txtSlSachCon.BackColor = txtSlSachCon.BackColor
+            txtSlSachCon.ForeColor = If(soluongSach = 0, Color.Red, Color.Black)
         Else
             txtTenSach.Text = String.Empty
             txtTacGia.Text = String.Empty
@@ -332,9 +318,7 @@ Public Class frmChoMuonSach
         End If
 
 
-        txtTinhTrangSach.Text = If(tinhTrangSach = 0, "Còn", "Đã hết sách")
-        txtTinhTrangSach.BackColor = txtTinhTrangSach.BackColor
-        txtTinhTrangSach.ForeColor = If(tinhTrangSach = 0, Color.Black, Color.Red)
+
 
     End Sub
 #End Region
@@ -349,7 +333,7 @@ Public Class frmChoMuonSach
 
         Dim isUnvalidBookInfo As Boolean = String.IsNullOrWhiteSpace(txtMaSach.Text) Or
             String.IsNullOrWhiteSpace(txtTenSach.Text) Or
-            String.IsNullOrWhiteSpace(txtTinhTrangSach.Text) Or
+            String.IsNullOrWhiteSpace(txtSlSachCon.Text) Or
             String.IsNullOrWhiteSpace(txtTheLoai.Text) Or
             String.IsNullOrWhiteSpace(txtTacGia.Text)
         If isUnvalidBookInfo Then
@@ -363,37 +347,44 @@ Public Class frmChoMuonSach
         End If
 
 
-        If (txtTinhTrangSach.Text = "Đã hết sách") Then
+        If (txtSlSachCon.Text = "Đã hết sách") Then
             MessageBox.Show("Sách đã cho mượn", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
 
         'Add distince book info
         ThemInfoSachCanMuonVaoDataGridView()
+        resetSachInputFields()
+    End Sub
+
+    Private Sub resetSachInputFields()
+        txtTenSach.Text = String.Empty
+        txtTacGia.Text = String.Empty
+        txtTheLoai.Text = String.Empty
+        txtSlSachCon.Text = String.Empty
+        nudSoLuong.Maximum = 1
+        _listIdCuonSachAvailable = New List(Of Integer)
     End Sub
 
     Private Sub ThemInfoSachCanMuonVaoDataGridView()
-        Dim rnum As Integer = dgvDanhSachCanMuon.Rows.Add()
+        For i = 1 To nudSoLuong.Value
+            If _listIdCuonSachAvailable.Count > 0 Then
+                addOneRowToGrid(_listIdCuonSachAvailable(0))
+                _listIdCuonSachAvailable.RemoveAt(0)
+            End If
+        Next
 
-        dgvDanhSachCanMuon.Rows.Item(rnum).Cells("MaSach").Value = txtMaSach.Text
-        dgvDanhSachCanMuon.Rows.Item(rnum).Cells("TenSach").Value = txtTenSach.Text
-        dgvDanhSachCanMuon.Rows.Item(rnum).Cells("TheLoai").Value = txtTheLoai.Text
-        dgvDanhSachCanMuon.Rows.Item(rnum).Cells("TacGia").Value = txtTacGia.Text
+    End Sub
 
-        Dim numberOfRows = dgvDanhSachCanMuon.Rows.Count - 1 'subtract the last row which is an editing row
-        Dim i As Integer = 0
+    Private Sub addOneRowToGrid(id As Integer)
+        System.Console.WriteLine("Log text")
+        Dim maDauSach = txtMaSach.Text
+        Dim maCuonSach = id
+        Dim tenSach = txtTenSach.Text
+        Dim theLoai = txtTheLoai.Text
+        Dim tacGia = txtTacGia.Text
 
-        While i < numberOfRows
-
-            For j As Integer = (numberOfRows) To (i + 1) Step -1
-                If dgvDanhSachCanMuon.Rows(i).Cells("MaSach").Value.ToString() = dgvDanhSachCanMuon.Rows(j).Cells("MaSach").Value.ToString() Then
-                    dgvDanhSachCanMuon.Rows.Remove(dgvDanhSachCanMuon.Rows(j))
-                    numberOfRows -= 1
-                End If
-            Next
-            i += 1
-        End While
-
+        dgvDanhSachCanMuon.Rows.Add(New String() {maDauSach, maCuonSach, tenSach, theLoai, tacGia})
     End Sub
 
     Private Sub btnXoa_Click(sender As Object, e As EventArgs) Handles btnXoa.Click
@@ -437,7 +428,7 @@ Public Class frmChoMuonSach
         For i As Integer = 0 To numberOfRows
             Dim chiTietPhieuMuonSach = New ChiTietPhieuMuonSach()
             chiTietPhieuMuonSach.MaPhieuMuonSach = maPhieuMuonSachHienTai
-            chiTietPhieuMuonSach.MaSach = dgvDanhSachCanMuon.Rows(i).Cells("MaSach").Value.ToString()
+            chiTietPhieuMuonSach.MaSach = dgvDanhSachCanMuon.Rows(i).Cells("MaCuonSach").Value.ToString()
 
             Dim insertChitietphieumuonsachResult = _chiTietPhieuMuonSach.InsertOne(chiTietPhieuMuonSach)
             If insertChitietphieumuonsachResult.FlagResult = False Then
