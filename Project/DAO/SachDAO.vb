@@ -142,6 +142,8 @@ where MaSach={0}", id)
         Return result
     End Function
 
+<<<<<<< HEAD
+=======
 
     Public Function GetByID(ByRef sach As Sach, maSach As Integer) As Result
         Dim query = String.Format("select * 
@@ -183,6 +185,7 @@ maSach={0}", maSach)
         Return result
     End Function
 
+>>>>>>> 23255e082546ff634623f5fd37accbfe6a2d20ef
       Public Function SelectAll(ByRef listTacGia As List(Of TacGia)) As Result
         Dim query = String.Empty
         query &= "Select * from dbo.TacGia"
@@ -233,6 +236,34 @@ order by MaTacGia desc")
         Next
         Return New Result()
     End Function
+<<<<<<< HEAD
+#End Region
+
+#Region "-    Insert,delete,update   -"
+    Function UpdateById(tacGia As TacGia, tacGiaId As String) As Result
+        Dim query = String.Format("
+update TacGia
+set TenTacGia='{0}'
+where MaTacGia={1} and DeleteFlag='N'", tacGia.TenTacGia, tacGiaId)
+        Return _dataProvider.ExecuteNonquery(query)
+    End Function
+
+    Function DeleteById(tacGiaId As String) As Result
+        Dim query = String.Format("
+update TacGia
+set DeleteFlag='Y'
+where MaTacGia={0}", tacGiaId)
+        Return _dataProvider.ExecuteNonquery(query)
+    End Function
+
+    Function InsertOne(tacGia As TacGia) As Result
+        Dim query = String.Format("
+INSERT into dbo.TacGia(TenTacGia)
+VALUES('{0}')", tacGia.TenTacGia)
+        Return _dataProvider.ExecuteNonquery(query)
+    End Function
+=======
+>>>>>>> 23255e082546ff634623f5fd37accbfe6a2d20ef
 #End Region
 
 #Region "-    Insert,delete,update   -"
