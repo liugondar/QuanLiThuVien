@@ -153,12 +153,11 @@ Public Class frmTraSach
 #End Region
 
 #Region "-  Confirm clicked   -"
-    Private Sub ConfirmMetroButton_Click(sender As Object, e As EventArgs) Handles ConfirmMetroButton.Click
+    Private Sub ConfirmMetroButton_Click(sender As Object, e As EventArgs) Handles btnTraHet.Click
         Dim maPhieumuon = MaPhieuMuonTextBox.Text
         _phieuMuonSachCanTra.MaPhieuMuonSach = maPhieumuon
-        _phieuMuonSachCanTra.NgayTra = NgayTraDateTimePicker.Value
         If Not WarningUnavailableMaPhieuMuonLabel.Visible Then
-            If _phieuMuonSachBus.UpdateCheckOutPhieuMuonByPhieuMuonSach(_phieuMuonSachCanTra, _listChiTietPhieuMuonSachDaMuon).FlagResult Then
+            If _phieuMuonSachBus.CheckOutPhieuMuonById(_phieuMuonSachCanTra, _listChiTietPhieuMuonSachDaMuon, NgayTraDateTimePicker.Value).FlagResult Then
                 MessageBox.Show("Trả sách thành công!")
                 _phieuMuonSachCanTra = New PhieuMuonSach()
                 MaPhieuMuonTextBox.ResetText()

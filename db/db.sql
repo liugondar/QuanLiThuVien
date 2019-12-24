@@ -176,7 +176,6 @@ CREATE TABLE dbo.PhieuMuonSach
     -- primary key column
     MaTheDocGia NVARCHAR(20) NOT NULL,
     NgayMuon[date] NOT NULL default GETDATE(),
-    NgayTra[date] ,
     HanTra[date] NOT NULL DEFAULT getdate(),
     TongSoSachMuon int NOT NULL DEFAULT 1,
     TinhTrang int not null DEFAULT 0,-- 0 is not check out, 1 is check out 
@@ -198,6 +197,7 @@ CREATE TABLE dbo.ChiTietPhieuMuonSach
     -- primary key column
     MaPhieuMuonSach INT NOT NULL,
     MaSach NVARCHAR(20) not null,
+    NgayTra[date] ,
     TinhTrang int not null DEFAULT 0,-- 0 is not check out, 1 is check out 
     DeleteFlag NVARCHAR(1) not null default 'N',
     CONSTRAINT FK_ChiTietPhieuMuonSach_PhieuMuonSach FOREIGN KEY(MaPhieuMuonSach)
