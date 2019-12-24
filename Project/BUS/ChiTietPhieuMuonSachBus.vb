@@ -42,8 +42,15 @@ Public Class ChiTietPhieuMuonSachBus
                                                maPhieuMuonSach As String) As Result
         Return _chiTietPhieuMuonSachDAO.selectAllByMaphieumuonsach(listChitietphieumuonsach, maPhieuMuonSach)
     End Function
+    Public Function selectAllByNgaymuonsach(ByRef listChitietphieumuonsach As List(Of ChiTietPhieuMuonSach),
+                                               maPhieuMuonSach As String) As Result
+        Return _chiTietPhieuMuonSachDAO.selectAllByMaphieumuonsach(listChitietphieumuonsach, maPhieuMuonSach)
+    End Function
 
     Public Function GetByID(ByRef chiTietPhieuMuonSach As ChiTietPhieuMuonSach, id As String) As Result
+        Return _chiTietPhieuMuonSachDAO.GetByID(chiTietPhieuMuonSach, id)
+    End Function
+    Public Function GetByTen(ByRef chiTietPhieuMuonSach As ChiTietPhieuMuonSach, id As String) As Result
         Return _chiTietPhieuMuonSachDAO.GetByID(chiTietPhieuMuonSach, id)
     End Function
     Public Function selectALL(ByRef list As List(Of ChiTietPhieuMuonSach)) As Result

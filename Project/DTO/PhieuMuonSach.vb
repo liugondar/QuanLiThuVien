@@ -36,6 +36,13 @@ Public Class PhieuMuonSach
             Return
         End If
 
+        'Integer.TryParse(row("MaPhieuMuonSach").ToString(), MaPhieuMuonSach)
+        'Integer.TryParse(row("MaTheDocGia").ToString(), MaTheDocGia)
+        'DateTime.TryParse(row("NgayMuon").ToString(), NgayMuon)
+        'DateTime.TryParse(row("NgayTra").ToString(), NgayTra)
+        'DateTime.TryParse(row("HanTra").ToString(), HanTra)
+        'Integer.TryParse(row("TinhTrang").ToString(), TinhTrang)
+        'Integer.TryParse(row("TongSoSachMuon").ToString(), TongSoSachMuon)
         Integer.TryParse(row("MaPhieuMuonSach").ToString(), MaPhieuMuonSach)
         Integer.TryParse(row("MaTheDocGia").ToString(), MaTheDocGia)
         DateTime.TryParse(row("NgayMuon").ToString(), NgayMuon)
@@ -43,6 +50,7 @@ Public Class PhieuMuonSach
         DateTime.TryParse(row("HanTra").ToString(), HanTra)
         Integer.TryParse(row("TinhTrang").ToString(), TinhTrang)
         Integer.TryParse(row("TongSoSachMuon").ToString(), TongSoSachMuon)
+    
     End Sub
 
     Public Sub New(maPhieuMuonSach As Integer, maTheDocGia As Integer, ngayMuon As Date, ngayTra As Date, hanTra As Date, tongSoSachMuon As Integer, tinhTrang As Integer)
