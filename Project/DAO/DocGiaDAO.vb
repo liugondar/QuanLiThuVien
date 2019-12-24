@@ -155,5 +155,40 @@ Public Class DocGiaDAO
         Return result
     End Function
 
+      Public Function UpdateAccount(newAccountProfile As Account) As Result
+        Dim salt As String = BCrypt.Net.BCrypt.GenerateSalt()
+        Dim newpassword = newAccountProfile.Password
+        Dim passwordHash As String = BCrypt.Net.BCrypt.HashPassword(newpassword, salt)
+        Dim doesPasswordMatch As Boolean = BCrypt.Net.BCrypt.Verify(newpassword, passwordHash)
+        Dim result = New Result()
+
+        If doesPasswordMatch Then
+            Dim dieuKienPassword = If(
+        String.IsNullOrWhiteSpace(newAccountProfile.Password),
+        "",
+        String.Format(",[Password]='{0}',
+salt='{1}'", passwordHash, salt))
+            Dim query = String.Format("update Account
+set DisplayName='{0}' {1}
+where AccountId={2}", newAccountProfile.DisplayName, dieuKienPassword,
+newAccountProfile.AccountId)
+            result = DataProvider.Instance.ExecuteNonquery(query)
+        End If
+
+        Return result
+    End Function
+
+    Public Function UpdateAccountTypeByUserName(account As Account) As Result
+        Dim query = String.Format("Update account set type={0} where userName='{1}'",
+account.Type, account.UserName)
+        Return DataProvider.Instance.ExecuteNonquery(query)
+    End Function
+
+    Public Function DeleteByUserName(userName As String) As Result
+        Dim query = String.Format("delete from Account where UserName='{0}'", userName)
+        Return DataProvider.Instance.ExecuteNonquery(query)
+    End Function
+
+
 #End Region
 End Class
