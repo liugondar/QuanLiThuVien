@@ -46,10 +46,11 @@ EXEC USP_NhapChiTietBaoCaoTinhHinhMuonSachTheoTheLoai
         Dim month = thoiGian.ToString("MM")
         Dim year = thoiGian.ToString("yyyy")
         Dim query = String.Format("select COUNT(DISTINCT(ctpms.MaChiTietPhieuMuonSach)) as SoLuotMuon
-from PhieuMuonSach pms,ChiTietPhieuMuonSach ctpms, sach s
-where ctpms.DeleteFlag='N' and s.DeleteFlag='N' and pms.DeleteFlag='N'
+from PhieuMuonSach pms,ChiTietPhieuMuonSach ctpms, sach s, DauSach ds
+where ctpms.DeleteFlag='N' and s.DeleteFlag='N' and pms.DeleteFlag='N' and ds.DeleteFlag='N'
+and ds.MaDauSach= s.MaDauSach
 and pms.MaPhieuMuonSach=ctpms.MaPhieuMuonSach and ctpms.MaSach=s.MaSach
-and s.MaTheLoaiSach={0} and Year(pms.NgayMuon)='{1}' and MONTH(pms.NgayMuon)='{2}'", maTheLoaiSach, year, month)
+and ds.MaTheLoaiSach={0} and Year(pms.NgayMuon)='{1}' and MONTH(pms.NgayMuon)='{2}'", maTheLoaiSach, year, month)
         Dim dataTable = New DataTable()
         Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         For Each row In dataTable.Rows
