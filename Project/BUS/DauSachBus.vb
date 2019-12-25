@@ -48,7 +48,21 @@ Public Class DauSachBus
         If validateResult.FlagResult = False Then Return validateResult
         Return _dausachDAO.InsertOne(dausach)
     End Function
-    Private Function Validate(dausach As DauSachDTO) As Result
+    Private Function Validatehan(dausach As DauSachDTO) As Result
+        If _ketQuaLayQuiDinh.FlagResult = False Then Return New Result(False, "Không thể lấy qui định trong cơ sở dữ liệu để xác nhập thông tin sách!", "")
+        Dim validateTenSachVaTenNhaXuatBanResult = dausach.ValidateTenSachAndTenNhaXuatBan()
+        Dim validateNgayXuatBanResult = ValidateNgayXuatBan(dausach.NgayXuatBan, dausach.NgayNhap)
+        Dim validateTheLoaiSachResult = ValidateTheLoaiSach(dausach.MaTheLoaiSach)
+        Dim validateTacGiaResult = ValidateTacGia(dausach.MaTacGia)
+
+        If validateTenSachVaTenNhaXuatBanResult.FlagResult = False Then Return validateTenSachVaTenNhaXuatBanResult
+        If validateNgayXuatBanResult.FlagResult = False Then Return validateNgayXuatBanResult
+        If validateTheLoaiSachResult.FlagResult = False Then Return validateTheLoaiSachResult
+        If validateTacGiaResult.FlagResult = False Then Return validateTacGiaResult
+
+        Return New Result()
+    End Function
+    Private Function Validatetime(dausach As DauSachDTO) As Result
         If _ketQuaLayQuiDinh.FlagResult = False Then Return New Result(False, "Không thể lấy qui định trong cơ sở dữ liệu để xác nhập thông tin sách!", "")
         Dim validateTenSachVaTenNhaXuatBanResult = dausach.ValidateTenSachAndTenNhaXuatBan()
         Dim validateNgayXuatBanResult = ValidateNgayXuatBan(dausach.NgayXuatBan, dausach.NgayNhap)
