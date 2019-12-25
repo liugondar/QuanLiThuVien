@@ -77,9 +77,7 @@ dausach.MaDauSach)
     End Function
 
     Public Function DeleteById(id As String) As Result
-        Dim query = String.Format("update DauSach
-set DeleteFlag='Y'
-where MaDauSach={0}", id)
+        Dim query = String.Format("EXECUTE dbo.USP_XoaDauSach {0}", id)
         Return _dataProvider.ExecuteNonquery(query)
     End Function
 #End Region

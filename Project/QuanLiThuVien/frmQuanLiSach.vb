@@ -349,6 +349,14 @@ Public Class frmQuanLiSach
         Me.InitializeComponent()
         InitComponenents()
     End Sub
+
+    Private Sub DataGridViewQuanLiSach_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewQuanLiSach.CellContentClick
+
+    End Sub
+
+    Private Sub GroupBoxThongTinSachCanTim_Enter(sender As Object, e As EventArgs) Handles GroupBoxThongTinSachCanTim.Enter
+
+    End Sub
 #End Region
 
 #End Region

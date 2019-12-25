@@ -74,9 +74,10 @@ Public Class frmNhapSach
 #Region "-   Create button clicked  -"
     Private Sub CreateButton_Click(sender As Object, e As EventArgs) Handles CreateButton.Click
         InsertDauSach()
+        LoadTxtMaDauSach()
     End Sub
 
-    Private Sub InsertDauSach()
+    Private Function InsertDauSach() As Result
         Dim result As New Result
 
         Dim dausach = New DauSachDTO()
@@ -94,7 +95,7 @@ Public Class frmNhapSach
             MessageBox.Show(result.ApplicationMessage)
         Else
 
-            For i As Integer = 1 To dausach.SoLuong
+            For i As Integer = 1 To nudSoLuong.Value
                 Dim cuonsach = New Sach With {
                     .MaDauSach = dausach.MaDauSach,
                     .NgayNhap = DateInputDateTimePicker.Value
@@ -105,7 +106,9 @@ Public Class frmNhapSach
 
         End If
 
-    End Sub
+        Return result
+
+    End Function
 
 
 
@@ -113,16 +116,10 @@ Public Class frmNhapSach
 #End Region
 
     Private Sub CreateAndCloseButton_Click(sender As Object, e As EventArgs) Handles CreateAndCloseButton.Click
-        InsertDauSach()
-        Close()
+        If InsertDauSach().FlagResult Then
+            Close()
+        End If
     End Sub
-
-    Private Sub nudSoLuong_ValueChanged(sender As Object, e As EventArgs) 
-
-    End Sub
-
-
-
 
 #End Region
 
