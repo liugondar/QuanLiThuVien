@@ -70,6 +70,7 @@
     <Compile Include="Account.vb" />
     <Compile Include="BaoCaoSachTraTre.vb" />
     <Compile Include="BaoCaoTinhHinhMuonSachTheoTheLoai.vb" />
+    <Compile Include="BaoCaoTraTreByMonth.vb" />
     <Compile Include="ChiTietBaoCaoSachTraTre.vb" />
     <Compile Include="ChiTietBaoCaoTinhHinhMuonSachTheoTheLoai.vb" />
     <Compile Include="ChiTietPhieuMuonSach.vb" />
