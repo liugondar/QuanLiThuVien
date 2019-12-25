@@ -5,33 +5,7 @@ Imports Utility
 Public Class frmQuanLiAccount
     Private _listLoaiTK As List(Of LoaiTaiKhoan)
 #Region "-   Constructor  -"
-    Private Sub frmQuanLiAccount_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        _listLoaiTK = New List(Of LoaiTaiKhoan)
-        LoadDefaultCB()
-        LoadDataGridView()
-    End Sub
-
-    Private Sub LoadDefaultCB()
-        Dim loaiTaiKhoanNhanVien = New LoaiTaiKhoan()
-        loaiTaiKhoanNhanVien.MaLoaiTaiKhoan = 0
-        loaiTaiKhoanNhanVien.TenLoaiTaiKhoan = "Nhân viên"
-        _listLoaiTK.Add(loaiTaiKhoanNhanVien)
-
-        Dim loaitkAdmin = New LoaiTaiKhoan()
-        loaitkAdmin.MaLoaiTaiKhoan = 1
-        loaitkAdmin.TenLoaiTaiKhoan = "Quản lí"
-        _listLoaiTK.Add(loaitkAdmin)
-
-        cbDefaultType.DataSource = New BindingSource(_listLoaiTK, String.Empty)
-        cbDefaultType.ValueMember = "MaLoaiTaiKhoan"
-        cbDefaultType.DisplayMember = "TenLoaiTaiKhoan"
-        cbDefaultType.SelectedIndex = 0
-
-        cbUpdateType.DataSource = New BindingSource(_listLoaiTK, String.Empty)
-        cbUpdateType.ValueMember = "MaLoaiTaiKhoan"
-        cbUpdateType.DisplayMember = "TenLoaiTaiKhoan"
-        cbUpdateType.SelectedIndex = 0
-    End Sub
+   
 #End Region
 
 #Region "-   Events   -"
