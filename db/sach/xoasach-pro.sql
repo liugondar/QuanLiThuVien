@@ -23,6 +23,7 @@ AS
     and s.MaSach= @MaCuonSach
     and ds.DeleteFlag = N'N'
 GO
+<<<<<<< HEAD
 
 
 -- Create a new stored procedure called 'USP_XoaDauSach' in schema 'dbo'
@@ -50,3 +51,14 @@ AS
         on s.MaDauSach = ds.MaDauSach
         and ds.MaDauSach= @MaDauSach
 GO
+=======
+-- example to execute the stored procedure we just created
+EXECUTE dbo.GetAllInfoBookByCuonSachId 1
+GO
+
+
+select * from Sach
+select * from DauSach
+
+'
+>>>>>>> loc

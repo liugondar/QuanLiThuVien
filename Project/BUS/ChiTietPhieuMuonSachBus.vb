@@ -60,6 +60,7 @@ Public Class ChiTietPhieuMuonSachBus
         Return _chiTietPhieuMuonSachDAO.GetByID(chiTietPhieuMuonSach, id)
     End Function
 <<<<<<< HEAD
+<<<<<<< HEAD
      Public Function GetByName(ByRef chiTietPhieuMuonSach As ChiTietPhieuMuonSach, id As String) As Result
         Return _chiTietPhieuMuonSachDAO.GetByID(chiTietPhieuMuonSach, id)
     End Function
@@ -69,10 +70,15 @@ Public Class ChiTietPhieuMuonSachBus
 
 
 =======
+=======
+>>>>>>> loc
 
     Public Function ReturnBookByPhieuMuonSachIdAndBookId(phieuMuonId As String, sachId As String, ngayTra As Date) As Result
         Return _chiTietPhieuMuonSachDAO.ReturnBookByPhieuMuonSachIdAndBookId(phieuMuonId, sachId, ngayTra)
     End Function
+<<<<<<< HEAD
 >>>>>>> origin/phat-dev
+=======
+>>>>>>> loc
 #End Region
 End Class

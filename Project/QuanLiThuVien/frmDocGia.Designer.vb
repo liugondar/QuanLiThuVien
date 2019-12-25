@@ -22,7 +22,11 @@ Partial Class frmDocGia
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+<<<<<<< HEAD:Project/QuanLiThuVien/frmDocGia.Designer.vb
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDocGia))
+=======
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmQuanLiTheDocGia))
+>>>>>>> loc:Project/QuanLiThuVien/frmQuanLiTheDocGia.Designer.vb
         Me.dtpBirthDate = New System.Windows.Forms.DateTimePicker()
         Me.txtAddress = New System.Windows.Forms.TextBox()
         Me.txtEmail = New System.Windows.Forms.TextBox()

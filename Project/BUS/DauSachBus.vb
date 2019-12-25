@@ -51,6 +51,7 @@ Public Class DauSachBus
         Return _dausachDAO.InsertOne(dausach)
     End Function
 <<<<<<< HEAD
+<<<<<<< HEAD
     Public Function InsertMore(dausach As DauSachDTO) As Result
         Dim getNextIDResult = GetNextId(dausach.MaDauSach)
         Dim validateResult = Validate(dausach)
@@ -77,6 +78,11 @@ Public Class DauSachBus
 
     Private Function Validate(dausach As DauSachDTO) As Result
 >>>>>>> origin/phat-dev
+=======
+
+
+    Private Function Validate(dausach As DauSachDTO) As Result
+>>>>>>> loc
         If _ketQuaLayQuiDinh.FlagResult = False Then Return New Result(False, "Không thể lấy qui định trong cơ sở dữ liệu để xác nhập thông tin sách!", "")
         Dim validateTenSachVaTenNhaXuatBanResult = dausach.ValidateTenSachAndTenNhaXuatBan()
         Dim validateTheLoaiSachResult = ValidateTheLoaiSach(dausach.MaTheLoaiSach)

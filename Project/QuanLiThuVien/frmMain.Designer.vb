@@ -36,7 +36,10 @@ Partial Class frmMain
         Me.NhậpSáchToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NhậpMớiiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CậpNhậtSốLượngSáchToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+<<<<<<< HEAD
         Me.XóaSáchKhỏiKhoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+=======
+>>>>>>> loc
         Me.QuảnLíSáchToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ChoMượnSáchToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -60,6 +63,7 @@ Partial Class frmMain
         Me.AboutMeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 <<<<<<< HEAD
+<<<<<<< HEAD
         Me.Label2 = New System.Windows.Forms.Label()
         Me.lbSoDauSach = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -68,6 +72,9 @@ Partial Class frmMain
         Me.lbSoLuotMuon = New System.Windows.Forms.Label()
 =======
 >>>>>>> origin/phat-dev
+=======
+        Me.XóaSáchKhỏiKhoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+>>>>>>> loc
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -91,7 +98,7 @@ Partial Class frmMain
         'QuitToolStripMenuItem
         '
         Me.QuitToolStripMenuItem.Name = "QuitToolStripMenuItem"
-        Me.QuitToolStripMenuItem.Size = New System.Drawing.Size(97, 22)
+        Me.QuitToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.QuitToolStripMenuItem.Text = "Quit"
         '
         'ThẻĐộcGiảToolStripMenuItem
@@ -104,30 +111,30 @@ Partial Class frmMain
         'LậpThẻĐộcGiảToolStripMenuItem
         '
         Me.LậpThẻĐộcGiảToolStripMenuItem.Name = "LậpThẻĐộcGiảToolStripMenuItem"
-        Me.LậpThẻĐộcGiảToolStripMenuItem.Size = New System.Drawing.Size(176, 22)
+        Me.LậpThẻĐộcGiảToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.LậpThẻĐộcGiảToolStripMenuItem.Text = "Lập thẻ độc giả"
         '
         'QuảnLíĐộcGiảToolStripMenuItem
         '
         Me.QuảnLíĐộcGiảToolStripMenuItem.Name = "QuảnLíĐộcGiảToolStripMenuItem"
-        Me.QuảnLíĐộcGiảToolStripMenuItem.Size = New System.Drawing.Size(176, 22)
+        Me.QuảnLíĐộcGiảToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.QuảnLíĐộcGiảToolStripMenuItem.Text = "Quản Lí độc giả"
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(173, 6)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(177, 6)
         '
         'ThêmLoạiĐộcGiảToolStripMenuItem
         '
         Me.ThêmLoạiĐộcGiảToolStripMenuItem.Name = "ThêmLoạiĐộcGiảToolStripMenuItem"
-        Me.ThêmLoạiĐộcGiảToolStripMenuItem.Size = New System.Drawing.Size(176, 22)
+        Me.ThêmLoạiĐộcGiảToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ThêmLoạiĐộcGiảToolStripMenuItem.Text = "Thêm loại độc giả"
         '
         'QuảnLíLoạiĐộcGảiToolStripMenuItem
         '
         Me.QuảnLíLoạiĐộcGảiToolStripMenuItem.Name = "QuảnLíLoạiĐộcGảiToolStripMenuItem"
-        Me.QuảnLíLoạiĐộcGảiToolStripMenuItem.Size = New System.Drawing.Size(176, 22)
+        Me.QuảnLíLoạiĐộcGảiToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.QuảnLíLoạiĐộcGảiToolStripMenuItem.Text = "Quản lí loại độc giả"
         '
         'SáchToolStripMenuItem
@@ -147,12 +154,17 @@ Partial Class frmMain
         'NhậpMớiiToolStripMenuItem
         '
         Me.NhậpMớiiToolStripMenuItem.Name = "NhậpMớiiToolStripMenuItem"
+<<<<<<< HEAD
         Me.NhậpMớiiToolStripMenuItem.Size = New System.Drawing.Size(176, 22)
+=======
+        Me.NhậpMớiiToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+>>>>>>> loc
         Me.NhậpMớiiToolStripMenuItem.Text = "Nhập mới"
         '
         'CậpNhậtSốLượngSáchToolStripMenuItem
         '
         Me.CậpNhậtSốLượngSáchToolStripMenuItem.Name = "CậpNhậtSốLượngSáchToolStripMenuItem"
+<<<<<<< HEAD
         Me.CậpNhậtSốLượngSáchToolStripMenuItem.Size = New System.Drawing.Size(176, 22)
         Me.CậpNhậtSốLượngSáchToolStripMenuItem.Text = "Thêm sách vào kho"
         '
@@ -162,11 +174,20 @@ Partial Class frmMain
         Me.XóaSáchKhỏiKhoToolStripMenuItem.Size = New System.Drawing.Size(176, 22)
         Me.XóaSáchKhỏiKhoToolStripMenuItem.Text = "Xóa sách khỏi kho"
         '
+=======
+        Me.CậpNhậtSốLượngSáchToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.CậpNhậtSốLượngSáchToolStripMenuItem.Text = "Thêm sách vào kho"
+        '
+>>>>>>> loc
         'QuảnLíSáchToolStripMenuItem
         '
         Me.QuảnLíSáchToolStripMenuItem.Name = "QuảnLíSáchToolStripMenuItem"
         Me.QuảnLíSáchToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+<<<<<<< HEAD
         Me.QuảnLíSáchToolStripMenuItem.Text = "Quản lí đầu sách"
+=======
+        Me.QuảnLíSáchToolStripMenuItem.Text = "Quản lí sách"
+>>>>>>> loc
         '
         'ToolStripSeparator1
         '
@@ -297,6 +318,7 @@ Partial Class frmMain
         Me.MeToolStripMenuItem.Text = "Me"
         '
 <<<<<<< HEAD
+<<<<<<< HEAD
         'Label2
         '
         Me.Label2.AutoSize = True
@@ -371,6 +393,14 @@ Partial Class frmMain
         '
 =======
 >>>>>>> origin/phat-dev
+=======
+        'XóaSáchKhỏiKhoToolStripMenuItem
+        '
+        Me.XóaSáchKhỏiKhoToolStripMenuItem.Name = "XóaSáchKhỏiKhoToolStripMenuItem"
+        Me.XóaSáchKhỏiKhoToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.XóaSáchKhỏiKhoToolStripMenuItem.Text = "Xóa sách khỏi kho"
+        '
+>>>>>>> loc
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -433,6 +463,7 @@ Partial Class frmMain
     Friend WithEvents ThêmTàiKhoảnToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents QuảnLíTàiKhoảnToolStripMenuItem As ToolStripMenuItem
 <<<<<<< HEAD
+<<<<<<< HEAD
     Friend WithEvents Label2 As Label
     Friend WithEvents lbSoDauSach As Label
     Friend WithEvents Label3 As Label
@@ -444,4 +475,9 @@ Partial Class frmMain
     Friend WithEvents NhậpMớiiToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents XóaSáchKhỏiKhoToolStripMenuItem As ToolStripMenuItem
 >>>>>>> origin/phat-dev
+=======
+    Friend WithEvents CậpNhậtSốLượngSáchToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents NhậpMớiiToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents XóaSáchKhỏiKhoToolStripMenuItem As ToolStripMenuItem
+>>>>>>> loc
 End Class

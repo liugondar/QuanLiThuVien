@@ -5,6 +5,7 @@ Imports DTO
 Public Class frmLogin
 
 
+<<<<<<< HEAD
      Private Sub frmQuanLiAccount_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         _listLoaiTK = New List(Of LoaiTaiKhoan)
         LoadDefaultCB()
@@ -31,6 +32,26 @@ Public Class frmLogin
         cbUpdateType.ValueMember = "MaLoaiTaiKhoan"
         cbUpdateType.DisplayMember = "TenLoaiTaiKhoan"
         cbUpdateType.SelectedIndex = 0
+=======
+        End If
+
+        authentication("admin", "admin")
+    End Sub
+
+    Private Sub authentication(userName As String, password As String)
+        If Login(userName, password) Then
+            Dim loginAccount = New Account()
+            Dim getAccountResult = AccountBUS.Instance.getAccountByUserName(loginAccount, userName)
+            If getAccountResult.FlagResult Then
+                Dim frmMain = New frmMain(loginAccount)
+                Me.Hide()
+                frmMain.ShowDialog()
+                Me.Show()
+            End If
+        Else
+            MessageBox.Show("Tên đăng nhập hoặc mật khẩu đăng nhập đã sai!")
+        End If
+>>>>>>> loc
     End Sub
 
     Private Sub CreateDefaultUserAccount()
@@ -60,19 +81,8 @@ Public Class frmLogin
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
         Dim userName As String = txtUsername.Text
         Dim password As String = txtPassword.Text
+        authentication(userName, password)
 
-        If Login(userName, password) Then
-            Dim loginAccount = New Account()
-            Dim getAccountResult = AccountBUS.Instance.getAccountByUserName(loginAccount, userName)
-            If getAccountResult.FlagResult Then
-                Dim frmMain = New frmMain(loginAccount)
-                Me.Hide()
-                frmMain.ShowDialog()
-                Me.Show()
-            End If
-        Else
-            MessageBox.Show("Tên đăng nhập hoặc mật khẩu đăng nhập đã sai!")
-        End If
     End Sub
 
     Private Function Login(userName As String, password As String) As Boolean

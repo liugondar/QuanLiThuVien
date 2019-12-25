@@ -300,6 +300,7 @@ Public Class ucBaoCaoSachTre
         ChiTietBaoCaoDataGridView.Columns.Add(tiLeColumn)
 
     End Sub
+<<<<<<< HEAD
 #End Region
 #End Region
 
@@ -370,6 +371,25 @@ Public Class ucBaoCaoSachTre
         TenSach.DataPropertyName = "TenSach"
         TenSach.Width = 150
         ChiTietBaoCaoDataGridView.Columns.Add(TenSach)
+=======
+    Private Sub BingdingListChiTietBaoCaoToDatagridviewSource()
+        Dim listChiTietDisplay = New List(Of ChiTietBaoCaoSachTraTreDisplay)
+        For Each chiTietBaoCaoSachTraTre In _listChiTietBaoCaoSachTraTre
+
+            Dim chiTietPhieuMuon = New DTO.ChiTietPhieuMuonSach()
+            _chiTietPhieuMuonBus.GetByID(chiTietPhieuMuon, chiTietBaoCaoSachTraTre.MaChiTietPhieuMuonSach)
+            Dim sach = New Sach()
+            '_sachBus.SelectSachById(sach, chiTietPhieuMuon.MaSach)
+            Dim phieuMuon = New PhieuMuonSach()
+            _phieuMuonSachBus.GetPhieuMuonSachById(phieuMuon, chiTietPhieuMuon.MaChiTietPhieuMuonSach)
+
+            Dim chiTietDisplay = New ChiTietBaoCaoSachTraTreDisplay()
+            chiTietDisplay.SoNgayTraTre = chiTietBaoCaoSachTraTre.SoNgayTraTre
+            'chiTietDisplay.TenSach = sach.TenSach
+            chiTietDisplay.NgayMuon = phieuMuon.NgayMuon.ToString(DateHelper.Instance.GetFormatType())
+            listChiTietDisplay.Add(chiTietDisplay)
+        Next
+>>>>>>> loc
 
 
     End Sub

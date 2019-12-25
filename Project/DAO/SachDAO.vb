@@ -158,7 +158,10 @@ where MaSach={0}", id)
     End Function
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> loc
 
     Public Function GetByID(ByRef sach As Sach, maSach As Integer) As Result
         Dim query = String.Format("select * 

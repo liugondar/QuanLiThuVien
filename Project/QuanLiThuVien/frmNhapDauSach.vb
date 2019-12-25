@@ -74,10 +74,22 @@ Public Class frmNhapSach
 #Region "-   Create button clicked  -"
     Private Sub CreateButton_Click(sender As Object, e As EventArgs) Handles CreateButton.Click
         InsertDauSach()
+<<<<<<< HEAD
+=======
+<<<<<<<< HEAD:Project/QuanLiThuVien/frmNhapDauSach.vb
+    End Sub
+
+    Private Sub InsertDauSach()
+========
+>>>>>>> loc
         LoadTxtMaDauSach()
     End Sub
 
     Private Function InsertDauSach() As Result
+<<<<<<< HEAD
+=======
+>>>>>>>> loc:Project/QuanLiThuVien/frmNhapSach.vb
+>>>>>>> loc
         Dim result As New Result
 
         Dim dausach = New DauSachDTO()
@@ -95,7 +107,15 @@ Public Class frmNhapSach
             MessageBox.Show(result.ApplicationMessage)
         Else
 
+<<<<<<< HEAD
             For i As Integer = 1 To nudSoLuong.Value
+=======
+<<<<<<<< HEAD:Project/QuanLiThuVien/frmNhapDauSach.vb
+            For i As Integer = 1 To dausach.SoLuong
+========
+            For i As Integer = 1 To nudSoLuong.Value
+>>>>>>>> loc:Project/QuanLiThuVien/frmNhapSach.vb
+>>>>>>> loc
                 Dim cuonsach = New Sach With {
                     .MaDauSach = dausach.MaDauSach,
                     .NgayNhap = DateInputDateTimePicker.Value
@@ -106,9 +126,19 @@ Public Class frmNhapSach
 
         End If
 
+<<<<<<< HEAD
         Return result
 
     End Function
+=======
+<<<<<<<< HEAD:Project/QuanLiThuVien/frmNhapDauSach.vb
+    End Sub
+========
+        Return result
+
+    End Function
+>>>>>>>> loc:Project/QuanLiThuVien/frmNhapSach.vb
+>>>>>>> loc
 
 
 
@@ -116,11 +146,31 @@ Public Class frmNhapSach
 #End Region
 
     Private Sub CreateAndCloseButton_Click(sender As Object, e As EventArgs) Handles CreateAndCloseButton.Click
+<<<<<<< HEAD
         If InsertDauSach().FlagResult Then
             Close()
         End If
     End Sub
 
+=======
+<<<<<<<< HEAD:Project/QuanLiThuVien/frmNhapDauSach.vb
+        InsertDauSach()
+        Close()
+========
+        If InsertDauSach().FlagResult Then
+            Close()
+        End If
+>>>>>>>> loc:Project/QuanLiThuVien/frmNhapSach.vb
+    End Sub
+
+    Private Sub nudSoLuong_ValueChanged(sender As Object, e As EventArgs) 
+
+    End Sub
+
+
+
+
+>>>>>>> loc
 #End Region
 
 End Class

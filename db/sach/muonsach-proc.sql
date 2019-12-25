@@ -69,8 +69,11 @@ AS
     WHERE s.MaDauSach = ds.MaDauSach
     and s.MaDauSach = @MaDauSach
     and s.TinhTrang= 0
+<<<<<<< HEAD
     and s.DeleteFlag =N'N'
     and ds.DeleteFlag=N'N'
+=======
+>>>>>>> loc
 GO
 -- example to execute the stored procedure we just created
 EXECUTE dbo.USP_CountCuonSachBaseOnDauSachId 1

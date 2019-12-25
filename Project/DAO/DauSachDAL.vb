@@ -34,6 +34,7 @@ Public Class DauSachDAO
         Return resultDauSach
     End Function
 <<<<<<< HEAD
+<<<<<<< HEAD
     Public Function InsertMore(dausach As DauSachDTO) As Result
         Dim query = String.Empty
         query &= "EXECUTE USP_NhapSach "
@@ -50,6 +51,8 @@ Public Class DauSachDAO
 
         Return resultDauSach
 =======
+=======
+>>>>>>> loc
 
     Public Function SelectAllByMaCuonSach(ByRef dauSach As DauSachDTO, txtDauSachId As String) As Result
         Dim qr = String.Format("EXECUTE dbo.GetAllInfoBookByCuonSachId N'{0}'", txtDauSachId)
@@ -60,7 +63,10 @@ Public Class DauSachDAO
             dauSach = New DauSachDTO(row)
         Next
         Return rs
+<<<<<<< HEAD
 >>>>>>> origin/phat-dev
+=======
+>>>>>>> loc
     End Function
 #End Region
 
@@ -72,6 +78,7 @@ set TinhTrang=1
 where maDauSach={0}", maDauSach)
         Return _dataProvider.ExecuteNonquery(query)
     End Function
+<<<<<<< HEAD
     Public Function SetStatusSachToUnavailableByName(maDauSach As String) As Result
         Dim query = String.Format("
 update DauSach
@@ -79,6 +86,8 @@ set TinhTrang=1
 where maDauSach={0}", maDauSach)
         Return _dataProvider.ExecuteNonquery(query)
     End Function
+=======
+>>>>>>> loc
 
     Public Function SetStatusSachToAvailableByID(maDauSach As String) As Result
         Dim query = String.Format("
@@ -87,6 +96,7 @@ set TinhTrang=0
 where maSach={0}", maDauSach)
         Return _dataProvider.ExecuteNonquery(query)
     End Function
+<<<<<<< HEAD
     Public Function SetStatusSachToAvailableByName(maDauSach As String) As Result
         Dim query = String.Format("
 update DauSach
@@ -94,6 +104,8 @@ set TinhTrang=0
 where maSach={0}", maDauSach)
         Return _dataProvider.ExecuteNonquery(query)
     End Function
+=======
+>>>>>>> loc
 
     Public Function Update(dausach As DauSachDTO) As Result
         Dim query = String.Format("update DauSach
@@ -109,10 +121,13 @@ dausach.MaDauSach)
     End Function
 
     Public Function DeleteById(id As String) As Result
+<<<<<<< HEAD
         Dim query = String.Format("EXECUTE dbo.USP_XoaDauSach {0}", id)
         Return _dataProvider.ExecuteNonquery(query)
     End Function
     Public Function DeleteByName(id As String) As Result
+=======
+>>>>>>> loc
         Dim query = String.Format("update DauSach
 set DeleteFlag='Y'
 where MaDauSach={0}", id)
@@ -188,6 +203,7 @@ triGiaMin, triGiaMax)
         End If
         Return result
     End Function
+<<<<<<< HEAD
     Public Function SelectAllByThelaoi(ByRef listDauSach As List(Of DauSachDTO), maDauSach As String) As Result
         Dim query = String.Empty
         query = String.Format("Select * from DauSach where MaSach={0} and DeleteFlag='N'", maDauSach)
@@ -201,6 +217,8 @@ triGiaMin, triGiaMax)
         End If
         Return result
     End Function
+=======
+>>>>>>> loc
 
     Public Function SelectByType(maDauSach As String,
                                  ByRef tenSach As String, ByRef theLoai As String,
@@ -252,6 +270,7 @@ and s.MaDauSach={0}", maDauSach)
         End If
         Return result
     End Function
+<<<<<<< HEAD
     Public Function SelectDauSachByname(dausach As DauSachDTO, maDauSach As String) As Result
         Dim query = String.Empty
         query &= "select [maDauSach], [tenSach], [maTacGia], [maTheLoaiSach]  "
@@ -279,6 +298,8 @@ and s.MaDauSach={0}", maDauSach)
         End If
         Return result
     End Function
+=======
+>>>>>>> loc
 
     Public Function GetByID(ByRef dausach As DauSachDTO, maDauSach As Integer) As Result
         Dim query = String.Format("select * 
@@ -319,6 +340,7 @@ maDauSach={0}", maDauSach)
         Next
         Return result
     End Function
+<<<<<<< HEAD
       Dim formatDate = DateHelper.Instance.GetFormatType()
         Dim query As String = String.Empty
         query &= "EXECUTE USP_ThemTheDocGia "
@@ -404,6 +426,8 @@ maDauSach={0}", maDauSach)
         Return result
     End Function
 
+=======
+>>>>>>> loc
 #End Region
 
 End Class

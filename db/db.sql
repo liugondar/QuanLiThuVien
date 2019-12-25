@@ -1,6 +1,10 @@
 USE master
 GO
 
+<<<<<<< HEAD:db.sql
+=======
+-- Create the new database if it does not exist already
+>>>>>>> loc:db/db.sql
 WHILE EXISTS(select NULL
 from sys.databases
 where name='QuanLiThuVien')
@@ -447,6 +451,7 @@ BEGIN
     VALUES(@MaBaoCaoSachTraTre, @MaChiTietPhieuMuonSach, @SoNgayTre)
 END
 go
+<<<<<<< HEAD:db.sql
 
 create PROC USP_NhapSach
     @MaDauSach NVARCHAR(20),
@@ -1152,3 +1157,5 @@ AS
     )
 GO
 -- example to execute the stored procedure we just created
+=======
+>>>>>>> loc:db/db.sql

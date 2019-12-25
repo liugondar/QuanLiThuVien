@@ -22,7 +22,11 @@ Partial Class frmTheLoai
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+<<<<<<< HEAD:Project/QuanLiThuVien/frmTheLoai.Designer.vb
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmTheLoai))
+=======
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmQuanLiTheLoaiSach))
+>>>>>>> loc:Project/QuanLiThuVien/frmQuanLiTheLoaiSach.Designer.vb
         Me.btnXoa = New MetroFramework.Controls.MetroButton()
         Me.btnCapNhap = New MetroFramework.Controls.MetroButton()
         Me.Label1 = New System.Windows.Forms.Label()

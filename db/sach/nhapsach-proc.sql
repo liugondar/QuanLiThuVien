@@ -58,4 +58,8 @@ GO
 EXECUTE dbo.UpdateCuonSachQuanlity 1, 6
 GO
 
+<<<<<<< HEAD
 Select * from sach where MaSach=N'3'and DeleteFlag= N'N' 
+=======
+Select * from sach where MaSach=N'3'and DeleteFlag= N'N' 
+>>>>>>> loc
