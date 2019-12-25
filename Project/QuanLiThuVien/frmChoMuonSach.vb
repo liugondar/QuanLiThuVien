@@ -52,7 +52,6 @@ Public Class frmChoMuonSach
 
         If _tacGiaBus.SelectAll(_listTacGia).FlagResult = False Then Return
         If _theLoaiSachBus.SelectAll(_listTheLoaiSach).FlagResult = False Then Return
-        'If _sachBus.SelectAll(_listSach).FlagResult = False Then Return
 
     End Sub
 

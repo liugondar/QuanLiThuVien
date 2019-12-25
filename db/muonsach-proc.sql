@@ -149,6 +149,8 @@ AS
         and ctpm.MaSach= s.MaSach
         and s.MaDauSach= ds.MaDauSach
 		and tg.MaTacGia =ds.MaTacGia
+        and pms.TinhTrang=0
+        and ctpm.TinhTrang=0
         and pms.DeleteFlag='N'
 
 GO

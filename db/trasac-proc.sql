@@ -68,5 +68,39 @@ GO
 EXECUTE dbo.ReturnAllBookByPhieuMuonId 1 , '2019-12-01'
 GO
 
-select * from PhieuMuonSach
+-- Create a new stored procedure called 'ReturnBookByPhieuMuonIdAndBookId' in schema 'dbo'
+-- Drop the stored procedure if it already exists
+IF EXISTS (
+SELECT *
+    FROM INFORMATION_SCHEMA.ROUTINES
+WHERE SPECIFIC_SCHEMA = N'dbo'
+    AND SPECIFIC_NAME = N'ReturnBookByPhieuMuonIdAndBookId'
+)
+DROP PROCEDURE dbo.ReturnBookByPhieuMuonIdAndBookId
+GO
+-- Create the stored procedure in the specified schema
+CREATE PROCEDURE dbo.ReturnBookByPhieuMuonIdAndBookId
+-- add more stored procedure parameters here
+    @MaPhieuMuonSach NVARCHAR(20),
+    @MaSach NVARCHAR(20),
+    @ReturnDate DATE
+AS
+    update 
+        ChiTietPhieuMuonSach
+    set 
+        TinhTrang=1,
+        NgayTra = @ReturnDate    
+    from 
+        ChiTietPhieuMuonSach as ctpms
+        INNER JOIN PhieuMuonSach as pms
+            on ctpms.MaPhieuMuonSach= pms.MaPhieuMuonSach
+        INNER JOIN Sach as s
+            on ctpms.MaSach= s.MaSach
+    where pms.MaPhieuMuonSach=@MaPhieuMuonSach 
+    and s.MaSach= @MaSach
+GO
+-- example to execute the stored procedure we just created
+EXECUTE dbo.ReturnBookByPhieuMuonIdAndBookId 3, 2, '2019-12-20' 
+GO
+
 select * from ChiTietPhieuMuonSach
