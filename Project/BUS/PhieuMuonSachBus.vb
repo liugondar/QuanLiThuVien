@@ -47,7 +47,38 @@ Public Class PhieuMuonSachBus
 
         Return _phieuMuonSachDAO.InsertOne(phieuMuonSach)
     End Function
+Public Function InsertMore(phieuMuonSach As PhieuMuonSach) As Result
+#Region "guard clause"
+        'Lay ma phieu muon sach tiep thieo
+        Dim maPhieuMuonSach As Integer
+        Dim ketQuaLayMaPhieuMuonSach = LayMaSoPhieuMuonSachTiepTheo(maPhieuMuonSach)
+        If ketQuaLayMaPhieuMuonSach.FlagResult = False Then Return ketQuaLayMaPhieuMuonSach
+        phieuMuonSach.MaPhieuMuonSach = maPhieuMuonSach
 
+        'Lay qui dinh
+        Dim getQuiDinhResult = GetQuiDinh()
+        If getQuiDinhResult.FlagResult = False Then Return getQuiDinhResult
+        phieuMuonSach.HanTra = phieuMuonSach.NgayMuon.AddDays(_quiDinh.SoNgayMuonSachToiDa)
+
+        'Lay danh sach sach da muon truoc do
+        Dim listPhieuMuonSachChuaTra = New List(Of PhieuMuonSach)
+        _phieuMuonSachDAO.SelectAllPhieuMuonSachChuaTraByReaderId(listPhieuMuonSachChuaTra, phieuMuonSach.maTheDocGia)
+
+        'kiem tra phieu muon sach hop le khong
+
+        Dim isValidPhieuMuonSach = phieuMuonSach.ValidateMaPhieuMuonSachAndMaTheDocGia()
+        If isValidPhieuMuonSach.FlagResult = False Then Return isValidPhieuMuonSach
+
+        Dim isValidSoSachMuonToiDa = ValidateSoSachMuonToiDa(phieuMuonSach.TongSoSachMuon, listPhieuMuonSachChuaTra)
+        If isValidSoSachMuonToiDa.FlagResult = False Then Return isValidSoSachMuonToiDa
+
+        Dim isValidTheDocGia = ValidateTheDocGia(phieuMuonSach.MaTheDocGia, listPhieuMuonSachChuaTra)
+        If isValidTheDocGia.FlagResult = False Then Return isValidTheDocGia
+
+#End Region
+
+        Return _phieuMuonSachDAO.InsertMore(phieuMuonSach)
+    End Function
     Private Function ValidateTheDocGia(maTheDocGia As Integer, listPhieuMuonSachChuaTra As List(Of PhieuMuonSach)) As Result
         Dim isValidHanSuDungThe = ValidateHanSuDungThe(maTheDocGia)
         If isValidHanSuDungThe.FlagResult = False Then Return isValidHanSuDungThe
