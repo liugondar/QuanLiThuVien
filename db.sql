@@ -830,4 +830,85 @@ VALUES(N'Bruce Clark')
 INSERT INTO dbo.TacGia
     (TenTacGia)
 VALUES(N'Matie Jefferson')
+INSERT INTO dbo.TacGia
+    (TenTacGia)
+VALUES(N'Christina Moran')
+INSERT INTO dbo.TacGia
+    (TenTacGia)
+VALUES(N'Cecilia Butler')
+INSERT INTO dbo.TacGia
+    (TenTacGia)
+VALUES(N'Mattie Welch')
+INSERT INTO dbo.TacGia
+    (TenTacGia)
+VALUES(N'Margaret Clarke')
+INSERT INTO dbo.TacGia
+    (TenTacGia)
+VALUES(N'Linnie Reed')
+INSERT INTO dbo.TacGia
+    (TenTacGia)
+VALUES(N'Sylvia Armstrong')
+INSERT INTO dbo.TacGia
+    (TenTacGia)
+VALUES(N'Effie Becker')
+INSERT INTO dbo.TacGia
+    (TenTacGia)
+VALUES(N'Bettie Peters')
+INSERT INTO dbo.TacGia
+    (TenTacGia)
+VALUES(N'Matthew Pierce')
+INSERT INTO dbo.TacGia
+    (TenTacGia)
+VALUES(N'Kate Roberson')
+INSERT INTO dbo.TacGia
+    (TenTacGia)
+VALUES(N'Leonard Fox')
+INSERT INTO dbo.TacGia
+    (TenTacGia)
+VALUES(N'Marie Graham')
+INSERT INTO dbo.TacGia
+    (TenTacGia)
+VALUES(N'Helen Weaver')
+INSERT INTO dbo.TacGia
+    (TenTacGia)
+VALUES(N'Alvin Sullivan')
+INSERT INTO dbo.TacGia
+    (TenTacGia)
+VALUES(N'Lilly Lee')
+INSERT INTO dbo.TacGia
+    (TenTacGia)
+VALUES(N'Ralph Pierce')
+INSERT INTO dbo.TacGia
+    (TenTacGia)
+VALUES(N'Ruth Wong')
+INSERT INTO dbo.TacGia
+    (TenTacGia)
+VALUES(N'Etta Yates')
+INSERT INTO dbo.TacGia
+    (TenTacGia)
+VALUES(N'Tom Owen')
+INSERT INTO dbo.TacGia
+    (TenTacGia)
+VALUES(N'Howard Moody')
+INSERT INTO dbo.TacGia
+    (TenTacGia)
+VALUES(N'Maud Reeves')
+INSERT INTO dbo.TacGia
+    (TenTacGia)
+VALUES(N'Luella Reese')
+INSERT INTO dbo.TacGia
+    (TenTacGia)
+VALUES(N'Mike Cole')
+INSERT INTO dbo.TacGia
+    (TenTacGia)
+VALUES(N'Terry Copeland')
+INSERT INTO dbo.TacGia
+    (TenTacGia)
+VALUES(N'Lelia Fletcher')
+INSERT INTO dbo.TacGia
+    (TenTacGia)
+VALUES(N'Bruce Clark')
+INSERT INTO dbo.TacGia
+    (TenTacGia)
+VALUES(N'Matie Jefferson')
 go

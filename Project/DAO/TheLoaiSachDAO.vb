@@ -65,8 +65,30 @@ VALUES('{0}')", theLoaiSach.TenTheLoaiSach)
         Next
         Return result
     End Function
+    Public Function SelectTheLoaiSachByName(ByRef theLoaiSach As TheLoaiSach, maTheLoaiSach As String) As Result
+        Dim query = String.Empty
+        query &= "Select * from dbo.TheLoaiSach where MaTheLoaiSach=" & maTheLoaiSach
+        query &= " and DeleteFlag='N'" & " "
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
+        For Each row As DataRow In dataTable.Rows
+            theLoaiSach = New TheLoaiSach(row)
+        Next
+        Return result
+    End Function
 
     Public Function GetTenTheLoaiSachByID(ByRef tentheLoaiSach As String, maTheLoaiSach As String) As Object
+        Dim query = String.Format("select [TenTheLoaiSach]
+from TheLoaiSach 
+where MaTheLoaiSach={0} and DeleteFlag='N'", maTheLoaiSach)
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
+        For Each row As DataRow In dataTable.Rows
+            tentheLoaiSach = row("TenTheLoaiSach").ToString()
+        Next
+        Return result
+    End Function
+    Public Function GetTenTheLoaiSachByName(ByRef tentheLoaiSach As String, maTheLoaiSach As String) As Object
         Dim query = String.Format("select [TenTheLoaiSach]
 from TheLoaiSach 
 where MaTheLoaiSach={0} and DeleteFlag='N'", maTheLoaiSach)
