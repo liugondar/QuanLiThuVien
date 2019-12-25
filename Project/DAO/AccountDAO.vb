@@ -120,6 +120,29 @@ account.Type, account.UserName)
 
         Return result
     End Function
+    
+        Public Function getAccountByUserMail(ByRef account As Account, ByVal userName As String) As Result
+        Dim data = New DataTable()
+        Dim query = "select * from account where username='" & userName & "'"
+        Dim result = DataProvider.Instance.ExecuteQuery(query, data)
+
+        For Each item As DataRow In data.Rows
+            account = New Account(item)
+        Next
+
+        Return result
+    End Function
+            Public Function getAccountByUserPassword(ByRef account As Account, ByVal userName As String) As Result
+        Dim data = New DataTable()
+        Dim query = "select * from account where username='" & userName & "'"
+        Dim result = DataProvider.Instance.ExecuteQuery(query, data)
+
+        For Each item As DataRow In data.Rows
+            account = New Account(item)
+        Next
+
+        Return result
+    End Function
 
     Public Function SelectAll(ByRef listAccount As List(Of Account)) As Result
         Dim query = "Select * from account"
