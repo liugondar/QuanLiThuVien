@@ -49,6 +49,16 @@ maBaoCao, tongSoLuotMuon)
         Next
         Return result
     End Function
+     Public Function GetTheLastName(ByRef maBaoCaoTinhHinhMuonSachTheoTheLoai) As Result
+        Dim query = String.Format("SELECT top 1 [MaBaoCaoTinhHinhMuonSachTheoTheLoai] from BaoCaoTinhHinhMuonSachTheoTheLoai ORDER by [MaBaoCaoTinhHinhMuonSachTheoTheLoai] desc")
+
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
+        For Each row In dataTable.Rows
+            maBaoCaoTinhHinhMuonSachTheoTheLoai = row("MaBaoCaoTinhHinhMuonSachTheoTheLoai")
+        Next
+        Return result
+    End Function
 
 #End Region
 

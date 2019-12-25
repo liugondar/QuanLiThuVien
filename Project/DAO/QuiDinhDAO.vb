@@ -17,6 +17,13 @@ Public Class QuiDinhDAO
     End Sub
 
 #End Region
+'
+'
+'
+'
+'
+'
+'
 
 #Region "-   Retrieve data    -"
     Public Function SelectAll(ByRef quiDinh As QuiDinh) As Result
@@ -30,18 +37,8 @@ Public Class QuiDinhDAO
         Return result
     End Function
 
-    Public Function GetTuoiToiDaVaToiThieu(ByRef quiDinh As QuiDinh) As Result
-        Dim query = String.Empty
-        query &= "Select [TuoiToiDa],[TuoiToiThieu] from QuiDinh"
-        Dim dataTable = New DataTable()
-        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
-        For Each row In dataTable.Rows
-            Integer.TryParse(row("TuoiToiDa"), quiDinh.TuoiToiDa)
-            Integer.TryParse(row("TuoiToiThieu"), quiDinh.TuoiToiThieu)
-        Next
-        Return result
-    End Function
- Public Function SelectAllByID(ByRef quiDinh As QuiDinh) As Result
+   
+     Public Function SelectAllByName(ByRef quiDinh As QuiDinh) As Result
         Dim query = String.Empty
         query &= "Select * from QuiDinh"
         Dim dataTable = New DataTable()
@@ -65,7 +62,32 @@ Public Class QuiDinhDAO
         Next
         Return result
     End Function
-
+     Public Function GetTuoiToiDaVaToiThieu(ByRef quiDinh As QuiDinh) As Result
+        Dim query = String.Empty
+        query &= "Select [TuoiToiDa],[TuoiToiThieu] from QuiDinh"
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
+        For Each row In dataTable.Rows
+            Integer.TryParse(row("TuoiToiDa"), quiDinh.TuoiToiDa)
+            Integer.TryParse(row("TuoiToiThieu"), quiDinh.TuoiToiThieu)
+        Next
+        Return result
+    End Function
+ 
+    Public Function SelectAllByID(ByRef quiDinh As QuiDinh) As Result
+        Dim query = String.Empty
+        query &= "Select * from QuiDinh"
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
+        For Each row In dataTable.Rows
+            quiDinh = New QuiDinh(row)
+        Next
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
+        For Each row In dataTable.Rows
+            Integer.TryParse(row("TuoiToiDa"), quiDinh.TuoiToiDa)
+            Integer.TryParse(row("TuoiToiThieu"), quiDinh.TuoiToiThieu)
+        Return result
+    End Function
     Public Function GetSoNgayMuonSachToiDa(ByRef quiDinh As QuiDinh) As Result
         Dim query = String.Empty
         Dim dataTable = New DataTable()
@@ -120,3 +142,5 @@ quiDinh.SoNgayMuonSachToiDa, quiDinh.SoSachMuonToiDa)
 
 #End Region
 End Class
+
+

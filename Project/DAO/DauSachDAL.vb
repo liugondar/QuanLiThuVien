@@ -32,6 +32,22 @@ Public Class DauSachDAO
 
         Return resultDauSach
     End Function
+    Public Function InsertMore(dausach As DauSachDTO) As Result
+        Dim query = String.Empty
+        query &= "EXECUTE USP_NhapSach "
+        query &= "@MaDauSach= N'" & dausach.MaDauSach & "',"
+        query &= "@TenSach = N'" & dausach.TenSach & "',"
+        query &= "@MaTheLoaiSach =" & dausach.MaTheLoaiSach & " ,"
+        query &= "@MaTacGia =" & dausach.MaTacGia & " ,"
+        query &= "@TenNhaXuatBan =N'" & dausach.TenNhaXuatBan & "',"
+        query &= "@NgayXuatBan='" & dausach.NgayXuatBan.ToString(formatDate) & "' ,"
+        query &= "@NgayNhap='" & dausach.NgayNhap.ToString(formatDate) & "' ,"
+        query &= "@TriGia =" & dausach.TriGia & " "
+
+        Dim resultDauSach = _dataProvider.ExecuteNonquery(query)
+
+        Return resultDauSach
+    End Function
 #End Region
 
 #Region "-   Update and delete  -"
@@ -42,8 +58,22 @@ set TinhTrang=1
 where maDauSach={0}", maDauSach)
         Return _dataProvider.ExecuteNonquery(query)
     End Function
+    Public Function SetStatusSachToUnavailableByName(maDauSach As String) As Result
+        Dim query = String.Format("
+update DauSach
+set TinhTrang=1
+where maDauSach={0}", maDauSach)
+        Return _dataProvider.ExecuteNonquery(query)
+    End Function
 
     Public Function SetStatusSachToAvailableByID(maDauSach As String) As Result
+        Dim query = String.Format("
+update DauSach
+set TinhTrang=0
+where maSach={0}", maDauSach)
+        Return _dataProvider.ExecuteNonquery(query)
+    End Function
+    Public Function SetStatusSachToAvailableByName(maDauSach As String) As Result
         Dim query = String.Format("
 update DauSach
 set TinhTrang=0
@@ -65,6 +95,12 @@ dausach.MaDauSach)
     End Function
 
     Public Function DeleteById(id As String) As Result
+        Dim query = String.Format("update DauSach
+set DeleteFlag='Y'
+where MaDauSach={0}", id)
+        Return _dataProvider.ExecuteNonquery(query)
+    End Function
+    Public Function DeleteByName(id As String) As Result
         Dim query = String.Format("update DauSach
 set DeleteFlag='Y'
 where MaDauSach={0}", id)
@@ -140,6 +176,19 @@ triGiaMin, triGiaMax)
         End If
         Return result
     End Function
+    Public Function SelectAllByThelaoi(ByRef listDauSach As List(Of DauSachDTO), maDauSach As String) As Result
+        Dim query = String.Empty
+        query = String.Format("Select * from DauSach where MaSach={0} and DeleteFlag='N'", maDauSach)
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
+        If result.FlagResult = True Then
+            For Each row In dataTable.Rows
+                Dim dausach = New DauSachDTO(row)
+                listDauSach.Add(dausach)
+            Next
+        End If
+        Return result
+    End Function
 
     Public Function SelectByType(maDauSach As String,
                                  ByRef tenSach As String, ByRef theLoai As String,
@@ -165,6 +214,33 @@ and s.MaDauSach={0}", maDauSach)
     End Function
 
     Public Function SelectDauSachById(dausach As DauSachDTO, maDauSach As String) As Result
+        Dim query = String.Empty
+        query &= "select [maDauSach], [tenSach], [maTacGia], [maTheLoaiSach]  "
+        query &= "from dausach "
+        query &= "where maDauSach= " & maDauSach & " "
+        query &= " And DeleteFlag='N'" & " "
+
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
+        If result.FlagResult = True Then
+            For Each row In dataTable.Rows
+                Dim doesRowContainsCorrectFields = row.Table.Columns.Contains("MaDauSach") And
+                 row.Table.Columns.Contains("MaTheLoaiSach") And
+                 row.Table.Columns.Contains("MaTacGia") And
+                row.Table.Columns.Contains("TenSach")
+
+                If doesRowContainsCorrectFields = False Then
+                    Return New Result(False, "Lấy thông tin sách không thành công!", "")
+                End If
+                Integer.TryParse(row("MaSach").ToString(), dausach.MaDauSach)
+                Integer.TryParse(row("MaTheLoaiSach").ToString(), dausach.MaTheLoaiSach)
+                Integer.TryParse(row("MaTacGia").ToString(), dausach.MaTacGia)
+                dausach.TenSach = row("TenSach").ToString()
+            Next
+        End If
+        Return result
+    End Function
+    Public Function SelectDauSachByname(dausach As DauSachDTO, maDauSach As String) As Result
         Dim query = String.Empty
         query &= "select [maDauSach], [tenSach], [maTacGia], [maTheLoaiSach]  "
         query &= "from dausach "

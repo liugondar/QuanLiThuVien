@@ -3,6 +3,9 @@ Imports DTO
 Imports Utility
 Public Class frmThemTheLoaiSach
     Private _theloaiSachBus As TheLoaiSachBUS
+
+
+
 #Region "-   Constructor   -"
     Private Sub frmThemTheLoaiSach_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         _theloaiSachBus = New TheLoaiSachBUS()
@@ -17,7 +20,6 @@ Public Class frmThemTheLoaiSach
         End If
     End Sub
 #End Region
-
 #Region "-   Events    -"
     Private Sub btnNhap_Click(sender As Object, e As EventArgs) Handles btnNhap.Click
         Dim insertResult = InsertTheLoaiSach()
