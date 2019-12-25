@@ -73,7 +73,7 @@ Public Class frmMain
     End Sub
 
     Private Sub QuảnLíĐộcGiảToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles QuảnLíĐộcGiảToolStripMenuItem.Click
-        Dim frm = New frmQuanLiTheDocGia(loginAccount)
+        Dim frm = New frmDocGia(loginAccount)
         frm.MdiParent = Me
         frm.Show()
     End Sub
@@ -135,7 +135,7 @@ Public Class frmMain
     End Sub
 
     Private Sub QuảnLíThểLoạiToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles QuảnLíThểLoạiToolStripMenuItem.Click
-        Dim frm = New frmQuanLiTheLoaiSach(loginAccount)
+        Dim frm = New frmTheLoai(loginAccount)
         frm.MdiParent = Me
         frm.Show()
     End Sub

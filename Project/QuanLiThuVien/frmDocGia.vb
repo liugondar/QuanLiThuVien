@@ -2,7 +2,7 @@
 Imports DTO
 Imports Utility
 
-Public Class frmQuanLiTheDocGia
+Public Class frmDocGia
 
 #Region "-   Fields   -"
     Private _docGiaBus As DocGiaBus

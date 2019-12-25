@@ -2,7 +2,7 @@
 Imports DTO
 Imports Utility
 
-Public Class frmQuanLiTheLoaiSach
+Public Class frmTheLoai
     Private theloaiSachBUS As TheLoaiSachBUS
     Private loginAccount As Account
 
