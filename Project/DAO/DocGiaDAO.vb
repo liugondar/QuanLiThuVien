@@ -111,7 +111,7 @@ Public Class DocGiaDAO
         Return result
     End Function
 
-    Public Function GetReaderByID(ByRef docGia As DocGia, maThe As String) As Object
+    Public Function GetReaderByID(ByRef docGia As DocGia, maThe As String) As Result
         Dim query As String = String.Empty
         query = String.Format("select * from TheDocGia where MaTheDocGia={0} and DeleteFlag='N'", maThe)
 

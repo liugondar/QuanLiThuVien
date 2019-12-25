@@ -39,6 +39,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DocumentationFile>QuanLiThuVien.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -109,6 +110,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountEvent.vb" />
+    <Compile Include="frmNhapThemSach.Designer.vb">
+      <DependentUpon>frmNhapThemSach.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNhapThemSach.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmAboutMe.Designer.vb">
       <DependentUpon>frmAboutMe.vb</DependentUpon>
     </Compile>
@@ -146,10 +153,10 @@
       <DependentUpon>frmMain.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmNhapSach.Designer.vb">
-      <DependentUpon>frmNhapSach.vb</DependentUpon>
+    <Compile Include="frmNhapDauSach.Designer.vb">
+      <DependentUpon>frmNhapDauSach.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmNhapSach.vb">
+    <Compile Include="frmNhapDauSach.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmQuanLiAccount.Designer.vb">
@@ -236,6 +243,12 @@
     <Compile Include="frmLogin.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmXoaSach.Designer.vb">
+      <DependentUpon>frmXoaSach.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmXoaSach.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -253,6 +266,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmNhapThemSach.resx">
+      <DependentUpon>frmNhapThemSach.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmAboutMe.resx">
       <DependentUpon>frmAboutMe.vb</DependentUpon>
     </EmbeddedResource>
@@ -271,8 +287,8 @@
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmNhapSach.resx">
-      <DependentUpon>frmNhapSach.vb</DependentUpon>
+    <EmbeddedResource Include="frmNhapDauSach.resx">
+      <DependentUpon>frmNhapDauSach.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmQuanLiAccount.resx">
       <DependentUpon>frmQuanLiAccount.vb</DependentUpon>
@@ -316,6 +332,9 @@
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmXoaSach.resx">
+      <DependentUpon>frmXoaSach.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
@@ -333,7 +352,9 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

@@ -81,6 +81,9 @@ Public Class frmQuanLiQuiDinh
 
     Private Function ValidateField() As Result
         If String.IsNullOrEmpty(txtSoNgayMuonToiDa.Text) Then Return New Result(False, "Xin nhập số ngày mượng tối đa!", "")
+        If String.IsNullOrEmpty(txtTuoiToiThieu.Text) Then Return New Result(False, "Xin nhập tuổi tối thiểu!", "")
+        If String.IsNullOrEmpty(txtTuoiToiDa.Text) Then Return New Result(False, "Xin nhập tuổi tối đa!", "")
+        If String.IsNullOrEmpty(txtThoiHanThe.Text) Then Return New Result(False, "Xin nhập thời hạn thẻ!", "")
         If String.IsNullOrEmpty(txtSoSachMuonToiDa.Text) Then Return New Result(False, "Xin nhập số mượng tối đa!", "")
         If String.IsNullOrEmpty(txtThoiHanNhanSach.Text) Then Return New Result(False, "Xin nhập thời hạn nhận sách!", "")
         If String.IsNullOrEmpty(txtThoiHanThe.Text) Then Return New Result(False, "Xin nhập thời hạn thẻ!", "")

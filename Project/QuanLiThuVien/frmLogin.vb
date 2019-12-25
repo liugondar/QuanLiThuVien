@@ -4,7 +4,7 @@ Imports DTO
 
 Public Class frmLogin
     Private Sub Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'Tạo account mặc định nếu database chưa có account
+        'Tạo account mặc định nếu db chưa có account
         Dim listAccount = New List(Of Account)
         Dim result = AccountBUS.Instance.SelectAll(listAccount)
         If result.FlagResult Then
@@ -14,6 +14,24 @@ Public Class frmLogin
         If result.FlagResult = False Then
             CreateDefaultAdminAccount()
             CreateDefaultUserAccount()
+
+        End If
+
+        authentication("admin", "admin")
+    End Sub
+
+    Private Sub authentication(userName As String, password As String)
+        If Login(userName, password) Then
+            Dim loginAccount = New Account()
+            Dim getAccountResult = AccountBUS.Instance.getAccountByUserName(loginAccount, userName)
+            If getAccountResult.FlagResult Then
+                Dim frmMain = New frmMain(loginAccount)
+                Me.Hide()
+                frmMain.ShowDialog()
+                Me.Show()
+            End If
+        Else
+            MessageBox.Show("Tên đăng nhập hoặc mật khẩu đăng nhập đã sai!")
         End If
     End Sub
 
@@ -44,19 +62,8 @@ Public Class frmLogin
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
         Dim userName As String = txtUsername.Text
         Dim password As String = txtPassword.Text
+        authentication(userName, password)
 
-        If Login(userName, password) Then
-            Dim loginAccount = New Account()
-            Dim getAccountResult = AccountBUS.Instance.getAccountByUserName(loginAccount, userName)
-            If getAccountResult.FlagResult Then
-                Dim frmMain = New frmMain(loginAccount)
-                Me.Hide()
-                frmMain.ShowDialog()
-                Me.Show()
-            End If
-        Else
-            MessageBox.Show("Tên đăng nhập hoặc mật khẩu đăng nhập đã sai!")
-        End If
     End Sub
 
     Private Function Login(userName As String, password As String) As Boolean

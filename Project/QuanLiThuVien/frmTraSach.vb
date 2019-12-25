@@ -86,77 +86,63 @@ Public Class frmTraSach
 
         _chiTietPhieuMuonSachBus.selectAllByMaphieumuonsach(_listChiTietPhieuMuonSachDaMuon, PhieuMuonSach.MaPhieuMuonSach)
 
-        Dim listSachDaMuon = New List(Of Sach)
-        For Each chiTietPhieuMuonSach In _listChiTietPhieuMuonSachDaMuon
-            _sachBus.SelectAllByMaSach(listSachDaMuon, chiTietPhieuMuonSach.MaSach)
-        Next
+        Dim listBook = New List(Of CustomBookInfoDisplay)
+        _phieuMuonSachBus.SelectAllSachChuaTraByPhieuMuonId(PhieuMuonSach.MaPhieuMuonSach, listBook)
 
-        Dim listCustomBookInfoDisplay = New List(Of CustomBookInfoDisplay)
-        For Each sach In listSachDaMuon
-            Dim maPhieuMuonSach = _listChiTietPhieuMuonSachDaMuon.
-                Where(Function(s) s.MaSach = sach.MaSach).
-                Select(Function(s) s.MaPhieuMuonSach).First()
-
-            Dim customBook = New CustomBookInfoDisplay()
-            customBook.MaSach = sach.MaSach
-            customBook.TenSach = sach.TenSach
-            _tacGiaBus.GetTenTacGiaByMaTacGia(customBook.TacGia, sach.MaTacGia)
-            customBook.NgayHetHan = PhieuMuonSach.HanTra
-
-            Dim dateNow As Date = Date.Now()
-            Dim isExpirated = If((PhieuMuonSach.HanTra - dateNow).TotalSeconds < 0, True, False)
-            customBook.TinhTrang = If(isExpirated, "Quá hạn", "Chưa trả")
-
-            listCustomBookInfoDisplay.Add(customBook)
-        Next
-
-        ListSachDaMuonDataGridView.DataSource = New BindingSource(listCustomBookInfoDisplay, String.Empty)
+        dtgSachDangMuon.DataSource = New BindingSource(listBook, String.Empty)
     End Sub
 
 
     Private Sub ClearBookBorrowedDataGridViewData()
-        ListSachDaMuonDataGridView.Columns.Clear()
-        ListSachDaMuonDataGridView.DataSource = Nothing
-        ListSachDaMuonDataGridView.AutoGenerateColumns = False
-        ListSachDaMuonDataGridView.AllowUserToAddRows = False
+        dtgSachDangMuon.Columns.Clear()
+        dtgSachDangMuon.DataSource = Nothing
+        dtgSachDangMuon.AutoGenerateColumns = False
+        dtgSachDangMuon.AllowUserToAddRows = False
         _listChiTietPhieuMuonSachDaMuon.Clear()
     End Sub
 
     Private Sub CreateListChiTietPMSDataGridViewTitleColumn()
         Dim maSachColumn = New DataGridViewTextBoxColumn()
-        maSachColumn.Name = "MaSach"
-        maSachColumn.HeaderText = "Mã sách"
-        maSachColumn.DataPropertyName = "MaSach"
+        maSachColumn.Name = "MaDauSach"
+        maSachColumn.HeaderText = "Mã đầu sách"
+        maSachColumn.DataPropertyName = "MaDauSach"
         maSachColumn.Width = 50
-        ListSachDaMuonDataGridView.Columns.Add(maSachColumn)
+        dtgSachDangMuon.Columns.Add(maSachColumn)
+
+        Dim mcsCln = New DataGridViewTextBoxColumn()
+        mcsCln.Name = "MaCuonSach"
+        mcsCln.HeaderText = "Mã cuốn sách"
+        mcsCln.DataPropertyName = "MaCuonSach"
+        mcsCln.Width = 50
+        dtgSachDangMuon.Columns.Add(mcsCln)
 
         Dim tenSachColumn = New DataGridViewTextBoxColumn()
         tenSachColumn.Name = "TenSach"
         tenSachColumn.HeaderText = "Tên sách"
         tenSachColumn.DataPropertyName = "TenSach"
         tenSachColumn.Width = 200
-        ListSachDaMuonDataGridView.Columns.Add(tenSachColumn)
+        dtgSachDangMuon.Columns.Add(tenSachColumn)
 
         Dim tacGiaColumn = New DataGridViewTextBoxColumn()
         tacGiaColumn.Name = "TacGia"
         tacGiaColumn.HeaderText = "Tác giả "
         tacGiaColumn.DataPropertyName = "TacGia"
         tacGiaColumn.Width = 140
-        ListSachDaMuonDataGridView.Columns.Add(tacGiaColumn)
+        dtgSachDangMuon.Columns.Add(tacGiaColumn)
 
         Dim tinhTrangColumn = New DataGridViewTextBoxColumn()
         tinhTrangColumn.Name = "TinhTrang"
         tinhTrangColumn.HeaderText = "Tình trạng"
         tinhTrangColumn.DataPropertyName = "TinhTrang"
         tinhTrangColumn.Width = 100
-        ListSachDaMuonDataGridView.Columns.Add(tinhTrangColumn)
+        dtgSachDangMuon.Columns.Add(tinhTrangColumn)
 
         Dim ngayHetHanColumn = New DataGridViewTextBoxColumn()
         ngayHetHanColumn.Name = "NgayHetHan"
         ngayHetHanColumn.HeaderText = "Ngày hết hạn"
         ngayHetHanColumn.DataPropertyName = "NgayHetHan"
         ngayHetHanColumn.Width = 120
-        ListSachDaMuonDataGridView.Columns.Add(ngayHetHanColumn)
+        dtgSachDangMuon.Columns.Add(ngayHetHanColumn)
     End Sub
 
 
@@ -167,12 +153,11 @@ Public Class frmTraSach
 #End Region
 
 #Region "-  Confirm clicked   -"
-    Private Sub ConfirmMetroButton_Click(sender As Object, e As EventArgs) Handles ConfirmMetroButton.Click
+    Private Sub ConfirmMetroButton_Click(sender As Object, e As EventArgs) Handles btnTraHet.Click
         Dim maPhieumuon = MaPhieuMuonTextBox.Text
         _phieuMuonSachCanTra.MaPhieuMuonSach = maPhieumuon
-        _phieuMuonSachCanTra.NgayTra = NgayTraDateTimePicker.Value
         If Not WarningUnavailableMaPhieuMuonLabel.Visible Then
-            If _phieuMuonSachBus.UpdateCheckOutPhieuMuonByPhieuMuonSach(_phieuMuonSachCanTra, _listChiTietPhieuMuonSachDaMuon).FlagResult Then
+            If _phieuMuonSachBus.CheckOutPhieuMuonById(_phieuMuonSachCanTra, _listChiTietPhieuMuonSachDaMuon, NgayTraDateTimePicker.Value).FlagResult Then
                 MessageBox.Show("Trả sách thành công!")
                 _phieuMuonSachCanTra = New PhieuMuonSach()
                 MaPhieuMuonTextBox.ResetText()
@@ -186,6 +171,38 @@ Public Class frmTraSach
         End If
 
         ClearBookBorrowedDataGridViewData()
+    End Sub
+
+    Private Sub btnPayOne_Click(sender As Object, e As EventArgs) Handles btnPayOne.Click
+        If dtgSachDangMuon.SelectedRows.Count = 0 Then
+            MessageBox.Show("Vui lòng chọn sách cần trả!")
+            Return
+        End If
+
+        Dim phieuMuonId = MaPhieuMuonTextBox.Text
+        Dim ngayTra = NgayTraDateTimePicker.Value
+
+        If Not WarningUnavailableMaPhieuMuonLabel.Visible Then
+
+            Dim rsAll = True
+            For Each row As DataGridViewRow In dtgSachDangMuon.SelectedRows
+                Dim rs = _chiTietPhieuMuonSachBus.ReturnBookByPhieuMuonSachIdAndBookId(phieuMuonId, row.Cells("MaCuonSach").Value, ngayTra)
+                If Not rs.FlagResult Then
+                    rsAll = False
+                End If
+            Next
+
+            If rsAll Then
+                MessageBox.Show("Trả sách thành công!")
+            Else
+                MessageBox.Show("Trả sách không thành công!")
+            End If
+        Else
+            MessageBox.Show("Vui lòng nhập đúng mã phiếu mượn!")
+        End If
+
+        LoadReaderInfoOfMaPhieuMuonInput(_phieuMuonSachCanTra.MaPhieuMuonSach)
+
     End Sub
 #End Region
 

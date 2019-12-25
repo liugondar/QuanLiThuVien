@@ -1,13 +1,13 @@
 ﻿Imports DTO
 
 Public Class TenNhaXuatBanComparer
-    Implements IEqualityComparer(Of Sach)
+    Implements IEqualityComparer(Of DauSachDTO)
 
-    Public Function Equals(x As Sach, y As Sach) As Boolean Implements IEqualityComparer(Of Sach).Equals
+    Public Function Equals(x As DauSachDTO, y As DauSachDTO) As Boolean Implements IEqualityComparer(Of DauSachDTO).Equals
         Return x.TenNhaXuatBan.Equals(y.TenNhaXuatBan)
     End Function
 
-    Public Function GetHashCode(obj As Sach) As Integer Implements IEqualityComparer(Of Sach).GetHashCode
+    Public Function GetHashCode(obj As DauSachDTO) As Integer Implements IEqualityComparer(Of DauSachDTO).GetHashCode
         Return obj.TenNhaXuatBan.GetHashCode()
     End Function
 End Class

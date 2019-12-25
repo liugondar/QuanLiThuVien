@@ -22,6 +22,7 @@ Partial Class frmQuanLiTacGia
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmQuanLiTacGia))
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtTenTacGia = New System.Windows.Forms.TextBox()
@@ -119,6 +120,7 @@ Partial Class frmQuanLiTacGia
         Me.Controls.Add(Me.btnCapNhap)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.dgvDanhSachTacGia)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmQuanLiTacGia"
         Me.Text = "Quản lí tác giả"
         CType(Me.dgvDanhSachTacGia, System.ComponentModel.ISupportInitialize).EndInit()

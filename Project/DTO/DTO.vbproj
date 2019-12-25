@@ -21,6 +21,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DocumentationFile>DTO.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -72,6 +73,7 @@
     <Compile Include="ChiTietBaoCaoSachTraTre.vb" />
     <Compile Include="ChiTietBaoCaoTinhHinhMuonSachTheoTheLoai.vb" />
     <Compile Include="ChiTietPhieuMuonSach.vb" />
+    <Compile Include="DauSachDTO.vb" />
     <Compile Include="DocGia.vb" />
     <Compile Include="LoaiDocGia.vb" />
     <Compile Include="LoaiTaiKhoan.vb" />

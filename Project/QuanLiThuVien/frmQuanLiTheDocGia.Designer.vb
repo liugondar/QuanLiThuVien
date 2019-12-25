@@ -22,6 +22,7 @@ Partial Class frmQuanLiTheDocGia
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmQuanLiTheDocGia))
         Me.dtpBirthDate = New System.Windows.Forms.DateTimePicker()
         Me.txtAddress = New System.Windows.Forms.TextBox()
         Me.txtEmail = New System.Windows.Forms.TextBox()
@@ -211,6 +212,7 @@ Partial Class frmQuanLiTheDocGia
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmQuanLiTheDocGia"
         Me.Text = "Quản lí thẻ độc giả"
         CType(Me.DataGridViewQuanLiTheDocGia, System.ComponentModel.ISupportInitialize).EndInit()

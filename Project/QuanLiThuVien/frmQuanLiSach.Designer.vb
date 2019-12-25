@@ -22,14 +22,13 @@ Partial Class frmQuanLiSach
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmQuanLiSach))
         Me.DataGridViewQuanLiSach = New System.Windows.Forms.DataGridView()
         Me.MinPriceNumericUpDown = New System.Windows.Forms.NumericUpDown()
-        Me.dpNgayNhapMin = New System.Windows.Forms.DateTimePicker()
         Me.dpNamXBCanTimMin = New System.Windows.Forms.DateTimePicker()
         Me.cbTacGiaCanTim = New System.Windows.Forms.ComboBox()
         Me.cbTheLoaiCanTim = New System.Windows.Forms.ComboBox()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -38,26 +37,21 @@ Partial Class frmQuanLiSach
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.dpNamXBCanTimMax = New System.Windows.Forms.DateTimePicker()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.dpNgayNhapMax = New System.Windows.Forms.DateTimePicker()
         Me.cbNhaXuatBanCanTim = New System.Windows.Forms.ComboBox()
         Me.cbTenSachCanTim = New System.Windows.Forms.ComboBox()
         Me.MaxPriceNumericUpDown = New System.Windows.Forms.NumericUpDown()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.btnSearch = New MetroFramework.Controls.MetroButton()
-        Me.txtMaSachDangChon = New System.Windows.Forms.TextBox()
+        Me.txtMaDauSachDangChon = New System.Windows.Forms.TextBox()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.nudTriGiaDangChon = New System.Windows.Forms.NumericUpDown()
-        Me.dpNgayNhapDangChon = New System.Windows.Forms.DateTimePicker()
         Me.dpNamXBDangChon = New System.Windows.Forms.DateTimePicker()
         Me.cbTacGiaDangChon = New System.Windows.Forms.ComboBox()
         Me.cbTheLoaiDangChon = New System.Windows.Forms.ComboBox()
         Me.txtTenNxbDangChon = New System.Windows.Forms.TextBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.txtTenSachDangChon = New System.Windows.Forms.TextBox()
-        Me.Label16 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.Label19 = New System.Windows.Forms.Label()
@@ -79,27 +73,20 @@ Partial Class frmQuanLiSach
         'DataGridViewQuanLiSach
         '
         Me.DataGridViewQuanLiSach.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewQuanLiSach.Location = New System.Drawing.Point(59, 280)
+        Me.DataGridViewQuanLiSach.Location = New System.Drawing.Point(59, 258)
         Me.DataGridViewQuanLiSach.Name = "DataGridViewQuanLiSach"
-        Me.DataGridViewQuanLiSach.Size = New System.Drawing.Size(918, 105)
+        Me.DataGridViewQuanLiSach.Size = New System.Drawing.Size(918, 127)
         Me.DataGridViewQuanLiSach.TabIndex = 68
         '
         'MinPriceNumericUpDown
         '
         Me.MinPriceNumericUpDown.ForeColor = System.Drawing.SystemColors.WindowText
-        Me.MinPriceNumericUpDown.Location = New System.Drawing.Point(709, 111)
+        Me.MinPriceNumericUpDown.Location = New System.Drawing.Point(709, 81)
         Me.MinPriceNumericUpDown.Maximum = New Decimal(New Integer() {1215752192, 23, 0, 0})
         Me.MinPriceNumericUpDown.Name = "MinPriceNumericUpDown"
         Me.MinPriceNumericUpDown.Size = New System.Drawing.Size(102, 20)
         Me.MinPriceNumericUpDown.TabIndex = 82
         Me.MinPriceNumericUpDown.ThousandsSeparator = True
-        '
-        'dpNgayNhapMin
-        '
-        Me.dpNgayNhapMin.Location = New System.Drawing.Point(709, 81)
-        Me.dpNgayNhapMin.Name = "dpNgayNhapMin"
-        Me.dpNgayNhapMin.Size = New System.Drawing.Size(102, 20)
-        Me.dpNgayNhapMin.TabIndex = 81
         '
         'dpNamXBCanTimMin
         '
@@ -133,22 +120,11 @@ Partial Class frmQuanLiSach
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label4.Location = New System.Drawing.Point(538, 111)
+        Me.Label4.Location = New System.Drawing.Point(538, 81)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(55, 20)
         Me.Label4.TabIndex = 76
         Me.Label4.Text = "Trị giá:"
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label8.Location = New System.Drawing.Point(538, 77)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(91, 20)
-        Me.Label8.TabIndex = 74
-        Me.Label8.Text = "Ngày Nhập:"
         '
         'Label7
         '
@@ -234,35 +210,6 @@ Partial Class frmQuanLiSach
         Me.dpNamXBCanTimMax.Size = New System.Drawing.Size(102, 20)
         Me.dpNamXBCanTimMax.TabIndex = 86
         '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label10.Location = New System.Drawing.Point(670, 81)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(24, 16)
-        Me.Label10.TabIndex = 87
-        Me.Label10.Text = "Từ"
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label11.Location = New System.Drawing.Point(828, 84)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(32, 16)
-        Me.Label11.TabIndex = 88
-        Me.Label11.Text = "Đến"
-        '
-        'dpNgayNhapMax
-        '
-        Me.dpNgayNhapMax.Location = New System.Drawing.Point(866, 80)
-        Me.dpNgayNhapMax.Name = "dpNgayNhapMax"
-        Me.dpNgayNhapMax.Size = New System.Drawing.Size(102, 20)
-        Me.dpNgayNhapMax.TabIndex = 89
-        '
         'cbNhaXuatBanCanTim
         '
         Me.cbNhaXuatBanCanTim.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
@@ -286,7 +233,7 @@ Partial Class frmQuanLiSach
         'MaxPriceNumericUpDown
         '
         Me.MaxPriceNumericUpDown.ForeColor = System.Drawing.SystemColors.WindowText
-        Me.MaxPriceNumericUpDown.Location = New System.Drawing.Point(866, 111)
+        Me.MaxPriceNumericUpDown.Location = New System.Drawing.Point(866, 81)
         Me.MaxPriceNumericUpDown.Maximum = New Decimal(New Integer() {1215752192, 23, 0, 0})
         Me.MaxPriceNumericUpDown.Name = "MaxPriceNumericUpDown"
         Me.MaxPriceNumericUpDown.Size = New System.Drawing.Size(102, 20)
@@ -299,7 +246,7 @@ Partial Class frmQuanLiSach
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label12.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label12.Location = New System.Drawing.Point(670, 115)
+        Me.Label12.Location = New System.Drawing.Point(670, 85)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(24, 16)
         Me.Label12.TabIndex = 93
@@ -310,7 +257,7 @@ Partial Class frmQuanLiSach
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label13.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label13.Location = New System.Drawing.Point(828, 113)
+        Me.Label13.Location = New System.Drawing.Point(828, 85)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(32, 16)
         Me.Label13.TabIndex = 94
@@ -318,19 +265,19 @@ Partial Class frmQuanLiSach
         '
         'btnSearch
         '
-        Me.btnSearch.Location = New System.Drawing.Point(466, 240)
+        Me.btnSearch.Location = New System.Drawing.Point(466, 221)
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(103, 23)
         Me.btnSearch.TabIndex = 96
         Me.btnSearch.Text = "Tìm kiếm"
         '
-        'txtMaSachDangChon
+        'txtMaDauSachDangChon
         '
-        Me.txtMaSachDangChon.Enabled = False
-        Me.txtMaSachDangChon.Location = New System.Drawing.Point(183, 26)
-        Me.txtMaSachDangChon.Name = "txtMaSachDangChon"
-        Me.txtMaSachDangChon.Size = New System.Drawing.Size(204, 20)
-        Me.txtMaSachDangChon.TabIndex = 100
+        Me.txtMaDauSachDangChon.Enabled = False
+        Me.txtMaDauSachDangChon.Location = New System.Drawing.Point(183, 26)
+        Me.txtMaDauSachDangChon.Name = "txtMaDauSachDangChon"
+        Me.txtMaDauSachDangChon.Size = New System.Drawing.Size(204, 20)
+        Me.txtMaDauSachDangChon.TabIndex = 100
         '
         'Label14
         '
@@ -346,21 +293,13 @@ Partial Class frmQuanLiSach
         'nudTriGiaDangChon
         '
         Me.nudTriGiaDangChon.ForeColor = System.Drawing.SystemColors.WindowText
-        Me.nudTriGiaDangChon.Location = New System.Drawing.Point(584, 133)
+        Me.nudTriGiaDangChon.Location = New System.Drawing.Point(584, 96)
         Me.nudTriGiaDangChon.Maximum = New Decimal(New Integer() {1215752192, 23, 0, 0})
         Me.nudTriGiaDangChon.Name = "nudTriGiaDangChon"
         Me.nudTriGiaDangChon.Size = New System.Drawing.Size(204, 20)
         Me.nudTriGiaDangChon.TabIndex = 107
         Me.nudTriGiaDangChon.ThousandsSeparator = True
         Me.nudTriGiaDangChon.Value = New Decimal(New Integer() {10000, 0, 0, 0})
-        '
-        'dpNgayNhapDangChon
-        '
-        Me.dpNgayNhapDangChon.Enabled = False
-        Me.dpNgayNhapDangChon.Location = New System.Drawing.Point(584, 97)
-        Me.dpNgayNhapDangChon.Name = "dpNgayNhapDangChon"
-        Me.dpNgayNhapDangChon.Size = New System.Drawing.Size(200, 20)
-        Me.dpNgayNhapDangChon.TabIndex = 106
         '
         'dpNamXBDangChon
         '
@@ -402,7 +341,7 @@ Partial Class frmQuanLiSach
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label15.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label15.Location = New System.Drawing.Point(435, 133)
+        Me.Label15.Location = New System.Drawing.Point(435, 96)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(55, 20)
         Me.Label15.TabIndex = 114
@@ -414,17 +353,6 @@ Partial Class frmQuanLiSach
         Me.txtTenSachDangChon.Name = "txtTenSachDangChon"
         Me.txtTenSachDangChon.Size = New System.Drawing.Size(204, 20)
         Me.txtTenSachDangChon.TabIndex = 101
-        '
-        'Label16
-        '
-        Me.Label16.AutoSize = True
-        Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label16.Location = New System.Drawing.Point(435, 97)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(91, 20)
-        Me.Label16.TabIndex = 113
-        Me.Label16.Text = "Ngày Nhập:"
         '
         'Label17
         '
@@ -504,19 +432,14 @@ Partial Class frmQuanLiSach
         Me.GroupBoxThongTinSachCanTim.Controls.Add(Me.Label3)
         Me.GroupBoxThongTinSachCanTim.Controls.Add(Me.Label6)
         Me.GroupBoxThongTinSachCanTim.Controls.Add(Me.Label7)
-        Me.GroupBoxThongTinSachCanTim.Controls.Add(Me.Label8)
         Me.GroupBoxThongTinSachCanTim.Controls.Add(Me.Label4)
         Me.GroupBoxThongTinSachCanTim.Controls.Add(Me.cbTheLoaiCanTim)
         Me.GroupBoxThongTinSachCanTim.Controls.Add(Me.cbTacGiaCanTim)
         Me.GroupBoxThongTinSachCanTim.Controls.Add(Me.dpNamXBCanTimMin)
-        Me.GroupBoxThongTinSachCanTim.Controls.Add(Me.dpNgayNhapMin)
         Me.GroupBoxThongTinSachCanTim.Controls.Add(Me.MinPriceNumericUpDown)
         Me.GroupBoxThongTinSachCanTim.Controls.Add(Me.Label1)
         Me.GroupBoxThongTinSachCanTim.Controls.Add(Me.Label9)
         Me.GroupBoxThongTinSachCanTim.Controls.Add(Me.dpNamXBCanTimMax)
-        Me.GroupBoxThongTinSachCanTim.Controls.Add(Me.Label10)
-        Me.GroupBoxThongTinSachCanTim.Controls.Add(Me.Label11)
-        Me.GroupBoxThongTinSachCanTim.Controls.Add(Me.dpNgayNhapMax)
         Me.GroupBoxThongTinSachCanTim.Controls.Add(Me.cbNhaXuatBanCanTim)
         Me.GroupBoxThongTinSachCanTim.Controls.Add(Me.cbTenSachCanTim)
         Me.GroupBoxThongTinSachCanTim.Controls.Add(Me.Label13)
@@ -526,7 +449,7 @@ Partial Class frmQuanLiSach
         Me.GroupBoxThongTinSachCanTim.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBoxThongTinSachCanTim.Name = "GroupBoxThongTinSachCanTim"
         Me.GroupBoxThongTinSachCanTim.Padding = New System.Windows.Forms.Padding(2)
-        Me.GroupBoxThongTinSachCanTim.Size = New System.Drawing.Size(989, 149)
+        Me.GroupBoxThongTinSachCanTim.Size = New System.Drawing.Size(989, 129)
         Me.GroupBoxThongTinSachCanTim.TabIndex = 118
         Me.GroupBoxThongTinSachCanTim.TabStop = False
         Me.GroupBoxThongTinSachCanTim.Text = "Thông tin sách cần tìm"
@@ -537,12 +460,10 @@ Partial Class frmQuanLiSach
         Me.GroupBoxThongTinSachDangChon.Controls.Add(Me.Label21)
         Me.GroupBoxThongTinSachDangChon.Controls.Add(Me.Label20)
         Me.GroupBoxThongTinSachDangChon.Controls.Add(Me.Label19)
-        Me.GroupBoxThongTinSachDangChon.Controls.Add(Me.txtMaSachDangChon)
+        Me.GroupBoxThongTinSachDangChon.Controls.Add(Me.txtMaDauSachDangChon)
         Me.GroupBoxThongTinSachDangChon.Controls.Add(Me.Label18)
         Me.GroupBoxThongTinSachDangChon.Controls.Add(Me.Label17)
         Me.GroupBoxThongTinSachDangChon.Controls.Add(Me.nudTriGiaDangChon)
-        Me.GroupBoxThongTinSachDangChon.Controls.Add(Me.Label16)
-        Me.GroupBoxThongTinSachDangChon.Controls.Add(Me.dpNgayNhapDangChon)
         Me.GroupBoxThongTinSachDangChon.Controls.Add(Me.txtTenSachDangChon)
         Me.GroupBoxThongTinSachDangChon.Controls.Add(Me.dpNamXBDangChon)
         Me.GroupBoxThongTinSachDangChon.Controls.Add(Me.Label15)
@@ -579,6 +500,7 @@ Partial Class frmQuanLiSach
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.btnSearch)
         Me.Controls.Add(Me.DataGridViewQuanLiSach)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmQuanLiSach"
         Me.Text = "Quản lí sách"
         CType(Me.DataGridViewQuanLiSach, System.ComponentModel.ISupportInitialize).EndInit()
@@ -594,12 +516,10 @@ Partial Class frmQuanLiSach
     End Sub
     Friend WithEvents DataGridViewQuanLiSach As DataGridView
     Friend WithEvents MinPriceNumericUpDown As NumericUpDown
-    Friend WithEvents dpNgayNhapMin As DateTimePicker
     Friend WithEvents dpNamXBCanTimMin As DateTimePicker
     Friend WithEvents cbTacGiaCanTim As ComboBox
     Friend WithEvents cbTheLoaiCanTim As ComboBox
     Friend WithEvents Label4 As Label
-    Friend WithEvents Label8 As Label
     Friend WithEvents Label7 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents Label5 As Label
@@ -608,26 +528,21 @@ Partial Class frmQuanLiSach
     Friend WithEvents Label1 As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents dpNamXBCanTimMax As DateTimePicker
-    Friend WithEvents Label10 As Label
-    Friend WithEvents Label11 As Label
-    Friend WithEvents dpNgayNhapMax As DateTimePicker
     Friend WithEvents cbNhaXuatBanCanTim As ComboBox
     Friend WithEvents cbTenSachCanTim As ComboBox
     Friend WithEvents MaxPriceNumericUpDown As NumericUpDown
     Friend WithEvents Label12 As Label
     Friend WithEvents Label13 As Label
     Friend WithEvents btnSearch As MetroFramework.Controls.MetroButton
-    Friend WithEvents txtMaSachDangChon As TextBox
+    Friend WithEvents txtMaDauSachDangChon As TextBox
     Friend WithEvents Label14 As Label
     Friend WithEvents nudTriGiaDangChon As NumericUpDown
-    Friend WithEvents dpNgayNhapDangChon As DateTimePicker
     Friend WithEvents dpNamXBDangChon As DateTimePicker
     Friend WithEvents cbTacGiaDangChon As ComboBox
     Friend WithEvents cbTheLoaiDangChon As ComboBox
     Friend WithEvents txtTenNxbDangChon As TextBox
     Friend WithEvents Label15 As Label
     Friend WithEvents txtTenSachDangChon As TextBox
-    Friend WithEvents Label16 As Label
     Friend WithEvents Label17 As Label
     Friend WithEvents Label18 As Label
     Friend WithEvents Label19 As Label

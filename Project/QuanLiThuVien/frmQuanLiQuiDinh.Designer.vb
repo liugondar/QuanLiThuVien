@@ -22,6 +22,7 @@ Partial Class frmQuanLiQuiDinh
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmQuanLiQuiDinh))
         Me.txtTuoiToiThieu = New System.Windows.Forms.TextBox()
         Me.txtTuoiToiDa = New System.Windows.Forms.TextBox()
         Me.txtThoiHanThe = New System.Windows.Forms.TextBox()
@@ -218,6 +219,7 @@ Partial Class frmQuanLiQuiDinh
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmQuanLiQuiDinh"
         Me.Text = "Quản lí qui định"
         Me.GroupBox1.ResumeLayout(False)

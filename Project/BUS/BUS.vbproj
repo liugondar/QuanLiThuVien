@@ -21,6 +21,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DocumentationFile>BUS.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -72,6 +73,7 @@
     <Compile Include="ChiTietBaoCaoTinhHinhMuonSachTheoTheLoaiBUS.vb" />
     <Compile Include="ChiTietBaoCaoTraSachTreBUS.vb" />
     <Compile Include="ChiTietPhieuMuonSachBus.vb" />
+    <Compile Include="DauSachBus.vb" />
     <Compile Include="DocGiaBus.vb" />
     <Compile Include="LoaiDocGiaBus.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />

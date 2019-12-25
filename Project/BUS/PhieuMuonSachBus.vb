@@ -79,6 +79,10 @@ Public Class PhieuMuonSachBus
         Return New Result()
     End Function
 
+    Public Sub SelectAllSachChuaTraByPhieuMuonId(maPhieuMuonSach As String, ByRef listBook As List(Of CustomBookInfoDisplay))
+        _phieuMuonSachDAO.SelectAllSachChuaTraByPhieuMuonId(maPhieuMuonSach, listBook)
+    End Sub
+
     Private Function ValidateSoSachMuonToiDa(tongSoSachCanMuon As Integer, listPhieuMuonSachChuaTra As List(Of PhieuMuonSach)) As Result
         Dim soSachMuonTruocDo = 0
         For Each phieuMuonSach In listPhieuMuonSachChuaTra
@@ -103,10 +107,10 @@ Public Class PhieuMuonSachBus
 #End Region
 
 #Region "-  Update   -"
-    Public Function UpdateCheckOutPhieuMuonByPhieuMuonSach(PhieuMuonSach As PhieuMuonSach, listChiTietPhieuMuonSach As List(Of ChiTietPhieuMuonSach)) As Result
+    Public Function CheckOutPhieuMuonById(PhieuMuonSach As PhieuMuonSach, listChiTietPhieuMuonSach As List(Of ChiTietPhieuMuonSach), ngayTra As Date) As Result
         If String.IsNullOrWhiteSpace(PhieuMuonSach.MaPhieuMuonSach) Then Return New Result(False, "Mã phiếu mượn không hợp lệ!", "")
 
-        Dim checkOutResult = _phieuMuonSachDAO.UpdateCheckOutPhieuMuonByPhieuMuonSach(PhieuMuonSach)
+        Dim checkOutResult = _phieuMuonSachDAO.UpdateCheckOutPhieuMuonByPhieuMuonSach(PhieuMuonSach, ngayTra)
         If checkOutResult.FlagResult = False Then Return checkOutResult
 
         Dim sachBus = New SachBus
@@ -115,9 +119,15 @@ Public Class PhieuMuonSachBus
         Next
         Return checkOutResult
     End Function
+
+
+
 #End Region
 
 #Region "-   Retrieve data  -"
+    Public Sub SelectRentSachByDocGiaId(docGiaId As String, ByRef sachInfo As List(Of CustomBookInfoDisplay))
+        _phieuMuonSachDAO.SelectRentSachByDocGiaId(docGiaId, sachInfo)
+    End Sub
     Public Function SelectAllByMaTheDocGia(ByRef listPhieuMuonSach As List(Of PhieuMuonSach), maTheDocGia As String) As Result
         Return _phieuMuonSachDAO.SelectAllByMaTheDocGia(listPhieuMuonSach, maTheDocGia)
     End Function
@@ -143,7 +153,8 @@ Public Class PhieuMuonSachBus
     Public Function SelectAllPhieuTraTreByDate(ByRef listPhieuMuonSach As List(Of PhieuMuonSach), thoiGian As DateTime) As Result
         Dim result = _phieuMuonSachDAO.SelectAllPhieuMuonSachByDate(listPhieuMuonSach, thoiGian)
         _quiDinhBus.GetSoNgayMuonSachToiDa(_quiDinh)
-        listPhieuMuonSach = listPhieuMuonSach.Where(Function(x) (x.NgayTra - x.NgayMuon).TotalDays > _quiDinh.SoNgayMuonSachToiDa).ToList()
+        'TODO: get phieu tra 
+        'listPhieuMuonSach = listPhieuMuonSach.Where(Function(x) (x.NgayTra - x.NgayMuon).TotalDays > _quiDinh.SoNgayMuonSachToiDa).ToList()
         Return result
     End Function
 

@@ -33,14 +33,11 @@ Public Class PhieuMuonSachDAO
 #End Region
 
 #Region "-   Update    -"
-    Public Function UpdateCheckOutPhieuMuonByPhieuMuonSach(PhieuMuonSach As PhieuMuonSach) As Result
+    Public Function UpdateCheckOutPhieuMuonByPhieuMuonSach(PhieuMuonSach As PhieuMuonSach, ngayTra As Date) As Result
         Dim formatDate = DateHelper.Instance.GetFormatType()
-        Dim query = String.Format("
-update PhieuMuonSach    
-set TinhTrang=1, NgayTra='{0}'
-where MaPhieuMuonSach={1}
- ", PhieuMuonSach.NgayTra.ToString(formatDate), PhieuMuonSach.MaPhieuMuonSach)
-        Return _dataProvider.ExecuteNonquery(query)
+        Dim qr = "EXECUTE dbo.ReturnAllBookByPhieuMuonId " + PhieuMuonSach.MaPhieuMuonSach + ", '" + ngayTra.ToString(formatDate) + "'"
+
+        Return _dataProvider.ExecuteNonquery(qr)
     End Function
 #End Region
 
@@ -84,11 +81,7 @@ where MaPhieuMuonSach={1}
     End Function
 
     Public Function SelectAllPhieuMuonSachChuaTraByReaderId(ByRef listPhieuMuonSach As List(Of PhieuMuonSach), maTheDocGia As String) As Result
-        Dim query = String.Empty
-        query = String.Format("Select * from PhieuMuonSach
-WHERE [MaTheDocGia]={0} AND [TinhTrang]=0
-and DeleteFlag='N'", maTheDocGia)
-
+        Dim query = "EXECUTE dbo.USP_getPhieuMuonSachNotPayByDocGiaId " + maTheDocGia
         Dim dataTable = New DataTable()
         Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         If result.FlagResult = False Then Return New Result(False, "Không thể lấy danh sach phiếu mượn sách đã có!", "")
@@ -100,6 +93,16 @@ and DeleteFlag='N'", maTheDocGia)
         Next
         Return result
     End Function
+
+    Public Sub SelectAllSachChuaTraByPhieuMuonId(maPhieuMuonSach As String, ByRef listBook As List(Of CustomBookInfoDisplay))
+        Dim qr = "EXECUTE dbo.USP_SelectRentInfo " + maPhieuMuonSach
+        Dim dtb = New DataTable()
+        Dim res = _dataProvider.ExecuteQuery(qr, dtb)
+        For Each row In dtb.Rows
+            Dim sachInfo = New CustomBookInfoDisplay(row)
+            listBook.Add(sachInfo)
+        Next
+    End Sub
 
     Public Function SelectIdTheLastOne(ByRef maPhieuMuonSach As String) As Result
         Dim query As String = String.Empty
@@ -143,5 +146,17 @@ And YEAR(NgayTra)='{0}' and month(NgayMuon)='{1}'
         Next
         Return result
     End Function
+
+    Public Sub SelectRentSachByDocGiaId(docGiaId As String, ByRef listSach As List(Of CustomBookInfoDisplay))
+        Dim qr = "EXECUTE dbo.SelectRentSachByDocGiaId " + docGiaId
+
+        Dim dtb = New DataTable()
+        Dim res = _dataProvider.ExecuteQuery(qr, dtb)
+        For Each row In dtb.Rows
+            Dim sachInfo = New CustomBookInfoDisplay(row)
+            listSach.Add(sachInfo)
+        Next
+
+    End Sub
 #End Region
 End Class
