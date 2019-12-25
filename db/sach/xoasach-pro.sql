@@ -23,9 +23,6 @@ AS
     and s.MaSach= @MaCuonSach
     and ds.DeleteFlag = N'N'
 GO
--- example to execute the stored procedure we just created
-EXECUTE dbo.GetAllInfoBookByCuonSachId 1
-GO
 
 
 -- Create a new stored procedure called 'USP_XoaDauSach' in schema 'dbo'
@@ -53,11 +50,3 @@ AS
         on s.MaDauSach = ds.MaDauSach
         and ds.MaDauSach= @MaDauSach
 GO
--- example to execute the stored procedure we just created
-EXECUTE dbo.USP_XoaDauSach 3
-GO
-
-select * from sach
-select * from dausach
-
-EXECUTE USP_NhapCuonSach @MaSach = N'11',@MaDauSach= N'7',@NgayNhap= N'2019-12-25',@TinhTrang = 0
