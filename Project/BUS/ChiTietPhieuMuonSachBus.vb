@@ -29,6 +29,19 @@ Public Class ChiTietPhieuMuonSachBus
         End If
         Return New Result()
     End Function
+     Public Function InsertMore(chiTietPhieuMuonSach As ChiTietPhieuMuonSach) As Result
+        Dim insertResult = _chiTietPhieuMuonSachDAO.InsertOne(chiTietPhieuMuonSach)
+        If insertResult.FlagResult = False Then Return insertResult
+
+        Dim updateSachInfoResult = _sachBus.SetStatusSachToUnavailableByID(chiTietPhieuMuonSach.MaSach)
+        If updateSachInfoResult.FlagResult = False Then
+            Dim lastID = String.Empty
+            _chiTietPhieuMuonSachDAO.GetTheLastID(lastID)
+            DeleteById(lastID)
+            Return updateSachInfoResult
+        End If
+        Return New Result()
+    End Function
 #End Region
 
 #Region "-   Delete   -"
@@ -44,6 +57,9 @@ Public Class ChiTietPhieuMuonSachBus
     End Function
 
     Public Function GetByID(ByRef chiTietPhieuMuonSach As ChiTietPhieuMuonSach, id As String) As Result
+        Return _chiTietPhieuMuonSachDAO.GetByID(chiTietPhieuMuonSach, id)
+    End Function
+     Public Function GetByName(ByRef chiTietPhieuMuonSach As ChiTietPhieuMuonSach, id As String) As Result
         Return _chiTietPhieuMuonSachDAO.GetByID(chiTietPhieuMuonSach, id)
     End Function
     Public Function selectALL(ByRef list As List(Of ChiTietPhieuMuonSach)) As Result
