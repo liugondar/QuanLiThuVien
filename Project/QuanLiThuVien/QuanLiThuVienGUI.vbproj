@@ -183,6 +183,12 @@
     <Compile Include="frmQuanLiTheLoaiSach.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FrmSLSach.Designer.vb">
+      <DependentUpon>FrmSLSach.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSLSach.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmThemAccount.Designer.vb">
       <DependentUpon>frmThemAccount.vb</DependentUpon>
     </Compile>
@@ -269,6 +275,18 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Readme.Designer.vb">
+      <DependentUpon>Readme.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Readme.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ThongKE.Designer.vb">
+      <DependentUpon>ThongKE.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ThongKE.vb">
+      <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
