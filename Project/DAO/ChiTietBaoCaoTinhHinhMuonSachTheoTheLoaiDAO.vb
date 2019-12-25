@@ -28,6 +28,20 @@ EXEC USP_NhapChiTietBaoCaoTinhHinhMuonSachTheoTheLoai
         Return _dataProvider.ExecuteNonquery(query)
     End Function
 
+    Public Function InsertMore(chiTietbaoCaoTinhHinhMuonSachTheoTheLoai As ChiTietBaoCaoTinhHinhMuonSachTheoTheLoai) As Result
+
+        Dim query = String.Format("
+EXEC USP_NhapChiTietBaoCaoTinhHinhMuonSachTheoTheLoai 
+@MaBaoCaoTinhHinhMuonSachTheoTheLoai={0},
+@MaTheLoaiSach={1},
+@SoLuongMuon={2}",
+        chiTietbaoCaoTinhHinhMuonSachTheoTheLoai.MaBaoCaoTinhHinhMuonSachTheoTheLoai,
+        chiTietbaoCaoTinhHinhMuonSachTheoTheLoai.MaTheLoaiSach,
+        chiTietbaoCaoTinhHinhMuonSachTheoTheLoai.SoLuongMuon
+)
+        Return _dataProvider.ExecuteNonquery(query)
+    End Function
+
 #End Region
 
 #Region "-   Update    -"
