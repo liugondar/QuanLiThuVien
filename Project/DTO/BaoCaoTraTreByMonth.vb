@@ -1,9 +1,10 @@
-﻿Public Class BaoCaoTraTreByMonth
+﻿Imports Utility
+Public Class BaoCaoTraTreByMonth
     Public Property MaPhieuMuonSach() As String
     Public Property MaTheDocGia() As String
     Public Property TenDocGia() As String
     Public Property NgayMuon() As Date
-    Public Property NgayTra() As Date
+    Public Property NgayTra() As String
     Public Property NgayTraTre() As Integer
     Public Property TenSach() As String
     Public Property MaSach() As String
@@ -30,9 +31,15 @@
         MaSach = row("MaSach")
         MaDauSach = row("MaDauSach")
 
-        Integer.TryParse(row("NgayTraTre"), NgayTraTre)
         Date.TryParse(row("NgayMuon"), NgayMuon)
-        Date.TryParse(row("NgayTra"), NgayTra)
+        NgayTraTre = If(Not IsDBNull(row("NgayTraTre")), Integer.Parse(row("NgayTraTre")), 0)
+        If Not IsDBNull(row("NgayTra")) Then
+            Dim temp As Date
+            Date.TryParse(row("NgayTra"), temp)
+            NgayTra = temp.ToShortDateString()
+        Else
+            NgayTra = "Chưa trả"
+        End If
 
     End Sub
 End Class
