@@ -185,7 +185,10 @@ maSach={0}", maSach)
         Return result
     End Function
 
+<<<<<<< HEAD
 >>>>>>> 23255e082546ff634623f5fd37accbfe6a2d20ef
+=======
+>>>>>>> 5509b4047bd1eda511aa2493ff1946e4f04b41e4
       Public Function SelectAll(ByRef listTacGia As List(Of TacGia)) As Result
         Dim query = String.Empty
         query &= "Select * from dbo.TacGia"
@@ -237,6 +240,7 @@ order by MaTacGia desc")
         Return New Result()
     End Function
 <<<<<<< HEAD
+<<<<<<< HEAD
 #End Region
 
 #Region "-    Insert,delete,update   -"
@@ -264,6 +268,8 @@ VALUES('{0}')", tacGia.TenTacGia)
     End Function
 =======
 >>>>>>> 23255e082546ff634623f5fd37accbfe6a2d20ef
+=======
+>>>>>>> 5509b4047bd1eda511aa2493ff1946e4f04b41e4
 #End Region
 
 #Region "-    Insert,delete,update   -"

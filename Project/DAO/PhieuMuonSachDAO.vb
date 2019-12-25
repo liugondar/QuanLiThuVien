@@ -33,14 +33,11 @@ Public Class PhieuMuonSachDAO
 #End Region
 
 #Region "-   Update    -"
-    Public Function UpdateCheckOutPhieuMuonByPhieuMuonSach(PhieuMuonSach As PhieuMuonSach) As Result
+    Public Function UpdateCheckOutPhieuMuonByPhieuMuonSach(PhieuMuonSach As PhieuMuonSach, ngayTra As Date) As Result
         Dim formatDate = DateHelper.Instance.GetFormatType()
-        Dim query = String.Format("
-update PhieuMuonSach    
-set TinhTrang=1, NgayTra='{0}'
-where MaPhieuMuonSach={1}
- ", PhieuMuonSach.NgayTra.ToString(formatDate), PhieuMuonSach.MaPhieuMuonSach)
-        Return _dataProvider.ExecuteNonquery(query)
+        Dim qr = "EXECUTE dbo.ReturnAllBookByPhieuMuonId " + PhieuMuonSach.MaPhieuMuonSach + ", '" + ngayTra.ToString(formatDate) + "'"
+
+        Return _dataProvider.ExecuteNonquery(qr)
     End Function
 #End Region
 
