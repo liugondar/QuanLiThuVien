@@ -33,7 +33,7 @@ Partial Class frmTraSach
         Me.HoTenDocGiaMaskedTextBox = New System.Windows.Forms.MaskedTextBox()
         Me.NgayTraDateTimePicker = New System.Windows.Forms.DateTimePicker()
         Me.ListSachDaMuonDataGridView = New System.Windows.Forms.DataGridView()
-        Me.ConfirmMetroButton = New MetroFramework.Controls.MetroButton()
+        Me.btnTraHet = New MetroFramework.Controls.MetroButton()
         Me.WarningUnavailableMaPhieuMuonLabel = New System.Windows.Forms.Label()
         CType(Me.ListSachDaMuonDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -134,13 +134,13 @@ Partial Class frmTraSach
         Me.ListSachDaMuonDataGridView.Size = New System.Drawing.Size(675, 150)
         Me.ListSachDaMuonDataGridView.TabIndex = 11
         '
-        'ConfirmMetroButton
+        'btnTraHet
         '
-        Me.ConfirmMetroButton.Location = New System.Drawing.Point(341, 375)
-        Me.ConfirmMetroButton.Name = "ConfirmMetroButton"
-        Me.ConfirmMetroButton.Size = New System.Drawing.Size(87, 28)
-        Me.ConfirmMetroButton.TabIndex = 6
-        Me.ConfirmMetroButton.Text = "Xác nhận"
+        Me.btnTraHet.Location = New System.Drawing.Point(245, 373)
+        Me.btnTraHet.Name = "btnTraHet"
+        Me.btnTraHet.Size = New System.Drawing.Size(87, 28)
+        Me.btnTraHet.TabIndex = 6
+        Me.btnTraHet.Text = "Trả hết"
         '
         'WarningUnavailableMaPhieuMuonLabel
         '
@@ -156,12 +156,12 @@ Partial Class frmTraSach
         '
         'frmTraSach
         '
-        Me.AcceptButton = Me.ConfirmMetroButton
+        Me.AcceptButton = Me.btnTraHet
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(763, 415)
         Me.Controls.Add(Me.WarningUnavailableMaPhieuMuonLabel)
-        Me.Controls.Add(Me.ConfirmMetroButton)
+        Me.Controls.Add(Me.btnTraHet)
         Me.Controls.Add(Me.ListSachDaMuonDataGridView)
         Me.Controls.Add(Me.NgayTraDateTimePicker)
         Me.Controls.Add(Me.HoTenDocGiaMaskedTextBox)
@@ -192,6 +192,6 @@ Partial Class frmTraSach
     Friend WithEvents HoTenDocGiaMaskedTextBox As MaskedTextBox
     Friend WithEvents NgayTraDateTimePicker As DateTimePicker
     Friend WithEvents ListSachDaMuonDataGridView As DataGridView
-    Friend WithEvents ConfirmMetroButton As MetroFramework.Controls.MetroButton
+    Friend WithEvents btnTraHet As MetroFramework.Controls.MetroButton
     Friend WithEvents WarningUnavailableMaPhieuMuonLabel As Label
 End Class
