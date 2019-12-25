@@ -138,7 +138,7 @@ Public Class frmBaoCaoTraSachTre
     End Sub
 
     Private Sub BtnExport_Click(sender As Object, e As EventArgs) Handles btnExport.Click
-        ExportExcel.Instance.Export("Báo cáo trả sách trễ tại " & ThoiGianCanTimDateTimePicker.Value.ToString("MM,yyyy"), LayDulieu(), "J")
+        ExportExcel.Instance.Export("Báo cáo trả sách trễ tại " & ThoiGianCanTimDateTimePicker.Value.ToString("MM,yyyy"), LayDulieu())
     End Sub
 
     Private Function LayDulieu() As DataTable

@@ -796,21 +796,24 @@ VALUES(55, 18, 6, 8, 4, 5)
 
 INSERT into LoaiDocGia
     (TenLoaiDocGia)
-VALUES('X')
+VALUES('Thường')
 INSERT into LoaiDocGia
     (TenLoaiDocGia)
-VALUES('Y')
+VALUES('VIP')
 
 --Init the loai 
 INSERT INTO dbo.TheLoaiSach
     (TenTheLoaiSach)
-VALUES('A')
+VALUES('Phiêu lưu')
 INSERT INTO dbo.TheLoaiSach
     (TenTheLoaiSach)
-VALUES('B')
+VALUES('Khoa học')
 INSERT INTO dbo.TheLoaiSach
     (TenTheLoaiSach)
-VALUES('C')
+VALUES('Trinh thám')
+INSERT INTO dbo.TheLoaiSach
+    (TenTheLoaiSach)
+VALUES('Ngôn tình')
 
 --Init tac gia
 INSERT INTO dbo.TacGia
