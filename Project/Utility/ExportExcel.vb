@@ -23,7 +23,9 @@ Public NotInheritable Class ExportExcel
             Dim misValue As Object = System.Reflection.Missing.Value
             Dim chartRange As Excel.Range
             xlWorkBook = xlApp.Workbooks.Add(misValue)
-            xlWorkSheet = xlWorkBook.Sheets("sheet1")
+            ' english
+            'xlWorkSheet = xlWorkBook.Sheets("sheet1")
+            xlWorkSheet = CType(xlWorkBook.Sheets(1), Excel.Worksheet)
             xlWorkSheet.Range("a2", "f2").Merge()
             xlWorkSheet.Cells(2, 1) = title
             xlWorkSheet.Cells(2, 1).VerticalAlignment = Excel.Constants.xlCenter
@@ -85,7 +87,8 @@ Public NotInheritable Class ExportExcel
             releaseObject(xlApp)
             releaseObject(xlWorkBook)
             releaseObject(xlWorkSheet)
-        Catch
+        Catch ex As Exception
+            Strings.Instance.LogErr(ex.Message)
             MessageBox.Show("Please check if your computer got excel!")
         End Try
     End Function
