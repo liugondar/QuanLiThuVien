@@ -56,5 +56,9 @@ Public Class BaoCaoSachTraTreBus
         Return result
     End Function
 
+    Public Function GetTinhHinhTraTreByMonth(month As Date, ByRef baocao As List(Of BaoCaoTraTreByMonth)) As Result
+        Return _baoCaoSachTraTreDaO.GetTinhHinhTraTreByMonth(month, baocao)
+    End Function
+
 #End Region
 End Class

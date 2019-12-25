@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿Imports QLTVDTO
 Imports QLTVBus
 Imports Utility
@@ -5,6 +6,25 @@ Imports System.Drawing
 Imports System.IO
 Imports iTextSharp.text
 Imports iTextSharp.text.pdf
+=======
+﻿Imports Utility
+Imports BUS
+Imports DTO
+Imports Excel = Microsoft.Office.Interop.Excel
+Imports ExcelAutoFormat = Microsoft.Office.Interop.Excel.XlRangeAutoFormat
+
+
+Public Class frmBaoCaoTraSachTre
+#Region "-   Fields   -"
+    Private _baoCaoSachTraTreBus As BaoCaoSachTraTreBus
+    Private _chiTietBaoCaoBus As ChiTietBaoCaoSachTraTreBus
+    Private _listChiTietBaoCaoSachTraTre As List(Of ChiTietBaoCaoSachTraTre)
+    Private _phieuMuonSachBus As PhieuMuonSachBus
+    Private _chiTietPhieuMuonBus As ChiTietPhieuMuonSachBus
+    Private _sachBus As SachBus
+    Dim directory As String = My.Application.Info.DirectoryPath
+    Private _listbaocao As List(Of BaoCaoTraTreByMonth)
+>>>>>>> loc-dev
 
 Public Class ucBaoCaoSachTre
     Dim tsBus As New ThamSoBUS
@@ -147,6 +167,7 @@ Public Class ucBaoCaoSachTre
             ketqua.SpacingAfter = 20.0F
             doc.Add(ketqua)
 
+<<<<<<< HEAD
             Dim pdftable As New PdfPTable(dgThongKe.Columns.Count)
             pdftable.TotalWidth = 400.0F
             pdftable.LockedWidth = True
@@ -201,6 +222,17 @@ Public Class ucBaoCaoSachTre
         _chiTietBaoCaoBus = New ChiTietBaoCaoTinhHinhMuonSachTheoTheLoaiBUS()
 
         _listChiTietBaoCao = New List(Of ChiTietBaoCaoTinhHinhMuonSachTheoTheLoai)
+=======
+#Region "-   Constructor   -"
+    Private Sub frmBaoCaoTraSachTre_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        _baoCaoSachTraTreBus = New BaoCaoSachTraTreBus()
+        _chiTietBaoCaoBus = New ChiTietBaoCaoSachTraTreBus()
+        _listChiTietBaoCaoSachTraTre = New List(Of ChiTietBaoCaoSachTraTre)
+        _phieuMuonSachBus = New PhieuMuonSachBus()
+        _chiTietPhieuMuonBus = New ChiTietPhieuMuonSachBus()
+        _sachBus = New SachBus()
+        _listbaocao = New List(Of BaoCaoTraTreByMonth)
+>>>>>>> loc-dev
 
         ThoiGianCanTimDateTimePicker.Format = DateTimePickerFormat.Custom
         ThoiGianCanTimDateTimePicker.CustomFormat = "MM/yyyy"
@@ -245,6 +277,7 @@ Public Class ucBaoCaoSachTre
     End Sub
 
     Private Sub CreateTitleColumn()
+<<<<<<< HEAD
         Dim tenTheLoaiColumn = New DataGridViewTextBoxColumn()
         tenTheLoaiColumn.Name = "TenTheLoaiSach"
         tenTheLoaiColumn.HeaderText = "Tên thể loại"
@@ -271,6 +304,49 @@ Public Class ucBaoCaoSachTre
 #End Region
 
 #Region "-   Events   -"
+=======
+        Dim phieuMuonIdClmn = New DataGridViewTextBoxColumn()
+        phieuMuonIdClmn.Name = "MaPhieuMuonSach"
+        phieuMuonIdClmn.HeaderText = "Mã phiếu mượn"
+        phieuMuonIdClmn.DataPropertyName = "MaPhieuMuonSach"
+        phieuMuonIdClmn.Width = 50
+        ChiTietBaoCaoDataGridView.Columns.Add(phieuMuonIdClmn)
+
+        Dim MaTheDocGia = New DataGridViewTextBoxColumn()
+        MaTheDocGia.Name = "MaTheDocGia"
+        MaTheDocGia.HeaderText = "MaTheDocGia"
+        MaTheDocGia.DataPropertyName = "MaTheDocGia"
+        MaTheDocGia.Width = 50
+        ChiTietBaoCaoDataGridView.Columns.Add(MaTheDocGia)
+
+
+        Dim TenDocGia = New DataGridViewTextBoxColumn()
+        TenDocGia.Name = "TenDocGia"
+        TenDocGia.HeaderText = "TenDocGia"
+        TenDocGia.DataPropertyName = "TenDocGia"
+        TenDocGia.Width = 50
+        ChiTietBaoCaoDataGridView.Columns.Add(TenDocGia)
+
+
+        Dim NgayMuon = New DataGridViewTextBoxColumn()
+        NgayMuon.Name = "NgayMuon"
+        NgayMuon.HeaderText = "Ngày mượn"
+        NgayMuon.DataPropertyName = "NgayMuon"
+        NgayMuon.Width = 50
+        ChiTietBaoCaoDataGridView.Columns.Add(NgayMuon)
+
+        Dim NgayTra = New DataGridViewTextBoxColumn()
+        NgayTra.Name = "NgayTra"
+        NgayTra.HeaderText = "NgayTra"
+        NgayTra.DataPropertyName = "NgayTra"
+        NgayTra.Width = 50
+        ChiTietBaoCaoDataGridView.Columns.Add(NgayTra)
+
+
+    End Sub
+    Private Sub BingdingListChiTietBaoCaoToDatagridviewSource()
+        ChiTietBaoCaoDataGridView.DataSource = New BindingSource(_listbaocao, String.Empty)
+>>>>>>> loc-dev
 
 #Region "-   ConfirmButtonClick   -"
     Private Sub ConfirmMetroButton_Click(sender As Object, e As EventArgs) Handles ConfirmMetroButton.Click
@@ -278,6 +354,7 @@ Public Class ucBaoCaoSachTre
         LoadDataListChiTietBaoCao()
     End Sub
 
+<<<<<<< HEAD
     Private Sub InsertBaoCao()
         Dim thoiGian = ThoiGianCanTimDateTimePicker.Value
         _baoCaoTinhHinhMuonSachTheoTheLoaiBus.InsertByThoiGian(thoiGian)
@@ -288,6 +365,18 @@ Public Class ucBaoCaoSachTre
         _listChiTietBaoCao.Clear()
         _chiTietBaoCaoBus.SelectAllByMaBaoCaoTinhHinhMuonSachTheoTheLoai(_listChiTietBaoCao, maBaoCao)
         LoadChiTietBaoCaoGridViewAndTongLuotMuonLabel()
+=======
+
+#End Region
+
+#Region "-   Events    -"
+    Private Sub ConfirmMetroButton_Click(sender As Object, e As EventArgs) Handles ConfirmMetroButton.Click
+        _listChiTietBaoCaoSachTraTre.Clear()
+        _listbaocao.Clear()
+        Dim thoiGian = ThoiGianCanTimDateTimePicker.Value
+        Dim rs = _baoCaoSachTraTreBus.GetTinhHinhTraTreByMonth(thoiGian, _listbaocao)
+        LoadChiTietBaoCaoGrid()
+>>>>>>> loc-dev
     End Sub
 
     Private Sub ExportButton_Click(sender As Object, e As EventArgs) Handles ExportButton.Click

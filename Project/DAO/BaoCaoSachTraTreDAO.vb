@@ -35,5 +35,17 @@ ORDER by [MaBaoCaoSachTraTre] DESC")
         Next
         Return result
     End Function
+
+    Public Function GetTinhHinhTraTreByMonth(month As Date, ByRef baocao As List(Of BaoCaoTraTreByMonth)) As Result
+        Dim qr = String.Format("EXECUTE dbo.GetThongMuonTre '{0}'", month.ToString(DateHelper.Instance.GetFormatType()))
+
+        Dim tb = New DataTable()
+        Dim result = _dataProvider.ExecuteQuery(qr, tb)
+        For Each row In tb.Rows
+            Dim temp = New BaoCaoTraTreByMonth(row)
+            baocao.Add(temp)
+        Next
+        Return result
+    End Function
 #End Region
 End Class
