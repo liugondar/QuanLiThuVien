@@ -243,6 +243,12 @@
     <Compile Include="frmLogin.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmXemXetTinhHinhMuonSachTheoNgay.Designer.vb">
+      <DependentUpon>frmXemXetTinhHinhMuonSachTheoNgay.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmXemXetTinhHinhMuonSachTheoNgay.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmXoaSach.Designer.vb">
       <DependentUpon>frmXoaSach.vb</DependentUpon>
     </Compile>

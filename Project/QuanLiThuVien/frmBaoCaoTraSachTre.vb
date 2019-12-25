@@ -61,17 +61,17 @@ Public Class frmBaoCaoTraSachTre
 
         Dim MaTheDocGia = New DataGridViewTextBoxColumn()
         MaTheDocGia.Name = "MaTheDocGia"
-        MaTheDocGia.HeaderText = "MaTheDocGia"
+        MaTheDocGia.HeaderText = "Mã thẻ độc giả"
         MaTheDocGia.DataPropertyName = "MaTheDocGia"
-        MaTheDocGia.Width = 50
+        MaTheDocGia.Width = 150
         ChiTietBaoCaoDataGridView.Columns.Add(MaTheDocGia)
 
 
         Dim TenDocGia = New DataGridViewTextBoxColumn()
         TenDocGia.Name = "TenDocGia"
-        TenDocGia.HeaderText = "TenDocGia"
+        TenDocGia.HeaderText = "Tên độc giả"
         TenDocGia.DataPropertyName = "TenDocGia"
-        TenDocGia.Width = 50
+        TenDocGia.Width = 150
         ChiTietBaoCaoDataGridView.Columns.Add(TenDocGia)
 
 
@@ -79,15 +79,44 @@ Public Class frmBaoCaoTraSachTre
         NgayMuon.Name = "NgayMuon"
         NgayMuon.HeaderText = "Ngày mượn"
         NgayMuon.DataPropertyName = "NgayMuon"
-        NgayMuon.Width = 50
+        NgayMuon.Width = 150
         ChiTietBaoCaoDataGridView.Columns.Add(NgayMuon)
 
         Dim NgayTra = New DataGridViewTextBoxColumn()
         NgayTra.Name = "NgayTra"
-        NgayTra.HeaderText = "NgayTra"
+        NgayTra.HeaderText = "Ngày trả"
         NgayTra.DataPropertyName = "NgayTra"
-        NgayTra.Width = 50
+        NgayTra.Width = 150
         ChiTietBaoCaoDataGridView.Columns.Add(NgayTra)
+
+
+        Dim NgayTraTre = New DataGridViewTextBoxColumn()
+        NgayTraTre.Name = "NgayTraTre"
+        NgayTraTre.HeaderText = "Ngày trả trễ"
+        NgayTraTre.DataPropertyName = "NgayTraTre"
+        NgayTraTre.Width = 100
+        ChiTietBaoCaoDataGridView.Columns.Add(NgayTraTre)
+
+        Dim MaSach = New DataGridViewTextBoxColumn()
+        MaSach.Name = "MaSach"
+        MaSach.HeaderText = "Mã sách"
+        MaSach.DataPropertyName = "MaSach"
+        MaSach.Width = 50
+        ChiTietBaoCaoDataGridView.Columns.Add(MaSach)
+
+        Dim MaDauSach = New DataGridViewTextBoxColumn()
+        MaDauSach.Name = "MaDauSach"
+        MaDauSach.HeaderText = "Mã đầu sách"
+        MaDauSach.DataPropertyName = "MaDauSach"
+        MaDauSach.Width = 100
+        ChiTietBaoCaoDataGridView.Columns.Add(MaDauSach)
+
+        Dim TenSach = New DataGridViewTextBoxColumn()
+        TenSach.Name = "TenSach"
+        TenSach.HeaderText = "Tên Sách"
+        TenSach.DataPropertyName = "TenSach"
+        TenSach.Width = 150
+        ChiTietBaoCaoDataGridView.Columns.Add(TenSach)
 
 
     End Sub
