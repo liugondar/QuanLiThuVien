@@ -1,9 +1,11 @@
-﻿Imports DAO
+﻿Imports System.Windows.Forms
+Imports DAO
 Imports DTO
 Imports Utility
 
 Public Class SachBus
     Private _sachDAO As SachDAO
+    Private _dauSachDAO As DauSachDAO
     Private _quiDinh As QuiDinh
     Private _danhSachTacGia As List(Of TacGia)
     Private _danhSachTheLoaiSach As List(Of TheLoaiSach)
@@ -11,6 +13,7 @@ Public Class SachBus
     Public Sub New()
         _sachDAO = New SachDAO()
         _danhSachTacGia = New List(Of TacGia)
+        _dauSachDAO = New DauSachDAO()
         _danhSachTheLoaiSach = New List(Of TheLoaiSach)
 
     End Sub
@@ -20,6 +23,10 @@ Public Class SachBus
         Dim validateResult = Validate(cuonsach)
         If validateResult.FlagResult = False Then Return validateResult
         Return _sachDAO.InsertOne(cuonsach)
+    End Function
+
+    Public Function SelectById(txtSachId As String, ByRef sach As Sach) As Result
+        Return _sachDAO.SelectById(txtSachId, sach)
     End Function
 
     Friend Function SetStatusSachToUnavailableByID(maSach As String) As Object
@@ -45,12 +52,23 @@ Public Class SachBus
         Return _sachDAO.SelectByType(maSach, tenSach, theLoai, tacGia, soluongSachCon, listIdCuonSach)
     End Function
 
+    Public Function DeleteById(txtSachId As String, dauSachId As String) As Result
+        Dim rs = _sachDAO.DeleteById(txtSachId)
+
+        If rs.FlagResult Then
+            Dim count = getQuanlity(dauSachId)
+            count = If(count < 0, 0, count)
+            _dauSachDAO.UpdateQuanlityBook(dauSachId, count - 1)
+        End If
+        Return rs
+    End Function
+
     Public Function getAvailableQuanlity(maDauSach As String, ByRef slCon As Integer) As Result
         Return _sachDAO.getAvailableSachBaseOnDauSachId(maDauSach, slCon)
     End Function
 
-    Public Function SelectAllByMaSach(ByRef listSachDaMuon As List(Of Sach), maSach As String) As Result
-        Return _sachDAO.SelectAllByMaSach(listSachDaMuon, maSach)
+    Public Function SelectAllCuonSachByMaSach(ByRef listSachDaMuon As List(Of Sach), maSach As String) As Result
+        Return _sachDAO.SelectAllCuonSachByMaSach(listSachDaMuon, maSach)
     End Function
 
     Public Sub selectSachByType(maSach As String, ByRef tSach As String, ByRef tgia As String, ByRef maDauSach As String)

@@ -85,10 +85,8 @@ Public Class frmNhapSach
         dausach.MaTacGia = AuthorComboBox.SelectedItem.MaTacGia
         dausach.TenNhaXuatBan = PulisherTextBox.Text
         dausach.NgayXuatBan = PublishYearDateTimePicker.Value
-        dausach.NgayNhap = DateInputDateTimePicker.Value
         dausach.TriGia = PriceNumericUpDown.Value
-
-        Dim soLuongSach = nudSoLuong.Value
+        dausach.SoLuong = nudSoLuong.Value
 
 
         result = _dausachBus.InsertOne(dausach)
@@ -96,45 +94,16 @@ Public Class frmNhapSach
             MessageBox.Show(result.ApplicationMessage)
         Else
 
-            For i As Integer = 1 To nudSoLuong.Value
-                Dim cuonsach As New Sach
-                cuonsach.MaDauSach = dausach.MaDauSach
+            For i As Integer = 1 To dausach.SoLuong
+                Dim cuonsach = New Sach With {
+                    .MaDauSach = dausach.MaDauSach,
+                    .NgayNhap = DateInputDateTimePicker.Value
+                }
                 cuonSachBus.InsertOne(cuonsach)
-                'cuonsachBus.buildMaCuonSach(macuonsach)
-
-                'cuonsach.MaCuonSach = macuonsach
-                'cuonsach.TinhTrang = txbTinhTrang.Text
-                'cuonsach.DauSach = txtMaSach.Text
-                'cuonsach.SoKe = nudViTriKe.Value
-
-                'result = cuonsachBus.insert(cuonsach)
-                'If result.FlagResult = False Then
-                '    Dim mes = "Thêm cuốn sách thất bại: " + macuonsach + "\n" + result.SystemMessage
-                '    MessageBox.Show(mes, "Lỗi", MessageBoxButtons.OK)
-                'End If
             Next
             MessageBox.Show("Đã nhập thành công đầu sách mới!")
 
         End If
-
-        'For i As Integer = 1 To nudSoLuong.Value
-        '    Dim cuonsach As New DauSachDTO
-        '    Dim macuonsach As String
-        '    macuonsach = ""
-        '    cuonsachBus.buildMaCuonSach(macuonsach)
-
-        '    cuonsach.MaCuonSach = macuonsach
-        '    cuonsach.TinhTrang = txbTinhTrang.Text
-        '    cuonsach.DauSach = txtMaSach.Text
-        '    cuonsach.SoKe = nudViTriKe.Value
-
-        '    result = cuonsachBus.insert(cuonsach)
-        '    If result.FlagResult = False Then
-        '        Dim mes = "Thêm cuốn sách thất bại: " + macuonsach + "\n" + result.SystemMessage
-        '        MessageBox.Show(mes, "Lỗi", MessageBoxButtons.OK)
-        '    End If
-        'Next
-
 
     End Sub
 
@@ -148,7 +117,7 @@ Public Class frmNhapSach
         Close()
     End Sub
 
-    Private Sub nudSoLuong_ValueChanged(sender As Object, e As EventArgs) Handles nudSoLuong.ValueChanged
+    Private Sub nudSoLuong_ValueChanged(sender As Object, e As EventArgs) 
 
     End Sub
 

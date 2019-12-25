@@ -105,17 +105,6 @@ Public Class frmQuanLiSach
     End Sub
 
     Private Sub InitDateTimePickers()
-        dpNgayNhapMin.Format = DateTimePickerFormat.Custom
-        dpNgayNhapMin.CustomFormat = "yyyy"
-        dpNgayNhapMin.ShowUpDown = True
-        dpNgayNhapMin.MaxDate = Now
-        dpNgayNhapMin.Value = New Date(1753, 1, 1)
-
-        dpNgayNhapMax.Format = DateTimePickerFormat.Custom
-        dpNgayNhapMax.CustomFormat = "yyyy"
-        dpNgayNhapMax.ShowUpDown = True
-        dpNgayNhapMax.MaxDate = Now
-
         dpNamXBCanTimMin.Format = DateTimePickerFormat.Custom
         dpNamXBCanTimMin.CustomFormat = "yyyy"
         dpNamXBCanTimMin.ShowUpDown = True
@@ -146,8 +135,6 @@ Public Class frmQuanLiSach
         dausach.TenNhaXuatBan = If(cbNhaXuatBanCanTim.SelectedValue = "-----------------------------", -1, cbNhaXuatBanCanTim.SelectedValue)
         Dim ngayXuatBanMin = dpNamXBCanTimMin.Value
         Dim ngayXuatBanMax = dpNamXBCanTimMax.Value
-        Dim ngayNhapMin = dpNgayNhapMin.Value
-        Dim ngayNhapMax = dpNgayNhapMax.Value
         Dim triGiaMin = MinPriceNumericUpDown.Value
         Dim triGiaMax = MaxPriceNumericUpDown.Value
 
@@ -155,7 +142,6 @@ Public Class frmQuanLiSach
         Dim listThoaMan = New List(Of DauSachDTO)
         _dausachBus.SelectALLBySpecificConditions(listThoaMan, dausach,
                                                ngayXuatBanMin, ngayXuatBanMax,
-                                                ngayNhapMin, ngayNhapMax,
                                                 triGiaMin, triGiaMax)
         LoadListDauSach(listThoaMan)
     End Sub
@@ -307,7 +293,6 @@ Public Class frmQuanLiSach
         cbTheLoaiDangChon.SelectedIndex = cbTheLoaiDangChon.Items.IndexOf(selectedTheLoai)
 
         dpNamXBDangChon.Value = dausach.NgayXuatBan
-        dpNgayNhapDangChon.Value = dausach.NgayNhap
         nudTriGiaDangChon.Value = dausach.TriGia
     End Sub
 

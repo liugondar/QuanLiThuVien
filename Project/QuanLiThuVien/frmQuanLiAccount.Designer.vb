@@ -22,6 +22,7 @@ Partial Class frmQuanLiAccount
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmQuanLiAccount))
         Me.dgvListAccount = New System.Windows.Forms.DataGridView()
         Me.SelectedAccountGroupBox = New System.Windows.Forms.GroupBox()
         Me.cbUpdateType = New System.Windows.Forms.ComboBox()
@@ -163,6 +164,7 @@ Partial Class frmQuanLiAccount
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.SelectedAccountGroupBox)
         Me.Controls.Add(Me.dgvListAccount)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmQuanLiAccount"
         Me.Text = "Quản lí tài khoản"
         CType(Me.dgvListAccount, System.ComponentModel.ISupportInitialize).EndInit()

@@ -22,6 +22,7 @@ Partial Class frmTraSach
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmTraSach))
         Me.MaPhieuMuonTextBox = New System.Windows.Forms.MaskedTextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -183,6 +184,7 @@ Partial Class frmTraSach
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.MaPhieuMuonTextBox)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmTraSach"
         Me.Text = "Trả sách"
         CType(Me.dtgSachDangMuon, System.ComponentModel.ISupportInitialize).EndInit()

@@ -154,8 +154,3 @@ AS
         and pms.DeleteFlag='N'
 
 GO
--- example to execute the stored procedure we just created
-EXECUTE dbo.SelectRentSachByDocGiaId 19000000
-EXECUTE dbo.USP_getPhieuMuonSachNotPayByDocGiaId 19000000
-
-select * from PhieuMuonSach

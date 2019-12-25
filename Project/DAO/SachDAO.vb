@@ -1,4 +1,5 @@
-﻿Imports DTO
+﻿Imports System.Windows.Forms
+Imports DTO
 Imports Utility
 
 Public Class SachDAO
@@ -17,14 +18,31 @@ Public Class SachDAO
 
 #Region "-   insert   -"
     Public Function InsertOne(cuonsach As Sach) As Result
+        Dim dfm = DateHelper.Instance.GetFormatType()
         Dim query = String.Empty
         query &= "EXECUTE USP_NhapCuonSach "
         query &= "@MaSach = N'" & cuonsach.MaSach & "',"
         query &= "@MaDauSach= N'" & cuonsach.MaDauSach & "',"
+        query &= "@NgayNhap= N'" & cuonsach.NgayNhap.ToString(dfm) & "',"
         query &= "@TinhTrang = 0"
 
         Dim result = _dataProvider.ExecuteNonquery(query)
         Return result
+    End Function
+
+    Public Function SelectById(txtSachId As String, ByRef sach As Sach) As Result
+        Dim qr = String.Format("Select * from sach where MaSach=N'{0}'", txtSachId)
+        qr &= Strings.Instance.GetNotDeleteString()
+
+        Dim tb = New DataTable()
+        Dim rs = _dataProvider.ExecuteQuery(qr, tb)
+        If tb.Rows.Count = 0 Then
+            Return New Result(False, "Cannot find book", "")
+        End If
+        For Each row In tb.Rows
+            sach = New Sach(row)
+        Next
+        Return rs
     End Function
 #End Region
 
@@ -45,10 +63,6 @@ where maSach={0}", maSach)
         Return _dataProvider.ExecuteNonquery(query)
     End Function
 
-    Public Function Update(sach As Sach) As Result
-
-    End Function
-
     Public Function DeleteById(id As String) As Result
         Dim query = String.Format("update Sach
 set DeleteFlag='Y'
@@ -60,6 +74,7 @@ where MaSach={0}", id)
 #Region "-   Retrieve data    -"
     Public Function getQuanlity(maDauSach As String) As Integer
         Dim query = "Select * from [QuanLiThuVien].[dbo].[Sach] where MaDauSach=N'" & maDauSach & "'"
+        query &= Strings.Instance.GetNotDeleteString()
         Dim dataTable = New DataTable()
         Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         Return dataTable.Rows.Count
@@ -128,7 +143,7 @@ where MaSach={0}", id)
         Return result
     End Function
 
-    Public Function SelectAllByMaSach(ByRef listSach As List(Of Sach), maSach As String) As Result
+    Public Function SelectAllCuonSachByMaSach(ByRef listSach As List(Of Sach), maSach As String) As Result
         Dim query = String.Empty
         query = String.Format("Select * from Sach where MaSach={0} and DeleteFlag='N'", maSach)
         Dim dataTable = New DataTable()

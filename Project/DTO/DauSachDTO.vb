@@ -11,9 +11,9 @@ Public Class DauSachDTO
             row.Table.Columns.Contains("MaTacGia") And
             row.Table.Columns.Contains("TenSach") And
             row.Table.Columns.Contains("TenNhaXuatBan") And
-            row.Table.Columns.Contains("NgayNhap") And
             row.Table.Columns.Contains("NgayXuatBan") And
-            row.Table.Columns.Contains("TriGia")
+            row.Table.Columns.Contains("TriGia") And
+            row.Table.Columns.Contains("SoLuong")
         If doesRowContainsCorrectFields = False Then
             Return
         End If
@@ -23,27 +23,26 @@ Public Class DauSachDTO
         TenSach = row("TenSach").ToString()
         TenNhaXuatBan = row("TenNhaXuatBan").ToString()
         DateTime.TryParse(row("NgayXuatBan").ToString(), NgayXuatBan)
-        DateTime.TryParse(row("NgayNhap").ToString(), NgayNhap)
         Integer.TryParse(row("TriGia").ToString(), TriGia)
+        Integer.TryParse(row("SoLuong").ToString(), SoLuong)
     End Sub
-    Public Sub New(maDauSach As Integer, tenSach As String, maLoaiSach As Integer, maTacGia As Integer, tenNhaXuatBan As String, namXuatBan As Date, ngayNhap As Date, triGia As Integer)
+    Public Sub New(maDauSach As Integer, tenSach As String, maLoaiSach As Integer, maTacGia As Integer, tenNhaXuatBan As String, namXuatBan As Date, triGia As Integer)
         Me.MaDauSach = maDauSach
         Me.TenSach = tenSach
         Me.MaTheLoaiSach = maLoaiSach
         Me.MaTacGia = maTacGia
         Me.TenNhaXuatBan = tenNhaXuatBan
         Me.NgayXuatBan = namXuatBan
-        Me.NgayNhap = ngayNhap
         Me.TriGia = triGia
     End Sub
 
+    Public Property SoLuong() As Integer
     Public Property MaDauSach() As String
     Public Property TenSach() As String
     Public Property MaTheLoaiSach() As Integer
     Public Property MaTacGia() As Integer
     Public Property TenNhaXuatBan() As String
     Public Property NgayXuatBan() As DateTime
-    Public Property NgayNhap() As DateTime
     Public Property TriGia() As Integer
 
 

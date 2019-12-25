@@ -22,6 +22,7 @@ Partial Class frmQuanLiTheLoaiSach
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmQuanLiTheLoaiSach))
         Me.btnXoa = New MetroFramework.Controls.MetroButton()
         Me.btnCapNhap = New MetroFramework.Controls.MetroButton()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -119,6 +120,7 @@ Partial Class frmQuanLiTheLoaiSach
         Me.Controls.Add(Me.btnCapNhap)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.dgvDanhSachTheLoaiSach)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmQuanLiTheLoaiSach"
         Me.Text = "Quản lí thể loại sách"
         CType(Me.dgvDanhSachTheLoaiSach, System.ComponentModel.ISupportInitialize).EndInit()
