@@ -74,9 +74,10 @@ Public Class frmNhapSach
 #Region "-   Create button clicked  -"
     Private Sub CreateButton_Click(sender As Object, e As EventArgs) Handles CreateButton.Click
         InsertDauSach()
+        LoadTxtMaDauSach()
     End Sub
 
-    Private Sub InsertDauSach()
+    Private Function InsertDauSach() As Result
         Dim result As New Result
 
         Dim dausach = New DauSachDTO()
@@ -85,10 +86,8 @@ Public Class frmNhapSach
         dausach.MaTacGia = AuthorComboBox.SelectedItem.MaTacGia
         dausach.TenNhaXuatBan = PulisherTextBox.Text
         dausach.NgayXuatBan = PublishYearDateTimePicker.Value
-        dausach.NgayNhap = DateInputDateTimePicker.Value
         dausach.TriGia = PriceNumericUpDown.Value
-
-        Dim soLuongSach = nudSoLuong.Value
+        dausach.SoLuong = nudSoLuong.Value
 
 
         result = _dausachBus.InsertOne(dausach)
@@ -97,46 +96,19 @@ Public Class frmNhapSach
         Else
 
             For i As Integer = 1 To nudSoLuong.Value
-                Dim cuonsach As New Sach
-                cuonsach.MaDauSach = dausach.MaDauSach
+                Dim cuonsach = New Sach With {
+                    .MaDauSach = dausach.MaDauSach,
+                    .NgayNhap = DateInputDateTimePicker.Value
+                }
                 cuonSachBus.InsertOne(cuonsach)
-                'cuonsachBus.buildMaCuonSach(macuonsach)
-
-                'cuonsach.MaCuonSach = macuonsach
-                'cuonsach.TinhTrang = txbTinhTrang.Text
-                'cuonsach.DauSach = txtMaSach.Text
-                'cuonsach.SoKe = nudViTriKe.Value
-
-                'result = cuonsachBus.insert(cuonsach)
-                'If result.FlagResult = False Then
-                '    Dim mes = "Thêm cuốn sách thất bại: " + macuonsach + "\n" + result.SystemMessage
-                '    MessageBox.Show(mes, "Lỗi", MessageBoxButtons.OK)
-                'End If
             Next
             MessageBox.Show("Đã nhập thành công đầu sách mới!")
 
         End If
 
-        'For i As Integer = 1 To nudSoLuong.Value
-        '    Dim cuonsach As New DauSachDTO
-        '    Dim macuonsach As String
-        '    macuonsach = ""
-        '    cuonsachBus.buildMaCuonSach(macuonsach)
+        Return result
 
-        '    cuonsach.MaCuonSach = macuonsach
-        '    cuonsach.TinhTrang = txbTinhTrang.Text
-        '    cuonsach.DauSach = txtMaSach.Text
-        '    cuonsach.SoKe = nudViTriKe.Value
-
-        '    result = cuonsachBus.insert(cuonsach)
-        '    If result.FlagResult = False Then
-        '        Dim mes = "Thêm cuốn sách thất bại: " + macuonsach + "\n" + result.SystemMessage
-        '        MessageBox.Show(mes, "Lỗi", MessageBoxButtons.OK)
-        '    End If
-        'Next
-
-
-    End Sub
+    End Function
 
 
 
@@ -144,16 +116,10 @@ Public Class frmNhapSach
 #End Region
 
     Private Sub CreateAndCloseButton_Click(sender As Object, e As EventArgs) Handles CreateAndCloseButton.Click
-        InsertDauSach()
-        Close()
+        If InsertDauSach().FlagResult Then
+            Close()
+        End If
     End Sub
-
-    Private Sub nudSoLuong_ValueChanged(sender As Object, e As EventArgs) Handles nudSoLuong.ValueChanged
-
-    End Sub
-
-
-
 
 #End Region
 

@@ -22,6 +22,7 @@ Partial Class frmAccountProfile
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmAccountProfile))
         Me.panel5 = New System.Windows.Forms.Panel()
         Me.txtNewPasswordConfirm = New System.Windows.Forms.TextBox()
         Me.label5 = New System.Windows.Forms.Label()
@@ -190,6 +191,7 @@ Partial Class frmAccountProfile
         '
         'btnExit
         '
+        Me.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnExit.Location = New System.Drawing.Point(366, 407)
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Size = New System.Drawing.Size(75, 23)
@@ -210,6 +212,7 @@ Partial Class frmAccountProfile
         Me.Controls.Add(Me.panel3)
         Me.Controls.Add(Me.panel1)
         Me.Controls.Add(Me.panel2)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmAccountProfile"
         Me.Text = "Thông tin tài khoản"
         Me.panel5.ResumeLayout(False)

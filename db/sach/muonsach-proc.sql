@@ -69,6 +69,8 @@ AS
     WHERE s.MaDauSach = ds.MaDauSach
     and s.MaDauSach = @MaDauSach
     and s.TinhTrang= 0
+    and s.DeleteFlag =N'N'
+    and ds.DeleteFlag=N'N'
 GO
 -- example to execute the stored procedure we just created
 EXECUTE dbo.USP_CountCuonSachBaseOnDauSachId 1
@@ -149,11 +151,8 @@ AS
         and ctpm.MaSach= s.MaSach
         and s.MaDauSach= ds.MaDauSach
 		and tg.MaTacGia =ds.MaTacGia
+        and pms.TinhTrang=0
+        and ctpm.TinhTrang=0
         and pms.DeleteFlag='N'
 
 GO
--- example to execute the stored procedure we just created
-EXECUTE dbo.SelectRentSachByDocGiaId 19000000
-EXECUTE dbo.USP_getPhieuMuonSachNotPayByDocGiaId 19000000
-
-select * from PhieuMuonSach

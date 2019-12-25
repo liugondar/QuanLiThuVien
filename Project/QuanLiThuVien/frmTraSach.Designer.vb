@@ -22,6 +22,7 @@ Partial Class frmTraSach
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmTraSach))
         Me.MaPhieuMuonTextBox = New System.Windows.Forms.MaskedTextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -32,10 +33,11 @@ Partial Class frmTraSach
         Me.BorrowDateTimePicker = New System.Windows.Forms.DateTimePicker()
         Me.HoTenDocGiaMaskedTextBox = New System.Windows.Forms.MaskedTextBox()
         Me.NgayTraDateTimePicker = New System.Windows.Forms.DateTimePicker()
-        Me.ListSachDaMuonDataGridView = New System.Windows.Forms.DataGridView()
+        Me.dtgSachDangMuon = New System.Windows.Forms.DataGridView()
         Me.btnTraHet = New MetroFramework.Controls.MetroButton()
         Me.WarningUnavailableMaPhieuMuonLabel = New System.Windows.Forms.Label()
-        CType(Me.ListSachDaMuonDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.btnPayOne = New MetroFramework.Controls.MetroButton()
+        CType(Me.dtgSachDangMuon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MaPhieuMuonTextBox
@@ -126,19 +128,19 @@ Partial Class frmTraSach
         Me.NgayTraDateTimePicker.Size = New System.Drawing.Size(200, 20)
         Me.NgayTraDateTimePicker.TabIndex = 5
         '
-        'ListSachDaMuonDataGridView
+        'dtgSachDangMuon
         '
-        Me.ListSachDaMuonDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.ListSachDaMuonDataGridView.Location = New System.Drawing.Point(36, 205)
-        Me.ListSachDaMuonDataGridView.Name = "ListSachDaMuonDataGridView"
-        Me.ListSachDaMuonDataGridView.Size = New System.Drawing.Size(675, 150)
-        Me.ListSachDaMuonDataGridView.TabIndex = 11
+        Me.dtgSachDangMuon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dtgSachDangMuon.Location = New System.Drawing.Point(36, 205)
+        Me.dtgSachDangMuon.Name = "dtgSachDangMuon"
+        Me.dtgSachDangMuon.Size = New System.Drawing.Size(675, 150)
+        Me.dtgSachDangMuon.TabIndex = 11
         '
         'btnTraHet
         '
-        Me.btnTraHet.Location = New System.Drawing.Point(245, 373)
+        Me.btnTraHet.Location = New System.Drawing.Point(210, 373)
         Me.btnTraHet.Name = "btnTraHet"
-        Me.btnTraHet.Size = New System.Drawing.Size(87, 28)
+        Me.btnTraHet.Size = New System.Drawing.Size(144, 28)
         Me.btnTraHet.TabIndex = 6
         Me.btnTraHet.Text = "Trả hết"
         '
@@ -154,15 +156,24 @@ Partial Class frmTraSach
         Me.WarningUnavailableMaPhieuMuonLabel.Text = "Warning"
         Me.WarningUnavailableMaPhieuMuonLabel.Visible = False
         '
+        'btnPayOne
+        '
+        Me.btnPayOne.Location = New System.Drawing.Point(387, 373)
+        Me.btnPayOne.Name = "btnPayOne"
+        Me.btnPayOne.Size = New System.Drawing.Size(144, 28)
+        Me.btnPayOne.TabIndex = 13
+        Me.btnPayOne.Text = "Trả quyển đang chọn"
+        '
         'frmTraSach
         '
         Me.AcceptButton = Me.btnTraHet
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(763, 415)
+        Me.Controls.Add(Me.btnPayOne)
         Me.Controls.Add(Me.WarningUnavailableMaPhieuMuonLabel)
         Me.Controls.Add(Me.btnTraHet)
-        Me.Controls.Add(Me.ListSachDaMuonDataGridView)
+        Me.Controls.Add(Me.dtgSachDangMuon)
         Me.Controls.Add(Me.NgayTraDateTimePicker)
         Me.Controls.Add(Me.HoTenDocGiaMaskedTextBox)
         Me.Controls.Add(Me.BorrowDateTimePicker)
@@ -173,9 +184,10 @@ Partial Class frmTraSach
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.MaPhieuMuonTextBox)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmTraSach"
         Me.Text = "Trả sách"
-        CType(Me.ListSachDaMuonDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dtgSachDangMuon, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -191,7 +203,8 @@ Partial Class frmTraSach
     Friend WithEvents BorrowDateTimePicker As DateTimePicker
     Friend WithEvents HoTenDocGiaMaskedTextBox As MaskedTextBox
     Friend WithEvents NgayTraDateTimePicker As DateTimePicker
-    Friend WithEvents ListSachDaMuonDataGridView As DataGridView
+    Friend WithEvents dtgSachDangMuon As DataGridView
     Friend WithEvents btnTraHet As MetroFramework.Controls.MetroButton
     Friend WithEvents WarningUnavailableMaPhieuMuonLabel As Label
+    Friend WithEvents btnPayOne As MetroFramework.Controls.MetroButton
 End Class

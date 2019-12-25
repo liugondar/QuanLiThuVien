@@ -79,9 +79,6 @@ Public Class frmMain
     End Sub
 
     Private Sub NhậpSáchToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NhậpSáchToolStripMenuItem.Click
-        Dim frm = New frmNhapSach()
-        frm.MdiParent = Me
-        frm.Show()
     End Sub
 
     Private Sub QuảnLíSáchToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles QuảnLíSáchToolStripMenuItem.Click
@@ -193,6 +190,24 @@ Public Class frmMain
 
     Private Sub QuảnLíTàiKhoảnToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles QuảnLíTàiKhoảnToolStripMenuItem.Click
         Dim frm = New frmQuanLiAccount()
+        frm.MdiParent = Me
+        frm.Show()
+    End Sub
+
+    Private Sub NhậpMớiiToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NhậpMớiiToolStripMenuItem.Click
+        Dim frm = New frmNhapSach()
+        frm.MdiParent = Me
+        frm.Show()
+    End Sub
+
+    Private Sub CậpNhậtSốLượngSáchToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CậpNhậtSốLượngSáchToolStripMenuItem.Click
+        Dim frm = New frmNhapThemSach()
+        frm.MdiParent = Me
+        frm.Show()
+    End Sub
+
+    Private Sub XóaSáchKhỏiKhoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles XóaSáchKhỏiKhoToolStripMenuItem.Click
+        Dim frm = New frmXoaSach()
         frm.MdiParent = Me
         frm.Show()
     End Sub

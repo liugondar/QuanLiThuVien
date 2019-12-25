@@ -61,6 +61,13 @@ ORDER by [MaChiTietPhieuMuonSach] desc")
         Return result
     End Function
 
+    Public Function ReturnBookByPhieuMuonSachIdAndBookId(phieuMuonId As String, sachId As String, ngayTra As Date) As Result
+        Dim formatDate = DateHelper.Instance.GetFormatType()
+        Dim qr = String.Format("EXECUTE dbo.ReturnBookByPhieuMuonIdAndBookId {0}, {1}, '{2}' ",
+                               phieuMuonId, sachId, ngayTra.ToString(formatDate))
+        Return _dataProvider.ExecuteNonquery(qr)
+    End Function
+
     Public Function GetByID(ByRef chiTietPhieuMuonSach As ChiTietPhieuMuonSach, id As String) As Result
         Dim query = String.Format("Select *
     from ChiTietPhieuMuonSach

@@ -139,8 +139,8 @@ CREATE TABLE dbo.DauSach
     TenNhaXuatBan NVARCHAR(50) not null default N'TenNXB',
     TenSach NVARCHAR(50) not null default N'TenSach',
     NgayXuatBan date not null DEFAULT getdate(),
-    NgayNhap date not null DEFAULT getdate(),
     TriGia INT not null DEFAULT 0,
+    SoLuong Int not null default 0,
     DeleteFlag NVARCHAR(1) not null default 'N',
     CONSTRAINT FK_DauSach_TacGia FOREIGN KEY(MaTacGia) REFERENCES TacGia(MaTacGia),
     CONSTRAINT FK_DauSach_TheLoaiSach FOREIGN KEY(MaTheLoaiSach) REFERENCES TheLoaiSach(MaTheLoaiSach),
@@ -156,11 +156,19 @@ CREATE TABLE dbo.Sach
 (
     MaSach NVARCHAR(20) NOT NUll PRIMARY KEY,
     -- primary key column
+<<<<<<< HEAD:db/db.sql
     MaDauSach varchar(50) NOT NULL,
     TinhTrang INT not null DEFAULT 0,-- 0 la con, 1 la het 
     DeleteFlag NVARCHAR(1) not null default 'N',
 
     CONSTRAINT FK_Sach_DauSach FOREIGN KEY(MaDauSach) REFERENCES DauSach(MaDauSach),
+=======
+	MaDauSach varchar(50) NOT NULL,
+    NgayNhap date not null DEFAULT getdate(),
+	TinhTrang INT not null DEFAULT 0,-- 0 la con, 1 la het 
+    DeleteFlag NVARCHAR(1) not null default 'N',
+	 CONSTRAINT FK_Sach_DauSach FOREIGN KEY(MaDauSach) REFERENCES DauSach(MaDauSach),
+>>>>>>> origin/phat-dev:db/table.sql
 
 );
 GO
@@ -376,37 +384,6 @@ BEGIN
 END
 go
 
---create producer insert sach
-create PROC USP_NhapSach
-    @MaDauSach NVARCHAR(20),
-    @TenSach NVARCHAR(50),
-    @MaTheLoaiSach int,
-    @MaTacGia int,
-    @TenNhaXuatBan NVARCHAR(50),
-    @NgayXuatBan date,
-    @NgayNhap date,
-    @TriGia INT
-AS
-BEGIN
-    insert into dbo.DauSach
-        (MaDauSach,TenSach,MaTheLoaiSach,MaTacGia,TenNhaXuatBan,NgayXuatBan,NgayNhap,TriGia)
-    VALUES(@MaDauSach, @TenSach, @MaTheLoaiSach, @MaTacGia, @TenNhaXuatBan, @NgayXuatBan, @NgayNhap, @TriGia)
-END
-GO
-
--- sach
---create producer insert sach
-create PROC USP_NhapCuonSach
-    @MaSach NVARCHAR(50),
-    @MaDauSach NVARCHAR(20),
-    @TinhTrang INT
-AS
-BEGIN
-    insert into dbo.Sach
-        (MaSach, MaDauSach, TinhTrang)
-    VALUES(@MaSach, @MaDauSach, @TinhTrang)
-END
-GO
 USE QuanLiThuVien
 Go
 

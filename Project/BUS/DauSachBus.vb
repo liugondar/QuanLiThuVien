@@ -1,10 +1,12 @@
-﻿Imports DAO
+﻿Imports System.Windows.Forms
+Imports DAO
 Imports DTO
 Imports Utility
 
 Public Class DauSachBus
 #Region "-   field   -"
     Private _dausachDAO As DauSachDAO
+    Private _sachBus As SachBus
     Private _quiDinh As QuiDinh
     Private _danhSachTacGia As List(Of TacGia)
     Private _danhSachTheLoaiSach As List(Of TheLoaiSach)
@@ -13,6 +15,7 @@ Public Class DauSachBus
         _dausachDAO = New DauSachDAO()
         _danhSachTacGia = New List(Of TacGia)
         _danhSachTheLoaiSach = New List(Of TheLoaiSach)
+        _sachBus = New SachBus()
         _ketQuaLayQuiDinh = GetQuiDinh()
         GetDanhSachTacGia()
         GetDanhSachTheLoaiSach()
@@ -23,6 +26,11 @@ Public Class DauSachBus
         Dim result = quiDinhBus.SelectAll(_quiDinh)
         Return result
     End Function
+
+    Public Function SelectAllByMaCuonSach(ByRef dauSach As DauSachDTO, txtDauSachId As String) As Result
+        Return _dausachDAO.SelectAllByMaCuonSach(dauSach, txtDauSachId)
+    End Function
+
     Private Function GetDanhSachTacGia() As Result
         Dim tacGiaBus = New TacGiaBUS()
         Dim result = tacGiaBus.SelectAll(_danhSachTacGia)
@@ -42,6 +50,7 @@ Public Class DauSachBus
         If validateResult.FlagResult = False Then Return validateResult
         Return _dausachDAO.InsertOne(dausach)
     End Function
+<<<<<<< HEAD
     Public Function InsertMore(dausach As DauSachDTO) As Result
         Dim getNextIDResult = GetNextId(dausach.MaDauSach)
         Dim validateResult = Validate(dausach)
@@ -63,14 +72,17 @@ Public Class DauSachBus
         Return New Result()
     End Function
     Private Function Validatetime(dausach As DauSachDTO) As Result
+=======
+
+
+    Private Function Validate(dausach As DauSachDTO) As Result
+>>>>>>> origin/phat-dev
         If _ketQuaLayQuiDinh.FlagResult = False Then Return New Result(False, "Không thể lấy qui định trong cơ sở dữ liệu để xác nhập thông tin sách!", "")
         Dim validateTenSachVaTenNhaXuatBanResult = dausach.ValidateTenSachAndTenNhaXuatBan()
-        Dim validateNgayXuatBanResult = ValidateNgayXuatBan(dausach.NgayXuatBan, dausach.NgayNhap)
         Dim validateTheLoaiSachResult = ValidateTheLoaiSach(dausach.MaTheLoaiSach)
         Dim validateTacGiaResult = ValidateTacGia(dausach.MaTacGia)
 
         If validateTenSachVaTenNhaXuatBanResult.FlagResult = False Then Return validateTenSachVaTenNhaXuatBanResult
-        If validateNgayXuatBanResult.FlagResult = False Then Return validateNgayXuatBanResult
         If validateTheLoaiSachResult.FlagResult = False Then Return validateTheLoaiSachResult
         If validateTacGiaResult.FlagResult = False Then Return validateTacGiaResult
 
@@ -97,12 +109,22 @@ Public Class DauSachBus
 #End Region
 
 #Region "-   Update and delete  -"
-    Public Function SetStatusSachToUnavailableByID(maDauSach As String) As Result
-        Return _dausachDAO.SetStatusSachToUnavailableByID(maDauSach)
+    Public Function ThemSachMoiVaoDauSach(id As String, amount As Decimal, ngayNhap As Date) As Result
+        Dim rs As Result = _dausachDAO.UpdateQuanlityBook(id, amount)
+        If rs.FlagResult Then
+            Dim dausach = New DauSachDTO()
+            GetById(dausach, id)
+            Dim cuonsach = New Sach()
+            cuonsach.MaDauSach = id
+            cuonsach.NgayNhap = ngayNhap
+            cuonsach.TinhTrang = 0
+            Return _sachBus.InsertOne(cuonsach)
+        End If
+        Return rs
     End Function
-
-    Public Function SetStatusSachToAvailableByID(maDauSach As String) As Result
-        Return _dausachDAO.SetStatusSachToAvailableByID(maDauSach)
+    Public Function UpdateQuanlity(id As String, amount As Decimal) As Result
+        Dim rs As Result = _dausachDAO.UpdateQuanlityBook(id, amount)
+        Return rs
     End Function
 
     Public Function Update(dausach As DauSachDTO) As Result
@@ -127,11 +149,9 @@ Public Class DauSachBus
 
     Public Function SelectALLBySpecificConditions(ByRef listDauSach As List(Of DauSachDTO), dausach As DauSachDTO,
                                                NgayXuatBanMin As DateTime, NgayXuatBanMax As DateTime,
-                                               NgayNhapMin As DateTime, NgayNhapMax As DateTime,
                                                TriGiaMin As Double, TriGiaMax As Double) As Result
         Return _dausachDAO.SelectAllBySpecificConditions(listDauSach, dausach,
                                                       NgayXuatBanMin, NgayXuatBanMax,
-                                                      NgayNhapMin, NgayNhapMax,
                                                         TriGiaMin, TriGiaMax)
     End Function
 

@@ -22,6 +22,7 @@ Partial Class frmBaoCaoTraSachTre
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmBaoCaoTraSachTre))
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ThoiGianCanTimDateTimePicker = New System.Windows.Forms.DateTimePicker()
         Me.ConfirmMetroButton = New MetroFramework.Controls.MetroButton()
@@ -82,6 +83,7 @@ Partial Class frmBaoCaoTraSachTre
         Me.Controls.Add(Me.ChiTietBaoCaoDataGridView)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ThoiGianCanTimDateTimePicker)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmBaoCaoTraSachTre"
         Me.Text = "Báo cáo trá sách trễ"
         CType(Me.ChiTietBaoCaoDataGridView, System.ComponentModel.ISupportInitialize).EndInit()

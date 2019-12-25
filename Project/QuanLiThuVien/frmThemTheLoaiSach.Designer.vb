@@ -22,6 +22,7 @@ Partial Class frmThemTheLoaiSach
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmThemTheLoaiSach))
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtTenTheLoaiSach = New System.Windows.Forms.TextBox()
@@ -94,6 +95,7 @@ Partial Class frmThemTheLoaiSach
         Me.Controls.Add(Me.txtMaTheLoaiSach)
         Me.Controls.Add(Me.btnNhapVaDong)
         Me.Controls.Add(Me.btnNhap)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmThemTheLoaiSach"
         Me.Text = "Thêm thể loại sách"
         Me.ResumeLayout(False)

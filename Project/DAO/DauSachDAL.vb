@@ -1,4 +1,5 @@
-﻿Imports DTO
+﻿Imports System.Windows.Forms
+Imports DTO
 Imports Utility
 
 Public Class DauSachDAO
@@ -25,13 +26,14 @@ Public Class DauSachDAO
         query &= "@MaTacGia =" & dausach.MaTacGia & " ,"
         query &= "@TenNhaXuatBan =N'" & dausach.TenNhaXuatBan & "',"
         query &= "@NgayXuatBan='" & dausach.NgayXuatBan.ToString(formatDate) & "' ,"
-        query &= "@NgayNhap='" & dausach.NgayNhap.ToString(formatDate) & "' ,"
-        query &= "@TriGia =" & dausach.TriGia & " "
+        query &= "@TriGia =" & dausach.TriGia & "  , "
+        query &= "@SoLuong=" & dausach.SoLuong
 
         Dim resultDauSach = _dataProvider.ExecuteNonquery(query)
 
         Return resultDauSach
     End Function
+<<<<<<< HEAD
     Public Function InsertMore(dausach As DauSachDTO) As Result
         Dim query = String.Empty
         query &= "EXECUTE USP_NhapSach "
@@ -47,6 +49,18 @@ Public Class DauSachDAO
         Dim resultDauSach = _dataProvider.ExecuteNonquery(query)
 
         Return resultDauSach
+=======
+
+    Public Function SelectAllByMaCuonSach(ByRef dauSach As DauSachDTO, txtDauSachId As String) As Result
+        Dim qr = String.Format("EXECUTE dbo.GetAllInfoBookByCuonSachId N'{0}'", txtDauSachId)
+        Dim tb = New DataTable()
+        Dim rs = _dataProvider.ExecuteQuery(qr, tb)
+
+        For Each row In tb.Rows
+            dauSach = New DauSachDTO(row)
+        Next
+        Return rs
+>>>>>>> origin/phat-dev
     End Function
 #End Region
 
@@ -95,9 +109,7 @@ dausach.MaDauSach)
     End Function
 
     Public Function DeleteById(id As String) As Result
-        Dim query = String.Format("update DauSach
-set DeleteFlag='Y'
-where MaDauSach={0}", id)
+        Dim query = String.Format("EXECUTE dbo.USP_XoaDauSach {0}", id)
         Return _dataProvider.ExecuteNonquery(query)
     End Function
     Public Function DeleteByName(id As String) As Result
@@ -125,7 +137,6 @@ where MaDauSach={0}", id)
 
     Public Function SelectAllBySpecificConditions(listDauSach As List(Of DauSachDTO), sachYeuCau As DauSachDTO,
                                                   ngayXuatBanMin As Date, ngayXuatBanMax As Date,
-                                                  ngayNhapMin As Date, ngayNhapMax As Date,
                                                   triGiaMin As Double, triGiaMax As Double) As Result
         Dim query = String.Empty
 
@@ -137,18 +148,14 @@ where MaDauSach={0}", id)
         Dim formatDate = DateHelper.Instance.GetFormatType()
         Dim ngayxbMinConverted = ngayXuatBanMin.ToString(formatDate)
         Dim ngayxbMaxConverted = ngayXuatBanMax.ToString(formatDate)
-        Dim ngayNhapMinConverted = ngayNhapMin.ToString(formatDate)
-        Dim ngayNhapMaxConverted = ngayNhapMax.ToString(formatDate)
 
         query = String.Format("select * 
 from DauSach
 where {0} and {1} and {2} and {3}
-and NgayNhap between '{4}' and '{5}'
-and NgayXuatBan between '{6}' and '{7}'
-and TriGia between {8} and {9}
+and NgayXuatBan between '{4}' and '{5}'
+and TriGia between {6} and {7}
 and DeleteFlag='N'",
 dieuKienMaDauSach, dieuKienMaTheLoaiSach, dieuKienMaTacGia, dieuKienTenNhaXuatBan,
-ngayNhapMinConverted, ngayNhapMaxConverted,
 ngayxbMinConverted, ngayxbMaxConverted,
 triGiaMin, triGiaMax)
 
@@ -161,6 +168,11 @@ triGiaMin, triGiaMax)
             Next
         End If
         Return result
+    End Function
+
+    Public Function UpdateQuanlityBook(id As String, amount As Decimal) As Object
+        Dim qr = String.Format("EXECUTE dbo.UpdateCuonSachQuanlity {0}, {1}", id, amount)
+        Return _dataProvider.ExecuteNonquery(qr)
     End Function
 
     Public Function SelectAllByMaDauSach(ByRef listDauSach As List(Of DauSachDTO), maDauSach As String) As Result

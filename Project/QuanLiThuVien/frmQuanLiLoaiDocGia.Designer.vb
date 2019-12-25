@@ -22,6 +22,7 @@ Partial Class frmQuanLiLoaiDocGia
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmQuanLiLoaiDocGia))
         Me.dgvDanhSachLoaiDocGia = New System.Windows.Forms.DataGridView()
         Me.txtMaLoai = New System.Windows.Forms.TextBox()
         Me.txtTenLoai = New System.Windows.Forms.TextBox()
@@ -118,6 +119,7 @@ Partial Class frmQuanLiLoaiDocGia
         Me.Controls.Add(Me.txtTenLoai)
         Me.Controls.Add(Me.txtMaLoai)
         Me.Controls.Add(Me.dgvDanhSachLoaiDocGia)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmQuanLiLoaiDocGia"
         Me.Text = "Quản lí loại độc giả"
         CType(Me.dgvDanhSachLoaiDocGia, System.ComponentModel.ISupportInitialize).EndInit()

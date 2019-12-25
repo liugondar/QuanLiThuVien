@@ -22,6 +22,7 @@ Partial Class frmThemLoaiDocGia
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmThemLoaiDocGia))
         Me.btnNhapVaDong = New MetroFramework.Controls.MetroButton()
         Me.btnNhap = New MetroFramework.Controls.MetroButton()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -94,6 +95,7 @@ Partial Class frmThemLoaiDocGia
         Me.Controls.Add(Me.txtMaLoaiDocGia)
         Me.Controls.Add(Me.btnNhapVaDong)
         Me.Controls.Add(Me.btnNhap)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmThemLoaiDocGia"
         Me.Text = "Thêm loại độc giả"
         Me.ResumeLayout(False)

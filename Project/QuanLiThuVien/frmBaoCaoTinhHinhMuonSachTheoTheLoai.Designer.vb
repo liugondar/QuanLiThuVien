@@ -22,6 +22,7 @@ Partial Class frmBaoCaoTinhHinhMuonSachTheoTheLoai
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmBaoCaoTinhHinhMuonSachTheoTheLoai))
         Me.ThoiGianCanTimDateTimePicker = New System.Windows.Forms.DateTimePicker()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ChiTietBaoCaoDataGridView = New System.Windows.Forms.DataGridView()
@@ -94,6 +95,7 @@ Partial Class frmBaoCaoTinhHinhMuonSachTheoTheLoai
         Me.Controls.Add(Me.ChiTietBaoCaoDataGridView)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ThoiGianCanTimDateTimePicker)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmBaoCaoTinhHinhMuonSachTheoTheLoai"
         Me.Text = "Báo cáo tình hình mượn sách theo thể loại"
         CType(Me.ChiTietBaoCaoDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
