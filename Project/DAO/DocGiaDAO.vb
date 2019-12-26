@@ -123,5 +123,17 @@ Public Class DocGiaDAO
         Return result
     End Function
 
+    Public Function GetReaderByIdIncludeDeleted(ByRef docGia As DocGia, id As String) As Result
+        Dim query As String = String.Empty
+        query = String.Format("select * from TheDocGia where MaTheDocGia={0} ", id)
+
+        Dim dataTable = New DataTable()
+        Dim result = _dataProvider.ExecuteQuery(query, dataTable)
+        For Each row In dataTable.Rows
+            docGia = New DocGia(row)
+        Next
+        Return result
+    End Function
+
 #End Region
 End Class

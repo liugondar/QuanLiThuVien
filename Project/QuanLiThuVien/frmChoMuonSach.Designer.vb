@@ -398,7 +398,8 @@ Partial Class frmChoMuonSach
         Me.AcceptButton = Me.ConfirmButton
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(878, 897)
+        Me.AutoScroll = True
+        Me.ClientSize = New System.Drawing.Size(881, 788)
         Me.Controls.Add(Me.btnReload)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox4)
