@@ -22,6 +22,16 @@ QuanLiThuVien
   resource lookups using this strongly typed resource class.
 </summary>
 </member>
+<member name="P:QuanLiThuVien.My.Resources.Resources._1930">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:QuanLiThuVien.My.Resources.Resources._3167319">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
 <member name="P:QuanLiThuVien.My.Resources.Resources.aboutMeImage">
 <summary>
   Looks up a localized resource of type System.Drawing.Bitmap.

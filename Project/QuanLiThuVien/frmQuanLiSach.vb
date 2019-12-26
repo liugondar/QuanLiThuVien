@@ -61,7 +61,7 @@ Public Class frmQuanLiSach
 
         cbTenSachCanTim.DataSource = New BindingSource(_listDauSach, String.Empty)
         cbTenSachCanTim.DisplayMember = "TenSach"
-        cbTenSachCanTim.ValueMember = "MaDauSach"
+        cbTenSachCanTim.ValueMember = "TenSach"
 
         Dim listNhaXuatBan = New List(Of DauSachDTO)
         Dim nhaXuatBanComparer = New TenNhaXuatBanComparer()
@@ -121,7 +121,7 @@ Public Class frmQuanLiSach
 #Region "-   Events   -"
 
 #Region "-   search Button click   -"
-    Private Sub SearchButton_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+    Private Sub SearchButton_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
         SearchByDataInput()
     End Sub
 
@@ -129,7 +129,7 @@ Public Class frmQuanLiSach
 
         'get input data
         Dim dausach = New DauSachDTO()
-        dausach.MaDauSach = cbTenSachCanTim.SelectedValue
+        dausach.TenSach = If(cbTenSachCanTim.SelectedValue = "-----------------------------", "-1", cbTenSachCanTim.SelectedValue)
         dausach.MaTacGia = cbTacGiaCanTim.SelectedValue
         dausach.MaTheLoaiSach = cbTheLoaiCanTim.SelectedValue
         dausach.TenNhaXuatBan = If(cbNhaXuatBanCanTim.SelectedValue = "-----------------------------", -1, cbNhaXuatBanCanTim.SelectedValue)
@@ -175,11 +175,7 @@ Public Class frmQuanLiSach
             Dim slCon = 0
             _sachBus.getAvailableQuanlity(listDauSach(index).MaDauSach, slCon)
 
-            'load ten tinh trang
-            'Dim TongSoLuongTemp = If(listDauSach(index).TongSoLuong = 0, "Còn", "Hết")
-
-
-            DataGridViewQuanLiSach.Rows.Add(listDauSach(index).MaDauSach,
+                 DataGridViewQuanLiSach.Rows.Add(listDauSach(index).MaDauSach,
             listDauSach(index).TenSach, tenTheLoaiSachTemp, tenTacGiaTemp, soluong, slCon)
         Next
     End Sub
@@ -356,6 +352,32 @@ Public Class frmQuanLiSach
 
     Private Sub GroupBoxThongTinSachCanTim_Enter(sender As Object, e As EventArgs) Handles GroupBoxThongTinSachCanTim.Enter
 
+    End Sub
+
+    Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
+
+    End Sub
+
+    Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+        SearchInfo()
+
+    End Sub
+
+    Private Sub SearchInfo()
+        Try
+            Dim listSear = New List(Of DauSachDTO)
+            QuanLiSachBus.Instance.SearchSachByString(txtSearch.Text, listSear)
+            LoadListDauSach(listSear)
+        Catch ex As Exception
+            Strings.Instance.LogErr(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub txtSearch_KeyDown(sender As Object, e As KeyEventArgs) Handles txtSearch.KeyDown
+        Strings.Instance.LogMess(e.KeyCode)
+        If e.KeyCode = Keys.Enter Then
+            SearchInfo()
+        End If
     End Sub
 #End Region
 

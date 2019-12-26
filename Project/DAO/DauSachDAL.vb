@@ -102,7 +102,7 @@ dausach.MaDauSach)
                                                   triGiaMin As Double, triGiaMax As Double) As Result
         Dim query = String.Empty
 
-        Dim dieuKienMaDauSach = If(sachYeuCau.MaDauSach = -1, " 1=1 ", " MaSach=" & sachYeuCau.MaDauSach)
+        Dim dieuKienMaDauSach = If(sachYeuCau.TenSach = "-1", " 1=1 ", " TenSach like '" & sachYeuCau.TenSach & "' ")
         Dim dieuKienTenNhaXuatBan = If(sachYeuCau.TenNhaXuatBan = "-1", " 1=1 ", "TenNhaXuatBan='" & sachYeuCau.TenNhaXuatBan & "'")
         Dim dieuKienMaTacGia = If(sachYeuCau.MaTacGia = -1, " 1=1 ", "MaTacGia=" & sachYeuCau.MaTacGia)
         Dim dieuKienMaTheLoaiSach = If(sachYeuCau.MaTheLoaiSach = -1, " 1=1 ", "MaTheLoaiSach=" & sachYeuCau.MaTheLoaiSach)

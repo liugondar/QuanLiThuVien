@@ -21,8 +21,8 @@ Public Class DataProvider
         connectionString = ConfigurationManager.AppSettings("ConnectionString")
     End Sub
     Public Function ExecuteNonquery(query As String) As Result
-        System.Diagnostics.Debug.WriteLine(query, "nonquery ")
         System.Diagnostics.Debug.WriteLine("-----------")
+        System.Diagnostics.Debug.WriteLine(query, "nonquery ")
         If String.IsNullOrWhiteSpace(query) Then
             Return New Result(False, "Dữ liệu nhập vào không hợp lệ", "")
         End If
@@ -48,8 +48,8 @@ Public Class DataProvider
     End Function
 
     Public Function ExecuteQuery(query As String, ByRef dataTable As DataTable) As Result
-        System.Diagnostics.Debug.WriteLine(query, "query")
         System.Diagnostics.Debug.WriteLine("-----------")
+        System.Diagnostics.Debug.WriteLine(query, "query")
 
         If String.IsNullOrWhiteSpace(query) Then
             Return New Result(False, "Không thể lấy dữ liệu", "")

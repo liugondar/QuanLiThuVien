@@ -384,6 +384,8 @@
   <ItemGroup>
     <Content Include="MetroFramework.txt" />
     <None Include="Resources\AboutMeImage.png" />
+    <None Include="Resources\1930.jpg" />
+    <None Include="Resources\3167319.jpg" />
     <Content Include="Resources\icon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
