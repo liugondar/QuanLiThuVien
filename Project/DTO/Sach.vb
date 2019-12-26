@@ -14,7 +14,7 @@ Public Class Sach
             Return
         End If
         Integer.TryParse(row("MaSach").ToString(), MaSach)
-        Integer.TryParse(row("MaDauSach").ToString(), MaSach)
+        Integer.TryParse(row("MaDauSach").ToString(), MaDauSach)
         Integer.TryParse(row("TinhTrang").ToString(), TinhTrang)
         Date.TryParse(row("NgayNhap").ToString(), NgayNhap)
     End Sub

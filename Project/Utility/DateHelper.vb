@@ -14,4 +14,7 @@ Public NotInheritable Class DateHelper
     Function GetFormatType() As String
         Return ConfigurationManager.AppSettings("FormatDateString")
     End Function
+    Function GetFormatMonth() As String
+        Return ConfigurationManager.AppSettings("FormatMonthString")
+    End Function
 End Class

@@ -211,4 +211,10 @@ Public Class frmMain
         frm.MdiParent = Me
         frm.Show()
     End Sub
+
+    Private Sub SoSánhToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SoSánhToolStripMenuItem.Click
+        Dim frm = New frmThongKeCacThang()
+        frm.MdiParent = Me
+        frm.Show()
+    End Sub
 End Class

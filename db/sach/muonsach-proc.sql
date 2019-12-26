@@ -34,16 +34,18 @@ END
 go
 
 
+drop proc USP_GetInfoBookForRent
+go
 -- get sach procs
 -- create proc get info sach for rent
 create PROC USP_GetInfoBookForRent
-	@MaDauSach NVARCHAR(50)
+	@MaSach NVARCHAR(50)
 as
 begin
 	select cs.TinhTrang, tg.TenTacGia, cs.MaSach, cs.MaDauSach, tls.TenTheLoaiSach, ds.TenSach
 	from Sach cs,DauSach ds, TheLoaiSach tls, TacGia tg
 	where cs.MaDauSach = ds.MaDauSach
-	and cs.MaDauSach= @MaDauSach
+	and cs.MaSach= @MaSach
 	and tls.MaTheLoaiSach= ds.MaTheLoaiSach 
 	and tg.MaTacGia = ds.MaTacGia
 end
@@ -159,3 +161,15 @@ AS
         and pms.DeleteFlag='N'
 
 GO
+
+exec USP_GetInfoBookForRent @MaSach=N'2'
+
+ Select * from sach where MaSach=N'2' and DeleteFlag= N'N' query: Select * from sach where MaSach=N'2' and DeleteFlag= N'N' 
+
+
+
+select count(ctpm.MaChiTietPhieuMuonSach) SachDangMuon
+from PhieuMuonSach pms, TheDocGia dg, ChiTietPhieuMuonSach ctpm
+where dg.MaTheDocGia= pms.MaTheDocGia
+and pms.MaPhieuMuonSach = ctpm.MaPhieuMuonSach
+and dg.MaTheDocGia= 19000000

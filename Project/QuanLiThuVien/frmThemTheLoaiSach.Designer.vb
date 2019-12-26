@@ -96,6 +96,8 @@ Partial Class frmThemTheLoaiSach
         Me.Controls.Add(Me.btnNhapVaDong)
         Me.Controls.Add(Me.btnNhap)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "frmThemTheLoaiSach"
         Me.Text = "Thêm thể loại sách"
         Me.ResumeLayout(False)

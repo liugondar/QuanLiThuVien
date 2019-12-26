@@ -120,6 +120,8 @@ Partial Class frmQuanLiLoaiDocGia
         Me.Controls.Add(Me.txtMaLoai)
         Me.Controls.Add(Me.dgvDanhSachLoaiDocGia)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "frmQuanLiLoaiDocGia"
         Me.Text = "Quản lí loại độc giả"
         CType(Me.dgvDanhSachLoaiDocGia, System.ComponentModel.ISupportInitialize).EndInit()

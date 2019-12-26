@@ -223,6 +223,8 @@ Partial Class frmTaoTheDocGia
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "frmTaoTheDocGia"
         Me.Text = "Tạo thẻ độc giả"
         Me.ResumeLayout(False)

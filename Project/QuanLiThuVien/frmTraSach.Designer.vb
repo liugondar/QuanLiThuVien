@@ -26,7 +26,6 @@ Partial Class frmTraSach
         Me.MaPhieuMuonTextBox = New System.Windows.Forms.MaskedTextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.MaTheDocGiaTextBox = New System.Windows.Forms.MaskedTextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -37,6 +36,7 @@ Partial Class frmTraSach
         Me.btnTraHet = New MetroFramework.Controls.MetroButton()
         Me.WarningUnavailableMaPhieuMuonLabel = New System.Windows.Forms.Label()
         Me.btnPayOne = New MetroFramework.Controls.MetroButton()
+        Me.cbDocGiaId = New System.Windows.Forms.ComboBox()
         CType(Me.dtgSachDangMuon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -66,14 +66,6 @@ Partial Class frmTraSach
         Me.Label2.Size = New System.Drawing.Size(109, 18)
         Me.Label2.TabIndex = 3
         Me.Label2.Text = "Mã thẻ độc giả:"
-        '
-        'MaTheDocGiaTextBox
-        '
-        Me.MaTheDocGiaTextBox.Enabled = False
-        Me.MaTheDocGiaTextBox.Location = New System.Drawing.Point(154, 122)
-        Me.MaTheDocGiaTextBox.Name = "MaTheDocGiaTextBox"
-        Me.MaTheDocGiaTextBox.Size = New System.Drawing.Size(200, 20)
-        Me.MaTheDocGiaTextBox.TabIndex = 2
         '
         'Label3
         '
@@ -164,12 +156,23 @@ Partial Class frmTraSach
         Me.btnPayOne.TabIndex = 13
         Me.btnPayOne.Text = "Trả quyển đang chọn"
         '
+        'cbDocGiaId
+        '
+        Me.cbDocGiaId.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cbDocGiaId.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cbDocGiaId.FormattingEnabled = True
+        Me.cbDocGiaId.Location = New System.Drawing.Point(154, 119)
+        Me.cbDocGiaId.Name = "cbDocGiaId"
+        Me.cbDocGiaId.Size = New System.Drawing.Size(200, 21)
+        Me.cbDocGiaId.TabIndex = 91
+        '
         'frmTraSach
         '
         Me.AcceptButton = Me.btnTraHet
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(763, 415)
+        Me.Controls.Add(Me.cbDocGiaId)
         Me.Controls.Add(Me.btnPayOne)
         Me.Controls.Add(Me.WarningUnavailableMaPhieuMuonLabel)
         Me.Controls.Add(Me.btnTraHet)
@@ -180,11 +183,12 @@ Partial Class frmTraSach
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.MaTheDocGiaTextBox)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.MaPhieuMuonTextBox)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "frmTraSach"
         Me.Text = "Trả sách"
         CType(Me.dtgSachDangMuon, System.ComponentModel.ISupportInitialize).EndInit()
@@ -196,7 +200,6 @@ Partial Class frmTraSach
     Friend WithEvents MaPhieuMuonTextBox As MaskedTextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
-    Friend WithEvents MaTheDocGiaTextBox As MaskedTextBox
     Friend WithEvents Label3 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents Label5 As Label
@@ -207,4 +210,5 @@ Partial Class frmTraSach
     Friend WithEvents btnTraHet As MetroFramework.Controls.MetroButton
     Friend WithEvents WarningUnavailableMaPhieuMuonLabel As Label
     Friend WithEvents btnPayOne As MetroFramework.Controls.MetroButton
+    Friend WithEvents cbDocGiaId As ComboBox
 End Class

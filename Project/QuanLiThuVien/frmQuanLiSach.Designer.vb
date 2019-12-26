@@ -42,7 +42,7 @@ Partial Class frmQuanLiSach
         Me.MaxPriceNumericUpDown = New System.Windows.Forms.NumericUpDown()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
-        Me.btnSearch = New MetroFramework.Controls.MetroButton()
+        Me.btnFilter = New MetroFramework.Controls.MetroButton()
         Me.txtMaDauSachDangChon = New System.Windows.Forms.TextBox()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.nudTriGiaDangChon = New System.Windows.Forms.NumericUpDown()
@@ -62,6 +62,8 @@ Partial Class frmQuanLiSach
         Me.GroupBoxThongTinSachCanTim = New System.Windows.Forms.GroupBox()
         Me.GroupBoxThongTinSachDangChon = New System.Windows.Forms.GroupBox()
         Me.btnReload = New MetroFramework.Controls.MetroButton()
+        Me.txtSearch = New System.Windows.Forms.TextBox()
+        Me.btnSearch = New MetroFramework.Controls.MetroButton()
         CType(Me.DataGridViewQuanLiSach, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.MinPriceNumericUpDown, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.MaxPriceNumericUpDown, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -73,9 +75,9 @@ Partial Class frmQuanLiSach
         'DataGridViewQuanLiSach
         '
         Me.DataGridViewQuanLiSach.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewQuanLiSach.Location = New System.Drawing.Point(59, 258)
+        Me.DataGridViewQuanLiSach.Location = New System.Drawing.Point(59, 298)
         Me.DataGridViewQuanLiSach.Name = "DataGridViewQuanLiSach"
-        Me.DataGridViewQuanLiSach.Size = New System.Drawing.Size(918, 127)
+        Me.DataGridViewQuanLiSach.Size = New System.Drawing.Size(918, 131)
         Me.DataGridViewQuanLiSach.TabIndex = 68
         '
         'MinPriceNumericUpDown
@@ -263,13 +265,13 @@ Partial Class frmQuanLiSach
         Me.Label13.TabIndex = 94
         Me.Label13.Text = "Đến"
         '
-        'btnSearch
+        'btnFilter
         '
-        Me.btnSearch.Location = New System.Drawing.Point(466, 221)
-        Me.btnSearch.Name = "btnSearch"
-        Me.btnSearch.Size = New System.Drawing.Size(103, 23)
-        Me.btnSearch.TabIndex = 96
-        Me.btnSearch.Text = "Tìm kiếm"
+        Me.btnFilter.Location = New System.Drawing.Point(466, 261)
+        Me.btnFilter.Name = "btnFilter"
+        Me.btnFilter.Size = New System.Drawing.Size(103, 27)
+        Me.btnFilter.TabIndex = 96
+        Me.btnFilter.Text = "Filter"
         '
         'txtMaDauSachDangChon
         '
@@ -411,17 +413,17 @@ Partial Class frmQuanLiSach
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(466, 594)
+        Me.btnUpdate.Location = New System.Drawing.Point(466, 634)
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(103, 23)
+        Me.btnUpdate.Size = New System.Drawing.Size(103, 27)
         Me.btnUpdate.TabIndex = 116
         Me.btnUpdate.Text = "Cập nhật"
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(602, 594)
+        Me.btnDelete.Location = New System.Drawing.Point(602, 634)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(103, 23)
+        Me.btnDelete.Size = New System.Drawing.Size(103, 27)
         Me.btnDelete.TabIndex = 117
         Me.btnDelete.Text = "Xoá"
         '
@@ -445,11 +447,11 @@ Partial Class frmQuanLiSach
         Me.GroupBoxThongTinSachCanTim.Controls.Add(Me.Label13)
         Me.GroupBoxThongTinSachCanTim.Controls.Add(Me.MaxPriceNumericUpDown)
         Me.GroupBoxThongTinSachCanTim.Controls.Add(Me.Label12)
-        Me.GroupBoxThongTinSachCanTim.Location = New System.Drawing.Point(22, 77)
+        Me.GroupBoxThongTinSachCanTim.Location = New System.Drawing.Point(22, 117)
         Me.GroupBoxThongTinSachCanTim.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBoxThongTinSachCanTim.Name = "GroupBoxThongTinSachCanTim"
         Me.GroupBoxThongTinSachCanTim.Padding = New System.Windows.Forms.Padding(2)
-        Me.GroupBoxThongTinSachCanTim.Size = New System.Drawing.Size(989, 129)
+        Me.GroupBoxThongTinSachCanTim.Size = New System.Drawing.Size(989, 133)
         Me.GroupBoxThongTinSachCanTim.TabIndex = 118
         Me.GroupBoxThongTinSachCanTim.TabStop = False
         Me.GroupBoxThongTinSachCanTim.Text = "Thông tin sách cần tìm"
@@ -470,37 +472,55 @@ Partial Class frmQuanLiSach
         Me.GroupBoxThongTinSachDangChon.Controls.Add(Me.cbTacGiaDangChon)
         Me.GroupBoxThongTinSachDangChon.Controls.Add(Me.txtTenNxbDangChon)
         Me.GroupBoxThongTinSachDangChon.Controls.Add(Me.cbTheLoaiDangChon)
-        Me.GroupBoxThongTinSachDangChon.Location = New System.Drawing.Point(126, 406)
+        Me.GroupBoxThongTinSachDangChon.Location = New System.Drawing.Point(126, 446)
         Me.GroupBoxThongTinSachDangChon.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBoxThongTinSachDangChon.Name = "GroupBoxThongTinSachDangChon"
         Me.GroupBoxThongTinSachDangChon.Padding = New System.Windows.Forms.Padding(2)
-        Me.GroupBoxThongTinSachDangChon.Size = New System.Drawing.Size(814, 170)
+        Me.GroupBoxThongTinSachDangChon.Size = New System.Drawing.Size(814, 174)
         Me.GroupBoxThongTinSachDangChon.TabIndex = 119
         Me.GroupBoxThongTinSachDangChon.TabStop = False
         Me.GroupBoxThongTinSachDangChon.Text = "Thông tin sách đang chọn"
         '
         'btnReload
         '
-        Me.btnReload.Location = New System.Drawing.Point(335, 594)
+        Me.btnReload.Location = New System.Drawing.Point(335, 634)
         Me.btnReload.Name = "btnReload"
-        Me.btnReload.Size = New System.Drawing.Size(103, 23)
+        Me.btnReload.Size = New System.Drawing.Size(103, 27)
         Me.btnReload.TabIndex = 120
         Me.btnReload.Text = "Reload "
         '
+        'txtSearch
+        '
+        Me.txtSearch.Location = New System.Drawing.Point(113, 74)
+        Me.txtSearch.Name = "txtSearch"
+        Me.txtSearch.Size = New System.Drawing.Size(325, 20)
+        Me.txtSearch.TabIndex = 121
+        '
+        'btnSearch
+        '
+        Me.btnSearch.Location = New System.Drawing.Point(466, 71)
+        Me.btnSearch.Name = "btnSearch"
+        Me.btnSearch.Size = New System.Drawing.Size(103, 27)
+        Me.btnSearch.TabIndex = 123
+        Me.btnSearch.Text = "Search"
+        '
         'frmQuanLiSach
         '
-        Me.AcceptButton = Me.btnUpdate
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1030, 629)
+        Me.ClientSize = New System.Drawing.Size(1040, 677)
+        Me.Controls.Add(Me.btnSearch)
+        Me.Controls.Add(Me.txtSearch)
         Me.Controls.Add(Me.btnReload)
         Me.Controls.Add(Me.GroupBoxThongTinSachDangChon)
         Me.Controls.Add(Me.GroupBoxThongTinSachCanTim)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnUpdate)
-        Me.Controls.Add(Me.btnSearch)
+        Me.Controls.Add(Me.btnFilter)
         Me.Controls.Add(Me.DataGridViewQuanLiSach)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "frmQuanLiSach"
         Me.Text = "Quản lí sách"
         CType(Me.DataGridViewQuanLiSach, System.ComponentModel.ISupportInitialize).EndInit()
@@ -512,6 +532,7 @@ Partial Class frmQuanLiSach
         Me.GroupBoxThongTinSachDangChon.ResumeLayout(False)
         Me.GroupBoxThongTinSachDangChon.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents DataGridViewQuanLiSach As DataGridView
@@ -533,7 +554,7 @@ Partial Class frmQuanLiSach
     Friend WithEvents MaxPriceNumericUpDown As NumericUpDown
     Friend WithEvents Label12 As Label
     Friend WithEvents Label13 As Label
-    Friend WithEvents btnSearch As MetroFramework.Controls.MetroButton
+    Friend WithEvents btnFilter As MetroFramework.Controls.MetroButton
     Friend WithEvents txtMaDauSachDangChon As TextBox
     Friend WithEvents Label14 As Label
     Friend WithEvents nudTriGiaDangChon As NumericUpDown
@@ -553,4 +574,6 @@ Partial Class frmQuanLiSach
     Friend WithEvents GroupBoxThongTinSachCanTim As GroupBox
     Friend WithEvents GroupBoxThongTinSachDangChon As GroupBox
     Friend WithEvents btnReload As MetroFramework.Controls.MetroButton
+    Friend WithEvents txtSearch As TextBox
+    Friend WithEvents btnSearch As MetroFramework.Controls.MetroButton
 End Class

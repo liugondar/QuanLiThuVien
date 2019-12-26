@@ -84,6 +84,8 @@ Partial Class frmBaoCaoTraSachTre
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ThoiGianCanTimDateTimePicker)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "frmBaoCaoTraSachTre"
         Me.Text = "Báo cáo trá sách trễ"
         CType(Me.ChiTietBaoCaoDataGridView, System.ComponentModel.ISupportInitialize).EndInit()

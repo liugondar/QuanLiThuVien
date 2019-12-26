@@ -213,6 +213,8 @@ Partial Class frmAccountProfile
         Me.Controls.Add(Me.panel1)
         Me.Controls.Add(Me.panel2)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "frmAccountProfile"
         Me.Text = "Thông tin tài khoản"
         Me.panel5.ResumeLayout(False)

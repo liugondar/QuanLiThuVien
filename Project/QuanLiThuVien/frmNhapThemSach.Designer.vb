@@ -169,6 +169,8 @@ Partial Class frmNhapThemSach
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.CreateButton)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "frmNhapThemSach"
         Me.Text = "Thêm sách vào kho"
         CType(Me.nudSoLuong, System.ComponentModel.ISupportInitialize).EndInit()

@@ -119,6 +119,19 @@ Public Class DocGiaDAO
         Return result
     End Function
 
+    Public Function SelectAll(ByRef listThedocgia As List(Of DocGia)) As Result
+        Dim qr = "select * from TheDocGia"
+        Dim tb = New DataTable()
+
+        Dim rs = _dataProvider.ExecuteQuery(qr, tb)
+        For Each row In tb.Rows
+            Dim dg = New DocGia(row)
+            listThedocgia.Add(dg)
+        Next
+        Return rs
+
+    End Function
+
     Public Function GetExpirationDateById(ByRef ngayHetHan As DateTime, maThe As String) As Result
         Dim query = String.Empty
         query = String.Format("Select ngayHetHan from TheDocGia where MaTheDocGia={0} and DeleteFlag='N'", maThe)
@@ -142,11 +155,18 @@ Public Class DocGiaDAO
         Return result
     End Function
 
+<<<<<<< HEAD
     
     Public Function GetReaderByTen(ByRef docGia As DocGia, maThe As String) As Object
         Dim query As String = String.Empty
         query = String.Format("select * from TheDocGia where MaTheDocGia={0} and DeleteFlag='N'", maThe)
   query = String.Format("select * from TheDocGia where {0} and DeleteFlag='N'", dieuKienMaLoai)
+=======
+    Public Function GetReaderByIdIncludeDeleted(ByRef docGia As DocGia, id As String) As Result
+        Dim query As String = String.Empty
+        query = String.Format("select * from TheDocGia where MaTheDocGia={0} ", id)
+
+>>>>>>> prod
         Dim dataTable = New DataTable()
         Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         For Each row In dataTable.Rows
@@ -155,6 +175,7 @@ Public Class DocGiaDAO
         Return result
     End Function
 
+<<<<<<< HEAD
       Public Function UpdateAccount(newAccountProfile As Account) As Result
         Dim salt As String = BCrypt.Net.BCrypt.GenerateSalt()
         Dim newpassword = newAccountProfile.Password
@@ -190,5 +211,19 @@ account.Type, account.UserName)
     End Function
 
 
+=======
+    Function CountSachDangMuon(id As String, ByRef count As Integer) As Result
+        Dim qr = String.Format("EXECUTE dbo.USP_DemSoLuongSachMuonByTheDocGiaID {0}", id)
+        Dim tb = New DataTable()
+        Dim rs = _dataProvider.ExecuteQuery(qr, tb)
+
+        For Each row In tb.Rows
+            count = row("SachDangMuon")
+        Next
+        Strings.Instance.LogMess("count: " & count)
+        Return rs
+    End Function
+
+>>>>>>> prod
 #End Region
 End Class

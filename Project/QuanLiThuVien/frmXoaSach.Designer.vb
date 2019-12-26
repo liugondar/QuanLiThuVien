@@ -22,6 +22,7 @@ Partial Class frmXoaSach
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmXoaSach))
         Me.Label8 = New System.Windows.Forms.Label()
         Me.txtTheLoai = New System.Windows.Forms.TextBox()
         Me.txtTitleBook = New System.Windows.Forms.TextBox()
@@ -186,6 +187,9 @@ Partial Class frmXoaSach
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.txtDauSachId)
         Me.Controls.Add(Me.Label1)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "frmXoaSach"
         Me.Text = "Xóa sách"
         Me.ResumeLayout(False)

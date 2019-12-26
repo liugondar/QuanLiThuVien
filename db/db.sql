@@ -1156,6 +1156,52 @@ AS
         or ctpm.NgayTra is null and  ctpm.NgayTra is null and DATEDIFF(DAY,pms.HanTra, GETDATE()) >0
     )
 GO
+<<<<<<< HEAD:db/db.sql
 -- example to execute the stored procedure we just created
 =======
 >>>>>>> loc:db/db.sql
+=======
+
+
+-- Create a new stored procedure called 'USP_DemSoLuongSachMuonByTheDocGiaID' in schema 'dbo'
+-- Drop the stored procedure if it already exists
+IF EXISTS (
+SELECT *
+    FROM INFORMATION_SCHEMA.ROUTINES
+WHERE SPECIFIC_SCHEMA = N'dbo'
+    AND SPECIFIC_NAME = N'USP_DemSoLuongSachMuonByTheDocGiaID'
+)
+DROP PROCEDURE dbo.USP_DemSoLuongSachMuonByTheDocGiaID
+GO
+-- Create the stored procedure in the specified schema
+CREATE PROCEDURE dbo.USP_DemSoLuongSachMuonByTheDocGiaID
+    @MaTheDocGia NVARCHAR(50)
+AS
+    select count(ctpm.MaChiTietPhieuMuonSach) SachDangMuon
+    from PhieuMuonSach pms, TheDocGia dg, ChiTietPhieuMuonSach ctpm
+    where dg.MaTheDocGia= pms.MaTheDocGia
+    and pms.MaPhieuMuonSach = ctpm.MaPhieuMuonSach
+    and dg.MaTheDocGia=  @MaTheDocGia
+GO
+
+-- Create a new stored procedure called 'USP_CountSlMuon' in schema 'dbo'
+-- Drop the stored procedure if it already exists
+IF EXISTS (
+SELECT *
+    FROM INFORMATION_SCHEMA.ROUTINES
+WHERE SPECIFIC_SCHEMA = N'dbo'
+    AND SPECIFIC_NAME = N'USP_CountSlMuon'
+)
+DROP PROCEDURE dbo.USP_CountSlMuon
+GO
+-- Create the stored procedure in the specified schema
+CREATE PROCEDURE dbo.USP_CountSlMuon
+    @Thang as Date
+AS
+    SELECT COUNT(ctpms.MaPhieuMuonSach) SoLuotMuon
+    from PhieuMuonSach pms, ChiTietPhieuMuonSach ctpms
+    where ctpms.TinhTrang=1
+    and MONTH(ctpms.NgayTra) = MONTH(@Thang)
+    and Year(ctpms.NgayTra) = Year(@Thang)
+GO
+>>>>>>> prod:db.sql
