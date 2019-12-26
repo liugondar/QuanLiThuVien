@@ -519,6 +519,8 @@ Partial Class frmQuanLiSach
         Me.Controls.Add(Me.btnFilter)
         Me.Controls.Add(Me.DataGridViewQuanLiSach)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "frmQuanLiSach"
         Me.Text = "Quản lí sách"
         CType(Me.DataGridViewQuanLiSach, System.ComponentModel.ISupportInitialize).EndInit()

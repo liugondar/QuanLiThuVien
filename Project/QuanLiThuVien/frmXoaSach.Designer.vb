@@ -188,6 +188,8 @@ Partial Class frmXoaSach
         Me.Controls.Add(Me.txtDauSachId)
         Me.Controls.Add(Me.Label1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "frmXoaSach"
         Me.Text = "Xóa sách"
         Me.ResumeLayout(False)

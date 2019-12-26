@@ -165,6 +165,8 @@ Partial Class frmQuanLiAccount
         Me.Controls.Add(Me.SelectedAccountGroupBox)
         Me.Controls.Add(Me.dgvListAccount)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "frmQuanLiAccount"
         Me.Text = "Quản lí tài khoản"
         CType(Me.dgvListAccount, System.ComponentModel.ISupportInitialize).EndInit()

@@ -23,6 +23,7 @@ Partial Class frmThongKeCacThang
     Private Sub InitializeComponent()
         Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
         Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmThongKeCacThang))
         Me.chartThang = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.btnThongKe = New MetroFramework.Controls.MetroButton()
         Me.dtpkFromDate = New System.Windows.Forms.DateTimePicker()
@@ -114,6 +115,9 @@ Partial Class frmThongKeCacThang
         Me.Controls.Add(Me.dtpkFromDate)
         Me.Controls.Add(Me.btnThongKe)
         Me.Controls.Add(Me.chartThang)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "frmThongKeCacThang"
         Me.Text = "Thống kê lượt mượn theo tháng"
         CType(Me.chartThang, System.ComponentModel.ISupportInitialize).EndInit()

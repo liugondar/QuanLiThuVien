@@ -21,6 +21,20 @@ Public Class frmTraSach
         _tacGiaBus = New TacGiaBUS()
         _phieuMuonSachCanTra = New PhieuMuonSach()
         _listChiTietPhieuMuonSachDaMuon = New List(Of ChiTietPhieuMuonSach)
+
+        loadDocGiaIDCB()
+    End Sub
+
+    Private Sub loadDocGiaIDCB()
+        Dim listDocGia = New List(Of DocGia)
+        Try
+            _docGiaBus.SelectAll(listDocGia)
+            cbDocGiaId.DataSource = New BindingSource(listDocGia, String.Empty)
+            cbDocGiaId.DisplayMember = "MaTheDocGia"
+            cbDocGiaId.ValueMember = "MaTheDocGia"
+        Catch ex As Exception
+
+        End Try
     End Sub
 
 #End Region
@@ -67,7 +81,7 @@ Public Class frmTraSach
         Dim docgia = New DocGia()
         _docGiaBus.GetReaderById(docgia, phieuMuonSAch.MaTheDocGia)
 
-        MaTheDocGiaTextBox.Text = docgia.MaTheDocGia
+        cbDocGiaId.SelectedValue = docgia.MaTheDocGia
         HoTenDocGiaMaskedTextBox.Text = docgia.TenDocGia
         BorrowDateTimePicker.Value = phieuMuonSAch.NgayMuon
     End Sub

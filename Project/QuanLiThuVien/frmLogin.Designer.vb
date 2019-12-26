@@ -127,6 +127,8 @@ Partial Class frmLogin
         Me.ClientSize = New System.Drawing.Size(517, 242)
         Me.Controls.Add(Me.panel1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "frmLogin"
         Me.Text = "Đăng nhập"
         Me.panel1.ResumeLayout(False)

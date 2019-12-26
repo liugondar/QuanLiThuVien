@@ -36,6 +36,7 @@ Partial Class frmChoMuonSach
         Me.Label12 = New System.Windows.Forms.Label()
         Me.WarningValidateReaderIdLabel = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.cbDocGiaId = New System.Windows.Forms.ComboBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.dgvDanhSachCanMuon = New System.Windows.Forms.DataGridView()
@@ -53,7 +54,6 @@ Partial Class frmChoMuonSach
         Me.txtTacGia = New System.Windows.Forms.TextBox()
         Me.txtMaSach = New System.Windows.Forms.TextBox()
         Me.btnReload = New MetroFramework.Controls.MetroButton()
-        Me.cbDocGiaId = New System.Windows.Forms.ComboBox()
         CType(Me.ListSachDaMuonDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -130,12 +130,12 @@ Partial Class frmChoMuonSach
         Me.ListSachDaMuonDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.ListSachDaMuonDataGridView.Location = New System.Drawing.Point(29, 18)
         Me.ListSachDaMuonDataGridView.Name = "ListSachDaMuonDataGridView"
-        Me.ListSachDaMuonDataGridView.Size = New System.Drawing.Size(734, 169)
+        Me.ListSachDaMuonDataGridView.Size = New System.Drawing.Size(856, 162)
         Me.ListSachDaMuonDataGridView.TabIndex = 51
         '
         'ConfirmButton
         '
-        Me.ConfirmButton.Location = New System.Drawing.Point(442, 783)
+        Me.ConfirmButton.Location = New System.Drawing.Point(686, 707)
         Me.ConfirmButton.Name = "ConfirmButton"
         Me.ConfirmButton.Size = New System.Drawing.Size(85, 30)
         Me.ConfirmButton.TabIndex = 12
@@ -193,6 +193,16 @@ Partial Class frmChoMuonSach
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Thông tin phiếu mượn sách:"
         '
+        'cbDocGiaId
+        '
+        Me.cbDocGiaId.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cbDocGiaId.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cbDocGiaId.FormattingEnabled = True
+        Me.cbDocGiaId.Location = New System.Drawing.Point(172, 61)
+        Me.cbDocGiaId.Name = "cbDocGiaId"
+        Me.cbDocGiaId.Size = New System.Drawing.Size(200, 21)
+        Me.cbDocGiaId.TabIndex = 112
+        '
         'GroupBox3
         '
         Me.GroupBox3.Controls.Add(Me.ListSachDaMuonDataGridView)
@@ -200,7 +210,7 @@ Partial Class frmChoMuonSach
         Me.GroupBox3.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Padding = New System.Windows.Forms.Padding(2)
-        Me.GroupBox3.Size = New System.Drawing.Size(790, 202)
+        Me.GroupBox3.Size = New System.Drawing.Size(908, 207)
         Me.GroupBox3.TabIndex = 112
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Danh sách mượn đã mượn:"
@@ -212,7 +222,7 @@ Partial Class frmChoMuonSach
         Me.GroupBox4.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Padding = New System.Windows.Forms.Padding(2)
-        Me.GroupBox4.Size = New System.Drawing.Size(464, 292)
+        Me.GroupBox4.Size = New System.Drawing.Size(582, 220)
         Me.GroupBox4.TabIndex = 113
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Danh sách mượn"
@@ -222,7 +232,7 @@ Partial Class frmChoMuonSach
         Me.dgvDanhSachCanMuon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvDanhSachCanMuon.Location = New System.Drawing.Point(29, 31)
         Me.dgvDanhSachCanMuon.Name = "dgvDanhSachCanMuon"
-        Me.dgvDanhSachCanMuon.Size = New System.Drawing.Size(408, 230)
+        Me.dgvDanhSachCanMuon.Size = New System.Drawing.Size(530, 166)
         Me.dgvDanhSachCanMuon.TabIndex = 52
         '
         'GroupBox2
@@ -243,7 +253,7 @@ Partial Class frmChoMuonSach
         Me.GroupBox2.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Padding = New System.Windows.Forms.Padding(2)
-        Me.GroupBox2.Size = New System.Drawing.Size(296, 292)
+        Me.GroupBox2.Size = New System.Drawing.Size(293, 273)
         Me.GroupBox2.TabIndex = 114
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Thêm Sách Mượn"
@@ -353,29 +363,18 @@ Partial Class frmChoMuonSach
         '
         'btnReload
         '
-        Me.btnReload.Location = New System.Drawing.Point(265, 783)
+        Me.btnReload.Location = New System.Drawing.Point(532, 707)
         Me.btnReload.Name = "btnReload"
         Me.btnReload.Size = New System.Drawing.Size(85, 30)
         Me.btnReload.TabIndex = 121
         Me.btnReload.Text = "Reload "
-        '
-        'cbDocGiaId
-        '
-        Me.cbDocGiaId.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.cbDocGiaId.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.cbDocGiaId.FormattingEnabled = True
-        Me.cbDocGiaId.Location = New System.Drawing.Point(172, 61)
-        Me.cbDocGiaId.Name = "cbDocGiaId"
-        Me.cbDocGiaId.Size = New System.Drawing.Size(200, 21)
-        Me.cbDocGiaId.TabIndex = 112
         '
         'frmChoMuonSach
         '
         Me.AcceptButton = Me.ConfirmButton
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.AutoScroll = True
-        Me.ClientSize = New System.Drawing.Size(881, 788)
+        Me.ClientSize = New System.Drawing.Size(998, 788)
         Me.Controls.Add(Me.btnReload)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox4)
@@ -383,6 +382,8 @@ Partial Class frmChoMuonSach
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.ConfirmButton)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "frmChoMuonSach"
         Me.Text = "Mượn sách"
         CType(Me.ListSachDaMuonDataGridView, System.ComponentModel.ISupportInitialize).EndInit()

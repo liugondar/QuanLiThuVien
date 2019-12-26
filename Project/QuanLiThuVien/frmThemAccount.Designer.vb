@@ -138,6 +138,8 @@ Partial Class frmThemAccount
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "frmThemAccount"
         Me.Text = "Thêm tài khoản"
         Me.ResumeLayout(False)

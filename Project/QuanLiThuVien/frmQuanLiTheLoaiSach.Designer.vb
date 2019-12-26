@@ -121,6 +121,8 @@ Partial Class frmQuanLiTheLoaiSach
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.dgvDanhSachTheLoaiSach)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "frmQuanLiTheLoaiSach"
         Me.Text = "Quản lí thể loại sách"
         CType(Me.dgvDanhSachTheLoaiSach, System.ComponentModel.ISupportInitialize).EndInit()

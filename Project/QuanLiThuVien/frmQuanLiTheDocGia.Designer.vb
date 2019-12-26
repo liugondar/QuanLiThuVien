@@ -213,6 +213,8 @@ Partial Class frmQuanLiTheDocGia
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "frmQuanLiTheDocGia"
         Me.Text = "Quản lí thẻ độc giả"
         CType(Me.DataGridViewQuanLiTheDocGia, System.ComponentModel.ISupportInitialize).EndInit()

@@ -96,6 +96,8 @@ Partial Class frmBaoCaoTinhHinhMuonSachTheoTheLoai
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ThoiGianCanTimDateTimePicker)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "frmBaoCaoTinhHinhMuonSachTheoTheLoai"
         Me.Text = "Báo cáo tình hình mượn sách theo thể loại"
         CType(Me.ChiTietBaoCaoDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
