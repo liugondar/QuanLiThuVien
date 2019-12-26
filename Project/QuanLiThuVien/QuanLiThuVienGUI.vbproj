@@ -338,6 +338,9 @@
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmXemXetTinhHinhMuonSachTheoNgay.resx">
+      <DependentUpon>frmXemXetTinhHinhMuonSachTheoNgay.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmXoaSach.resx">
       <DependentUpon>frmXoaSach.vb</DependentUpon>
     </EmbeddedResource>

@@ -185,6 +185,8 @@ Partial Class frmTraSach
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.MaPhieuMuonTextBox)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "frmTraSach"
         Me.Text = "Trả sách"
         CType(Me.dtgSachDangMuon, System.ComponentModel.ISupportInitialize).EndInit()
