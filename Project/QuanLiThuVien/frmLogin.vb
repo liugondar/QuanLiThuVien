@@ -17,7 +17,6 @@ Public Class frmLogin
 
         End If
 
-        authentication("admin", "admin")
     End Sub
 
     Private Sub authentication(userName As String, password As String)

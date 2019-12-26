@@ -159,3 +159,4 @@ C:\Users\MaiAnhDinh\source\repos\dinhmai74\QuanLiThuVien\Project\QuanLiThuVien\o
 C:\Users\MaiAnhDinh\source\repos\dinhmai74\QuanLiThuVien\Project\QuanLiThuVien\obj\Debug\QuanLiThuVien.frmNhapThemSach.resources
 C:\Users\MaiAnhDinh\source\repos\dinhmai74\QuanLiThuVien\Project\QuanLiThuVien\obj\Debug\QuanLiThuVien.frmXoaSach.resources
 C:\Users\MaiAnhDinh\source\repos\dinhmai74\QuanLiThuVien\Project\QuanLiThuVien\obj\Debug\QuanLiThuVien.frmXemXetTinhHinhMuonSachTheoNgay.resources
+C:\Users\MaiAnhDinh\source\repos\dinhmai74\QuanLiThuVien\Project\QuanLiThuVien\obj\Debug\QuanLiThuVien.frmThongKeCacThang.resources

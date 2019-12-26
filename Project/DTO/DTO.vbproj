@@ -98,6 +98,7 @@
     <Compile Include="Sach.vb" />
     <Compile Include="TacGia.vb" />
     <Compile Include="TheLoaiSach.vb" />
+    <Compile Include="ThongKeSoLuotMuon.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

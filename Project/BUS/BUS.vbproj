@@ -98,6 +98,7 @@
     <Compile Include="TacGiaBUS.vb" />
     <Compile Include="TenNhaXuatBanComparer.vb" />
     <Compile Include="TheLoaiSachBUS.vb" />
+    <Compile Include="ThongKeBus.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
