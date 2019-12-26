@@ -1192,4 +1192,5 @@ AS
     from PhieuMuonSach pms, ChiTietPhieuMuonSach ctpms
     where ctpms.TinhTrang=1
     and MONTH(ctpms.NgayTra) = MONTH(@Thang)
+    and Year(ctpms.NgayTra) = Year(@Thang)
 GO
