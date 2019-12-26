@@ -162,3 +162,11 @@ GO
 exec USP_GetInfoBookForRent @MaSach=N'2'
 
  Select * from sach where MaSach=N'2' and DeleteFlag= N'N' query: Select * from sach where MaSach=N'2' and DeleteFlag= N'N' 
+
+
+
+select count(ctpm.MaChiTietPhieuMuonSach) SachDangMuon
+from PhieuMuonSach pms, TheDocGia dg, ChiTietPhieuMuonSach ctpm
+where dg.MaTheDocGia= pms.MaTheDocGia
+and pms.MaPhieuMuonSach = ctpm.MaPhieuMuonSach
+and dg.MaTheDocGia= 19000000

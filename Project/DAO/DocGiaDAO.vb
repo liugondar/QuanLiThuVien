@@ -135,5 +135,17 @@ Public Class DocGiaDAO
         Return result
     End Function
 
+    Function CountSachDangMuon(id As String, ByRef count As Integer) As Result
+        Dim qr = String.Format("EXECUTE dbo.USP_DemSoLuongSachMuonByTheDocGiaID {0}", id)
+        Dim tb = New DataTable()
+        Dim rs = _dataProvider.ExecuteQuery(qr, tb)
+
+        For Each row In tb.Rows
+            count = row("SachDangMuon")
+        Next
+        Strings.Instance.LogMess("count: " & count)
+        Return rs
+    End Function
+
 #End Region
 End Class

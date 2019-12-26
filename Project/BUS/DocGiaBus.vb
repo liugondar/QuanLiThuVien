@@ -135,11 +135,20 @@ Public Class DocGiaBus
     End Function
 
     Public Function GetReaderByIdIncludeDeleted(ByRef docGia As DocGia, id As String) As Result
+
         Return _docGiaDAO.GetReaderByIdIncludeDeleted(docGia, id)
     End Function
 
     Public Function DeleteByID(maThe As String) As Result
         If String.IsNullOrWhiteSpace(maThe) Then Return New Result(False, "Mã thẻ độc giả không được để trống", "")
+        Dim count = 0
+        Dim rs = _docGiaDAO.CountSachDangMuon(maThe, count)
+        If Not rs.FlagResult Then
+            Return rs
+        End If
+        If count > 0 Then
+            Return New Result(False, "Thẻ đang có sách mượn chưa trả", "")
+        End If
         Dim result = _docGiaDAO.DeleteByReaderID(maThe)
         Return result
     End Function

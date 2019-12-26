@@ -136,7 +136,7 @@ Public Class frmChoMuonSach
     Private Sub RenderDataWhenReaderIdTextBoxChanged()
         UserNameTextBox.Text = ""
         Dim docGia As DocGia
-        Dim result = _docGiaBus.GetReaderByIdIncludeDeleted(docGia, ReaderIdTextBox.Text)
+        Dim result = _docGiaBus.GetReaderById(docGia, ReaderIdTextBox.Text)
         If (result.FlagResult AndAlso docGia IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(docGia.TenDocGia)) Then
             UserNameTextBox.Text = docGia.TenDocGia
             Dim sachInfo As List(Of CustomBookInfoDisplay)
