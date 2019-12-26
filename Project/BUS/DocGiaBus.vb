@@ -86,6 +86,11 @@ Public Class DocGiaBus
         Return result
     End Function
 
+    Public Sub SelectAll(ByRef listThedocgia As List(Of DocGia))
+        _docGiaDAO.SelectAll(listThedocgia)
+
+    End Sub
+
     Private Function ValidateAll(docGia As DocGia) As Result
         Dim validateUserNameAndEmailResult = docGia.Validate()
         Dim validateYearsoldResult = ValidateYearsold(docGia.NgaySinh)

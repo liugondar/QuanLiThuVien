@@ -100,6 +100,19 @@ Public Class DocGiaDAO
         Return result
     End Function
 
+    Public Function SelectAll(ByRef listThedocgia As List(Of DocGia)) As Result
+        Dim qr = "select * from TheDocGia"
+        Dim tb = New DataTable()
+
+        Dim rs = _dataProvider.ExecuteQuery(qr, tb)
+        For Each row In tb.Rows
+            Dim dg = New DocGia(row)
+            listThedocgia.Add(dg)
+        Next
+        Return rs
+
+    End Function
+
     Public Function GetExpirationDateById(ByRef ngayHetHan As DateTime, maThe As String) As Result
         Dim query = String.Empty
         query = String.Format("Select ngayHetHan from TheDocGia where MaTheDocGia={0} and DeleteFlag='N'", maThe)

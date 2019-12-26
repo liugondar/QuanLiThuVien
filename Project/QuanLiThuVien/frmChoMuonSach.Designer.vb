@@ -23,7 +23,6 @@ Partial Class frmChoMuonSach
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmChoMuonSach))
-        Me.ReaderIdTextBox = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.ExpirationTimePicker = New System.Windows.Forms.DateTimePicker()
         Me.BorrowDateTimePicker = New System.Windows.Forms.DateTimePicker()
@@ -54,6 +53,7 @@ Partial Class frmChoMuonSach
         Me.txtTacGia = New System.Windows.Forms.TextBox()
         Me.txtMaSach = New System.Windows.Forms.TextBox()
         Me.btnReload = New MetroFramework.Controls.MetroButton()
+        Me.cbDocGiaId = New System.Windows.Forms.ComboBox()
         CType(Me.ListSachDaMuonDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -61,13 +61,6 @@ Partial Class frmChoMuonSach
         CType(Me.dgvDanhSachCanMuon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'ReaderIdTextBox
-        '
-        Me.ReaderIdTextBox.Location = New System.Drawing.Point(172, 64)
-        Me.ReaderIdTextBox.Name = "ReaderIdTextBox"
-        Me.ReaderIdTextBox.Size = New System.Drawing.Size(200, 20)
-        Me.ReaderIdTextBox.TabIndex = 1
         '
         'Label4
         '
@@ -180,6 +173,7 @@ Partial Class frmChoMuonSach
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.cbDocGiaId)
         Me.GroupBox1.Controls.Add(Me.WarningValidateReaderIdLabel)
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.PhieuMuonSachIdTextBox)
@@ -190,7 +184,6 @@ Partial Class frmChoMuonSach
         Me.GroupBox1.Controls.Add(Me.BorrowDateTimePicker)
         Me.GroupBox1.Controls.Add(Me.ExpirationTimePicker)
         Me.GroupBox1.Controls.Add(Me.Label4)
-        Me.GroupBox1.Controls.Add(Me.ReaderIdTextBox)
         Me.GroupBox1.Location = New System.Drawing.Point(38, 62)
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox1.Name = "GroupBox1"
@@ -366,6 +359,16 @@ Partial Class frmChoMuonSach
         Me.btnReload.TabIndex = 121
         Me.btnReload.Text = "Reload "
         '
+        'cbDocGiaId
+        '
+        Me.cbDocGiaId.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cbDocGiaId.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cbDocGiaId.FormattingEnabled = True
+        Me.cbDocGiaId.Location = New System.Drawing.Point(172, 61)
+        Me.cbDocGiaId.Name = "cbDocGiaId"
+        Me.cbDocGiaId.Size = New System.Drawing.Size(200, 21)
+        Me.cbDocGiaId.TabIndex = 112
+        '
         'frmChoMuonSach
         '
         Me.AcceptButton = Me.ConfirmButton
@@ -393,8 +396,6 @@ Partial Class frmChoMuonSach
         Me.ResumeLayout(False)
 
     End Sub
-
-    Friend WithEvents ReaderIdTextBox As TextBox
     Friend WithEvents Label4 As Label
     Friend WithEvents ExpirationTimePicker As DateTimePicker
     Friend WithEvents BorrowDateTimePicker As DateTimePicker
@@ -425,4 +426,5 @@ Partial Class frmChoMuonSach
     Friend WithEvents txtTacGia As TextBox
     Friend WithEvents txtMaSach As TextBox
     Friend WithEvents btnReload As MetroFramework.Controls.MetroButton
+    Friend WithEvents cbDocGiaId As ComboBox
 End Class

@@ -49,6 +49,7 @@ Public Class frmChoMuonSach
 
         '"-  Load data for controls  -"
         LoadMaPhieuMuonSach()
+        LoadMaTheDocGiaCB()
         CreateListSachCanMuonDataGridViewColumn()
 
         If MapBorrowDateToExpirationDate().FlagResult = False Then Return
@@ -57,6 +58,19 @@ Public Class frmChoMuonSach
         If _tacGiaBus.SelectAll(_listTacGia).FlagResult = False Then Return
         If _theLoaiSachBus.SelectAll(_listTheLoaiSach).FlagResult = False Then Return
 
+    End Sub
+
+    Private Sub LoadMaTheDocGiaCB()
+        Dim listThedocgia = New List(Of DocGia)
+        Try
+            _docGiaBus.SelectAll(listThedocgia)
+            cbDocGiaId.DataSource = New BindingSource(listThedocgia, String.Empty)
+            cbDocGiaId.DisplayMember = "Mã thẻ đọc giả"
+            cbDocGiaId.ValueMember = "MaTheDocGia"
+            cbDocGiaId.SelectedIndex = -1
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Private Sub CreateListSachCanMuonDataGridViewColumn()
@@ -129,30 +143,35 @@ Public Class frmChoMuonSach
 
 #Region "-   Thay doi thong tin the doc gia khi ma doc gia thay doi   -"
     'Thay đổi thông tin thẻ độc giả khi người dùng nhập vào mã thẻ độc giả
-    Private Sub ReaderIdTextBox_TextChanged(sender As Object, e As EventArgs) Handles ReaderIdTextBox.TextChanged
+    Private Sub ReaderIdTextBox_TextChanged(sender As Object, e As EventArgs) Handles cbDocGiaId.SelectedIndexChanged
         RenderDataWhenReaderIdTextBoxChanged()
     End Sub
 
     Private Sub RenderDataWhenReaderIdTextBoxChanged()
-        UserNameTextBox.Text = ""
-        Dim docGia As DocGia
-        Dim result = _docGiaBus.GetReaderById(docGia, ReaderIdTextBox.Text)
-        If (result.FlagResult AndAlso docGia IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(docGia.TenDocGia)) Then
-            UserNameTextBox.Text = docGia.TenDocGia
-            Dim sachInfo As List(Of CustomBookInfoDisplay)
-            sachInfo = New List(Of CustomBookInfoDisplay)
-            _phieuMuonSachBus.SelectRentSachByDocGiaId(ReaderIdTextBox.Text, sachInfo)
-            LoadListSachDaMuonDataGridView(sachInfo)
-        End If
+        Try
+            UserNameTextBox.Text = ""
+            Dim docGia = New DocGia()
+            Dim result = _docGiaBus.GetReaderById(docGia, cbDocGiaId.SelectedValue)
+            If (result.FlagResult AndAlso docGia IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(docGia.TenDocGia)) Then
+                UserNameTextBox.Text = docGia.TenDocGia
+                Dim sachInfo As List(Of CustomBookInfoDisplay)
+                sachInfo = New List(Of CustomBookInfoDisplay)
+                _phieuMuonSachBus.SelectRentSachByDocGiaId(cbDocGiaId.SelectedValue, sachInfo)
+                LoadListSachDaMuonDataGridView(sachInfo)
+            End If
+
+        Catch ex As Exception
+
+        End Try
 
     End Sub
 
 #End Region
 
 #Region "-   Display warning reader id valdiate label depend on reader id   -"
-    Private Sub ReaderIdTextBox_lostFocus(sender As Object, e As EventArgs) Handles ReaderIdTextBox.LostFocus
+    Private Sub ReaderIdTextBox_lostFocus(sender As Object, e As EventArgs) Handles cbDocGiaId.Enter
 
-        Dim maTheDocGia = ReaderIdTextBox.Text
+        Dim maTheDocGia = cbDocGiaId.Text
 
         WarningValidateReaderIdLabel.Visible = False
         If String.IsNullOrWhiteSpace(maTheDocGia) Then
@@ -336,7 +355,7 @@ Public Class frmChoMuonSach
 #Region "-  Thêm và bớt sách cần mượn"
     Private Sub btnThem_Click(sender As Object, e As EventArgs) Handles btnThem.Click
         'Guard clause: c Handles btnThem.Clicka chua
-        If WarningValidateReaderIdLabel.Visible Or String.IsNullOrWhiteSpace(ReaderIdTextBox.Text) Then
+        If WarningValidateReaderIdLabel.Visible Or String.IsNullOrWhiteSpace(cbDocGiaId.Text) Then
             MessageBox.Show("Vui lòng nhập mã thẻ độc giả!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
@@ -443,7 +462,7 @@ Public Class frmChoMuonSach
 
     Private Function InsertPhieuMuonSach() As Result
         Dim phieuMuonSAch = New PhieuMuonSach()
-        phieuMuonSAch.MaTheDocGia = ReaderIdTextBox.Text
+        phieuMuonSAch.MaTheDocGia = cbDocGiaId.Text
         phieuMuonSAch.NgayMuon = BorrowDateTimePicker.Value
         phieuMuonSAch.HanTra = ExpirationTimePicker.Value
         Dim insertPhieumuonsachResult = _phieuMuonSachBus.InsertOne(phieuMuonSAch)
