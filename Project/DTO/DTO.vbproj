@@ -96,6 +96,7 @@
     <Compile Include="PhieuMuonSach.vb" />
     <Compile Include="QuiDinh.vb" />
     <Compile Include="Sach.vb" />
+    <Compile Include="SachIdAndNameComparer.vb" />
     <Compile Include="TacGia.vb" />
     <Compile Include="TheLoaiSach.vb" />
     <Compile Include="ThongKeSoLuotMuon.vb" />
