@@ -48,8 +48,8 @@ Public Class SachBus
         Return _sachDAO.getQuanlity(maDauSach)
     End Function
 
-    Public Function SelectByType(maSach As String, ByRef tenSach As String, ByRef theLoai As String, ByRef tacGia As String, ByRef soluongSachCon As Integer, ByRef listIdCuonSach As List(Of Integer)) As Result
-        Return _sachDAO.SelectByType(maSach, tenSach, theLoai, tacGia, soluongSachCon, listIdCuonSach)
+    Public Function SelectByType(maCS As String, ByRef tenSach As String, ByRef theLoai As String, ByRef tacGia As String, ByRef soluongSachCon As Integer, ByRef listIdCuonSach As List(Of Integer)) As Result
+        Return _sachDAO.SelectByType(maCS, tenSach, theLoai, tacGia, soluongSachCon, listIdCuonSach)
     End Function
 
     Public Function DeleteById(txtSachId As String, dauSachId As String) As Result

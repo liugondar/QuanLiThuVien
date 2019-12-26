@@ -41,8 +41,6 @@ Partial Class frmChoMuonSach
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.dgvDanhSachCanMuon = New System.Windows.Forms.DataGridView()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.nudSoLuong = New System.Windows.Forms.NumericUpDown()
-        Me.MetroLabel1 = New MetroFramework.Controls.MetroLabel()
         Me.btnXoa = New MetroFramework.Controls.MetroButton()
         Me.btnThem = New MetroFramework.Controls.MetroButton()
         Me.MetroLabel9 = New MetroFramework.Controls.MetroLabel()
@@ -62,7 +60,6 @@ Partial Class frmChoMuonSach
         Me.GroupBox4.SuspendLayout()
         CType(Me.dgvDanhSachCanMuon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
-        CType(Me.nudSoLuong, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ReaderIdTextBox
@@ -145,7 +142,7 @@ Partial Class frmChoMuonSach
         '
         'ConfirmButton
         '
-        Me.ConfirmButton.Location = New System.Drawing.Point(436, 835)
+        Me.ConfirmButton.Location = New System.Drawing.Point(442, 783)
         Me.ConfirmButton.Name = "ConfirmButton"
         Me.ConfirmButton.Size = New System.Drawing.Size(85, 30)
         Me.ConfirmButton.TabIndex = 12
@@ -222,7 +219,7 @@ Partial Class frmChoMuonSach
         Me.GroupBox4.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Padding = New System.Windows.Forms.Padding(2)
-        Me.GroupBox4.Size = New System.Drawing.Size(464, 333)
+        Me.GroupBox4.Size = New System.Drawing.Size(464, 292)
         Me.GroupBox4.TabIndex = 113
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Danh sách mượn"
@@ -230,15 +227,13 @@ Partial Class frmChoMuonSach
         'dgvDanhSachCanMuon
         '
         Me.dgvDanhSachCanMuon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvDanhSachCanMuon.Location = New System.Drawing.Point(29, 45)
+        Me.dgvDanhSachCanMuon.Location = New System.Drawing.Point(29, 31)
         Me.dgvDanhSachCanMuon.Name = "dgvDanhSachCanMuon"
-        Me.dgvDanhSachCanMuon.Size = New System.Drawing.Size(408, 261)
+        Me.dgvDanhSachCanMuon.Size = New System.Drawing.Size(408, 230)
         Me.dgvDanhSachCanMuon.TabIndex = 52
         '
         'GroupBox2
         '
-        Me.GroupBox2.Controls.Add(Me.nudSoLuong)
-        Me.GroupBox2.Controls.Add(Me.MetroLabel1)
         Me.GroupBox2.Controls.Add(Me.btnXoa)
         Me.GroupBox2.Controls.Add(Me.btnThem)
         Me.GroupBox2.Controls.Add(Me.MetroLabel9)
@@ -255,36 +250,14 @@ Partial Class frmChoMuonSach
         Me.GroupBox2.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Padding = New System.Windows.Forms.Padding(2)
-        Me.GroupBox2.Size = New System.Drawing.Size(296, 333)
+        Me.GroupBox2.Size = New System.Drawing.Size(296, 292)
         Me.GroupBox2.TabIndex = 114
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Thêm Sách Mượn"
         '
-        'nudSoLuong
-        '
-        Me.nudSoLuong.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.nudSoLuong.Font = New System.Drawing.Font("Segoe UI", 12.0!)
-        Me.nudSoLuong.Location = New System.Drawing.Point(172, 229)
-        Me.nudSoLuong.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
-        Me.nudSoLuong.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.nudSoLuong.Name = "nudSoLuong"
-        Me.nudSoLuong.Size = New System.Drawing.Size(87, 29)
-        Me.nudSoLuong.TabIndex = 101
-        Me.nudSoLuong.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.nudSoLuong.Value = New Decimal(New Integer() {1, 0, 0, 0})
-        '
-        'MetroLabel1
-        '
-        Me.MetroLabel1.AutoSize = True
-        Me.MetroLabel1.Location = New System.Drawing.Point(14, 232)
-        Me.MetroLabel1.Name = "MetroLabel1"
-        Me.MetroLabel1.Size = New System.Drawing.Size(137, 19)
-        Me.MetroLabel1.TabIndex = 12
-        Me.MetroLabel1.Text = "Chọn số lượng mượn:"
-        '
         'btnXoa
         '
-        Me.btnXoa.Location = New System.Drawing.Point(155, 283)
+        Me.btnXoa.Location = New System.Drawing.Point(155, 238)
         Me.btnXoa.Margin = New System.Windows.Forms.Padding(2)
         Me.btnXoa.Name = "btnXoa"
         Me.btnXoa.Size = New System.Drawing.Size(76, 23)
@@ -293,7 +266,7 @@ Partial Class frmChoMuonSach
         '
         'btnThem
         '
-        Me.btnThem.Location = New System.Drawing.Point(51, 283)
+        Me.btnThem.Location = New System.Drawing.Point(51, 238)
         Me.btnThem.Margin = New System.Windows.Forms.Padding(2)
         Me.btnThem.Name = "btnThem"
         Me.btnThem.Size = New System.Drawing.Size(80, 23)
@@ -314,9 +287,9 @@ Partial Class frmChoMuonSach
         Me.MetroLabel7.AutoSize = True
         Me.MetroLabel7.Location = New System.Drawing.Point(15, 31)
         Me.MetroLabel7.Name = "MetroLabel7"
-        Me.MetroLabel7.Size = New System.Drawing.Size(83, 19)
+        Me.MetroLabel7.Size = New System.Drawing.Size(89, 19)
         Me.MetroLabel7.TabIndex = 5
-        Me.MetroLabel7.Text = "Mã đầu sách"
+        Me.MetroLabel7.Text = "Mã cuốn sách"
         '
         'MetroLabel11
         '
@@ -387,7 +360,7 @@ Partial Class frmChoMuonSach
         '
         'btnReload
         '
-        Me.btnReload.Location = New System.Drawing.Point(316, 835)
+        Me.btnReload.Location = New System.Drawing.Point(265, 783)
         Me.btnReload.Name = "btnReload"
         Me.btnReload.Size = New System.Drawing.Size(85, 30)
         Me.btnReload.TabIndex = 121
@@ -417,7 +390,6 @@ Partial Class frmChoMuonSach
         CType(Me.dgvDanhSachCanMuon, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
-        CType(Me.nudSoLuong, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -453,6 +425,4 @@ Partial Class frmChoMuonSach
     Friend WithEvents txtTacGia As TextBox
     Friend WithEvents txtMaSach As TextBox
     Friend WithEvents btnReload As MetroFramework.Controls.MetroButton
-    Friend WithEvents MetroLabel1 As MetroFramework.Controls.MetroLabel
-    Friend WithEvents nudSoLuong As NumericUpDown
 End Class

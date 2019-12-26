@@ -10,6 +10,7 @@ Public Class frmChoMuonSach
     Private _tacGiaBus As TacGiaBUS
     Private _theLoaiSachBus As TheLoaiSachBUS
     Private _sachBus As SachBus
+    Private _dauSachBus As DauSachBus
     Private _phieuMuonSachBus As PhieuMuonSachBus
     Private _chiTietPhieuMuonSach As ChiTietPhieuMuonSachBus
 
@@ -18,6 +19,7 @@ Public Class frmChoMuonSach
     Private _listTacGia As List(Of TacGia)
     Private _listTheLoaiSach As List(Of TheLoaiSach)
     Private _listIdCuonSachAvailable As List(Of Integer)
+    Private _sachDangChon As Sach
 
 
     Private AddNewRowButton As Button
@@ -37,11 +39,13 @@ Public Class frmChoMuonSach
         _tacGiaBus = New TacGiaBUS()
         _theLoaiSachBus = New TheLoaiSachBUS()
         _chiTietPhieuMuonSach = New ChiTietPhieuMuonSachBus()
+        _dauSachBus = New DauSachBus()
 
         _listPhieuMuonSachDaMuon = New List(Of PhieuMuonSach)
         _listSach = New List(Of Sach)
         _listTacGia = New List(Of TacGia)
         _listTheLoaiSach = New List(Of TheLoaiSach)
+        _sachDangChon = New Sach()
 
         '"-  Load data for controls  -"
         LoadMaPhieuMuonSach()
@@ -284,41 +288,48 @@ Public Class frmChoMuonSach
 #Region "-   Cập nhật thông tin sách chọn khi masach thay đổi    -"
     Private Sub txtMaSach_TextChanged(sender As Object, e As EventArgs) Handles txtMaSach.TextChanged
         Try
-            Dim maSach = txtMaSach.Text
-            LoadInfoBook(maSach)
+            Dim maCuonSach = txtMaSach.Text
+            LoadInfoBook(maCuonSach)
 
         Catch ex As Exception
             System.Diagnostics.Debug.WriteLine("errror" & ex.ToString)
 
         End Try
     End Sub
-    Private Sub LoadInfoBook(maSach As String)
+    Private Sub LoadInfoBook(maCS As String)
         resetSachInputFields()
-        Dim tenSach = String.Empty
         Dim tacGia = String.Empty
         Dim theLoai = String.Empty
-        Dim soluongSach = 0
         Dim result As Result
 
-        result = _sachBus.SelectByType(maSach, tenSach, theLoai, tacGia, soluongSach, _listIdCuonSachAvailable)
+        result = _sachBus.SelectById(maCS, _sachDangChon)
+        Dim dauSach = New DauSachDTO()
 
-        If (result.FlagResult) Then
-            txtTenSach.Text = tenSach
-            txtTacGia.Text = tacGia
-            txtTheLoai.Text = theLoai
-            nudSoLuong.Maximum = soluongSach
-            txtSlSachCon.Text = If(soluongSach = 0, "Đã hết Sách", soluongSach)
-            txtSlSachCon.BackColor = txtSlSachCon.BackColor
-            txtSlSachCon.ForeColor = If(soluongSach = 0, Color.Red, Color.Black)
-        Else
+        Try
+            If (result.FlagResult) Then
+                _dauSachBus.GetById(dauSach, _sachDangChon.MaDauSach)
+                _tacGiaBus.GetTenTacGiaByMaTacGia(tacGia, dauSach.MaTacGia)
+                _theLoaiSachBus.GetTenTheLoaiSachByID(theLoai, dauSach.MaTheLoaiSach)
+                If result.FlagResult Then
+                    txtTenSach.Text = dauSach.TenSach
+                    txtTacGia.Text = tacGia
+                    txtTheLoai.Text = theLoai
+                    txtSlSachCon.Text = If(_sachDangChon.TinhTrang = 0, "Còn", "Đã hết Sách")
+                    txtSlSachCon.BackColor = txtSlSachCon.BackColor
+                    txtSlSachCon.ForeColor = If(Not _sachDangChon.TinhTrang = 0, Color.Red, Color.Black)
+                End If
+            Else
+                txtTenSach.Text = String.Empty
+                txtTacGia.Text = String.Empty
+                txtTheLoai.Text = String.Empty
+            End If
+
+        Catch ex As Exception
+
             txtTenSach.Text = String.Empty
             txtTacGia.Text = String.Empty
             txtTheLoai.Text = String.Empty
-        End If
-
-
-
-
+        End Try
     End Sub
 #End Region
 
@@ -361,18 +372,10 @@ Public Class frmChoMuonSach
         txtTacGia.Text = String.Empty
         txtTheLoai.Text = String.Empty
         txtSlSachCon.Text = String.Empty
-        nudSoLuong.Maximum = 1
-        _listIdCuonSachAvailable = New List(Of Integer)
     End Sub
 
     Private Sub ThemInfoSachCanMuonVaoDataGridView()
-        For i = 1 To nudSoLuong.Value
-            If _listIdCuonSachAvailable.Count > 0 Then
-                addOneRowToGrid(_listIdCuonSachAvailable(0))
-                _listIdCuonSachAvailable.RemoveAt(0)
-            End If
-        Next
-
+        addOneRowToGrid(txtMaSach.Text)
     End Sub
 
     Private Sub addOneRowToGrid(id As Integer)
@@ -452,6 +455,10 @@ Public Class frmChoMuonSach
         Me.Controls.Clear()
         Me.InitializeComponent()
         InitComponenents()
+    End Sub
+
+    Private Sub MetroLabel7_Click(sender As Object, e As EventArgs) Handles MetroLabel7.Click
+
     End Sub
 
 #End Region

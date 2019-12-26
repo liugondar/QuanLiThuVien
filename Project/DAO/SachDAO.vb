@@ -116,7 +116,7 @@ where MaSach={0}", id)
     End Function
 
     Public Function SelectByType(maSach As String, ByRef tenSach As String, ByRef theLoai As String, ByRef tenTacGia As String, ByRef soluongSachCon As Integer, ByRef listIdCuonSach As List(Of Integer)) As Result
-        Dim query = String.Format("exec USP_GetInfoBookForRent @MaDauSach=N'{0}'", maSach)
+        Dim query = String.Format("exec USP_GetInfoBookForRent @MaSach=N'{0}'", maSach)
         Dim dataTable = New DataTable()
         Dim result = _dataProvider.ExecuteQuery(query, dataTable)
         If (dataTable.Rows.Count <= 0) Then
