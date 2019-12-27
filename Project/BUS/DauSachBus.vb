@@ -86,17 +86,19 @@ Public Class DauSachBus
 
 #Region "-   Update and delete  -"
     Public Function ThemSachMoiVaoDauSach(id As String, amount As Decimal, ngayNhap As Date) As Result
-        Dim rs As Result = _dausachDAO.UpdateQuanlityBook(id, amount)
-        If rs.FlagResult Then
-            Dim dausach = New DauSachDTO()
-            GetById(dausach, id)
+        Dim dausach = New DauSachDTO()
+
+        GetById(dausach, id)
+        Dim newAmount = amount + dausach.SoLuong
+        For i = 1 To amount
             Dim cuonsach = New Sach()
             cuonsach.MaDauSach = id
             cuonsach.NgayNhap = ngayNhap
             cuonsach.TinhTrang = 0
-            Return _sachBus.InsertOne(cuonsach)
-        End If
-        Return rs
+            _sachBus.InsertOne(cuonsach)
+        Next
+        _dausachDAO.UpdateQuanlityBook(id, newAmount)
+        Return New Result()
     End Function
     Public Function UpdateQuanlity(id As String, amount As Decimal) As Result
         Dim rs As Result = _dausachDAO.UpdateQuanlityBook(id, amount)

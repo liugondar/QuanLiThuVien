@@ -33,7 +33,7 @@ where maTheLoaiSach={0}", theLoaiSachId)
     Function InsertOne(theLoaiSach As TheLoaiSach) As Result
         Dim query = String.Format("
 INSERT into dbo.TheLoaiSach(TenTheLoaiSach)
-VALUES('{0}')", theLoaiSach.TenTheLoaiSach)
+VALUES('N{0}')", theLoaiSach.TenTheLoaiSach)
         Return _dataProvider.ExecuteNonquery(query)
     End Function
 #End Region

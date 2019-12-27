@@ -88,7 +88,7 @@ where MaTacGia={0}", tacGiaId)
     Function InsertOne(tacGia As TacGia) As Result
         Dim query = String.Format("
 INSERT into dbo.TacGia(TenTacGia)
-VALUES('{0}')", tacGia.TenTacGia)
+VALUES('N{0}')", tacGia.TenTacGia)
         Return _dataProvider.ExecuteNonquery(query)
     End Function
 #End Region

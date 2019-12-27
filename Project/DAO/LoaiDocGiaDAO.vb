@@ -56,7 +56,7 @@ where MaLoaiDocGia={0}", loaiDocGiaId)
     Function InsertOne(loaiDocGia As LoaiDocGia) As Result
         Dim query = String.Format("
 INSERT into dbo.LoaiDocGia(TenLoaiDocGia)
-VALUES('{0}')", loaiDocGia.TenLoaiDocGia)
+VALUES(N'{0}')", loaiDocGia.TenLoaiDocGia)
         Return _dataProvider.ExecuteNonquery(query)
     End Function
 End Class

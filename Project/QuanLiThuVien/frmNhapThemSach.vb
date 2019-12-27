@@ -29,7 +29,6 @@ Public Class frmNhapThemSach
                 result = _theLoaiBus.GetTenTheLoaiSachByID(txtTheLoai.Text, ds.MaTheLoaiSach)
                 If result.FlagResult Then
                     txtTitleBook.Text = ds.TenSach
-                    nudSoLuong.Value = ds.SoLuong
                 End If
             Else
             End If

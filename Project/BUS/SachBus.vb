@@ -35,7 +35,10 @@ Public Class SachBus
 
     Private Function GetNextId(ByRef maCuonSach) As Result
         Dim result = _sachDAO.GetTheLastID(maCuonSach)
+        Strings.Instance.LogMess("ma " & maCuonSach)
+
         maCuonSach = If(String.IsNullOrWhiteSpace(maCuonSach), 1, maCuonSach + 1)
+
         Return result
     End Function
 

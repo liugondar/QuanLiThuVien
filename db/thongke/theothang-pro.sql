@@ -12,9 +12,10 @@ GO
 CREATE PROCEDURE dbo.USP_CountSlMuon
     @Thang as Date
 AS
-    SELECT COUNT(ctpms.MaPhieuMuonSach) SoLuotMuon
+    SELECT COUNT(ctpms.MaChiTietPhieuMuonSach) SoLuotMuon
     from PhieuMuonSach pms, ChiTietPhieuMuonSach ctpms
     where ctpms.TinhTrang=1
+	and ctpms.MaPhieuMuonSach = pms.MaPhieuMuonSach 
     and MONTH(ctpms.NgayTra) = MONTH(@Thang)
     and Year(ctpms.NgayTra) = Year(@Thang)
 GO
