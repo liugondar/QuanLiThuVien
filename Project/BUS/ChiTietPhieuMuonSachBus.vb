@@ -29,6 +29,10 @@ Public Class ChiTietPhieuMuonSachBus
         End If
         Return New Result()
     End Function
+
+    Public Function ReturnBookByPhieuMuonSachIdAndBookId(phieuMuonId As String, sachId As String, ngayTra As Date) As Result
+        Return _chiTietPhieuMuonSachDAO.ReturnBookByPhieuMuonSachIdAndBookId(phieuMuonId, sachId, ngayTra)
+    End Function
 #End Region
 
 #Region "-   Delete   -"
@@ -43,12 +47,15 @@ Public Class ChiTietPhieuMuonSachBus
         Return _chiTietPhieuMuonSachDAO.selectAllByMaphieumuonsach(listChitietphieumuonsach, maPhieuMuonSach)
     End Function
 
+    Public Function SelectAllBorrowsByReaderId(readerId As String,
+                                               ByRef listCTPM As List(Of ChiTietPhieuMuonSach)) As Result
+        Return _chiTietPhieuMuonSachDAO.SelectAllBorrowsByReaderId(readerId, listCTPM)
+    End Function
+
     Public Function GetByID(ByRef chiTietPhieuMuonSach As ChiTietPhieuMuonSach, id As String) As Result
         Return _chiTietPhieuMuonSachDAO.GetByID(chiTietPhieuMuonSach, id)
     End Function
 
-    Public Function ReturnBookByPhieuMuonSachIdAndBookId(phieuMuonId As String, sachId As String, ngayTra As Date) As Result
-        Return _chiTietPhieuMuonSachDAO.ReturnBookByPhieuMuonSachIdAndBookId(phieuMuonId, sachId, ngayTra)
-    End Function
+
 #End Region
 End Class

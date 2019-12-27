@@ -22,20 +22,9 @@ Public Class frmTraSach
         _phieuMuonSachCanTra = New PhieuMuonSach()
         _listChiTietPhieuMuonSachDaMuon = New List(Of ChiTietPhieuMuonSach)
 
-        loadDocGiaIDCB()
     End Sub
 
-    Private Sub loadDocGiaIDCB()
-        Dim listDocGia = New List(Of DocGia)
-        Try
-            _docGiaBus.SelectAll(listDocGia)
-            cbDocGiaId.DataSource = New BindingSource(listDocGia, String.Empty)
-            cbDocGiaId.DisplayMember = "MaTheDocGia"
-            cbDocGiaId.ValueMember = "MaTheDocGia"
-        Catch ex As Exception
 
-        End Try
-    End Sub
 
 #End Region
 
@@ -48,10 +37,7 @@ Public Class frmTraSach
 
         LoadReaderInfoOfMaPhieuMuonInput(_phieuMuonSachCanTra.MaPhieuMuonSach)
 
-
     End Sub
-
-
 
 #Region "-   Load info   -"
     Private Sub LoadReaderInfoOfMaPhieuMuonInput(maPhieuMuon As String)
@@ -81,7 +67,7 @@ Public Class frmTraSach
         Dim docgia = New DocGia()
         _docGiaBus.GetReaderById(docgia, phieuMuonSAch.MaTheDocGia)
 
-        cbDocGiaId.SelectedValue = docgia.MaTheDocGia
+        txtDocGiaId.Text = docgia.MaTheDocGia
         HoTenDocGiaMaskedTextBox.Text = docgia.TenDocGia
         BorrowDateTimePicker.Value = phieuMuonSAch.NgayMuon
     End Sub
@@ -91,7 +77,6 @@ Public Class frmTraSach
         ClearBookBorrowedDataGridViewData()
 
         CreateListChiTietPMSDataGridViewTitleColumn()
-
 
         BindingSourceBookBorrowedDataGridViewData(PhieuMuonSach)
 
@@ -200,7 +185,10 @@ Public Class frmTraSach
 
             Dim rsAll = True
             For Each row As DataGridViewRow In dtgSachDangMuon.SelectedRows
-                Dim rs = _chiTietPhieuMuonSachBus.ReturnBookByPhieuMuonSachIdAndBookId(phieuMuonId, row.Cells("MaCuonSach").Value, ngayTra)
+                Dim rs = _chiTietPhieuMuonSachBus.
+                    ReturnBookByPhieuMuonSachIdAndBookId(txtDocGiaId.Text,
+                                                         row.Cells("MaCuonSach").Value,
+                                                         ngayTra)
                 If Not rs.FlagResult Then
                     rsAll = False
                 End If
@@ -218,6 +206,7 @@ Public Class frmTraSach
         LoadReaderInfoOfMaPhieuMuonInput(_phieuMuonSachCanTra.MaPhieuMuonSach)
 
     End Sub
+
 #End Region
 
 #End Region

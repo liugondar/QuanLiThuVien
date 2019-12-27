@@ -102,6 +102,7 @@
     <Compile Include="TacGiaDAO.vb" />
     <Compile Include="TheLoaiSachDAO.vb" />
     <Compile Include="ThongKeDAO.vb" />
+    <Compile Include="TraSachTheoIdDAO.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

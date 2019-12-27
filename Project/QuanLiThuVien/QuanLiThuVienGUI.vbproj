@@ -250,6 +250,12 @@
     <Compile Include="frmLogin.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmTraSachTheoMaDocGia.Designer.vb">
+      <DependentUpon>frmTraSachTheoMaDocGia.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmTraSachTheoMaDocGia.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmXemXetTinhHinhMuonSachTheoNgay.Designer.vb">
       <DependentUpon>frmXemXetTinhHinhMuonSachTheoNgay.vb</DependentUpon>
     </Compile>
@@ -347,6 +353,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTraSachTheoMaDocGia.resx">
+      <DependentUpon>frmTraSachTheoMaDocGia.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmXemXetTinhHinhMuonSachTheoNgay.resx">
       <DependentUpon>frmXemXetTinhHinhMuonSachTheoNgay.vb</DependentUpon>

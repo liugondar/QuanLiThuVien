@@ -61,6 +61,25 @@ ORDER by [MaChiTietPhieuMuonSach] desc")
         Return result
     End Function
 
+    Public Function SelectAllBorrowsByReaderId(readerId As String, ByRef listCTPM As List(Of ChiTietPhieuMuonSach)) As Result
+        Dim qr = String.Format("
+select *
+from PhieuMuonSach pms, ChiTietPhieuMuonSach ctpm, TheDocGia tdg
+where tdg.MaTheDocGia= pms.MaTheDocGia
+and tdg.MaTheDocGia = N'{0}'
+and pms.MaPhieuMuonSach = ctpm.MaPhieuMuonSach
+and ctpm.TinhTrang =0", readerId)
+
+        Dim tb = New DataTable()
+        Dim rs = _dataProvider.ExecuteQuery(qr, tb)
+        For Each r In tb.Rows
+            Dim temp = New ChiTietPhieuMuonSach(r)
+            listCTPM.Add(temp)
+        Next
+
+        Return rs
+    End Function
+
     Public Function ReturnBookByPhieuMuonSachIdAndBookId(phieuMuonId As String, sachId As String, ngayTra As Date) As Result
         Dim formatDate = DateHelper.Instance.GetFormatType()
         Dim qr = String.Format("EXECUTE dbo.ReturnBookByPhieuMuonIdAndBookId {0}, {1}, '{2}' ",

@@ -36,7 +36,7 @@ Partial Class frmTraSach
         Me.btnTraHet = New MetroFramework.Controls.MetroButton()
         Me.WarningUnavailableMaPhieuMuonLabel = New System.Windows.Forms.Label()
         Me.btnPayOne = New MetroFramework.Controls.MetroButton()
-        Me.cbDocGiaId = New System.Windows.Forms.ComboBox()
+        Me.txtDocGiaId = New System.Windows.Forms.MaskedTextBox()
         CType(Me.dtgSachDangMuon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -156,15 +156,13 @@ Partial Class frmTraSach
         Me.btnPayOne.TabIndex = 13
         Me.btnPayOne.Text = "Trả quyển đang chọn"
         '
-        'cbDocGiaId
+        'txtDocGiaId
         '
-        Me.cbDocGiaId.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.cbDocGiaId.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.cbDocGiaId.FormattingEnabled = True
-        Me.cbDocGiaId.Location = New System.Drawing.Point(154, 119)
-        Me.cbDocGiaId.Name = "cbDocGiaId"
-        Me.cbDocGiaId.Size = New System.Drawing.Size(200, 21)
-        Me.cbDocGiaId.TabIndex = 91
+        Me.txtDocGiaId.Enabled = False
+        Me.txtDocGiaId.Location = New System.Drawing.Point(154, 122)
+        Me.txtDocGiaId.Name = "txtDocGiaId"
+        Me.txtDocGiaId.Size = New System.Drawing.Size(200, 20)
+        Me.txtDocGiaId.TabIndex = 14
         '
         'frmTraSach
         '
@@ -172,7 +170,7 @@ Partial Class frmTraSach
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(763, 415)
-        Me.Controls.Add(Me.cbDocGiaId)
+        Me.Controls.Add(Me.txtDocGiaId)
         Me.Controls.Add(Me.btnPayOne)
         Me.Controls.Add(Me.WarningUnavailableMaPhieuMuonLabel)
         Me.Controls.Add(Me.btnTraHet)
@@ -210,5 +208,5 @@ Partial Class frmTraSach
     Friend WithEvents btnTraHet As MetroFramework.Controls.MetroButton
     Friend WithEvents WarningUnavailableMaPhieuMuonLabel As Label
     Friend WithEvents btnPayOne As MetroFramework.Controls.MetroButton
-    Friend WithEvents cbDocGiaId As ComboBox
+    Friend WithEvents txtDocGiaId As MaskedTextBox
 End Class

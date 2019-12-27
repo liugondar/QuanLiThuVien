@@ -724,26 +724,23 @@ GO
 
 
 
-
--- Create a new stored procedure called 'ReturnAllBookByPhieuMuonId' in schema 'dbo'
+-- Create a new stored procedure called 'ReturnBookByPhieuMuonIdAndBookId' in schema 'dbo'
 -- Drop the stored procedure if it already exists
 IF EXISTS (
 SELECT *
     FROM INFORMATION_SCHEMA.ROUTINES
 WHERE SPECIFIC_SCHEMA = N'dbo'
-    AND SPECIFIC_NAME = N'ReturnAllBookByPhieuMuonId'
+    AND SPECIFIC_NAME = N'ReturnBookByPhieuMuonIdAndBookId'
 )
-DROP PROCEDURE dbo.ReturnAllBookByPhieuMuonId
+DROP PROCEDURE dbo.ReturnBookByPhieuMuonIdAndBookId
 GO
 -- Create the stored procedure in the specified schema
-CREATE PROCEDURE dbo.ReturnAllBookByPhieuMuonId
-    @MaPhieuMuonSach NVARCHAR(20),
-    @ReturnDate DATETIME
+CREATE PROCEDURE dbo.ReturnBookByPhieuMuonIdAndBookId
+-- add more stored procedure parameters here
+    @MaTheDocGia NVARCHAR(20),
+    @MaSach NVARCHAR(20),
+    @ReturnDate DATE
 AS
-    update PhieuMuonSach
-    set TinhTrang=1
-    where MaPhieuMuonSach= @MaPhieuMuonSach
-
     update 
         ChiTietPhieuMuonSach
     set 
@@ -752,8 +749,13 @@ AS
     from 
         ChiTietPhieuMuonSach as ctpms
         INNER JOIN PhieuMuonSach as pms
-        on ctpms.MaPhieuMuonSach= pms.MaPhieuMuonSach
-    where pms.MaPhieuMuonSach=@MaPhieuMuonSach
+            on ctpms.MaPhieuMuonSach= pms.MaPhieuMuonSach
+        INNER JOIN Sach as s
+            on ctpms.MaSach= s.MaSach
+        INNER JOIN TheDocGia as tdg
+            on pms.MaTheDocGia = tdg.MaTheDocGia
+    where tdg.MaTheDocGia= @MaTheDocGia
+    and s.MaSach= @MaSach
 GO
 
 -- Create a new stored procedure called 'ReturnBookByPhieuMuonIdAndBookId' in schema 'dbo'

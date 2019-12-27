@@ -81,7 +81,7 @@ GO
 -- Create the stored procedure in the specified schema
 CREATE PROCEDURE dbo.ReturnBookByPhieuMuonIdAndBookId
 -- add more stored procedure parameters here
-    @MaPhieuMuonSach NVARCHAR(20),
+    @MaTheDocGia NVARCHAR(20),
     @MaSach NVARCHAR(20),
     @ReturnDate DATE
 AS
@@ -96,11 +96,35 @@ AS
             on ctpms.MaPhieuMuonSach= pms.MaPhieuMuonSach
         INNER JOIN Sach as s
             on ctpms.MaSach= s.MaSach
-    where pms.MaPhieuMuonSach=@MaPhieuMuonSach 
+        INNER JOIN TheDocGia as tdg
+            on pms.MaTheDocGia = tdg.MaTheDocGia
+    where tdg.MaTheDocGia= @MaTheDocGia
     and s.MaSach= @MaSach
 GO
 -- example to execute the stored procedure we just created
-EXECUTE dbo.ReturnBookByPhieuMuonIdAndBookId 3, 2, '2019-12-20' 
+EXECUTE dbo.ReturnBookByPhieuMuonIdAndBookId 19000000, 2, '2019-12-20' 
 GO
 
-select * from ChiTietPhieuMuonSach
+
+select pms.MaPhieuMuonSach, cs.MaSach, ds.TenSach, pms.NgayMuon, ds.MaDauSach, pms.HanTra NgayHetHan
+from PhieuMuonSach pms, ChiTietPhieuMuonSach ctpm, TheDocGia tdg, Sach cs, DauSach ds
+where tdg.MaTheDocGia= pms.MaTheDocGia
+and tdg.MaTheDocGia = 19000000
+and pms.MaPhieuMuonSach = ctpm.MaPhieuMuonSach
+and ctpm.TinhTrang =0
+and cs.MaDauSach = ds.MaDauSach
+and ctpm.MaSach= cs.MaSach
+
+
+
+
+select pms.MaPhieuMuonSach, cs.MaSach, ds.TenSach, pms.NgayMuon, ds.MaDauSach, pms.HanTra NgayHetHan, tg.TenTacGia
+from PhieuMuonSach pms, ChiTietPhieuMuonSach ctpm, TheDocGia tdg, Sach cs, DauSach ds, TacGia tg
+where tdg.MaTheDocGia= pms.MaTheDocGia
+and tdg.MaTheDocGia = N'19000000' 
+and pms.MaPhieuMuonSach = ctpm.MaPhieuMuonSach
+and ctpm.TinhTrang =0
+and cs.MaDauSach = ds.MaDauSach
+and ctpm.MaSach= cs.MaSach
+and tg.MaTacGia= ds.MaTacGia
+

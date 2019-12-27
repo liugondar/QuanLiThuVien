@@ -39,9 +39,6 @@ Public Class frmMain
         frm.Show()
     End Sub
     Private Sub TrảSáchToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TrảSáchToolStripMenuItem.Click
-        Dim frm = New frmTraSach()
-        frm.MdiParent = Me
-        frm.Show()
     End Sub
 
     Private Sub LậpThẻĐộcGiảToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LậpThẻĐộcGiảToolStripMenuItem.Click
@@ -160,6 +157,18 @@ Public Class frmMain
 
     Private Sub SoSánhToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SoSánhToolStripMenuItem.Click
         Dim frm = New frmThongKeCacThang()
+        frm.MdiParent = Me
+        frm.Show()
+    End Sub
+
+    Private Sub TheoPhiToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TheoPhiToolStripMenuItem.Click
+        Dim frm = New frmTraSach()
+        frm.MdiParent = Me
+        frm.Show()
+    End Sub
+
+    Private Sub TheoMãĐộcGiảToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TheoMãĐộcGiảToolStripMenuItem.Click
+        Dim frm = New frmTraSachTheoMaDocGia()
         frm.MdiParent = Me
         frm.Show()
     End Sub
